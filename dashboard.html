@@ -753,6 +753,39 @@
       loadQuestion();
     }
 
+    // New function to save quiz results to localStorage for admin panel
+    function saveQuizResultToAdminPanel() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+            console.error("No logged-in user found to save quiz result.");
+            return;
+        }
+
+        const finalScoreCorrect = score; // 'score' holds the correct answers count
+        const totalQuizQuestions = quizData.length;
+
+        // Get existing quiz results or initialize an empty array
+        let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+
+        // Create a new submission object
+        const newSubmission = {
+            user: loggedInUser,
+            score: `${finalScoreCorrect}/${totalQuizQuestions}`, // Format as "3/10"
+            numericScore: finalScoreCorrect, // Store numeric value for potential sorting if needed
+            totalQuestions: totalQuizQuestions,
+            wrongAnswers: wrongAnswers, // <--- ADDED THIS LINE
+            skippedQuestionsCount: skippedQuestionsCount, // <--- ADDED THIS LINE
+            timestamp: new Date().toLocaleString() // Record current date and time
+        };
+
+        // Add the new submission to the array
+        quizResults.push(newSubmission);
+
+        // Save the updated array back to localStorage
+        localStorage.setItem('quizResults', JSON.stringify(quizResults));
+        console.log(`Quiz result for ${loggedInUser} (${finalScoreCorrect}/${totalQuizQuestions}) saved to localStorage.`);
+    }
+
     function showFinalScore() {
       clearInterval(timer);
       quizContainer.style.display = 'none';
@@ -767,6 +800,9 @@
 
       // Ensure progress bar is full when quiz ends
       updateProgressBar();
+
+      // *** Call the function to save the score to localStorage for the admin panel ***
+      saveQuizResultToAdminPanel();
 
       // Display detailed results
       quizResultsDetails.innerHTML = '<h3>Detailed Results:</h3>';

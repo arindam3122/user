@@ -135,9 +135,10 @@
   </div>
 
   <div id="error" class="error"></div> <script>
-    // Sample user data for validation
+    // Sample user data for validation - now includes both general and admin users
     const users = {
-      "admin": "12345" // User "arindam" removed, "admin" with password "12345" added
+      "arindam": "2004", // General user
+      "admin": "12345"   // Admin user
     };
 
     function validateLogin() {
@@ -161,9 +162,14 @@
 
       if (users[username] && users[username] === password) {
         localStorage.setItem('loggedInUser', username);
-        // Set a flag in localStorage to indicate a successful login
         localStorage.setItem('hasShownLoginMessage', 'false');
-        window.location.href = "dashboard.html"; // Redirect on successful login
+
+        // Conditional redirection based on username
+        if (username === "admin") {
+          window.location.href = "admin.html"; // Redirect admin to admin page
+        } else {
+          window.location.href = "dashboard.html"; // Redirect other users to dashboard
+        }
       } else {
         errorDiv.textContent = "Invalid username or password.";
         errorDiv.classList.add('show'); // Show the error message
