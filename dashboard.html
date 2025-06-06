@@ -38,6 +38,117 @@
     button.logout-btn:hover {
       background-color: #e04343;
     }
+    .quiz-container {
+      margin-top: 30px;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      display: none; /* Hidden by default */
+    }
+    .quiz-question {
+      font-size: 18px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    .quiz-options label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .quiz-options input[type="radio"] {
+      margin-right: 10px;
+    }
+    .quiz-feedback {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .quiz-feedback.correct {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .quiz-feedback.incorrect {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    .quiz-navigation button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+    .quiz-navigation button:hover {
+      background-color: #0056b3;
+    }
+    .quiz-navigation button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    .timer {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #d9534f; /* Red color for timer */
+    }
+    .final-score-container {
+      text-align: center;
+      margin-top: 40px;
+      padding: 30px;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      background-color: #eaf5ff;
+      display: none; /* Hidden by default */
+    }
+    .final-score-container h2 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+    .final-score-container p {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #333;
+    }
+    .quiz-info-box {
+      margin-top: 30px;
+      border: 1px solid #007bff;
+      padding: 25px;
+      border-radius: 8px;
+      background-color: #eaf5ff;
+      text-align: center;
+    }
+    .quiz-info-box h2 {
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+    .quiz-info-box p {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+    .quiz-info-box button {
+      background-color: #28a745; /* Green start button */
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+    .quiz-info-box button:hover {
+      background-color: #218838;
+    }
+    .user-welcome-message {
+      font-size: 2em; /* Larger font size */
+      font-weight: bold;
+      color: #28a745; /* Green color */
+      margin-bottom: 20px; /* Space below the message */
+    }
   </style>
 </head>
 <body>
@@ -51,25 +162,254 @@
   </nav>
 
   <div class="content">
-    <h1>Welcome to your dashboard!</h1>
-    <p>This is a simple dashboard page.</p>
+    <div class="user-welcome-message" id="welcomeMessage"></div>
+
+    <div class="quiz-info-box" id="quizInfoBox">
+      <h2>Welcome to the Quiz!</h2>
+      <p>Total Questions: <span id="infoTotalQuestions"></span></p>
+      <p>Time per question: <span id="infoTimePerQuestion"></span> seconds (varies per question)</p>
+      <p>Test your knowledge and see how well you score!</p>
+      <button id="startQuizBtn">Start Quiz</button>
+    </div>
+
+    <div class="quiz-container" id="quizContainer">
+      <h2>Simple Quiz</h2>
+      <div class="timer" id="timer">Time left: 15s</div>
+      <div id="quiz"></div>
+      <div class="quiz-feedback" id="feedback"></div>
+      <div class="quiz-navigation">
+        <button id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
+        <button id="nextBtn" onclick="nextQuestion()" style="display: none;">Next Question</button>
+      </div>
+    </div>
+
+    <div class="final-score-container" id="finalScoreContainer">
+      <h2>Quiz Completed!</h2>
+      <p>Your final score is: <span id="finalScore">0</span> / <span id="totalQuestions">0</span></p>
+      <button class="quiz-navigation-button" onclick="retakeQuiz()">Retake Quiz</button>
+    </div>
   </div>
 
   <script>
     // Get username from localStorage
     const user = localStorage.getItem('loggedInUser');
+    const welcomeMessageDiv = document.getElementById('welcomeMessage');
 
     if (!user) {
       // If no user is logged in, redirect to login
       window.location.href = "index.html";
     } else {
       document.getElementById('userName').textContent = `Hello, ${user}`;
+      // Set the welcome message in green
+      welcomeMessageDiv.textContent = `${user}'s Dashboard`;
     }
 
     function logout() {
       localStorage.removeItem('loggedInUser');
       window.location.href = "index.html";
     }
+
+    const quizData = [
+      {
+        question: "What is the capital of France?",
+        options: ["Berlin", "Madrid", "Paris", "Rome"],
+        answer: "Paris",
+        timeLimit: 15 // seconds
+      },
+      {
+        question: "Which planet is known as the Red Planet?",
+        options: ["Earth", "Mars", "Jupiter", "Venus"],
+        answer: "Mars",
+        timeLimit: 10
+      },
+      {
+        question: "What is 7 + 8?",
+        options: ["12", "13", "14", "15"],
+        answer: "15",
+        timeLimit: 20
+      },
+      {
+        question: "What is the largest ocean on Earth?",
+        options: ["Atlantic", "Indian", "Arctic", "Pacific"],
+        answer: "Pacific",
+        timeLimit: 15
+      },
+      {
+        question: "How many continents are there?",
+        options: ["5", "6", "7", "8"],
+        answer: "7",
+        timeLimit: 12
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let timer;
+    let timeLeft;
+    let questionAttempted = false;
+
+    // Get elements
+    const quizDiv = document.getElementById('quiz');
+    const feedbackDiv = document.getElementById('feedback');
+    const submitBtn = document.getElementById('submitBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const timerDisplay = document.getElementById('timer');
+    const quizContainer = document.getElementById('quizContainer');
+    const finalScoreContainer = document.getElementById('finalScoreContainer');
+    const finalScoreSpan = document.getElementById('finalScore');
+    const totalQuestionsSpan = document.getElementById('totalQuestions');
+    const quizInfoBox = document.getElementById('quizInfoBox');
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    const infoTotalQuestions = document.getElementById('infoTotalQuestions');
+    const infoTimePerQuestion = document.getElementById('infoTimePerQuestion');
+
+    // Populate info box
+    infoTotalQuestions.textContent = quizData.length;
+    // Calculate average time limit for display, or show max/min
+    const averageTime = quizData.reduce((acc, q) => acc + q.timeLimit, 0) / quizData.length;
+    infoTimePerQuestion.textContent = `${averageTime.toFixed(1)} (average)`;
+
+    startQuizBtn.addEventListener('click', () => {
+      quizInfoBox.style.display = 'none'; // Hide info box
+      quizContainer.style.display = 'block'; // Show quiz container
+      loadQuestion(); // Start the quiz
+    });
+
+    function startTimer() {
+      clearInterval(timer); // Clear any existing timer
+      timeLeft = quizData[currentQuestionIndex].timeLimit;
+      timerDisplay.textContent = `Time left: ${timeLeft}s`;
+      timerDisplay.style.color = '#d9534f'; // Reset timer color
+
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Time left: ${timeLeft}s`;
+
+        if (timeLeft <= 5 && timeLeft > 0) {
+          timerDisplay.style.color = 'red';
+        }
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          feedbackDiv.textContent = "Time's up! The correct answer was: " + quizData[currentQuestionIndex].answer;
+          feedbackDiv.classList.add('incorrect');
+          disableOptions();
+          submitBtn.style.display = 'none';
+          questionAttempted = true;
+
+          setTimeout(() => {
+            if (currentQuestionIndex < quizData.length - 1) {
+              nextQuestion();
+            } else {
+              showFinalScore();
+            }
+          }, 1500); // 1.5 second delay
+        }
+      }, 1000);
+    }
+
+    function disableOptions() {
+      const options = document.querySelectorAll('input[name="quizOption"]');
+      options.forEach(option => {
+        option.disabled = true;
+      });
+    }
+
+    function enableOptions() {
+      const options = document.querySelectorAll('input[name="quizOption"]');
+      options.forEach(option => {
+        option.disabled = false;
+      });
+    }
+
+    function loadQuestion() {
+      questionAttempted = false; // Reset for new question
+      feedbackDiv.textContent = '';
+      feedbackDiv.className = 'quiz-feedback'; // Reset classes
+      submitBtn.style.display = 'inline-block';
+      nextBtn.style.display = 'none';
+      enableOptions(); // Enable options for new question
+
+      if (currentQuestionIndex < quizData.length) {
+        const currentQuiz = quizData[currentQuestionIndex];
+        let quizHTML = `<p class="quiz-question">${currentQuestionIndex + 1}. ${currentQuiz.question}</p>`;
+        quizHTML += `<div class="quiz-options">`;
+        currentQuiz.options.forEach((option, index) => {
+          quizHTML += `
+            <label>
+              <input type="radio" name="quizOption" value="${option}">
+              ${option}
+            </label>
+          `;
+        });
+        quizHTML += `</div>`;
+        quizDiv.innerHTML = quizHTML;
+        startTimer(); // Start timer for the new question
+      } else {
+        showFinalScore();
+      }
+    }
+
+    function submitAnswer() {
+      if (questionAttempted) return;
+      questionAttempted = true;
+
+      clearInterval(timer);
+
+      const selectedOption = document.querySelector('input[name="quizOption"]:checked');
+      disableOptions();
+
+      if (selectedOption) {
+        const userAnswer = selectedOption.value;
+        const correctAnswer = quizData[currentQuestionIndex].answer;
+
+        if (userAnswer === correctAnswer) {
+          feedbackDiv.textContent = "Correct!";
+          feedbackDiv.classList.add('correct');
+          score++;
+        } else {
+          feedbackDiv.textContent = `Incorrect. The correct answer was: ${correctAnswer}`;
+          feedbackDiv.classList.add('incorrect');
+        }
+      } else {
+        feedbackDiv.textContent = `No answer selected. The correct answer was: ${quizData[currentQuestionIndex].answer}`;
+        feedbackDiv.className = 'quiz-feedback incorrect';
+      }
+
+      submitBtn.style.display = 'none';
+      setTimeout(() => {
+        if (currentQuestionIndex < quizData.length - 1) {
+          nextQuestion();
+        } else {
+          showFinalScore();
+        }
+      }, 1500); // 1.5 second delay
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex++;
+      loadQuestion();
+    }
+
+    function showFinalScore() {
+      clearInterval(timer);
+      quizContainer.style.display = 'none';
+      finalScoreContainer.style.display = 'block';
+      finalScoreSpan.textContent = score;
+      totalQuestionsSpan.textContent = quizData.length;
+    }
+
+    function retakeQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      finalScoreContainer.style.display = 'none';
+      quizInfoBox.style.display = 'block';
+    }
+
+    // Initial setup: Show info box, hide quiz and score
+    quizContainer.style.display = 'none';
+    finalScoreContainer.style.display = 'none';
+    quizInfoBox.style.display = 'block';
   </script>
 
 </body>
