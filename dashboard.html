@@ -22,22 +22,60 @@
       font-weight: bold;
       font-size: 20px;
     }
+    /* Styles for the decorative User Name */
     nav .user-name {
-      font-size: 16px;
+      font-size: 1.1em; /* Slightly larger font */
+      font-weight: bold;
+      color: #e6e6e6; /* Light grey for contrast */
+      margin-right: 15px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
     }
-    .content {
-      padding: 20px;
-    }
+    /* Styles for the decorative Logout button */
     button.logout-btn {
-      background-color: #ff4c4c;
+      background: linear-gradient(45deg, #ff4c4c, #e04343); /* Red gradient */
       color: white;
       border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
+      padding: 8px 15px; /* Slightly more padding */
+      border-radius: 20px; /* More rounded */
       cursor: pointer;
+      font-size: 0.95em; /* Slightly larger font */
+      transition: all 0.3s ease; /* Smooth transition for hover effects */
+      box-shadow: 0 4px 8px rgba(255, 76, 76, 0.3); /* Soft shadow */
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-weight: bold;
     }
     button.logout-btn:hover {
-      background-color: #e04343;
+      background: linear-gradient(45deg, #e04343, #c9302c); /* Darker gradient on hover */
+      box-shadow: 0 6px 12px rgba(255, 76, 76, 0.4); /* Larger shadow on hover */
+      transform: translateY(-1px); /* Slight lift effect */
+    }
+
+    /* Styles for the Login Success Message (Bottom-Left) */
+    .login-success-message {
+      position: fixed; /* Fixed position relative to the viewport */
+      bottom: 20px; /* Positioned at the bottom */
+      left: 20px; /* Positioned at the left */
+      right: auto; /* Ensure it's positioned from the left and not right */
+      background-color: #4CAF50; /* Green background */
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0; /* Initially hidden */
+      visibility: hidden; /* Ensure it's not clickable when hidden */
+      transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+      z-index: 1000; /* Ensure it's on top of other content */
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    .login-success-message.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .content {
+      padding: 20px;
     }
     .quiz-container {
       margin-top: 30px;
@@ -115,6 +153,27 @@
       font-weight: bold;
       color: #333;
     }
+    /* Styles for the decorative "Retake Quiz" button */
+    .quiz-navigation-button {
+      background: linear-gradient(45deg, #28a745, #218838); /* Green gradient */
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px; /* More rounded */
+      cursor: pointer;
+      font-size: 1.2em;
+      margin-top: 20px;
+      transition: all 0.3s ease; /* Smooth transition for hover effects */
+      box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Soft shadow */
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .quiz-navigation-button:hover {
+      background: linear-gradient(45deg, #218838, #1e7e34); /* Darker gradient on hover */
+      box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Larger shadow on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
     .quiz-info-box {
       margin-top: 30px;
       border: 1px solid #007bff;
@@ -150,6 +209,41 @@
       color: #28a745; /* Green color */
       margin-bottom: 20px; /* Space below the message */
     }
+    .quiz-results-details {
+      margin-top: 30px;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      text-align: left;
+      display: none; /* Hidden by default */
+    }
+    .quiz-results-details h3 {
+      color: #007bff;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .quiz-results-details .result-item {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #eee;
+    }
+    .quiz-results-details .result-item:last-child {
+      border-bottom: none;
+    }
+    .quiz-results-details .question {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .quiz-results-details .your-answer {
+      color: #d9534f; /* Red for incorrect user answer */
+    }
+    .quiz-results-details .correct-answer {
+      color: #28a745; /* Green for correct answer */
+    }
+    .quiz-results-details .your-answer.correct {
+      color: #28a745; /* Green for correct user answer */
+    }
   </style>
 </head>
 <body>
@@ -163,6 +257,8 @@
   </nav>
 
   <div class="content">
+    <div id="loginSuccessMessage" class="login-success-message">Login Successful!</div>
+
     <div class="user-welcome-message" id="welcomeMessage"></div>
 
     <div class="quiz-info-box" id="quizInfoBox">
@@ -189,57 +285,86 @@
       <p>Your final score is: <span id="finalScore">0</span> / <span id="totalQuestions">0</span></p>
       <button class="quiz-navigation-button" onclick="retakeQuiz()">Retake Quiz</button>
     </div>
+
+    <div class="quiz-results-details" id="quizResultsDetails">
+      <h3>Detailed Results:</h3>
+      </div>
   </div>
 
   <script>
     // Get username from localStorage
     const user = localStorage.getItem('loggedInUser');
     const welcomeMessageDiv = document.getElementById('welcomeMessage');
+    const loginSuccessMessage = document.getElementById('loginSuccessMessage'); // Get the message div
 
     if (!user) {
       // If no user is logged in, redirect to login
       window.location.href = "index.html";
     } else {
       document.getElementById('userName').textContent = `Hello, ${user}`;
-      // Set the welcome message in green
       welcomeMessageDiv.textContent = `${user}'s Dashboard`;
+
+      // Logic for login success message
+      // This flag ensures the message only shows once per login session
+      const hasShownLoginMessage = localStorage.getItem('hasShownLoginMessage');
+
+      if (!hasShownLoginMessage) { // If message hasn't been shown for this login session
+        loginSuccessMessage.classList.add('show');
+        localStorage.setItem('hasShownLoginMessage', 'true'); // Mark as shown
+
+        setTimeout(() => {
+          loginSuccessMessage.classList.remove('show');
+        }, 3000); // Message visible for 3 seconds
+      }
     }
 
     function logout() {
       localStorage.removeItem('loggedInUser');
+      localStorage.removeItem('hasShownLoginMessage'); // Clear this flag on logout
       window.location.href = "index.html";
     }
 
+    // Modified quizData to include userAnswer and isCorrect properties
     const quizData = [
       {
         question: "What is the capital of France?",
         options: ["Berlin", "Madrid", "Paris", "Rome"],
         answer: "Paris",
-        timeLimit: 15 // seconds
+        timeLimit: 15, // seconds
+        userAnswer: null, // To store user's selected answer
+        isCorrect: null // To store if the user's answer was correct
       },
       {
         question: "Which planet is known as the Red Planet?",
         options: ["Earth", "Mars", "Jupiter", "Venus"],
         answer: "Mars",
-        timeLimit: 10
+        timeLimit: 10,
+        userAnswer: null,
+        isCorrect: null
       },
       {
         question: "What is 7 + 8?",
         options: ["12", "13", "14", "15"],
         answer: "15",
-        timeLimit: 20
+        timeLimit: 20,
+        userAnswer: null,
+        isCorrect: null
       },
       {
         question: "What is the largest ocean on Earth?",
         options: ["Atlantic", "Indian", "Arctic", "Pacific"],
         answer: "Pacific",
-        timeLimit: 15
+        timeLimit: 15,
+        userAnswer: null,
+        isCorrect: null
       },
       {
         question: "How many continents are there?",
         options: ["5", "6", "7", "8"],
         answer: "7",
-        timeLimit: 12
+        timeLimit: 12,
+        userAnswer: null,
+        isCorrect: null
       }
     ];
 
@@ -263,6 +388,7 @@
     const startQuizBtn = document.getElementById('startQuizBtn');
     const infoTotalQuestions = document.getElementById('infoTotalQuestions');
     const infoTimePerQuestion = document.getElementById('infoTimePerQuestion');
+    const quizResultsDetails = document.getElementById('quizResultsDetails'); // New element
 
     // Populate info box
     infoTotalQuestions.textContent = quizData.length;
@@ -297,6 +423,10 @@
           disableOptions();
           submitBtn.style.display = 'none';
           questionAttempted = true;
+
+          // Record as incorrect due to time-out
+          quizData[currentQuestionIndex].userAnswer = "Time's up!";
+          quizData[currentQuestionIndex].isCorrect = false;
 
           setTimeout(() => {
             if (currentQuestionIndex < quizData.length - 1) {
@@ -360,21 +490,29 @@
       const selectedOption = document.querySelector('input[name="quizOption"]:checked');
       disableOptions();
 
+      const currentQuestion = quizData[currentQuestionIndex];
+
       if (selectedOption) {
         const userAnswer = selectedOption.value;
-        const correctAnswer = quizData[currentQuestionIndex].answer;
+        const correctAnswer = currentQuestion.answer;
+
+        currentQuestion.userAnswer = userAnswer; // Store user's answer
 
         if (userAnswer === correctAnswer) {
           feedbackDiv.textContent = "Correct!";
           feedbackDiv.classList.add('correct');
           score++;
+          currentQuestion.isCorrect = true; // Mark as correct
         } else {
           feedbackDiv.textContent = `Incorrect. The correct answer was: ${correctAnswer}`;
           feedbackDiv.classList.add('incorrect');
+          currentQuestion.isCorrect = false; // Mark as incorrect
         }
       } else {
-        feedbackDiv.textContent = `No answer selected. The correct answer was: ${quizData[currentQuestionIndex].answer}`;
+        feedbackDiv.textContent = `No answer selected. The correct answer was: ${currentQuestion.answer}`;
         feedbackDiv.className = 'quiz-feedback incorrect';
+        currentQuestion.userAnswer = "No answer selected"; // Store lack of answer
+        currentQuestion.isCorrect = false; // Mark as incorrect
       }
 
       submitBtn.style.display = 'none';
@@ -398,18 +536,59 @@
       finalScoreContainer.style.display = 'block';
       finalScoreSpan.textContent = score;
       totalQuestionsSpan.textContent = quizData.length;
+
+      // Display detailed results
+      quizResultsDetails.innerHTML = '<h3>Detailed Results:</h3>';
+      
+      quizData.forEach((q, index) => {
+        const resultItem = document.createElement('div');
+        resultItem.classList.add('result-item');
+
+        const questionP = document.createElement('p');
+        questionP.classList.add('question');
+        questionP.textContent = `${index + 1}. ${q.question}`;
+        resultItem.appendChild(questionP);
+
+        const yourAnswerP = document.createElement('p');
+        yourAnswerP.textContent = `Your Answer: ${q.userAnswer}`;
+        if (q.isCorrect) {
+          yourAnswerP.classList.add('your-answer', 'correct');
+        } else {
+          yourAnswerP.classList.add('your-answer');
+        }
+        resultItem.appendChild(yourAnswerP);
+
+        // Only show correct answer if the user's answer was incorrect or not selected
+        if (!q.isCorrect) {
+          const correctAnswerP = document.createElement('p');
+          correctAnswerP.classList.add('correct-answer');
+          correctAnswerP.textContent = `Correct Answer: ${q.answer}`;
+          resultItem.appendChild(correctAnswerP);
+        }
+
+        quizResultsDetails.appendChild(resultItem);
+      });
+
+      quizResultsDetails.style.display = 'block'; // Always show the detailed results section
     }
 
     function retakeQuiz() {
       currentQuestionIndex = 0;
       score = 0;
+      // Reset userAnswer and isCorrect for all questions
+      quizData.forEach(q => {
+        q.userAnswer = null;
+        q.isCorrect = null;
+      });
       finalScoreContainer.style.display = 'none';
+      quizResultsDetails.style.display = 'none'; // Hide detailed results
       quizInfoBox.style.display = 'block';
     }
 
     // Initial setup: Show info box, hide quiz and score
     quizContainer.style.display = 'none';
     finalScoreContainer.style.display = 'none';
+    quizResultsDetails.style.display = 'none';
     quizInfoBox.style.display = 'block';
   </script>
 
