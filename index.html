@@ -30,8 +30,8 @@
       margin-bottom: 30px;
     }
     .logo img {
-      width: 100px; /* Adjust logo size */
-      height: 100px;
+      width: 180px; /* Further increased logo size */
+      height: 180px; /* Further increased logo size */
       object-fit: contain;
     }
     h2 {
@@ -137,8 +137,7 @@
   <div id="error" class="error"></div> <script>
     // Sample user data for validation
     const users = {
-      "arindam": "2004"
-      // Prerana Ghosh and Anushka Sengupta removed as per previous request
+      "admin": "12345" // User "arindam" removed, "admin" with password "12345" added
     };
 
     function validateLogin() {
@@ -153,6 +152,10 @@
       if (!username || !password) {
         errorDiv.textContent = "Please enter both username and password.";
         errorDiv.classList.add('show'); // Show the error message
+        setTimeout(() => { // Set a timeout to hide the message after 3 seconds
+          errorDiv.classList.remove('show');
+          errorDiv.textContent = ""; // Clear text after fading out
+        }, 3000);
         return;
       }
 
@@ -164,6 +167,10 @@
       } else {
         errorDiv.textContent = "Invalid username or password.";
         errorDiv.classList.add('show'); // Show the error message
+        setTimeout(() => { // Set a timeout to hide the message after 3 seconds
+          errorDiv.classList.remove('show');
+          errorDiv.textContent = ""; // Clear text after fading out
+        }, 3000);
       }
     }
   </script>
