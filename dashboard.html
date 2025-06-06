@@ -8,66 +8,69 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+      background: #f0f2f5; /* Light background */
+      color: #333;
     }
     nav {
       background-color: #46aa8c;
       color: white;
-      padding: 15px 20px;
+      padding: 15px 25px; /* Increased padding */
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Subtle shadow */
     }
     nav .brand {
       font-weight: bold;
-      font-size: 20px;
+      font-size: 24px; /* Larger brand name */
+      letter-spacing: 1px;
     }
-    /* Styles for the decorative User Name */
     nav .user-name {
-      font-size: 1.1em; /* Slightly larger font */
+      font-size: 1.1em;
       font-weight: bold;
-      color: #e6e6e6; /* Light grey for contrast */
-      margin-right: 15px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+      color: #e6e6e6;
+      margin-right: 20px; /* More space */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
-    /* Styles for the decorative Logout button */
     button.logout-btn {
-      background: linear-gradient(45deg, #ff4c4c, #e04343); /* Red gradient */
+      background: linear-gradient(45deg, #ff4c4c, #e04343);
       color: white;
       border: none;
-      padding: 8px 15px; /* Slightly more padding */
-      border-radius: 20px; /* More rounded */
+      padding: 10px 18px; /* Larger button */
+      border-radius: 25px; /* More rounded */
       cursor: pointer;
-      font-size: 0.95em; /* Slightly larger font */
-      transition: all 0.3s ease; /* Smooth transition for hover effects */
-      box-shadow: 0 4px 8px rgba(255, 76, 76, 0.3); /* Soft shadow */
+      font-size: 1em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(255, 76, 76, 0.3);
       letter-spacing: 0.5px;
       text-transform: uppercase;
       font-weight: bold;
     }
     button.logout-btn:hover {
-      background: linear-gradient(45deg, #e04343, #c9302c); /* Darker gradient on hover */
-      box-shadow: 0 6px 12px rgba(255, 76, 76, 0.4); /* Larger shadow on hover */
-      transform: translateY(-1px); /* Slight lift effect */
+      background: linear-gradient(45deg, #e04343, #c9302c);
+      box-shadow: 0 6px 12px rgba(255, 76, 76, 0.4);
+      transform: translateY(-1px);
     }
 
     /* Styles for the Login Success Message (Bottom-Left) */
     .login-success-message {
-      position: fixed; /* Fixed position relative to the viewport */
-      bottom: 20px; /* Positioned at the bottom */
-      left: 20px; /* Positioned at the left */
-      right: auto; /* Ensure it's positioned from the left and not right */
-      background-color: #4CAF50; /* Green background */
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: auto;
+      background-color: #4CAF50;
       color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      opacity: 0; /* Initially hidden */
-      visibility: hidden; /* Ensure it's not clickable when hidden */
+      padding: 14px 25px; /* Larger padding */
+      border-radius: 10px; /* More rounded */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+      opacity: 0;
+      visibility: hidden;
       transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-      z-index: 1000; /* Ensure it's on top of other content */
+      z-index: 1000;
       font-weight: bold;
       letter-spacing: 0.5px;
+      font-size: 1.1em;
     }
     .login-success-message.show {
       opacity: 1;
@@ -75,174 +78,290 @@
     }
 
     .content {
+      max-width: 900px; /* Wider content area */
+      margin: 30px auto; /* Center content with margin */
       padding: 20px;
+      background: white;
+      border-radius: 15px; /* More rounded container */
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1); /* Deeper shadow */
     }
     .quiz-container {
       margin-top: 30px;
-      border: 1px solid #ddd;
-      padding: 20px;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-      display: none; /* Hidden by default */
+      padding: 30px; /* More padding */
+      border-radius: 12px; /* Smoother corners */
+      background-color: #ffffff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Internal shadow */
+      display: none;
+      border: 1px solid #e0e0e0; /* Light border */
     }
     .quiz-question {
-      font-size: 18px;
-      margin-bottom: 15px;
+      font-size: 22px; /* Larger question font */
+      margin-bottom: 25px; /* More space */
       font-weight: bold;
+      color: #0056b3; /* Blue question color */
+      line-height: 1.4;
     }
     .quiz-options label {
-      display: block;
-      margin-bottom: 10px;
+      display: flex; /* Use flexbox for alignment */
+      align-items: center;
+      margin-bottom: 15px; /* More space between options */
       cursor: pointer;
+      font-size: 18px; /* Larger option font */
+      padding: 12px 15px; /* Padding for click area */
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .quiz-options label:hover {
+      background-color: #f5f5f5;
+      border-color: #007bff;
     }
     .quiz-options input[type="radio"] {
-      margin-right: 10px;
+      margin-right: 15px; /* More space for radio button */
+      transform: scale(1.2); /* Slightly larger radio button */
     }
     .quiz-feedback {
-      margin-top: 20px;
-      padding: 10px;
-      border-radius: 4px;
+      margin-top: 25px; /* More space */
+      padding: 15px; /* More padding */
+      border-radius: 8px;
       font-weight: bold;
+      font-size: 1.1em;
+      animation: fadeIn 0.5s ease-out; /* Fade in animation */
     }
     .quiz-feedback.correct {
       background-color: #d4edda;
       color: #155724;
+      border: 1px solid #28a745;
     }
     .quiz-feedback.incorrect {
       background-color: #f8d7da;
       color: #721c24;
+      border: 1px solid #d9534f;
     }
     .quiz-navigation button {
       background-color: #007bff;
       color: white;
       border: none;
-      padding: 10px 15px;
-      border-radius: 4px;
+      padding: 12px 25px; /* Larger buttons */
+      border-radius: 8px;
       cursor: pointer;
-      margin-top: 15px;
-      font-size: 16px;
+      margin-top: 25px; /* More space */
+      font-size: 18px; /* Larger font */
+      transition: background-color 0.2s ease, transform 0.2s ease;
+      margin-right: 10px; /* Space between buttons */
+    }
+    .quiz-navigation button#skipBtn { /* Specific style for Skip button */
+        background-color: #ffc107; /* Yellowish color */
+        color: #333; /* Dark text */
+    }
+    .quiz-navigation button#skipBtn:hover {
+        background-color: #e0a800; /* Darker yellow on hover */
     }
     .quiz-navigation button:hover {
       background-color: #0056b3;
+      transform: translateY(-2px); /* Lift effect */
     }
     .quiz-navigation button:disabled {
       background-color: #cccccc;
       cursor: not-allowed;
+      transform: none;
     }
     .timer {
-      font-size: 1.2em;
+      font-size: 1.5em; /* Larger timer */
       font-weight: bold;
-      margin-bottom: 15px;
-      color: #d9534f; /* Red color for timer */
+      margin-bottom: 20px;
+      color: #d9534f;
+      text-align: right; /* Align to right */
     }
     .final-score-container {
       text-align: center;
       margin-top: 40px;
-      padding: 30px;
+      padding: 40px; /* More padding */
       border: 2px solid #007bff;
-      border-radius: 10px;
+      border-radius: 15px; /* More rounded */
       background-color: #eaf5ff;
-      display: none; /* Hidden by default */
+      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.15); /* Stronger shadow */
+      display: none;
     }
     .final-score-container h2 {
       color: #007bff;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      font-size: 2.2em;
     }
     .final-score-container p {
-      font-size: 1.5em;
+      font-size: 1.8em; /* Larger score text */
       font-weight: bold;
       color: #333;
+      margin-bottom: 30px;
     }
-    /* Styles for the decorative "Retake Quiz" button */
-    .quiz-navigation-button {
-      background: linear-gradient(45deg, #28a745, #218838); /* Green gradient */
+    .final-score-summary { /* New style for summary section */
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #b3d7ff; /* Light blue border */
+      display: flex;
+      justify-content: center;
+      gap: 30px; /* Space between items */
+      flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    }
+    .final-score-summary div {
+      font-size: 1.2em; /* Smaller than main score but still readable */
+      font-weight: bold;
+      color: #555;
+      padding: 10px 15px;
+      border-radius: 8px;
+      background-color: #e0f0ff; /* Light background for summary items */
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+    }
+    .final-score-summary .correct-count {
+      color: #28a745;
+    }
+    .final-score-summary .wrong-count {
+      color: #d9534f;
+    }
+    .final-score-summary .skipped-count {
+      color: #ffc107;
+    }
+
+
+    .quiz-navigation-button { /* Retake Quiz Button */
+      background: linear-gradient(45deg, #28a745, #218838);
       color: white;
       border: none;
-      padding: 12px 25px;
-      border-radius: 25px; /* More rounded */
+      padding: 15px 30px; /* Larger button */
+      border-radius: 30px;
       cursor: pointer;
-      font-size: 1.2em;
+      font-size: 1.3em;
       margin-top: 20px;
-      transition: all 0.3s ease; /* Smooth transition for hover effects */
-      box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Soft shadow */
-      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+      letter-spacing: 0.8px;
       text-transform: uppercase;
     }
     .quiz-navigation-button:hover {
-      background: linear-gradient(45deg, #218838, #1e7e34); /* Darker gradient on hover */
-      box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4); /* Larger shadow on hover */
-      transform: translateY(-2px); /* Slight lift effect */
+      background: linear-gradient(45deg, #218838, #1e7e34);
+      box-shadow: 0 6px 18px rgba(40, 167, 69, 0.4);
+      transform: translateY(-3px);
     }
 
     .quiz-info-box {
       margin-top: 30px;
       border: 1px solid #007bff;
-      padding: 25px;
-      border-radius: 8px;
+      padding: 30px; /* More padding */
+      border-radius: 12px;
       background-color: #eaf5ff;
       text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
     }
     .quiz-info-box h2 {
       color: #007bff;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      font-size: 2em;
     }
     .quiz-info-box p {
-      font-size: 1.1em;
-      margin-bottom: 10px;
+      font-size: 1.2em;
+      margin-bottom: 12px;
+      line-height: 1.5;
     }
     .quiz-info-box button {
-      background-color: #28a745; /* Green start button */
+      background-color: #28a745;
       color: white;
       border: none;
-      padding: 12px 25px;
-      border-radius: 5px;
+      padding: 15px 30px; /* Larger button */
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 1.2em;
-      margin-top: 20px;
+      font-size: 1.3em;
+      margin-top: 25px;
+      transition: background-color 0.2s ease, transform 0.2s ease;
     }
     .quiz-info-box button:hover {
       background-color: #218838;
+      transform: translateY(-2px);
     }
     .user-welcome-message {
-      font-size: 2em; /* Larger font size */
+      font-size: 2.5em; /* Larger font size */
       font-weight: bold;
-      color: #28a745; /* Green color */
-      margin-bottom: 20px; /* Space below the message */
+      color: #28a745;
+      margin-bottom: 30px;
+      text-align: center;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
     }
     .quiz-results-details {
       margin-top: 30px;
-      border: 1px solid #ddd;
-      padding: 20px;
-      border-radius: 8px;
-      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
       text-align: left;
-      display: none; /* Hidden by default */
+      display: none;
+      border: 1px solid #e0e0e0;
     }
     .quiz-results-details h3 {
       color: #007bff;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       text-align: center;
+      font-size: 1.8em;
+      border-bottom: 2px solid #eaf5ff;
+      padding-bottom: 10px;
     }
     .quiz-results-details .result-item {
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px dashed #eee;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed #ddd;
     }
     .quiz-results-details .result-item:last-child {
       border-bottom: none;
     }
     .quiz-results-details .question {
       font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      font-size: 1.25em; /* Increased font size */
+      color: #555;
     }
     .quiz-results-details .your-answer {
-      color: #d9534f; /* Red for incorrect user answer */
+      color: #d9534f;
+      font-style: italic;
+      margin-left: 10px;
+      font-size: 1.1em; /* Increased font size */
     }
     .quiz-results-details .correct-answer {
-      color: #28a745; /* Green for correct answer */
+      color: #28a745;
+      font-weight: bold;
+      margin-left: 10px;
+      font-size: 1.1em; /* Increased font size */
     }
     .quiz-results-details .your-answer.correct {
-      color: #28a745; /* Green for correct user answer */
+      color: #28a745;
+    }
+    .quiz-results-details .your-answer.skipped { /* Style for skipped answer */
+        color: #ffc107; /* Yellowish color for skipped */
+        font-weight: bold;
+    }
+
+    /* Progress Bar Styles */
+    #progressBarContainer {
+      width: 100%;
+      height: 15px; /* Height of the progress bar */
+      background-color: #e0e0e0; /* Background of the empty bar */
+      border-radius: 8px; /* Rounded corners for the container */
+      margin-bottom: 25px; /* Space below the progress bar */
+      overflow: hidden; /* Ensures the fill stays within rounded corners */
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); /* Inner shadow for depth */
+    }
+
+    #progressBarFill {
+      height: 100%;
+      width: 0%; /* Initial width */
+      background: linear-gradient(to right, #007bff, #00c6ff); /* Gradient fill */
+      border-radius: 8px; /* Rounded corners for the fill */
+      transition: width 0.5s ease-in-out; /* Smooth transition for width changes */
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+    }
+
+
+    /* Keyframe for fade-in effect */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -272,17 +391,25 @@
     <div class="quiz-container" id="quizContainer">
       <h2>Simple Quiz</h2>
       <div class="timer" id="timer">Time left: 15s</div>
+      <div id="progressBarContainer">
+        <div id="progressBarFill"></div>
+      </div>
       <div id="quiz"></div>
       <div class="quiz-feedback" id="feedback"></div>
       <div class="quiz-navigation">
         <button id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
-        <button id="nextBtn" onclick="nextQuestion()" style="display: none;">Next Question</button>
+        <button id="skipBtn" onclick="skipQuestion()">Skip Question</button> <button id="nextBtn" onclick="nextQuestion()" style="display: none;">Next Question</button>
       </div>
     </div>
 
     <div class="final-score-container" id="finalScoreContainer">
       <h2>Quiz Completed!</h2>
       <p>Your final score is: <span id="finalScore">0</span> / <span id="totalQuestions">0</span></p>
+      <div class="final-score-summary">
+        <div>Correct: <span id="finalCorrectAnswers" class="correct-count">0</span></div>
+        <div>Wrong: <span id="finalWrongAnswers" class="wrong-count">0</span></div>
+        <div>Skipped: <span id="finalSkippedQuestions" class="skipped-count">0</span></div>
+      </div>
       <button class="quiz-navigation-button" onclick="retakeQuiz()">Retake Quiz</button>
     </div>
 
@@ -308,7 +435,8 @@
       // This flag ensures the message only shows once per login session
       const hasShownLoginMessage = localStorage.getItem('hasShownLoginMessage');
 
-      if (!hasShownLoginMessage) { // If message hasn't been shown for this login session
+      // Check if the flag is specifically 'false' (meaning just logged in) or null/undefined
+      if (hasShownLoginMessage === 'false' || hasShownLoginMessage === null) {
         loginSuccessMessage.classList.add('show');
         localStorage.setItem('hasShownLoginMessage', 'true'); // Mark as shown
 
@@ -343,33 +471,75 @@
         isCorrect: null
       },
       {
-        question: "What is 7 + 8?",
-        options: ["12", "13", "14", "15"],
-        answer: "15",
-        timeLimit: 20,
+        question: "What is the largest ocean on Earth?",
+        options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+        answer: "Pacific Ocean",
+        timeLimit: 18,
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "What is the largest ocean on Earth?",
-        options: ["Atlantic", "Indian", "Arctic", "Pacific"],
-        answer: "Pacific",
+        question: "Which of these is a primary color?",
+        options: ["Green", "Orange", "Purple", "Blue"],
+        answer: "Blue",
+        timeLimit: 12,
+        userAnswer: null,
+        isCorrect: null
+      },
+      {
+        question: "What is the chemical symbol for water?",
+        options: ["O2", "H2O", "CO2", "NACL"],
+        answer: "H2O",
         timeLimit: 15,
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "How many continents are there?",
-        options: ["5", "6", "7", "8"],
-        answer: "7",
-        timeLimit: 12,
+        question: "Who painted the Mona Lisa?",
+        options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"],
+        answer: "Leonardo da Vinci",
+        timeLimit: 20,
+        userAnswer: null,
+        isCorrect: null
+      },
+      {
+        question: "What is the process by which plants make their own food?",
+        options: ["Respiration", "Transpiration", "Photosynthesis", "Germination"],
+        answer: "Photosynthesis",
+        timeLimit: 25,
+        userAnswer: null,
+        isCorrect: null
+      },
+      {
+        question: "Which country is famous for the Great Wall?",
+        options: ["Japan", "India", "China", "Egypt"],
+        answer: "China",
+        timeLimit: 10,
+        userAnswer: null,
+        isCorrect: null
+      },
+      {
+        question: "What is the smallest prime number?",
+        options: ["0", "1", "2", "3"],
+        answer: "2",
+        timeLimit: 15,
+        userAnswer: null,
+        isCorrect: null
+      },
+      {
+        question: "Which instrument is used to measure earthquakes?",
+        options: ["Anemometer", "Barometer", "Seismograph", "Thermometer"],
+        answer: "Seismograph",
+        timeLimit: 18,
         userAnswer: null,
         isCorrect: null
       }
     ];
 
     let currentQuestionIndex = 0;
-    let score = 0;
+    let score = 0; // Correct answers
+    let wrongAnswers = 0; // Wrong answers
+    let skippedQuestionsCount = 0; // Skipped questions
     let timer;
     let timeLeft;
     let questionAttempted = false;
@@ -378,6 +548,7 @@
     const quizDiv = document.getElementById('quiz');
     const feedbackDiv = document.getElementById('feedback');
     const submitBtn = document.getElementById('submitBtn');
+    const skipBtn = document.getElementById('skipBtn'); // Get the new skip button
     const nextBtn = document.getElementById('nextBtn');
     const timerDisplay = document.getElementById('timer');
     const quizContainer = document.getElementById('quizContainer');
@@ -389,6 +560,14 @@
     const infoTotalQuestions = document.getElementById('infoTotalQuestions');
     const infoTimePerQuestion = document.getElementById('infoTimePerQuestion');
     const quizResultsDetails = document.getElementById('quizResultsDetails'); // New element
+
+    // New spans for summary
+    const finalCorrectAnswersSpan = document.getElementById('finalCorrectAnswers');
+    const finalWrongAnswersSpan = document.getElementById('finalWrongAnswers');
+    const finalSkippedQuestionsSpan = document.getElementById('finalSkippedQuestions');
+
+    // Progress bar elements
+    const progressBarFill = document.getElementById('progressBarFill');
 
     // Populate info box
     infoTotalQuestions.textContent = quizData.length;
@@ -422,11 +601,13 @@
           feedbackDiv.classList.add('incorrect');
           disableOptions();
           submitBtn.style.display = 'none';
+          skipBtn.style.display = 'none'; // Hide skip button too
           questionAttempted = true;
 
           // Record as incorrect due to time-out
           quizData[currentQuestionIndex].userAnswer = "Time's up!";
           quizData[currentQuestionIndex].isCorrect = false;
+          wrongAnswers++; // Increment wrong answers for time out
 
           setTimeout(() => {
             if (currentQuestionIndex < quizData.length - 1) {
@@ -453,11 +634,22 @@
       });
     }
 
+    function updateProgressBar() {
+      // Calculate progress based on (questions answered + skipped) / total questions
+      // The progress bar should reach 100% when all questions are either answered or skipped.
+      let progress = (currentQuestionIndex / quizData.length) * 100;
+      if (currentQuestionIndex === quizData.length) { // Ensure it's 100% at the end
+        progress = 100;
+      }
+      progressBarFill.style.width = `${progress}%`;
+    }
+
     function loadQuestion() {
       questionAttempted = false; // Reset for new question
       feedbackDiv.textContent = '';
       feedbackDiv.className = 'quiz-feedback'; // Reset classes
       submitBtn.style.display = 'inline-block';
+      skipBtn.style.display = 'inline-block'; // Show skip button
       nextBtn.style.display = 'none';
       enableOptions(); // Enable options for new question
 
@@ -476,6 +668,7 @@
         quizHTML += `</div>`;
         quizDiv.innerHTML = quizHTML;
         startTimer(); // Start timer for the new question
+        updateProgressBar(); // Update progress bar on question load
       } else {
         showFinalScore();
       }
@@ -485,10 +678,12 @@
       if (questionAttempted) return;
       questionAttempted = true;
 
-      clearInterval(timer);
+      clearInterval(timer); // Stop timer on submit
 
       const selectedOption = document.querySelector('input[name="quizOption"]:checked');
       disableOptions();
+      submitBtn.style.display = 'none'; // Hide submit button
+      skipBtn.style.display = 'none'; // Hide skip button
 
       const currentQuestion = quizData[currentQuestionIndex];
 
@@ -501,11 +696,12 @@
         if (userAnswer === correctAnswer) {
           feedbackDiv.textContent = "Correct!";
           feedbackDiv.classList.add('correct');
-          score++;
+          score++; // Increment correct answers
           currentQuestion.isCorrect = true; // Mark as correct
         } else {
           feedbackDiv.textContent = `Incorrect. The correct answer was: ${correctAnswer}`;
           feedbackDiv.classList.add('incorrect');
+          wrongAnswers++; // Increment wrong answers
           currentQuestion.isCorrect = false; // Mark as incorrect
         }
       } else {
@@ -513,9 +709,9 @@
         feedbackDiv.className = 'quiz-feedback incorrect';
         currentQuestion.userAnswer = "No answer selected"; // Store lack of answer
         currentQuestion.isCorrect = false; // Mark as incorrect
+        wrongAnswers++; // Increment wrong answers for no selection
       }
 
-      submitBtn.style.display = 'none';
       setTimeout(() => {
         if (currentQuestionIndex < quizData.length - 1) {
           nextQuestion();
@@ -524,6 +720,33 @@
         }
       }, 1500); // 1.5 second delay
     }
+
+    function skipQuestion() {
+        if (questionAttempted) return; // Prevent multiple actions
+        questionAttempted = true;
+
+        clearInterval(timer); // Stop the timer
+        disableOptions(); // Disable options
+        submitBtn.style.display = 'none'; // Hide submit button
+        skipBtn.style.display = 'none'; // Hide skip button
+
+        // Mark the question as skipped
+        quizData[currentQuestionIndex].userAnswer = "Skipped";
+        quizData[currentQuestionIndex].isCorrect = false; // Count as incorrect for score
+        skippedQuestionsCount++; // Increment skipped questions
+
+        feedbackDiv.textContent = "Question skipped.";
+        feedbackDiv.className = 'quiz-feedback'; // Clear correct/incorrect styling
+
+        setTimeout(() => {
+            if (currentQuestionIndex < quizData.length - 1) {
+                nextQuestion();
+            } else {
+                showFinalScore();
+            }
+        }, 1500); // 1.5 second delay before moving on
+    }
+
 
     function nextQuestion() {
       currentQuestionIndex++;
@@ -536,6 +759,14 @@
       finalScoreContainer.style.display = 'block';
       finalScoreSpan.textContent = score;
       totalQuestionsSpan.textContent = quizData.length;
+
+      // Update summary counts
+      finalCorrectAnswersSpan.textContent = score;
+      finalWrongAnswersSpan.textContent = wrongAnswers;
+      finalSkippedQuestionsSpan.textContent = skippedQuestionsCount;
+
+      // Ensure progress bar is full when quiz ends
+      updateProgressBar();
 
       // Display detailed results
       quizResultsDetails.innerHTML = '<h3>Detailed Results:</h3>';
@@ -553,12 +784,14 @@
         yourAnswerP.textContent = `Your Answer: ${q.userAnswer}`;
         if (q.isCorrect) {
           yourAnswerP.classList.add('your-answer', 'correct');
+        } else if (q.userAnswer === "Skipped") { // Specific styling for skipped
+          yourAnswerP.classList.add('your-answer', 'skipped');
         } else {
           yourAnswerP.classList.add('your-answer');
         }
         resultItem.appendChild(yourAnswerP);
 
-        // Only show correct answer if the user's answer was incorrect or not selected
+        // Always show the correct answer for skipped or incorrect questions (including "No answer selected" and "Time's up!")
         if (!q.isCorrect) {
           const correctAnswerP = document.createElement('p');
           correctAnswerP.classList.add('correct-answer');
@@ -575,6 +808,8 @@
     function retakeQuiz() {
       currentQuestionIndex = 0;
       score = 0;
+      wrongAnswers = 0; // Reset wrong answers
+      skippedQuestionsCount = 0; // Reset skipped questions
       // Reset userAnswer and isCorrect for all questions
       quizData.forEach(q => {
         q.userAnswer = null;
@@ -583,6 +818,7 @@
       finalScoreContainer.style.display = 'none';
       quizResultsDetails.style.display = 'none'; // Hide detailed results
       quizInfoBox.style.display = 'block';
+      updateProgressBar(); // Reset progress bar to 0%
     }
 
     // Initial setup: Show info box, hide quiz and score
@@ -590,6 +826,7 @@
     finalScoreContainer.style.display = 'none';
     quizResultsDetails.style.display = 'none';
     quizInfoBox.style.display = 'block';
+    updateProgressBar(); // Initialize progress bar to 0% at start
   </script>
 
 </body>
