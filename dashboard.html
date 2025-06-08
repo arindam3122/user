@@ -495,6 +495,66 @@
         transform: translateY(-1px);
     }
 
+    /* Custom Alert/Info Modal Styles */
+    .info-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* Ensure it's on top */
+        display: none; /* Hidden by default */
+        opacity: 0;
+        transition: opacity 0.2s ease-out;
+    }
+
+    .info-modal-overlay.active {
+        opacity: 1;
+    }
+
+    .info-modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        transform: scale(0.95);
+        transition: transform 0.2s ease-out;
+    }
+
+    .info-modal-overlay.active .info-modal-content {
+        transform: scale(1);
+    }
+
+    .info-modal-content p {
+        font-size: 1.2em;
+        color: #333;
+        margin-bottom: 25px;
+        line-height: 1.4;
+    }
+
+    .info-modal-content button {
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 1em;
+        min-width: 80px;
+        background-color: #007bff; /* Blue button for info modal */
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .info-modal-content button:hover {
+        background-color: #0056b3;
+    }
+
   </style>
 </head>
 <body>
@@ -587,6 +647,14 @@
 
   </div>
 
+    <!-- Custom Info/Alert Modal -->
+    <div id="infoModal" class="info-modal-overlay">
+        <div class="info-modal-content">
+            <p id="infoMessage"></p>
+            <button id="infoOkButton">OK</button>
+        </div>
+    </div>
+
   <script>
     const quizInfoBox = document.getElementById('quizInfoBox');
     const quizContainer = document.getElementById('quizContainer');
@@ -639,6 +707,36 @@
     // Timer variables
     let timeLeft = 0; // Initialize to 0, will be set when loading a question
     let timerInterval;
+
+    /**
+     * Displays a custom information/alert modal.
+     * @param {string} message - The message to display in the modal.
+     */
+    function showInfoModal(message) {
+        const modal = document.getElementById('infoModal');
+        const msgElem = document.getElementById('infoMessage');
+        const okButton = document.getElementById('infoOkButton');
+
+        msgElem.textContent = message;
+        modal.style.display = 'flex'; // Make modal visible
+        modal.classList.add('active'); // Add active class for CSS transitions
+
+        okButton.onclick = () => {
+            hideInfoModal();
+        };
+    }
+
+    /**
+     * Hides the custom information/alert modal.
+     */
+    function hideInfoModal() {
+        const modal = document.getElementById('infoModal');
+        modal.classList.remove('active'); // Remove active class for CSS transitions
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 200); // This duration should match the CSS transition duration
+    }
+
 
     // --- Authentication and Initial Load ---
     document.addEventListener('DOMContentLoaded', (event) => {
@@ -803,8 +901,6 @@
                 },
 
 
-
-
             ]
         },
     ];
@@ -814,7 +910,7 @@
 
     function startRandomQuiz() {
         if (quizzes.length === 0) {
-            alert("No quizzes available to start!");
+            showInfoModal("No quizzes available to start!"); // Replaced alert()
             return;
         }
         const randomIndex = Math.floor(Math.random() * quizzes.length);
@@ -1059,7 +1155,7 @@
             totalQuestions: totalQuestions, // Store total questions for percentage calculation
             wrongAnswers: wrongAnswersTotal,
             skippedQuestionsCount: skippedQuestionsTotal,
-            timestamp: new Date().toLocaleString(),
+            timestamp: new Date().toLocaleString(), // Keep as is for now, will format later in display
             quizDetails: quizDetailsForDisplay // Store detailed answers
         };
         quizResults.push(newResult);
@@ -1156,7 +1252,25 @@
                 percentage = ((result.numericScore / result.totalQuestions) * 100).toFixed(2) + '%';
             }
             row.insertCell(2).textContent = percentage;
-            row.insertCell(3).textContent = result.timestamp;
+            
+            // Format the Date/Time for previous quizzes table
+            let displayDateTime = 'N/A';
+            if (result.timestamp) {
+                const date = new Date(result.timestamp); // Attempt to parse the timestamp string
+                if (!isNaN(date.getTime())) { // Check if the parsed date is valid
+                    const day = String(date.getDate()).padStart(2, '0');
+                    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+                    const year = date.getFullYear();
+                    const hours = String(date.getHours()).padStart(2, '0');
+                    const minutes = String(date.getMinutes()).padStart(2, '0');
+                    const seconds = String(date.getSeconds()).padStart(2, '0');
+                    displayDateTime = `${day}/${month}/${year}, ${hours}:${minutes}:${seconds}`;
+                } else {
+                    console.warn("Could not parse timestamp in previous quizzes table:", result.timestamp);
+                    displayDateTime = result.timestamp; // Fallback to original string
+                }
+            }
+            row.insertCell(3).textContent = displayDateTime;
 
             const actionsCell = row.insertCell(4);
             const viewDetailsButton = document.createElement('button');
