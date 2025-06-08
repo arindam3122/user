@@ -212,6 +212,63 @@
             margin-left: 5px;
             font-weight: bold;
         }
+
+        /* Custom Confirmation Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Ensure it's on top */
+            display: none; /* Hidden by default */
+            opacity: 0;
+            transition: opacity 0.2s ease-out;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            transform: scale(0.95);
+            transition: transform 0.2s ease-out;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content p {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .modal-buttons button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1em;
+            min-width: 80px;
+        }
     </style>
 </head>
 <body>
@@ -251,6 +308,17 @@
         </div>
     </div>
 
+    <!-- Custom Confirmation Modal -->
+    <div id="customConfirmModal" class="modal-overlay">
+        <div class="modal-content">
+            <p id="confirmMessage"></p>
+            <div class="modal-buttons">
+                <button id="confirmYes" class="view-btn">Yes</button>
+                <button id="confirmNo" class="delete-btn">No</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             const adminLoggedIn = localStorage.getItem('loggedInUser');
@@ -260,6 +328,60 @@
                 loadQuizResults();
             }
         });
+
+        // Global variable to store the callback for the custom confirmation modal
+        let currentConfirmCallback = null;
+
+        /**
+         * Displays a custom confirmation modal.
+         * @param {string} message - The message to display in the modal.
+         * @param {function(boolean): void} onConfirmCallback - Callback function executed with true if confirmed, false if cancelled.
+         */
+        function showCustomConfirm(message, onConfirmCallback) {
+            const modal = document.getElementById('customConfirmModal');
+            const msgElem = document.getElementById('confirmMessage');
+            const confirmYes = document.getElementById('confirmYes');
+            const confirmNo = document.getElementById('confirmNo');
+
+            msgElem.textContent = message;
+            modal.style.display = 'flex'; // Make modal visible
+            modal.classList.add('active'); // Add active class for CSS transitions
+
+            currentConfirmCallback = onConfirmCallback; // Store the callback
+
+            // Remove previous event listeners to prevent multiple bindings
+            confirmYes.onclick = null;
+            confirmNo.onclick = null;
+
+            // Attach new event listeners
+            confirmYes.onclick = () => {
+                hideCustomConfirm(); // Hide the modal
+                if (currentConfirmCallback) {
+                    currentConfirmCallback(true); // Call callback with true (confirmed)
+                }
+            };
+
+            confirmNo.onclick = () => {
+                hideCustomConfirm(); // Hide the modal
+                if (currentConfirmCallback) {
+                    currentConfirmCallback(false); // Call callback with false (cancelled)
+                }
+            };
+        }
+
+        /**
+         * Hides the custom confirmation modal.
+         */
+        function hideCustomConfirm() {
+            const modal = document.getElementById('customConfirmModal');
+            modal.classList.remove('active'); // Remove active class for CSS transitions
+            // Wait for transition to complete before setting display to 'none'
+            setTimeout(() => {
+                modal.style.display = 'none';
+                currentConfirmCallback = null; // Clear the callback reference
+            }, 200); // This duration should match the CSS transition duration
+        }
+
 
         function loadQuizResults() {
             const quizDataTable = document.getElementById('quizDataTable');
@@ -295,7 +417,26 @@
                 }
                 row.insertCell(6).textContent = percentage; // Percentage
 
-                row.insertCell(7).textContent = result.timestamp; // Date/Time
+                // Format the Date/Time
+                let displayDateTime = 'N/A';
+                if (result.timestamp) {
+                    const date = new Date(result.timestamp); // Attempt to parse the timestamp string
+                    // Check if the parsed date is valid
+                    if (!isNaN(date.getTime())) {
+                        const day = String(date.getDate()).padStart(2, '0');
+                        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+                        const year = date.getFullYear();
+                        const hours = String(date.getHours()).padStart(2, '0');
+                        const minutes = String(date.getMinutes()).padStart(2, '0');
+                        const seconds = String(date.getSeconds()).padStart(2, '0');
+                        displayDateTime = `${day}/${month}/${year}, ${hours}:${minutes}:${seconds}`;
+                    } else {
+                        // Fallback: If the timestamp cannot be parsed, display the original string
+                        console.warn("Could not parse timestamp:", result.timestamp);
+                        displayDateTime = result.timestamp;
+                    }
+                }
+                row.insertCell(7).textContent = displayDateTime; // Date/Time
 
                 const actionsCell = row.insertCell(8);
                 actionsCell.style.whiteSpace = 'nowrap'; // Prevent buttons from wrapping
@@ -402,20 +543,31 @@
             // No need to reload results, they are already loaded.
         }
 
+        /**
+         * Deletes a quiz result after confirmation via custom modal.
+         * @param {number} index - The index of the quiz result to delete.
+         */
         function deleteQuizResult(index) {
-            if (confirm("Are you sure you want to delete this quiz result?")) {
-                let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-                quizResults.splice(index, 1); // Remove the record at the given index
-                localStorage.setItem('quizResults', JSON.stringify(quizResults)); // Save updated array
-                loadQuizResults(); // Reload the table
-            }
+            showCustomConfirm("Are you sure you want to delete this quiz result?", (confirmed) => {
+                if (confirmed) {
+                    let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+                    quizResults.splice(index, 1); // Remove the record at the given index
+                    localStorage.setItem('quizResults', JSON.stringify(quizResults)); // Save updated array
+                    loadQuizResults(); // Reload the table to reflect the deletion
+                }
+            });
         }
 
+        /**
+         * Clears all quiz data from localStorage after confirmation via custom modal.
+         */
         function clearAllQuizData() {
-            if (confirm("Are you sure you want to clear all quiz data? This action cannot be undone.")) {
-                localStorage.removeItem('quizResults');
-                loadQuizResults(); // Reload the table to show it's empty
-            }
+            showCustomConfirm("Are you sure you want to clear all quiz data? This action cannot be undone.", (confirmed) => {
+                if (confirmed) {
+                    localStorage.removeItem('quizResults'); // Clear all quiz data
+                    loadQuizResults(); // Reload the table to show it's empty
+                }
+            });
         }
 
         function logout() {
