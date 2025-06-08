@@ -5,40 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/x-icon" href="linkup.png">
   <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* Global Styles */
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
-      background: #f0f2f5; /* Light background */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f2f5;
       color: #333;
+      display: flex; /* Make body a flex container */
+      min-height: 100vh; /* Ensure body takes full viewport height */
     }
+
+    /* Navigation Bar - Left Sidebar */
     nav {
       background-color: #46aa8c;
       color: white;
-      padding: 15px 25px; /* Increased padding */
+      padding: 25px 15px; /* Adjust padding for vertical layout */
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Subtle shadow */
+      flex-direction: column; /* Stack items vertically */
+      justify-content: flex-start; /* Align items to the top */
+      align-items: flex-start; /* Align items to the left */
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1); /* Shadow to the right */
+      width: 220px; /* Fixed width for the sidebar */
+      position: fixed; /* Keep it fixed on the left */
+      top: 0;
+      left: 0;
+      bottom: 0; /* Make it span full height */
+      z-index: 1000; /* Ensure it stays on top */
     }
     nav .brand {
       font-weight: bold;
-      font-size: 24px; /* Larger brand name */
-      letter-spacing: 1px;
+      font-size: 32px; /* Slightly larger brand name */
+      letter-spacing: 2px; /* Increased letter spacing */
+      margin-bottom: 40px; /* Space below brand */
+      align-self: center; /* Center the brand horizontally */
+      background: linear-gradient(to right, #ffffff, #e6e6e6); /* Gradient for the text color */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4); /* Deeper text shadow */
+      display: flex; /* Enable flex for alignment of icon and text */
+      align-items: center; /* Vertically align icon and text */
+    }
+    nav .brand img {
+      height: 50px; /* Increased size of the icon */
+      margin-right: 0; /* No space between icon and text, as text is removed */
     }
     nav .user-name {
-      font-size: 1.1em;
+      font-size: 1.2em;
       font-weight: bold;
       color: #e6e6e6;
-      margin-right: 20px; /* More space */
+      margin-bottom: 30px; /* Space below username */
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      align-self: center; /* Center username */
+    }
+    nav .nav-links {
+        display: flex;
+        flex-direction: column; /* Stack links vertically */
+        gap: 20px; /* Space between links */
+        width: 100%; /* Take full width of nav */
+        align-items: flex-start; /* Align links to the left */
+        margin-bottom: auto; /* Push logout button to the bottom */
+    }
+    nav .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+        font-weight: 500;
+        padding: 10px 15px; /* Larger clickable area */
+        border-radius: 5px;
+        transition: background-color 0.2s ease, padding-left 0.2s ease;
+        width: calc(100% - 30px); /* Adjust width for padding */
+        display: flex; /* Enable flex for icon and text alignment */
+        align-items: center; /* Vertically align icon and text */
+    }
+    nav .nav-links a i { /* Style for the icon */
+        margin-right: 10px; /* Space between icon and text */
+    }
+    nav .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding-left: 20px; /* Slight indent on hover */
     }
     button.logout-btn {
       background: linear-gradient(45deg, #ff4c4c, #e04343);
       color: white;
       border: none;
-      padding: 10px 18px; /* Larger button */
-      border-radius: 25px; /* More rounded */
+      padding: 10px 18px;
+      border-radius: 25px;
       cursor: pointer;
       font-size: 1em;
       transition: all 0.3s ease;
@@ -46,6 +99,13 @@
       letter-spacing: 0.5px;
       text-transform: uppercase;
       font-weight: bold;
+      align-self: center; /* Center the button */
+      margin-top: 30px; /* Space above button */
+      display: flex; /* Enable flex for icon and text alignment */
+      align-items: center; /* Vertically align icon and text */
+    }
+    button.logout-btn i { /* Style for the icon */
+        margin-right: 8px; /* Space between icon and text */
     }
     button.logout-btn:hover {
       background: linear-gradient(45deg, #e04343, #c9302c);
@@ -53,17 +113,40 @@
       transform: translateY(-1px);
     }
 
-    /* Styles for the Login Success Message (Bottom-Left) */
-    .login-success-message {
+    /* Main Content Area */
+    .content {
+      flex-grow: 1; /* Allow content to take remaining space */
+      margin-left: 220px; /* Offset by the nav bar's width */
+      max-width: calc(900px + 220px); /* Adjust max-width if needed to center */
+      padding: 30px 40px; /* Adjust padding for the new layout */
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      margin-top: 30px; /* Keep top margin */
+      margin-right: 30px; /* Add right margin for balance */
+      margin-bottom: 30px; /* Add bottom margin */
+      box-sizing: border-box; /* Include padding in element's total width and height */
+    }
+    /* Centering content within the main area */
+    .content > div { /* Apply to direct children of .content like quiz-info-box etc. */
+        max-width: 800px; /* Set a max-width for internal containers */
+        margin-left: auto; /* Center them */
+        margin-right: auto; /* Center them */
+    }
+
+
+    /* Existing Quiz Styles (no changes unless specified) */
+    .login-success-message,
+    .quiz-completed-message,
+    .logout-success-message { /* Added logout-success-message here */
       position: fixed;
-      bottom: 20px;
-      left: 20px;
-      right: auto;
-      background-color: #4CAF50;
+      top: 20px; /* Position at the top */
+      right: 20px; /* Position at the right */
+      left: auto; /* Ensure no conflict with left property */
       color: white;
-      padding: 14px 25px; /* Larger padding */
-      border-radius: 10px; /* More rounded */
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+      padding: 14px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
@@ -72,42 +155,44 @@
       letter-spacing: 0.5px;
       font-size: 1.1em;
     }
-    .login-success-message.show {
+    .login-success-message {
+        background-color: #4CAF50;
+    }
+    .quiz-completed-message {
+        background-color: #007bff;
+    }
+    .logout-success-message { /* Specific style for logout message */
+        background-color: #f44336; /* A common color for "danger" or "logout" */
+    }
+    .login-success-message.show,
+    .quiz-completed-message.show,
+    .logout-success-message.show { /* Added logout-success-message here */
       opacity: 1;
       visibility: visible;
     }
-
-    .content {
-      max-width: 900px; /* Wider content area */
-      margin: 30px auto; /* Center content with margin */
-      padding: 20px;
-      background: white;
-      border-radius: 15px; /* More rounded container */
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1); /* Deeper shadow */
-    }
     .quiz-container {
       margin-top: 30px;
-      padding: 30px; /* More padding */
-      border-radius: 12px; /* Smoother corners */
+      padding: 30px;
+      border-radius: 12px;
       background-color: #ffffff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Internal shadow */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
       display: none;
-      border: 1px solid #e0e0e0; /* Light border */
+      border: 1px solid #e0e0e0;
     }
     .quiz-question {
-      font-size: 22px; /* Larger question font */
-      margin-bottom: 25px; /* More space */
+      font-size: 22px;
+      margin-bottom: 25px;
       font-weight: bold;
-      color: #0056b3; /* Blue question color */
+      color: #0056b3;
       line-height: 1.4;
     }
     .quiz-options label {
-      display: flex; /* Use flexbox for alignment */
+      display: flex;
       align-items: center;
-      margin-bottom: 15px; /* More space between options */
+      margin-bottom: 15px;
       cursor: pointer;
-      font-size: 18px; /* Larger option font */
-      padding: 12px 15px; /* Padding for click area */
+      font-size: 18px;
+      padding: 12px 15px;
       border: 1px solid #e0e0e0;
       border-radius: 8px;
       transition: background-color 0.2s ease, border-color 0.2s ease;
@@ -117,16 +202,16 @@
       border-color: #007bff;
     }
     .quiz-options input[type="radio"] {
-      margin-right: 15px; /* More space for radio button */
-      transform: scale(1.2); /* Slightly larger radio button */
+      margin-right: 15px;
+      transform: scale(1.2);
     }
     .quiz-feedback {
-      margin-top: 25px; /* More space */
-      padding: 15px; /* More padding */
+      margin-top: 25px;
+      padding: 15px;
       border-radius: 8px;
       font-weight: bold;
       font-size: 1.1em;
-      animation: fadeIn 0.5s ease-out; /* Fade in animation */
+      animation: fadeIn 0.5s ease-out;
     }
     .quiz-feedback.correct {
       background-color: #d4edda;
@@ -142,24 +227,30 @@
       background-color: #007bff;
       color: white;
       border: none;
-      padding: 12px 25px; /* Larger buttons */
+      padding: 12px 25px;
       border-radius: 8px;
       cursor: pointer;
-      margin-top: 25px; /* More space */
-      font-size: 18px; /* Larger font */
+      margin-top: 25px;
+      font-size: 18px;
       transition: background-color 0.2s ease, transform 0.2s ease;
-      margin-right: 10px; /* Space between buttons */
+      margin-right: 10px;
+      display: inline-flex; /* Use flexbox for button content */
+      align-items: center; /* Vertically align icon and text */
+      justify-content: center; /* Center content horizontally */
     }
-    .quiz-navigation button#skipBtn { /* Specific style for Skip button */
-        background-color: #ffc107; /* Yellowish color */
-        color: #333; /* Dark text */
+    .quiz-navigation button i { /* Style for icons within quiz navigation buttons */
+        margin-right: 8px; /* Space between icon and text */
+    }
+    .quiz-navigation button#skipBtn {
+        background-color: #ffc107;
+        color: #333;
     }
     .quiz-navigation button#skipBtn:hover {
-        background-color: #e0a800; /* Darker yellow on hover */
+        background-color: #e0a800;
     }
     .quiz-navigation button:hover {
       background-color: #0056b3;
-      transform: translateY(-2px); /* Lift effect */
+      transform: translateY(-2px);
     }
     .quiz-navigation button:disabled {
       background-color: #cccccc;
@@ -167,20 +258,20 @@
       transform: none;
     }
     .timer {
-      font-size: 1.5em; /* Larger timer */
+      font-size: 1.5em;
       font-weight: bold;
       margin-bottom: 20px;
       color: #d9534f;
-      text-align: right; /* Align to right */
+      text-align: right;
     }
     .final-score-container {
       text-align: center;
       margin-top: 40px;
-      padding: 40px; /* More padding */
+      padding: 40px;
       border: 2px solid #007bff;
-      border-radius: 15px; /* More rounded */
+      border-radius: 15px;
       background-color: #eaf5ff;
-      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.15); /* Stronger shadow */
+      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.15);
       display: none;
     }
     .final-score-container h2 {
@@ -189,27 +280,27 @@
       font-size: 2.2em;
     }
     .final-score-container p {
-      font-size: 1.8em; /* Larger score text */
+      font-size: 1.8em;
       font-weight: bold;
       color: #333;
       margin-bottom: 30px;
     }
-    .final-score-summary { /* New style for summary section */
+    .final-score-summary {
       margin-top: 20px;
       padding-top: 20px;
-      border-top: 1px solid #b3d7ff; /* Light blue border */
+      border-top: 1px solid #b3d7ff;
       display: flex;
       justify-content: center;
-      gap: 30px; /* Space between items */
-      flex-wrap: wrap; /* Allow wrapping on smaller screens */
+      gap: 30px;
+      flex-wrap: wrap;
     }
     .final-score-summary div {
-      font-size: 1.2em; /* Smaller than main score but still readable */
+      font-size: 1.2em;
       font-weight: bold;
       color: #555;
       padding: 10px 15px;
       border-radius: 8px;
-      background-color: #e0f0ff; /* Light background for summary items */
+      background-color: #e0f0ff;
       box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
     }
     .final-score-summary .correct-count {
@@ -221,13 +312,11 @@
     .final-score-summary .skipped-count {
       color: #ffc107;
     }
-
-
-    .quiz-navigation-button { /* Retake Quiz Button */
+    .quiz-navigation-button {
       background: linear-gradient(45deg, #28a745, #218838);
       color: white;
       border: none;
-      padding: 15px 30px; /* Larger button */
+      padding: 15px 30px;
       border-radius: 30px;
       cursor: pointer;
       font-size: 1.3em;
@@ -236,17 +325,55 @@
       box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
       letter-spacing: 0.8px;
       text-transform: uppercase;
+      margin: 10px;
+      display: inline-flex; /* Use flexbox for button content */
+      align-items: center; /* Vertically align icon and text */
+      justify-content: center; /* Center content horizontally */
+    }
+    .quiz-navigation-button i { /* Style for icons within final score buttons */
+        margin-right: 8px; /* Space between icon and text */
     }
     .quiz-navigation-button:hover {
       background: linear-gradient(45deg, #218838, #1e7e34);
       box-shadow: 0 6px 18px rgba(40, 167, 69, 0.4);
       transform: translateY(-3px);
     }
-
+    .quiz-navigation-button.view-answers {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+    .quiz-navigation-button.view-answers:hover {
+        background: linear-gradient(45deg, #0056b3, #003f7f);
+        box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
+    }
+    .back-to-dashboard-btn,
+    .previous-quizzes-btn {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+    }
+    .back-to-dashboard-btn:hover,
+    .previous-quizzes-btn:hover {
+        background: linear-gradient(45deg, #0056b3, #003f7f);
+        box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+        transform: translateY(-1px);
+    }
     .quiz-info-box {
       margin-top: 30px;
       border: 1px solid #007bff;
-      padding: 30px; /* More padding */
+      padding: 10px;
       border-radius: 12px;
       background-color: #eaf5ff;
       text-align: center;
@@ -254,31 +381,37 @@
     }
     .quiz-info-box h2 {
       color: #007bff;
-      margin-bottom: 25px;
-      font-size: 2em;
+      margin-bottom: 30px;
+      font-size: 2.2em;
     }
     .quiz-info-box p {
-      font-size: 1.2em;
-      margin-bottom: 12px;
-      line-height: 1.5;
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      line-height: 1.6;
     }
     .quiz-info-box button {
       background-color: #28a745;
       color: white;
       border: none;
-      padding: 15px 30px; /* Larger button */
+      padding: 18px 35px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 1.3em;
-      margin-top: 25px;
+      font-size: 1.4em;
+      margin-top: 30px;
       transition: background-color 0.2s ease, transform 0.2s ease;
+      display: inline-flex; /* Use flexbox for button content */
+      align-items: center; /* Vertically align icon and text */
+      justify-content: center; /* Center content horizontally */
+    }
+    .quiz-info-box button i { /* Style for icons within quiz info box button */
+        margin-right: 10px; /* Space between icon and text */
     }
     .quiz-info-box button:hover {
       background-color: #218838;
       transform: translateY(-2px);
     }
     .user-welcome-message {
-      font-size: 2.5em; /* Larger font size */
+      font-size: 2.5em;
       font-weight: bold;
       color: #28a745;
       margin-bottom: 30px;
@@ -290,7 +423,7 @@
       padding: 30px;
       border-radius: 12px;
       background-color: #ffffff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 4gpx 10px rgba(0,0,0,0.08);
       text-align: left;
       display: none;
       border: 1px solid #e0e0e0;
@@ -314,82 +447,161 @@
     .quiz-results-details .question {
       font-weight: bold;
       margin-bottom: 8px;
-      font-size: 1.25em; /* Increased font size */
+      font-size: 1.25em;
       color: #555;
     }
     .quiz-results-details .your-answer {
       color: #d9534f;
       font-style: italic;
       margin-left: 10px;
-      font-size: 1.1em; /* Increased font size */
+      font-size: 1.1em;
     }
     .quiz-results-details .correct-answer {
       color: #28a745;
       font-weight: bold;
       margin-left: 10px;
-      font-size: 1.1em; /* Increased font size */
+      font-size: 1.1em;
     }
     .quiz-results-details .your-answer.correct {
       color: #28a745;
     }
-    .quiz-results-details .your-answer.skipped { /* Style for skipped answer */
-        color: #ffc107; /* Yellowish color for skipped */
+    .quiz-results-details .your-answer.skipped {
+        color: #ffc107;
         font-weight: bold;
     }
-
     /* Progress Bar Styles */
     #progressBarContainer {
       width: 100%;
-      height: 15px; /* Height of the progress bar */
-      background-color: #e0e0e0; /* Background of the empty bar */
-      border-radius: 8px; /* Rounded corners for the container */
-      margin-bottom: 25px; /* Space below the progress bar */
-      overflow: hidden; /* Ensures the fill stays within rounded corners */
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); /* Inner shadow for depth */
+      height: 15px;
+      background-color: #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
     }
-
     #progressBarFill {
       height: 100%;
-      width: 0%; /* Initial width */
-      background: linear-gradient(to right, #007bff, #00c6ff); /* Gradient fill */
-      border-radius: 8px; /* Rounded corners for the fill */
-      transition: width 0.5s ease-in-out; /* Smooth transition for width changes */
-      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow effect */
+      width: 0%;
+      background: linear-gradient(to right, #007bff, #00c6ff);
+      border-radius: 8px;
+      transition: width 0.5s ease-in-out;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     }
-
-
+    /* Removed previous-quizzes-container styles as it's no longer needed */
+    /* .previous-quizzes-container {
+        display: none;
+        margin-top: 30px;
+        padding: 30px;
+        border-radius: 12px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        text-align: left;
+        border: 1px solid #e0e0e0;
+    }
+    .previous-quizzes-container h3 {
+        color: #007bff;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.8em;
+        border-bottom: 2px solid #eaf5ff;
+        padding-bottom: 10px;
+    }
+    .previous-quizzes-container .quiz-entry {
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .previous-quizzes-container .quiz-entry p {
+        margin: 0;
+        font-size: 1.1em;
+        color: #555;
+    }
+    .previous-quizzes-container .quiz-entry .action-buttons {
+        display: flex;
+        gap: 10px;
+    }
+    .previous-quizzes-container .quiz-entry .view-details-btn,
+    .previous-quizzes-container .quiz-entry .delete-details-btn {
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+        transition: background-color 0.2s ease;
+    }
+    .previous-quizzes-container .quiz-entry .view-details-btn {
+        background-color: #007bff;
+    }
+    .previous-quizzes-container .quiz-entry .view-details-btn:hover {
+        background-color: #0056b3;
+    }
+    .previous-quizzes-container .quiz-entry .delete-details-btn {
+        background-color: #dc3545;
+    }
+    .previous-quizzes-container .quiz-entry .delete-details-btn:hover {
+        background-color: #c82333;
+    }
+    .previous-quizzes-container .no-previous-quizzes {
+        text-align: center;
+        font-style: italic;
+        color: #777;
+        margin-top: 20px;
+    } */
     /* Keyframe for fade-in effect */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    /* Styles for image display in quiz */
+    .question-image {
+        max-width: 80%;
+        height: auto;
+        display: block;
+        margin: 15px auto 25px auto; /* Center the image and add vertical spacing */
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <div class="brand">LinkUP</div>
-    <div>
-      <span class="user-name" id="userName"></span>
-      <button class="logout-btn" onclick="logout()">Logout</button>
+    <div class="brand">
+      <img src="linkup.png" alt="LinkUP Icon">
     </div>
+    <span class="user-name" id="userName"></span>
+    <div class="nav-links">
+      <a href="#" onclick="goToDashboard()"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      </div>
+    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
   </nav>
 
   <div class="content">
     <div id="loginSuccessMessage" class="login-success-message">Login Successful!</div>
+    <div id="quizCompletedMessage" class="quiz-completed-message">Quiz Completed!</div>
+    <div id="logoutSuccessMessage" class="logout-success-message">You have successfully been logged out!</div>
 
     <div class="user-welcome-message" id="welcomeMessage"></div>
 
     <div class="quiz-info-box" id="quizInfoBox">
-      <h2>Welcome to the Quiz!</h2>
+      <h2 id="quizInfoHeading">Welcome to Quize</h2>
       <p>Total Questions: <span id="infoTotalQuestions"></span></p>
       <p>Time per question: <span id="infoTimePerQuestion"></span> seconds (varies per question)</p>
+      <p id="lastQuizScoreDisplay" style="display: none;">Last Quiz Score: <span id="lastQuizScore">0</span> / <span id="lastQuizTotalQuestions">0</span></p>
       <p>Test your knowledge and see how well you score!</p>
-      <button id="startQuizBtn">Start Quiz</button>
+      <button id="startQuizBtn"><i class="fas fa-play"></i> Start Quiz</button>
     </div>
 
     <div class="quiz-container" id="quizContainer">
-      <h2>Simple Quiz</h2>
+      <h2>Questions on Biology</h2>
       <div class="timer" id="timer">Time left: 15s</div>
       <div id="progressBarContainer">
         <div id="progressBarFill"></div>
@@ -397,8 +609,8 @@
       <div id="quiz"></div>
       <div class="quiz-feedback" id="feedback"></div>
       <div class="quiz-navigation">
-        <button id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
-        <button id="skipBtn" onclick="skipQuestion()">Skip Question</button> <button id="nextBtn" onclick="nextQuestion()" style="display: none;">Next Question</button>
+        <button id="submitBtn" onclick="submitAnswer()"><i class="fas fa-check"></i> Submit Answer</button>
+        <button id="skipBtn" onclick="skipQuestion()"><i class="fas fa-forward"></i> Skip Question</button> <button id="nextBtn" onclick="nextQuestion()" style="display: none;"><i class="fas fa-arrow-right"></i> Next Question</button>
       </div>
     </div>
 
@@ -410,145 +622,229 @@
         <div>Wrong: <span id="finalWrongAnswers" class="wrong-count">0</span></div>
         <div>Skipped: <span id="finalSkippedQuestions" class="skipped-count">0</span></div>
       </div>
-      <button class="quiz-navigation-button" onclick="retakeQuiz()">Retake Quiz</button>
+      <button class="quiz-navigation-button" onclick="retakeQuiz()"><i class="fas fa-redo"></i> Retake Quiz</button>
+      <button class="quiz-navigation-button view-answers" onclick="showDetailedResults()"><i class="fas fa-file-alt"></i> View Detailed Answers</button>
     </div>
 
     <div class="quiz-results-details" id="quizResultsDetails">
       <h3>Detailed Results:</h3>
       </div>
-  </div>
+
+    </div>
 
   <script>
     // Get username from localStorage
     const user = localStorage.getItem('loggedInUser');
     const welcomeMessageDiv = document.getElementById('welcomeMessage');
-    const loginSuccessMessage = document.getElementById('loginSuccessMessage'); // Get the message div
+    const loginSuccessMessage = document.getElementById('loginSuccessMessage');
+    const quizCompletedMessage = document.getElementById('quizCompletedMessage');
+    const logoutSuccessMessage = document.getElementById('logoutSuccessMessage');
+
+    // Quiz Info Box elements
+    const quizInfoHeading = document.getElementById('quizInfoHeading');
+    const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
+    const lastQuizScoreSpan = document.getElementById('lastQuizScore');
+    const lastQuizTotalQuestionsSpan = document.getElementById('lastQuizTotalQuestions');
+
 
     if (!user) {
-      // If no user is logged in, redirect to login
       window.location.href = "index.html";
     } else {
       document.getElementById('userName').textContent = `Hello, ${user}`;
       welcomeMessageDiv.textContent = `${user}'s Dashboard`;
 
-      // Logic for login success message
-      // This flag ensures the message only shows once per login session
       const hasShownLoginMessage = localStorage.getItem('hasShownLoginMessage');
-
-      // Check if the flag is specifically 'false' (meaning just logged in) or null/undefined
       if (hasShownLoginMessage === 'false' || hasShownLoginMessage === null) {
         loginSuccessMessage.classList.add('show');
-        localStorage.setItem('hasShownLoginMessage', 'true'); // Mark as shown
-
+        localStorage.setItem('hasShownLoginMessage', 'true');
         setTimeout(() => {
           loginSuccessMessage.classList.remove('show');
-        }, 3000); // Message visible for 3 seconds
+        }, 3000); // Duration for login success message (3 seconds)
       }
     }
 
     function logout() {
+      // 1. Clear all relevant localStorage items immediately
+      const userBeforeLogout = localStorage.getItem('loggedInUser'); // Capture the user before clearing 'loggedInUser'
       localStorage.removeItem('loggedInUser');
-      localStorage.removeItem('hasShownLoginMessage'); // Clear this flag on logout
-      window.location.href = "index.html";
+      localStorage.removeItem('hasShownLoginMessage');
+      localStorage.removeItem('quizJustCompleted');
+      localStorage.removeItem('quizStatus');
+      localStorage.removeItem('lastQuizScore');
+      localStorage.removeItem('lastQuizTotal');
+
+      // Clear user-specific quiz history on logout (This can remain if you want to clear specific user quiz data on logout)
+      if (userBeforeLogout) {
+          localStorage.removeItem(`user_${userBeforeLogout}_quizzes`);
+      }
+
+      // 2. Show the logout success message
+      // This will make it visible *before* the redirection occurs.
+      logoutSuccessMessage.classList.add('show');
+
+      // 3. Delay the redirection to allow the user to see the logout message
+      // The message will be visible for this duration before the page changes.
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 2000); // Display for 2 seconds (adjust this duration as needed for logout message)
     }
 
-    // Modified quizData to include userAnswer and isCorrect properties
     const quizData = [
       {
-        question: "What is the capital of France?",
-        options: ["Berlin", "Madrid", "Paris", "Rome"],
-        answer: "Paris",
-        timeLimit: 15, // seconds
-        userAnswer: null, // To store user's selected answer
-        isCorrect: null // To store if the user's answer was correct
-      },
-      {
-        question: "Which planet is known as the Red Planet?",
-        options: ["Earth", "Mars", "Jupiter", "Venus"],
-        answer: "Mars",
-        timeLimit: 10,
+        question: "The figure given below is of Tobacco Mosaic Virus. Identify the label (a)",
+        options: [
+          "RNA",
+          "dsDNA",
+          "ssDNA",
+          "Capsid"
+        ],
+        answer: "RNA",
+        timeLimit: 60, // Default time limit
+        imageUrl: "1.png", // Add this line for questions with images
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "What is the largest ocean on Earth?",
-        options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
-        answer: "Pacific Ocean",
-        timeLimit: 18,
+        question: "What is the function of the cell marked as (a)",
+        options: [
+          "Fix atmospheric oxygen",
+          "Fix atmospheric nitrogen",
+          "Fix atmospheric carbon dioxide",
+          "Utilise sunlight"
+        ],
+        answer: "Fix atmospheric nitrogen",
+        timeLimit: 60, // Default time limit
+        imageUrl: "2.png", // Or simply omit the property if no image
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "Which of these is a primary color?",
-        options: ["Green", "Orange", "Purple", "Blue"],
-        answer: "Blue",
-        timeLimit: 12,
+        question: "Mark the correct answer with relation to aestivation in the diagram",
+        options: [
+          "Valvate- Calotropis",
+          "Twisted- China rose",
+          "Valvate- China rose",
+          "Twisted- Calotropis"
+        ],
+        answer: "Valvate- Calotropis",
+        timeLimit: 60, // Default time limit
+        imageUrl: "3.png", // Or simply omit the property if no image
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "What is the chemical symbol for water?",
-        options: ["O2", "H2O", "CO2", "NACL"],
-        answer: "H2O",
-        timeLimit: 15,
+        question: "What is the common location of the type of epithelium that has been shown in the figure",
+        options: [
+          "Blood vessel",
+          "Alveoli",
+          "PCT",
+          "Intestinal lining"
+        ],
+        answer: "PCT",
+        timeLimit: 90, // Default time limit
+        imageUrl: "4.png", // Or simply omit the property if no image
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "Who painted the Mona Lisa?",
-        options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"],
-        answer: "Leonardo da Vinci",
-        timeLimit: 20,
+        question: "The experiment demonstrated in the figure was carried out by",
+        options: [
+          "Engelmann",
+          "Priestley",
+          "Ingenhousz",
+          "Von Sachs"
+        ],
+        answer: "Priestley",
+        timeLimit: 60, // Default time limit
+        imageUrl: "5.png", // Or simply omit the property if no image
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "What is the process by which plants make their own food?",
-        options: ["Respiration", "Transpiration", "Photosynthesis", "Germination"],
-        answer: "Photosynthesis",
-        timeLimit: 25,
+        question: "What is the function of structure labelled as (a)",
+        options: [
+          "Absorption of glucose",
+          "Absorption of amino acids",
+          "Absorption of fats",
+          "Supply blood to villi"
+        ],
+        answer: "Absorption of fats",
+        timeLimit: 60, // Default time limit
+        imageUrl: "6.png", // Or simply omit the property if no image
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "Which country is famous for the Great Wall?",
-        options: ["Japan", "India", "China", "Egypt"],
-        answer: "China",
-        timeLimit: 10,
+        question: "Which is the hormone synthesized by (a) part of pituitary",
+        options: [
+          "FSH",
+          "TSH",
+          "ADH",
+          "None of these"
+        ],
+        answer: "None of these",
+        timeLimit: 60, // Default time limit
+        imageUrl: "7.png", // Or simply omit the property if no image
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "What is the smallest prime number?",
-        options: ["0", "1", "2", "3"],
-        answer: "2",
-        timeLimit: 15,
+        question: "What is happening to diaphragm in the given figure",
+        options: [
+          "Relaxation",
+          "Contraction",
+          "neither contraction nor relaxation",
+          "First contraction then relaxation"
+        ],
+        answer: "Contraction",
+        timeLimit: 60, // Default time limit
+        imageUrl: "8.png", // Or simply omit the property if no image
         userAnswer: null,
         isCorrect: null
       },
       {
-        question: "Which instrument is used to measure earthquakes?",
-        options: ["Anemometer", "Barometer", "Seismograph", "Thermometer"],
-        answer: "Seismograph",
-        timeLimit: 18,
+        question: "What is the site of action of ADH",
+        options: [
+          "PCT",
+          "Descending limb of Loop of Henle",
+          "Asending libm of Loop of Henle",
+          "DCT"
+        ],
+        answer: "Asending libm of Loop of Henle",
+        timeLimit: 60, // Default time limit
+        imageUrl: "9.png", // Or simply omit the property if no image
         userAnswer: null,
         isCorrect: null
-      }
+      },
+            {
+        question: "What is incorrect about (b)",
+        options: [
+          "When mature contain 2 cells",
+          "Develops from microspore",
+          "While developing, it derives nutrition ",
+          "None of these"
+        ],
+        answer: "None of these",
+        timeLimit: 60, // Default time limit
+        imageUrl: "10.png", // Or simply omit the property if no image
+        userAnswer: null,
+        isCorrect: null
+      },
+
     ];
 
     let currentQuestionIndex = 0;
-    let score = 0; // Correct answers
-    let wrongAnswers = 0; // Wrong answers
-    let skippedQuestionsCount = 0; // Skipped questions
+    let score = 0;
+    let wrongAnswers = 0;
+    let skippedQuestionsCount = 0;
     let timer;
     let timeLeft;
     let questionAttempted = false;
 
-    // Get elements
     const quizDiv = document.getElementById('quiz');
     const feedbackDiv = document.getElementById('feedback');
     const submitBtn = document.getElementById('submitBtn');
-    const skipBtn = document.getElementById('skipBtn'); // Get the new skip button
+    const skipBtn = document.getElementById('skipBtn');
     const nextBtn = document.getElementById('nextBtn');
     const timerDisplay = document.getElementById('timer');
     const quizContainer = document.getElementById('quizContainer');
@@ -559,33 +855,36 @@
     const startQuizBtn = document.getElementById('startQuizBtn');
     const infoTotalQuestions = document.getElementById('infoTotalQuestions');
     const infoTimePerQuestion = document.getElementById('infoTimePerQuestion');
-    const quizResultsDetails = document.getElementById('quizResultsDetails'); // New element
+    const quizResultsDetails = document.getElementById('quizResultsDetails');
+    // const previousQuizzesContainer = document.getElementById('previousQuizzesContainer'); // Removed
+    // const previousQuizList = document.getElementById('previousQuizList'); // Removed
 
-    // New spans for summary
     const finalCorrectAnswersSpan = document.getElementById('finalCorrectAnswers');
     const finalWrongAnswersSpan = document.getElementById('finalWrongAnswers');
     const finalSkippedQuestionsSpan = document.getElementById('finalSkippedQuestions');
 
-    // Progress bar elements
     const progressBarFill = document.getElementById('progressBarFill');
 
-    // Populate info box
     infoTotalQuestions.textContent = quizData.length;
-    // Calculate average time limit for display, or show max/min
     const averageTime = quizData.reduce((acc, q) => acc + q.timeLimit, 0) / quizData.length;
     infoTimePerQuestion.textContent = `${averageTime.toFixed(1)} (average)`;
 
     startQuizBtn.addEventListener('click', () => {
-      quizInfoBox.style.display = 'none'; // Hide info box
-      quizContainer.style.display = 'block'; // Show quiz container
-      loadQuestion(); // Start the quiz
+      quizInfoBox.style.display = 'none';
+      quizContainer.style.display = 'block';
+      welcomeMessageDiv.style.display = 'none';
+      // Clear quiz status and last score when starting a new quiz
+      localStorage.removeItem('quizStatus');
+      localStorage.removeItem('lastQuizScore');
+      localStorage.removeItem('lastQuizTotal');
+      loadQuestion();
     });
 
     function startTimer() {
-      clearInterval(timer); // Clear any existing timer
+      clearInterval(timer);
       timeLeft = quizData[currentQuestionIndex].timeLimit;
       timerDisplay.textContent = `Time left: ${timeLeft}s`;
-      timerDisplay.style.color = '#d9534f'; // Reset timer color
+      timerDisplay.style.color = '#d9534f';
 
       timer = setInterval(() => {
         timeLeft--;
@@ -601,13 +900,12 @@
           feedbackDiv.classList.add('incorrect');
           disableOptions();
           submitBtn.style.display = 'none';
-          skipBtn.style.display = 'none'; // Hide skip button too
+          skipBtn.style.display = 'none';
           questionAttempted = true;
 
-          // Record as incorrect due to time-out
           quizData[currentQuestionIndex].userAnswer = "Time's up!";
           quizData[currentQuestionIndex].isCorrect = false;
-          wrongAnswers++; // Increment wrong answers for time out
+          wrongAnswers++;
 
           setTimeout(() => {
             if (currentQuestionIndex < quizData.length - 1) {
@@ -615,7 +913,7 @@
             } else {
               showFinalScore();
             }
-          }, 1500); // 1.5 second delay
+          }, 1500);
         }
       }, 1000);
     }
@@ -635,27 +933,28 @@
     }
 
     function updateProgressBar() {
-      // Calculate progress based on (questions answered + skipped) / total questions
-      // The progress bar should reach 100% when all questions are either answered or skipped.
       let progress = (currentQuestionIndex / quizData.length) * 100;
-      if (currentQuestionIndex === quizData.length) { // Ensure it's 100% at the end
+      if (currentQuestionIndex === quizData.length) {
         progress = 100;
       }
       progressBarFill.style.width = `${progress}%`;
     }
 
     function loadQuestion() {
-      questionAttempted = false; // Reset for new question
+      questionAttempted = false;
       feedbackDiv.textContent = '';
-      feedbackDiv.className = 'quiz-feedback'; // Reset classes
+      feedbackDiv.className = 'quiz-feedback';
       submitBtn.style.display = 'inline-block';
-      skipBtn.style.display = 'inline-block'; // Show skip button
+      skipBtn.style.display = 'inline-block';
       nextBtn.style.display = 'none';
-      enableOptions(); // Enable options for new question
+      enableOptions();
 
       if (currentQuestionIndex < quizData.length) {
         const currentQuiz = quizData[currentQuestionIndex];
         let quizHTML = `<p class="quiz-question">${currentQuestionIndex + 1}. ${currentQuiz.question}</p>`;
+        if (currentQuiz.imageUrl) {
+            quizHTML += `<img src="${currentQuiz.imageUrl}" alt="Question Image" class="question-image">`;
+        }
         quizHTML += `<div class="quiz-options">`;
         currentQuiz.options.forEach((option, index) => {
           quizHTML += `
@@ -667,8 +966,8 @@
         });
         quizHTML += `</div>`;
         quizDiv.innerHTML = quizHTML;
-        startTimer(); // Start timer for the new question
-        updateProgressBar(); // Update progress bar on question load
+        startTimer();
+        updateProgressBar();
       } else {
         showFinalScore();
       }
@@ -678,12 +977,12 @@
       if (questionAttempted) return;
       questionAttempted = true;
 
-      clearInterval(timer); // Stop timer on submit
+      clearInterval(timer);
 
       const selectedOption = document.querySelector('input[name="quizOption"]:checked');
       disableOptions();
-      submitBtn.style.display = 'none'; // Hide submit button
-      skipBtn.style.display = 'none'; // Hide skip button
+      submitBtn.style.display = 'none';
+      skipBtn.style.display = 'none';
 
       const currentQuestion = quizData[currentQuestionIndex];
 
@@ -691,25 +990,25 @@
         const userAnswer = selectedOption.value;
         const correctAnswer = currentQuestion.answer;
 
-        currentQuestion.userAnswer = userAnswer; // Store user's answer
+        currentQuestion.userAnswer = userAnswer;
 
         if (userAnswer === correctAnswer) {
           feedbackDiv.textContent = "Correct!";
           feedbackDiv.classList.add('correct');
-          score++; // Increment correct answers
-          currentQuestion.isCorrect = true; // Mark as correct
+          score++;
+          currentQuestion.isCorrect = true;
         } else {
           feedbackDiv.textContent = `Incorrect. The correct answer was: ${correctAnswer}`;
           feedbackDiv.classList.add('incorrect');
-          wrongAnswers++; // Increment wrong answers
-          currentQuestion.isCorrect = false; // Mark as incorrect
+          wrongAnswers++;
+          currentQuestion.isCorrect = false;
         }
       } else {
         feedbackDiv.textContent = `No answer selected. The correct answer was: ${currentQuestion.answer}`;
         feedbackDiv.className = 'quiz-feedback incorrect';
-        currentQuestion.userAnswer = "No answer selected"; // Store lack of answer
-        currentQuestion.isCorrect = false; // Mark as incorrect
-        wrongAnswers++; // Increment wrong answers for no selection
+        currentQuestion.userAnswer = "No answer selected";
+        currentQuestion.isCorrect = false;
+        wrongAnswers++;
       }
 
       setTimeout(() => {
@@ -718,25 +1017,24 @@
         } else {
           showFinalScore();
         }
-      }, 1500); // 1.5 second delay
+      }, 1500);
     }
 
     function skipQuestion() {
-        if (questionAttempted) return; // Prevent multiple actions
+        if (questionAttempted) return;
         questionAttempted = true;
 
-        clearInterval(timer); // Stop the timer
-        disableOptions(); // Disable options
-        submitBtn.style.display = 'none'; // Hide submit button
-        skipBtn.style.display = 'none'; // Hide skip button
+        clearInterval(timer);
+        disableOptions();
+        submitBtn.style.display = 'none';
+        skipBtn.style.display = 'none';
 
-        // Mark the question as skipped
         quizData[currentQuestionIndex].userAnswer = "Skipped";
-        quizData[currentQuestionIndex].isCorrect = false; // Count as incorrect for score
-        skippedQuestionsCount++; // Increment skipped questions
+        quizData[currentQuestionIndex].isCorrect = false;
+        skippedQuestionsCount++;
 
         feedbackDiv.textContent = "Question skipped.";
-        feedbackDiv.className = 'quiz-feedback'; // Clear correct/incorrect styling
+        feedbackDiv.className = 'quiz-feedback';
 
         setTimeout(() => {
             if (currentQuestionIndex < quizData.length - 1) {
@@ -744,70 +1042,117 @@
             } else {
                 showFinalScore();
             }
-        }, 1500); // 1.5 second delay before moving on
+        }, 1500);
     }
-
 
     function nextQuestion() {
       currentQuestionIndex++;
       loadQuestion();
     }
 
-    // New function to save quiz results to localStorage for admin panel
-    function saveQuizResultToAdminPanel() {
+    function saveQuizResult() {
         const loggedInUser = localStorage.getItem('loggedInUser');
         if (!loggedInUser) {
             console.error("No logged-in user found to save quiz result.");
             return;
         }
 
-        const finalScoreCorrect = score; // 'score' holds the correct answers count
+        const finalScoreCorrect = score;
         const totalQuizQuestions = quizData.length;
 
-        // Get existing quiz results or initialize an empty array
-        let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+        // Create a deep copy of quizData to store with the result
+        const quizDataForStorage = quizData.map(q => ({
+            question: q.question,
+            options: [...q.options], // Deep copy options array
+            answer: q.answer,
+            userAnswer: q.userAnswer,
+            isCorrect: q.isCorrect,
+            imageUrl: q.imageUrl // Include imageUrl in stored data
+            // Do not store timeLimit if it's not relevant for past results display
+        }));
 
-        // Create a new submission object
         const newSubmission = {
             user: loggedInUser,
-            score: `${finalScoreCorrect}/${totalQuizQuestions}`, // Format as "3/10"
-            numericScore: finalScoreCorrect, // Store numeric value for potential sorting if needed
+            score: `${finalScoreCorrect}/${totalQuizQuestions}`,
+            numericScore: finalScoreCorrect,
             totalQuestions: totalQuizQuestions,
-            wrongAnswers: wrongAnswers, // <--- ADDED THIS LINE
-            skippedQuestionsCount: skippedQuestionsCount, // <--- ADDED THIS LINE
-            timestamp: new Date().toLocaleString() // Record current date and time
+            wrongAnswers: wrongAnswers,
+            skippedQuestionsCount: skippedQuestionsCount,
+            timestamp: new Date().toLocaleString(),
+            quizDetails: quizDataForStorage
         };
 
-        // Add the new submission to the array
-        quizResults.push(newSubmission);
+        // Save to global quizResults (for admin) - Keep this if you need a global record
+        let adminQuizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+        adminQuizResults.push(newSubmission);
+        localStorage.setItem('quizResults', JSON.stringify(adminQuizResults));
 
-        // Save the updated array back to localStorage
-        localStorage.setItem('quizResults', JSON.stringify(quizResults));
-        console.log(`Quiz result for ${loggedInUser} (${finalScoreCorrect}/${totalQuizQuestions}) saved to localStorage.`);
+        // The user-specific quiz history part is now commented out/removed as per requirement.
+        // If you still want to store user-specific quiz results (even if not displayed by "Previous Quizzes" button),
+        // you can keep this section. However, since the button and its display are removed,
+        // I'm commenting this out for consistency.
+        /*
+        let userPreviousQuizzes = JSON.parse(localStorage.getItem(`user_${loggedInUser}_quizzes`)) || [];
+        userPreviousQuizzes.push(newSubmission);
+        localStorage.setItem(`user_${loggedInUser}_quizzes`, JSON.stringify(userPreviousQuizzes));
+        */
+
+        console.log(`Quiz result for ${loggedInUser} (${finalScoreCorrect}/${totalQuizQuestions}) saved.`);
     }
 
     function showFinalScore() {
       clearInterval(timer);
       quizContainer.style.display = 'none';
+      quizInfoBox.style.display = 'none';
+      welcomeMessageDiv.style.display = 'none';
+      // previousQuizzesContainer.style.display = 'none'; // Removed this line
+
       finalScoreContainer.style.display = 'block';
       finalScoreSpan.textContent = score;
       totalQuestionsSpan.textContent = quizData.length;
 
-      // Update summary counts
       finalCorrectAnswersSpan.textContent = score;
       finalWrongAnswersSpan.textContent = wrongAnswers;
       finalSkippedQuestionsSpan.textContent = skippedQuestionsCount;
 
-      // Ensure progress bar is full when quiz ends
       updateProgressBar();
 
-      // *** Call the function to save the score to localStorage for the admin panel ***
-      saveQuizResultToAdminPanel();
+      saveQuizResult();
 
-      // Display detailed results
+      localStorage.setItem('quizJustCompleted', 'true');
+      localStorage.setItem('quizStatus', 'completed'); // Set quiz status
+      localStorage.setItem('lastQuizScore', score); // Store last quiz score
+      localStorage.setItem('lastQuizTotal', quizData.length); // Store last quiz total
+
+      renderQuizResultsDetails(quizData); // Render detailed results for the just completed quiz
+      quizResultsDetails.style.display = 'none'; // Keep detailed results hidden initially
+    }
+
+    // New function to show detailed results
+    function showDetailedResults() {
+        // Hide other main containers to show only detailed results
+        quizInfoBox.style.display = 'none';
+        quizContainer.style.display = 'none';
+        finalScoreContainer.style.display = 'none';
+        // previousQuizzesContainer.style.display = 'none'; // Removed this line
+        welcomeMessageDiv.style.display = 'none';
+
+        // Re-render the detailed results for the just completed quiz, if quizData is still in scope.
+        // Assuming quizData still holds the results of the last completed quiz.
+        renderQuizResultsDetails(quizData);
+        quizResultsDetails.style.display = 'block'; // Show the detailed results
+    }
+
+
+    function renderQuizResultsDetails(dataToRender) {
       quizResultsDetails.innerHTML = '<h3>Detailed Results:</h3>';
-      
-      quizData.forEach((q, index) => {
+
+      if (!dataToRender || dataToRender.length === 0) {
+          quizResultsDetails.innerHTML += '<p>No detailed results available.</p>';
+          return;
+      }
+
+      dataToRender.forEach((q, index) => {
         const resultItem = document.createElement('div');
         resultItem.classList.add('result-item');
 
@@ -816,19 +1161,27 @@
         questionP.textContent = `${index + 1}. ${q.question}`;
         resultItem.appendChild(questionP);
 
+        // Add image if available
+        if (q.imageUrl) {
+            const questionImage = document.createElement('img');
+            questionImage.src = q.imageUrl;
+            questionImage.alt = "Question Image";
+            questionImage.classList.add('question-image');
+            resultItem.appendChild(questionImage);
+        }
+
         const yourAnswerP = document.createElement('p');
         yourAnswerP.textContent = `Your Answer: ${q.userAnswer}`;
-        if (q.isCorrect) {
+        if (q.isCorrect === true) {
           yourAnswerP.classList.add('your-answer', 'correct');
-        } else if (q.userAnswer === "Skipped") { // Specific styling for skipped
+        } else if (q.userAnswer === "Skipped") {
           yourAnswerP.classList.add('your-answer', 'skipped');
         } else {
           yourAnswerP.classList.add('your-answer');
         }
         resultItem.appendChild(yourAnswerP);
 
-        // Always show the correct answer for skipped or incorrect questions (including "No answer selected" and "Time's up!")
-        if (!q.isCorrect) {
+        if (q.isCorrect === false || q.userAnswer === "Skipped") {
           const correctAnswerP = document.createElement('p');
           correctAnswerP.classList.add('correct-answer');
           correctAnswerP.textContent = `Correct Answer: ${q.answer}`;
@@ -837,32 +1190,178 @@
 
         quizResultsDetails.appendChild(resultItem);
       });
-
-      quizResultsDetails.style.display = 'block'; // Always show the detailed results section
     }
 
     function retakeQuiz() {
       currentQuestionIndex = 0;
       score = 0;
-      wrongAnswers = 0; // Reset wrong answers
-      skippedQuestionsCount = 0; // Reset skipped questions
-      // Reset userAnswer and isCorrect for all questions
+      wrongAnswers = 0;
+      skippedQuestionsCount = 0;
       quizData.forEach(q => {
         q.userAnswer = null;
         q.isCorrect = null;
       });
       finalScoreContainer.style.display = 'none';
-      quizResultsDetails.style.display = 'none'; // Hide detailed results
+      quizResultsDetails.style.display = 'none';
+      // previousQuizzesContainer.style.display = 'none'; // Removed this line
       quizInfoBox.style.display = 'block';
-      updateProgressBar(); // Reset progress bar to 0%
+      welcomeMessageDiv.style.display = 'block';
+      localStorage.removeItem('quizJustCompleted');
+      localStorage.removeItem('quizStatus'); // Clear quiz status when retaking
+      localStorage.removeItem('lastQuizScore'); // Clear last quiz score when retaking
+      localStorage.removeItem('lastQuizTotal'); // Clear last quiz total when retaking
+      updateQuizInfoBox(); // Update info box to default state
+      updateProgressBar();
     }
 
-    // Initial setup: Show info box, hide quiz and score
+    // Removed showPreviousQuizzes function and related load/view/delete functions
+    /*
+    function showPreviousQuizzes() {
+        quizInfoBox.style.display = 'none';
+        quizContainer.style.display = 'none';
+        finalScoreContainer.style.display = 'none';
+        quizResultsDetails.style.display = 'none'; // Ensure detailed results are hidden
+        welcomeMessageDiv.style.display = 'none';
+        localStorage.removeItem('quizJustCompleted');
+        localStorage.removeItem('quizStatus'); // Clear quiz status if viewing previous quizzes
+        localStorage.removeItem('lastQuizScore'); // Clear last quiz score
+        localStorage.removeItem('lastQuizTotal'); // Clear last quiz total
+
+        previousQuizzesContainer.style.display = 'block';
+        updateQuizInfoBox(); // Update info box to default state if coming from previous quizzes
+        loadPreviousQuizzes();
+    }
+
+    function loadPreviousQuizzes() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const userPreviousQuizzes = JSON.parse(localStorage.getItem(`user_${loggedInUser}_quizzes`)) || [];
+        previousQuizList.innerHTML = ''; // Clear existing entries
+
+        if (userPreviousQuizzes.length === 0) {
+            previousQuizList.innerHTML = '<p class="no-previous-quizzes">You have not completed any quizzes yet.</p>';
+            return;
+        }
+
+        userPreviousQuizzes.forEach((quiz, index) => {
+            const quizEntry = document.createElement('div');
+            quizEntry.classList.add('quiz-entry');
+            quizEntry.innerHTML = `
+                <p>Quiz ${index + 1}: Score ${quiz.score} (Correct: ${quiz.numericScore}, Wrong: ${quiz.wrongAnswers}, Skipped: ${quiz.skippedQuestionsCount}) - ${quiz.timestamp}</p>
+                <div class="action-buttons">
+                    <button class="view-details-btn" onclick="viewPreviousQuizDetails(${index})">View Details</button>
+                    <button class="delete-details-btn" onclick="deletePreviousQuizEntry(${index})">Delete Details</button>
+                </div>
+            `;
+            previousQuizList.appendChild(quizEntry);
+        });
+    }
+
+    function viewPreviousQuizDetails(index) {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const userPreviousQuizzes = JSON.parse(localStorage.getItem(`user_${loggedInUser}_quizzes`)) || [];
+
+        if (index >= 0 && index < userPreviousQuizzes.length) {
+            const selectedQuiz = userPreviousQuizzes[index];
+
+            quizInfoBox.style.display = 'none';
+            quizContainer.style.display = 'none';
+            finalScoreContainer.style.display = 'none';
+            previousQuizzesContainer.style.display = 'none';
+            welcomeMessageDiv.style.display = 'none';
+            localStorage.removeItem('quizJustCompleted');
+            localStorage.removeItem('quizStatus'); // Clear quiz status if viewing details
+            localStorage.removeItem('lastQuizScore'); // Clear last quiz score
+            localStorage.removeItem('lastQuizTotal'); // Clear last quiz total
+
+            renderQuizResultsDetails(selectedQuiz.quizDetails);
+            quizResultsDetails.style.display = 'block';
+            updateQuizInfoBox(); // Update info box to default state if coming from details
+        } else {
+            console.error("Invalid quiz index for viewing details.");
+        }
+    }
+
+    function deletePreviousQuizEntry(index) {
+        if (!confirm("Are you sure you want to delete this quiz entry? This action cannot be undone.")) {
+            return; // Stop if user cancels
+        }
+
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        let userPreviousQuizzes = JSON.parse(localStorage.getItem(`user_${loggedInUser}_quizzes`)) || [];
+
+        if (index >= 0 && index < userPreviousQuizzes.length) {
+            const deletedQuiz = userPreviousQuizzes.splice(index, 1)[0]; // Remove the entry and get it
+
+            localStorage.setItem(`user_${loggedInUser}_quizzes`, JSON.stringify(userPreviousQuizzes));
+            console.log(`Quiz entry ${index} deleted for user ${loggedInUser}.`);
+
+            // Optional: Also delete from global 'quizResults' for admin view if a perfect match is found
+            let adminQuizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+            const initialAdminCount = adminQuizResults.length;
+            adminQuizResults = adminQuizResults.filter(quiz =>
+                !(quiz.user === deletedQuiz.user &&
+                  quiz.score === deletedQuiz.score &&
+                  quiz.timestamp === deletedQuiz.timestamp &&
+                  quiz.numericScore === deletedQuiz.numericScore)
+            );
+            if (adminQuizResults.length < initialAdminCount) {
+                localStorage.setItem('quizResults', JSON.stringify(adminQuizResults));
+                console.log("Corresponding entry removed from admin quiz results.");
+            }
+            loadPreviousQuizzes(); // Reload the list to reflect the deletion
+        } else {
+            console.error("Invalid quiz index for deletion.");
+        }
+    }
+    */
+
+    function updateQuizInfoBox() {
+        const quizStatus = localStorage.getItem('quizStatus');
+        const lastScore = localStorage.getItem('lastQuizScore');
+        const lastTotal = localStorage.getItem('lastQuizTotal');
+
+        if (quizStatus === 'completed' && lastScore !== null && lastTotal !== null) {
+            quizInfoHeading.textContent = "Last Quiz Completed!";
+            lastQuizScoreSpan.textContent = lastScore;
+            lastQuizTotalQuestionsSpan.textContent = lastTotal;
+            lastQuizScoreDisplay.style.display = 'block';
+        } else {
+            quizInfoHeading.textContent = "Welcome to the Quiz!";
+            lastQuizScoreDisplay.style.display = 'none';
+        }
+    }
+
+    function goToDashboard() {
+        quizContainer.style.display = 'none';
+        finalScoreContainer.style.display = 'none';
+        quizResultsDetails.style.display = 'none';
+        // previousQuizzesContainer.style.display = 'none'; // Removed this line
+
+        quizInfoBox.style.display = 'block';
+        welcomeMessageDiv.style.display = 'block';
+
+        // Check if a quiz was just completed and show message
+        const quizJustCompleted = localStorage.getItem('quizJustCompleted');
+        if (quizJustCompleted === 'true') {
+            quizCompletedMessage.classList.add('show');
+            localStorage.removeItem('quizJustCompleted');
+            setTimeout(() => {
+                quizCompletedMessage.classList.remove('show');
+            }, 3000);
+        }
+
+        updateQuizInfoBox(); // Update the info box content
+    }
+
+
+    // Initial setup: Hide specific quiz sections on load
     quizContainer.style.display = 'none';
     finalScoreContainer.style.display = 'none';
     quizResultsDetails.style.display = 'none';
+    // previousQuizzesContainer.style.display = 'none'; // Removed this line
     quizInfoBox.style.display = 'block';
-    updateProgressBar(); // Initialize progress bar to 0% at start
+    updateProgressBar();
+    updateQuizInfoBox(); // Call on initial load to reflect previous completion
   </script>
 
 </body>
