@@ -22,10 +22,10 @@
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 900px; /* Wider container */
+            max-width: 1300px; /* Increased max-width to accommodate new columns and buttons */
             box-sizing: border-box;
             text-align: center;
-            flex-grow: 1; /* Allows the container to grow and push footer down */
+            flex-grow: 1;
         }
         h1 {
             color: #333;
@@ -45,12 +45,12 @@
         }
         th, td {
             border: 1px solid #ddd;
-            padding: 12px; /* More padding */
+            padding: 12px;
             text-align: left;
             font-size: 1em;
         }
         th {
-            background-color: #007bff;
+            background-color: #007bff; /* Original blue header background */
             color: white;
             font-weight: bold;
             text-transform: uppercase;
@@ -66,14 +66,14 @@
             margin-top: 30px;
             display: flex;
             justify-content: center;
-            gap: 20px; /* Space between buttons */
-            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+            gap: 20px;
+            flex-wrap: wrap;
         }
         button {
             background: linear-gradient(45deg, #007bff, #00c6ff);
             color: white;
             border: none;
-            padding: 12px 25px; /* Adjust padding */
+            padding: 12px 25px;
             border-radius: 25px;
             cursor: pointer;
             font-size: 1.1em;
@@ -89,7 +89,7 @@
             transform: translateY(-2px);
         }
         button.clear-btn {
-            background: linear-gradient(45deg, #6c757d, #5a6268); /* Grey gradient */
+            background: linear-gradient(45deg, #6c757d, #5a6268);
             box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
         }
         button.clear-btn:hover {
@@ -97,18 +97,120 @@
             box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
         }
         button.logout-btn {
-            background: linear-gradient(45deg, #dc3545, #c82333); /* Red gradient */
+            background: linear-gradient(45deg, #dc3545, #c82333);
             box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
         }
         button.logout-btn:hover {
             background: linear-gradient(45deg, #c82333, #bd2130);
             box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
         }
+        .view-btn, .delete-btn, .back-btn {
+            background: linear-gradient(45deg, #28a745, #218838); /* Green gradient for view button */
+            color: white;
+            border: none;
+            padding: 8px 15px; /* Smaller padding for individual buttons */
+            border-radius: 20px; /* Rounded corners */
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 2px; /* Small margin between buttons */
+        }
+        .view-btn:hover, .back-btn:hover {
+            background: linear-gradient(45deg, #218838, #1e7e34);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+            transform: translateY(-1px);
+        }
+        .delete-btn {
+            background: linear-gradient(45deg, #dc3545, #bd2130); /* Red gradient for delete button */
+            box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+        }
+        .delete-btn:hover {
+            background: linear-gradient(45deg, #c82333, #a71d2a);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+            transform: translateY(-1px);
+        }
         .no-data-message {
             margin-top: 20px;
             font-style: italic;
             color: #777;
             font-size: 1.1em;
+        }
+
+        /* Styles for Detailed Results */
+        .quiz-results-details {
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: left;
+            border: 1px solid #e0e0e0;
+            display: none; /* Hidden by default */
+        }
+        .quiz-results-details h3 {
+            color: #007bff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8em;
+            border-bottom: 2px solid #eaf5ff;
+            padding-bottom: 10px;
+        }
+        .quiz-results-details .result-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #ddd;
+        }
+        .quiz-results-details .result-item:last-child {
+            border-bottom: none;
+        }
+        .quiz-results-details .question {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.25em;
+            color: #555;
+        }
+        .quiz-results-details .your-answer {
+            color: #d9534f;
+            font-style: italic;
+            margin-left: 10px;
+            font-size: 1.1em;
+        }
+        .quiz-results-details .correct-answer {
+            color: #28a745;
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: 1.1em;
+        }
+        .quiz-results-details .your-answer.correct {
+            color: #28a745;
+        }
+        .quiz-results-details .your-answer.skipped {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        .question-image {
+            max-width: 80%;
+            height: auto;
+            display: block;
+            margin: 15px auto 25px auto; /* Center the image and add vertical spacing */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Styles for icons */
+        .correct-icon {
+            color: #28a745; /* Green */
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        .wrong-icon {
+            color: #dc3545; /* Red */
+            margin-left: 5px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -122,18 +224,25 @@
                 <thead>
                     <tr>
                         <th>Submission ID</th>
+                        <th>Quiz Name</th>
                         <th>User</th>
                         <th>Score</th>
                         <th>Wrong</th>
                         <th>Skipped</th>
                         <th>Percentage</th>
                         <th>Date/Time</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="quizResultsBody">
-                    </tbody>
+                </tbody>
             </table>
             <p id="noDataMessage" class="no-data-message" style="display:none;">No quiz data submitted yet.</p>
+        </div>
+
+        <div class="quiz-results-details" id="quizDetailedResultsAdmin">
+            <h3>Detailed Results:</h3>
+            <button class="back-btn" onclick="backToAdminDashboard()">Back to Admin Dashboard</button>
         </div>
 
         <div class="buttons-container">
@@ -146,7 +255,6 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             const adminLoggedIn = localStorage.getItem('loggedInUser');
             if (adminLoggedIn !== 'admin') {
-                // If not admin or not logged in, redirect to login page
                 window.location.href = "index.html";
             } else {
                 loadQuizResults();
@@ -154,6 +262,11 @@
         });
 
         function loadQuizResults() {
+            const quizDataTable = document.getElementById('quizDataTable');
+            const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
+            quizDataTable.style.display = 'block'; // Ensure table is visible
+            quizDetailedResultsAdmin.style.display = 'none'; // Ensure detailed view is hidden
+
             const quizResultsBody = document.getElementById('quizResultsBody');
             const noDataMessage = document.getElementById('noDataMessage');
             quizResultsBody.innerHTML = ''; // Clear existing rows
@@ -170,22 +283,132 @@
             quizResults.forEach((result, index) => {
                 const row = quizResultsBody.insertRow();
                 row.insertCell(0).textContent = index + 1; // Submission ID
-                row.insertCell(1).textContent = result.user; // User
-                row.insertCell(2).textContent = result.score; // Score (e.g., "3/10")
+                row.insertCell(1).textContent = result.quizName || 'N/A'; // Quiz Name
+                row.insertCell(2).textContent = result.user; // User
+                row.insertCell(3).textContent = result.score; // Score (e.g., "3/10")
+                row.insertCell(4).textContent = result.wrongAnswers !== undefined ? result.wrongAnswers : 'N/A';
+                row.insertCell(5).textContent = result.skippedQuestionsCount !== undefined ? result.skippedQuestionsCount : 'N/A';
 
-                // Add Wrong and Skipped counts
-                row.insertCell(3).textContent = result.wrongAnswers !== undefined ? result.wrongAnswers : 'N/A';
-                row.insertCell(4).textContent = result.skippedQuestionsCount !== undefined ? result.skippedQuestionsCount : 'N/A';
-
-                // Calculate and display Percentage
                 let percentage = 'N/A';
                 if (result.numericScore !== undefined && result.totalQuestions !== undefined && result.totalQuestions > 0) {
                     percentage = ((result.numericScore / result.totalQuestions) * 100).toFixed(2) + '%';
                 }
-                row.insertCell(5).textContent = percentage; // Percentage
+                row.insertCell(6).textContent = percentage; // Percentage
 
-                row.insertCell(6).textContent = result.timestamp; // Date/Time
+                row.insertCell(7).textContent = result.timestamp; // Date/Time
+
+                const actionsCell = row.insertCell(8);
+                actionsCell.style.whiteSpace = 'nowrap'; // Prevent buttons from wrapping
+                
+                // View Response Button
+                const viewButton = document.createElement('button');
+                viewButton.textContent = 'View Response';
+                viewButton.className = 'view-btn';
+                viewButton.onclick = function() {
+                    showDetailedAdminResults(index);
+                };
+                actionsCell.appendChild(viewButton);
+
+                // Delete Button
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'delete-btn';
+                deleteButton.onclick = function() {
+                    deleteQuizResult(index);
+                };
+                actionsCell.appendChild(deleteButton);
             });
+        }
+
+        function showDetailedAdminResults(index) {
+            const quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+            const quizDataTable = document.getElementById('quizDataTable');
+            const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
+            
+            if (index >= 0 && index < quizResults.length) {
+                const selectedQuiz = quizResults[index];
+                renderAdminQuizDetails(selectedQuiz.quizDetails); // Render the details
+
+                quizDataTable.style.display = 'none'; // Hide the table
+                quizDetailedResultsAdmin.style.display = 'block'; // Show the detailed view
+            } else {
+                console.error("Invalid quiz index for detailed results.");
+            }
+        }
+
+        function renderAdminQuizDetails(dataToRender) {
+            const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
+            // Clear previous content, but keep the H3 and Back button
+            const existingH3 = quizDetailedResultsAdmin.querySelector('h3');
+            const existingBackButton = quizDetailedResultsAdmin.querySelector('.back-btn');
+            quizDetailedResultsAdmin.innerHTML = ''; // Clear all content
+            quizDetailedResultsAdmin.appendChild(existingH3); // Re-add H3
+            
+            if (!dataToRender || dataToRender.length === 0) {
+                const noDetailsP = document.createElement('p');
+                noDetailsP.textContent = 'No detailed results available for this submission.';
+                quizDetailedResultsAdmin.appendChild(noDetailsP);
+            } else {
+                dataToRender.forEach((q, index) => {
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('result-item');
+
+                    const questionP = document.createElement('p');
+                    questionP.classList.add('question');
+                    questionP.textContent = `${index + 1}. ${q.question}`;
+                    resultItem.appendChild(questionP);
+
+                    if (q.imageUrl) {
+                        const questionImage = document.createElement('img');
+                        questionImage.src = q.imageUrl;
+                        questionImage.alt = "Question Image";
+                        questionImage.classList.add('question-image');
+                        resultItem.appendChild(questionImage);
+                    }
+
+                    const yourAnswerP = document.createElement('p');
+                    yourAnswerP.textContent = `Your Answer: ${q.userAnswer}`;
+                    if (q.isCorrect === true) {
+                        yourAnswerP.classList.add('your-answer', 'correct');
+                        yourAnswerP.innerHTML += '<span class="correct-icon">&#x2713;</span>'; // Green checkmark
+                    } else if (q.userAnswer === "Skipped") {
+                        yourAnswerP.classList.add('your-answer', 'skipped');
+                    } else {
+                        yourAnswerP.classList.add('your-answer');
+                        yourAnswerP.innerHTML += '<span class="wrong-icon">&#x2717;</span>'; // Red cross
+                    }
+                    resultItem.appendChild(yourAnswerP);
+
+                    if (q.isCorrect === false || q.userAnswer === "Skipped") {
+                        const correctAnswerP = document.createElement('p');
+                        correctAnswerP.classList.add('correct-answer');
+                        correctAnswerP.textContent = `Correct Answer: ${q.answer}`;
+                        correctAnswerP.innerHTML += '<span class="correct-icon">&#x2713;</span>'; // Green checkmark
+                        resultItem.appendChild(correctAnswerP);
+                    }
+
+                    quizDetailedResultsAdmin.appendChild(resultItem);
+                });
+            }
+            quizDetailedResultsAdmin.appendChild(existingBackButton); // Re-add Back button at the end
+        }
+
+        function backToAdminDashboard() {
+            const quizDataTable = document.getElementById('quizDataTable');
+            const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
+
+            quizDataTable.style.display = 'block'; // Show the main table
+            quizDetailedResultsAdmin.style.display = 'none'; // Hide the detailed view
+            // No need to reload results, they are already loaded.
+        }
+
+        function deleteQuizResult(index) {
+            if (confirm("Are you sure you want to delete this quiz result?")) {
+                let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+                quizResults.splice(index, 1); // Remove the record at the given index
+                localStorage.setItem('quizResults', JSON.stringify(quizResults)); // Save updated array
+                loadQuizResults(); // Reload the table
+            }
         }
 
         function clearAllQuizData() {

@@ -26,541 +26,201 @@
       flex-direction: column; /* Stack items vertically */
       justify-content: flex-start; /* Align items to the top */
       align-items: flex-start; /* Align items to the left */
-      box-shadow: 2px 0 10px rgba(0,0,0,0.1); /* Shadow to the right */
-      width: 220px; /* Fixed width for the sidebar */
-      position: fixed; /* Keep it fixed on the left */
-      top: 0;
-      left: 0;
-      bottom: 0; /* Make it span full height */
-      z-index: 1000; /* Ensure it stays on top */
+      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+      width: 200px; /* Fixed width for the sidebar */
+      flex-shrink: 0; /* Prevent shrinking */
     }
-    nav .brand {
-      font-weight: bold;
-      font-size: 32px; /* Slightly larger brand name */
-      letter-spacing: 2px; /* Increased letter spacing */
-      margin-bottom: 40px; /* Space below brand */
-      align-self: center; /* Center the brand horizontally */
-      background: linear-gradient(to right, #ffffff, #e6e6e6); /* Gradient for the text color */
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4); /* Deeper text shadow */
-      display: flex; /* Enable flex for alignment of icon and text */
-      align-items: center; /* Vertically align icon and text */
+
+    nav .logo-container {
+        text-align: center;
+        margin-bottom: 30px;
+        width: 100%; /* Ensure logo container takes full width */
     }
-    nav .brand img {
-      height: 50px; /* Increased size of the icon */
-      margin-right: 0; /* No space between icon and text, as text is removed */
+
+    nav .logo {
+        max-width: 120px; /* Adjust logo size */
+        height: auto;
+        border-radius: 8px; /* Slightly rounded corners for the logo */
     }
-    nav .user-name {
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #e6e6e6;
-      margin-bottom: 30px; /* Space below username */
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-      align-self: center; /* Center username */
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      width: 100%; /* Full width for list */
     }
-    nav .nav-links {
-        display: flex;
-        flex-direction: column; /* Stack links vertically */
-        gap: 20px; /* Space between links */
-        width: 100%; /* Take full width of nav */
-        align-items: flex-start; /* Align links to the left */
-        margin-bottom: auto; /* Push logout button to the bottom */
+
+    nav ul li {
+      margin-bottom: 15px;
     }
-    nav .nav-links a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.1em;
-        font-weight: 500;
-        padding: 10px 15px; /* Larger clickable area */
-        border-radius: 5px;
-        transition: background-color 0.2s ease, padding-left 0.2s ease;
-        width: calc(100% - 30px); /* Adjust width for padding */
-        display: flex; /* Enable flex for icon and text alignment */
-        align-items: center; /* Vertically align icon and text */
-    }
-    nav .nav-links a i { /* Style for the icon */
-        margin-right: 10px; /* Space between icon and text */
-    }
-    nav .nav-links a:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        padding-left: 20px; /* Slight indent on hover */
-    }
-    button.logout-btn {
-      background: linear-gradient(45deg, #ff4c4c, #e04343);
+
+    nav ul li a {
       color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(255, 76, 76, 0.3);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      font-weight: bold;
-      align-self: center; /* Center the button */
-      margin-top: 30px; /* Space above button */
-      display: flex; /* Enable flex for icon and text alignment */
-      align-items: center; /* Vertically align icon and text */
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      font-size: 1.1em;
+      font-weight: 500;
     }
-    button.logout-btn i { /* Style for the icon */
-        margin-right: 8px; /* Space between icon and text */
-    }
-    button.logout-btn:hover {
-      background: linear-gradient(45deg, #e04343, #c9302c);
-      box-shadow: 0 6px 12px rgba(255, 76, 76, 0.4);
-      transform: translateY(-1px);
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #3a8a71;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     /* Main Content Area */
-    .content {
+    .main-content {
       flex-grow: 1; /* Allow content to take remaining space */
-      margin-left: 220px; /* Offset by the nav bar's width */
-      max-width: calc(900px + 220px); /* Adjust max-width if needed to center */
-      padding: 30px 40px; /* Adjust padding for the new layout */
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      margin-top: 30px; /* Keep top margin */
-      margin-right: 30px; /* Add right margin for balance */
-      margin-bottom: 30px; /* Add bottom margin */
-      box-sizing: border-box; /* Include padding in element's total width and height */
-    }
-    /* Centering content within the main area */
-    .content > div { /* Apply to direct children of .content like quiz-info-box etc. */
-        max-width: 800px; /* Set a max-width for internal containers */
-        margin-left: auto; /* Center them */
-        margin-right: auto; /* Center them */
-    }
-
-
-    /* Existing Quiz Styles (no changes unless specified) */
-    .login-success-message,
-    .quiz-completed-message,
-    .logout-success-message { /* Added logout-success-message here */
-      position: fixed;
-      top: 20px; /* Position at the top */
-      right: 20px; /* Position at the right */
-      left: auto; /* Ensure no conflict with left property */
-      color: white;
-      padding: 14px 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-      z-index: 1000;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-      font-size: 1.1em;
-    }
-    .login-success-message {
-        background-color: #4CAF50;
-    }
-    .quiz-completed-message {
-        background-color: #007bff;
-    }
-    .logout-success-message { /* Specific style for logout message */
-        background-color: #f44336; /* A common color for "danger" or "logout" */
-    }
-    .login-success-message.show,
-    .quiz-completed-message.show,
-    .logout-success-message.show { /* Added logout-success-message here */
-      opacity: 1;
-      visibility: visible;
-    }
-    .quiz-container {
-      margin-top: 30px;
       padding: 30px;
-      border-radius: 12px;
-      background-color: #ffffff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      display: none;
-      border: 1px solid #e0e0e0;
+      overflow-y: auto; /* Enable scrolling for content */
     }
-    .quiz-question {
-      font-size: 22px;
-      margin-bottom: 25px;
-      font-weight: bold;
-      color: #0056b3;
-      line-height: 1.4;
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
     }
-    .quiz-options label {
+
+    header h1 {
+      color: #333;
+      font-size: 2.2em;
+      margin: 0;
+    }
+
+    .user-info {
       display: flex;
       align-items: center;
-      margin-bottom: 15px;
-      cursor: pointer;
-      font-size: 18px;
-      padding: 12px 15px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
-    .quiz-options label:hover {
-      background-color: #f5f5f5;
-      border-color: #007bff;
-    }
-    .quiz-options input[type="radio"] {
+
+    .user-info span {
       margin-right: 15px;
-      transform: scale(1.2);
-    }
-    .quiz-feedback {
-      margin-top: 25px;
-      padding: 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 1.1em;
-      animation: fadeIn 0.5s ease-out;
-    }
-    .quiz-feedback.correct {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #28a745;
-    }
-    .quiz-feedback.incorrect {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #d9534f;
-    }
-    .quiz-navigation button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 25px;
-      font-size: 18px;
-      transition: background-color 0.2s ease, transform 0.2s ease;
-      margin-right: 10px;
-      display: inline-flex; /* Use flexbox for button content */
-      align-items: center; /* Vertically align icon and text */
-      justify-content: center; /* Center content horizontally */
-    }
-    .quiz-navigation button i { /* Style for icons within quiz navigation buttons */
-        margin-right: 8px; /* Space between icon and text */
-    }
-    .quiz-navigation button#skipBtn {
-        background-color: #ffc107;
-        color: #333;
-    }
-    .quiz-navigation button#skipBtn:hover {
-        background-color: #e0a800;
-    }
-    .quiz-navigation button:hover {
-      background-color: #0056b3;
-      transform: translateY(-2px);
-    }
-    .quiz-navigation button:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-      transform: none;
-    }
-    .timer {
-      font-size: 1.5em;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #d9534f;
-      text-align: right;
-    }
-    .final-score-container {
-      text-align: center;
-      margin-top: 40px;
-      padding: 40px;
-      border: 2px solid #007bff;
-      border-radius: 15px;
-      background-color: #eaf5ff;
-      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.15);
-      display: none;
-    }
-    .final-score-container h2 {
-      color: #007bff;
-      margin-bottom: 25px;
-      font-size: 2.2em;
-    }
-    .final-score-container p {
-      font-size: 1.8em;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 30px;
-    }
-    .final-score-summary {
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid #b3d7ff;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-    .final-score-summary div {
-      font-size: 1.2em;
-      font-weight: bold;
+      font-weight: 600;
       color: #555;
-      padding: 10px 15px;
-      border-radius: 8px;
-      background-color: #e0f0ff;
-      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
     }
-    .final-score-summary .correct-count {
-      color: #28a745;
-    }
-    .final-score-summary .wrong-count {
-      color: #d9534f;
-    }
-    .final-score-summary .skipped-count {
-      color: #ffc107;
-    }
-    .quiz-navigation-button {
-      background: linear-gradient(45deg, #28a745, #218838);
+
+    .user-info button {
+      background-color: #dc3545;
       color: white;
       border: none;
-      padding: 15px 30px;
-      border-radius: 30px;
+      padding: 10px 20px;
+      border-radius: 25px;
       cursor: pointer;
-      font-size: 1.3em;
-      margin-top: 20px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      margin: 10px;
-      display: inline-flex; /* Use flexbox for button content */
-      align-items: center; /* Vertically align icon and text */
-      justify-content: center; /* Center content horizontally */
+      font-size: 0.9em;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    .quiz-navigation-button i { /* Style for icons within final score buttons */
-        margin-right: 8px; /* Space between icon and text */
+
+    .user-info button:hover {
+      background-color: #c82333;
+      transform: translateY(-1px);
     }
-    .quiz-navigation-button:hover {
-      background: linear-gradient(45deg, #218838, #1e7e34);
-      box-shadow: 0 6px 18px rgba(40, 167, 69, 0.4);
-      transform: translateY(-3px);
+
+    /* Welcome Message */
+    .welcome-message {
+        background-color: #d4edda; /* Light green for success */
+        color: #155724; /* Dark green text */
+        padding: 15px 25px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        font-size: 1.1em;
+        font-weight: 500;
+        border: 1px solid #c3e6cb;
+        opacity: 0; /* Hidden by default */
+        transform: translateY(-20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
-    .quiz-navigation-button.view-answers {
-        background: linear-gradient(45deg, #007bff, #0056b3);
-        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+
+    .welcome-message.show {
+        opacity: 1;
+        transform: translateY(0);
     }
-    .quiz-navigation-button.view-answers:hover {
-        background: linear-gradient(45deg, #0056b3, #003f7f);
-        box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
+
+    /* Quiz Info Box */
+    .quiz-info-box {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        text-align: center;
+        margin-bottom: 30px;
+        border: 1px solid #e0e0e0;
     }
-    .back-to-dashboard-btn,
-    .previous-quizzes-btn {
-        background: linear-gradient(45deg, #007bff, #0056b3);
+
+    .quiz-info-box h2 {
+        color: #007bff;
+        margin-bottom: 15px;
+        font-size: 1.8em;
+    }
+
+    .quiz-info-box p {
+        color: #555;
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .quiz-info-box button {
+        background-color: #007bff;
         color: white;
         border: none;
-        padding: 10px 18px;
+        padding: 12px 25px;
         border-radius: 25px;
         cursor: pointer;
         font-size: 1em;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        font-weight: bold;
-        text-decoration: none;
-        display: inline-block;
-        text-align: center;
+        font-weight: 600;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
     }
-    .back-to-dashboard-btn:hover,
-    .previous-quizzes-btn:hover {
-        background: linear-gradient(45deg, #0056b3, #003f7f);
-        box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+
+    .quiz-info-box button:hover {
+        background-color: #0056b3;
         transform: translateY(-1px);
     }
-    .quiz-info-box {
-      margin-top: 30px;
-      border: 1px solid #007bff;
-      padding: 10px;
-      border-radius: 12px;
-      background-color: #eaf5ff;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
-    }
-    .quiz-info-box h2 {
-      color: #007bff;
-      margin-bottom: 30px;
-      font-size: 2.2em;
-    }
-    .quiz-info-box p {
-      font-size: 1.3em;
-      margin-bottom: 15px;
-      line-height: 1.6;
-    }
-    .quiz-info-box button {
-      background-color: #28a745;
-      color: white;
-      border: none;
-      padding: 18px 35px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.4em;
-      margin-top: 30px;
-      transition: background-color 0.2s ease, transform 0.2s ease;
-      display: inline-flex; /* Use flexbox for button content */
-      align-items: center; /* Vertically align icon and text */
-      justify-content: center; /* Center content horizontally */
-    }
-    .quiz-info-box button i { /* Style for icons within quiz info box button */
-        margin-right: 10px; /* Space between icon and text */
-    }
-    .quiz-info-box button:hover {
-      background-color: #218838;
-      transform: translateY(-2px);
-    }
-    .user-welcome-message {
-      font-size: 2.5em;
-      font-weight: bold;
-      color: #28a745;
-      margin-bottom: 30px;
-      text-align: center;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    }
-    .quiz-results-details {
-      margin-top: 30px;
+
+    /* Quiz Container */
+    .quiz-container {
+      background: #ffffff;
       padding: 30px;
       border-radius: 12px;
-      background-color: #ffffff;
-      box-shadow: 0 4gpx 10px rgba(0,0,0,0.08);
-      text-align: left;
-      display: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
       border: 1px solid #e0e0e0;
+      display: none; /* Hidden by default */
     }
-    .quiz-results-details h3 {
+
+    .quiz-container h2 {
       color: #007bff;
       margin-bottom: 20px;
       text-align: center;
-      font-size: 1.8em;
-      border-bottom: 2px solid #eaf5ff;
-      padding-bottom: 10px;
+      font-size: 2em;
     }
-    .quiz-results-details .result-item {
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px dashed #ddd;
-    }
-    .quiz-results-details .result-item:last-child {
-      border-bottom: none;
-    }
-    .quiz-results-details .question {
-      font-weight: bold;
-      margin-bottom: 8px;
-      font-size: 1.25em;
-      color: #555;
-    }
-    .quiz-results-details .your-answer {
-      color: #d9534f;
-      font-style: italic;
-      margin-left: 10px;
-      font-size: 1.1em;
-    }
-    .quiz-results-details .correct-answer {
-      color: #28a745;
-      font-weight: bold;
-      margin-left: 10px;
-      font-size: 1.1em;
-    }
-    .quiz-results-details .your-answer.correct {
-      color: #28a745;
-    }
-    .quiz-results-details .your-answer.skipped {
-        color: #ffc107;
-        font-weight: bold;
-    }
-    /* Progress Bar Styles */
-    #progressBarContainer {
+
+    .progress-bar-container {
       width: 100%;
-      height: 15px;
       background-color: #e0e0e0;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-bottom: 25px;
+      height: 18px;
       overflow: hidden;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
     }
-    #progressBarFill {
+
+    .progress-bar {
       height: 100%;
       width: 0%;
-      background: linear-gradient(to right, #007bff, #00c6ff);
-      border-radius: 8px;
-      transition: width 0.5s ease-in-out;
-      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      background-color: #28a745;
+      border-radius: 10px;
+      transition: width 0.4s ease-in-out;
+      text-align: center;
+      color: white;
+      font-size: 0.8em;
+      line-height: 18px; /* Vertically center text */
     }
-    /* Removed previous-quizzes-container styles as it's no longer needed */
-    /* .previous-quizzes-container {
-        display: none;
-        margin-top: 30px;
-        padding: 30px;
-        border-radius: 12px;
-        background-color: #ffffff;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        text-align: left;
-        border: 1px solid #e0e0e0;
-    }
-    .previous-quizzes-container h3 {
-        color: #007bff;
-        margin-bottom: 20px;
-        text-align: center;
-        font-size: 1.8em;
-        border-bottom: 2px solid #eaf5ff;
-        padding-bottom: 10px;
-    }
-    .previous-quizzes-container .quiz-entry {
-        margin-bottom: 15px;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    .previous-quizzes-container .quiz-entry p {
-        margin: 0;
-        font-size: 1.1em;
-        color: #555;
-    }
-    .previous-quizzes-container .quiz-entry .action-buttons {
-        display: flex;
-        gap: 10px;
-    }
-    .previous-quizzes-container .quiz-entry .view-details-btn,
-    .previous-quizzes-container .quiz-entry .delete-details-btn {
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 0.9em;
-        transition: background-color 0.2s ease;
-    }
-    .previous-quizzes-container .quiz-entry .view-details-btn {
-        background-color: #007bff;
-    }
-    .previous-quizzes-container .quiz-entry .view-details-btn:hover {
-        background-color: #0056b3;
-    }
-    .previous-quizzes-container .quiz-entry .delete-details-btn {
-        background-color: #dc3545;
-    }
-    .previous-quizzes-container .quiz-entry .delete-details-btn:hover {
-        background-color: #c82333;
-    }
-    .previous-quizzes-container .no-previous-quizzes {
-        text-align: center;
-        font-style: italic;
-        color: #777;
-        margin-top: 20px;
-    } */
-    /* Keyframe for fade-in effect */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* Styles for image display in quiz */
+
     .question-image {
         max-width: 80%;
         height: auto;
@@ -569,761 +229,858 @@
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
+
+    .question {
+      font-size: 1.4em;
+      color: #333;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+      font-size: 1.1em;
+      text-align: left;
+      color: #444;
+      display: flex;
+      align-items: center;
+    }
+
+    .option:hover {
+      background-color: #e9f7ff;
+      border-color: #007bff;
+      transform: translateY(-2px);
+    }
+
+    .option.selected {
+      background-color: #e0f2fe; /* Light blue for selected */
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+    }
+
+    .option.correct {
+        background-color: #d4edda; /* Light green for correct */
+        border-color: #28a745;
+        color: #155724;
+    }
+
+    .option.wrong {
+        background-color: #f8d7da; /* Light red for wrong */
+        border-color: #dc3545;
+        color: #721c24;
+    }
+
+    .quiz-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      gap: 15px;
+    }
+
+    .quiz-navigation button {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .quiz-navigation button:hover {
+      background-color: #5a6268;
+      transform: translateY(-1px);
+    }
+
+    .quiz-navigation button#nextButton,
+    .quiz-navigation button#submitButton {
+        background-color: #007bff;
+    }
+
+    .quiz-navigation button#nextButton:hover,
+    .quiz-navigation button#submitButton:hover {
+        background-color: #0056b3;
+    }
+
+    button:disabled {
+        background-color: #cccccc !important;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+    }
+
+    /* Timer specific styles */
+    .timer-container {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.8em; /* Slightly larger font */
+        font-weight: bold;
+        color: #dc3545; /* Red color for urgency */
+        background-color: #ffebeb; /* Light red background */
+        border: 2px solid #dc3545; /* Red border */
+        border-radius: 10px; /* Rounded corners */
+        padding: 10px 20px; /* Add some padding */
+        box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2); /* Subtle shadow */
+        display: inline-block; /* Shrink to fit content */
+        min-width: 150px; /* Minimum width */
+        transition: all 0.3s ease-in-out; /* Smooth transitions for hover/state changes */
+    }
+
+    .timer-container.warning {
+        color: #ffc107; /* Orange for warning */
+        background-color: #fff3cd;
+        border-color: #ffc107;
+        box-shadow: 0 4px 10px rgba(255, 193, 7, 0.2);
+    }
+
+    .timer-container.critical {
+        color: #f00; /* Bright red for critical */
+        background-color: #ffe0e0;
+        border-color: #f00;
+        animation: pulse 1s infinite; /* Pulsing animation for critical time */
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+
+    /* Final Score Container */
+    .final-score-container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        text-align: center;
+        border: 1px solid #e0e0e0;
+        display: none; /* Hidden by default */
+    }
+
+    .final-score-container h2 {
+        color: #28a745; /* Green for success */
+        font-size: 2.5em;
+        margin-bottom: 15px;
+    }
+
+    .final-score-container p {
+        font-size: 1.2em;
+        color: #555;
+        margin-bottom: 25px;
+    }
+
+    .final-score-container button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 600;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+        margin: 0 10px; /* Space between buttons */
+    }
+
+    .final-score-container button:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
+    }
+
+    /* Quiz Results Details (Dashboard) */
+    .quiz-results-details {
+        margin-top: 30px;
+        padding: 30px;
+        border-radius: 12px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        text-align: left;
+        border: 1px solid #e0e0e0;
+        display: none; /* Hidden by default */
+    }
+    .quiz-results-details h3 {
+        color: #007bff;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.8em;
+        border-bottom: 2px solid #eaf5ff;
+        padding-bottom: 10px;
+    }
+    .quiz-results-details .result-item {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px dashed #ddd;
+    }
+    .quiz-results-details .result-item:last-child {
+        border-bottom: none;
+    }
+    .quiz-results-details .question {
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 1.25em;
+        color: #555;
+    }
+    .quiz-results-details .your-answer {
+        color: #d9534f;
+        font-style: italic;
+        margin-left: 10px;
+        font-size: 1.1em;
+    }
+    .quiz-results-details .correct-answer {
+        color: #28a745;
+        font-weight: bold;
+        margin-left: 10px;
+        font-size: 1.1em;
+    }
+    .quiz-results-details .your-answer.correct {
+        color: #28a745;
+    }
+    .quiz-results-details .your-answer.skipped {
+        color: #ffc107;
+        font-weight: bold;
+    }
+
+    /* Style for View Details Button in Previous Quizzes Table */
+    .previous-quiz-view-btn {
+        background-color: #28a745; /* A pleasant green */
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .previous-quiz-view-btn:hover {
+        background-color: #218838; /* Darker green on hover */
+        transform: translateY(-1px);
+    }
+
+    /* New style for the "Back to Score" button */
+    .back-to-score-btn {
+        background-color: #007bff; /* Blue */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px; /* Slightly more rounded */
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 600;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+        margin-top: 20px; /* Add some space above it */
+    }
+
+    .back-to-score-btn:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        transform: translateY(-1px);
+    }
+
   </style>
 </head>
 <body>
-
   <nav>
-    <div class="brand">
-      <img src="linkup.png" alt="LinkUP Icon">
+    <div class="logo-container">
+        <img src="linkup.png" alt="LinkUp Logo" class="logo">
     </div>
-    <span class="user-name" id="userName"></span>
-    <div class="nav-links">
-      <a href="#" onclick="goToDashboard()"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-      </div>
-    <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <ul>
+      <li><a href="#" id="dashboardLink" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+      <li><a href="#" id="startQuizLink"><i class="fas fa-play-circle"></i> Start Quiz</a></li>
+      <li><a href="#" id="previousQuizzesLink"><i class="fas fa-history"></i> Previous Quizzes</a></li>
+      <li><a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
   </nav>
 
-  <div class="content">
-    <div id="loginSuccessMessage" class="login-success-message">Login Successful!</div>
-    <div id="quizCompletedMessage" class="quiz-completed-message">Quiz Completed!</div>
-    <div id="logoutSuccessMessage" class="logout-success-message">You have successfully been logged out!</div>
+  <div class="main-content">
+    <header>
+      <h1 id="welcomeHeading"></h1>
+      <div class="user-info">
+        <span id="usernameDisplay"></span>
+        <button id="headerLogoutButton">Logout</button>
+      </div>
+    </header>
 
-    <div class="user-welcome-message" id="welcomeMessage"></div>
+    <div class="welcome-message" id="loginSuccessMessage">
+        You have successfully logged in!
+    </div>
+
+    <div class="welcome-message" id="quizCompletedMessage">
+        Quiz completed successfully!
+    </div>
 
     <div class="quiz-info-box" id="quizInfoBox">
-      <h2 id="quizInfoHeading">Welcome to Quize</h2>
-      <p>Total Questions: <span id="infoTotalQuestions"></span></p>
-      <p>Time per question: <span id="infoTimePerQuestion"></span> seconds (varies per question)</p>
-      <p id="lastQuizScoreDisplay" style="display: none;">Last Quiz Score: <span id="lastQuizScore">0</span> / <span id="lastQuizTotalQuestions">0</span></p>
-      <p>Test your knowledge and see how well you score!</p>
-      <button id="startQuizBtn"><i class="fas fa-play"></i> Start Quiz</button>
+        <h2 id="quizInfoHeading">Welcome to the Quiz!</h2>
+        <p>Test your knowledge with our exciting quizzes. Click the button below to start your first quiz.</p>
+        <p id="lastQuizScoreDisplay" style="display:none;"></p>
+        <button id="startQuizButton">Start New Quiz</button>
     </div>
 
     <div class="quiz-container" id="quizContainer">
-      <h2>Questions on Biology</h2>
-      <div class="timer" id="timer">Time left: 15s</div>
-      <div id="progressBarContainer">
-        <div id="progressBarFill"></div>
+      <h2 id="quizTitle"></h2>
+      <div class="timer-container" id="timerDisplay">Time Left: --s</div> <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar">0%</div>
       </div>
-      <div id="quiz"></div>
-      <div class="quiz-feedback" id="feedback"></div>
+      <img id="questionImage" class="question-image" src="" alt="Question Image" style="display:none;">
+      <p class="question" id="questionText"></p>
+      <div class="options" id="optionsContainer">
+        </div>
       <div class="quiz-navigation">
-        <button id="submitBtn" onclick="submitAnswer()"><i class="fas fa-check"></i> Submit Answer</button>
-        <button id="skipBtn" onclick="skipQuestion()"><i class="fas fa-forward"></i> Skip Question</button> <button id="nextBtn" onclick="nextQuestion()" style="display: none;"><i class="fas fa-arrow-right"></i> Next Question</button>
+        <button id="prevButton" disabled>Previous</button>
+        <button id="skipButton">Skip</button>
+        <button id="nextButton">Next</button>
+        <button id="submitButton" style="display:none;">Submit Quiz</button>
       </div>
     </div>
 
     <div class="final-score-container" id="finalScoreContainer">
       <h2>Quiz Completed!</h2>
-      <p>Your final score is: <span id="finalScore">0</span> / <span id="totalQuestions">0</span></p>
-      <div class="final-score-summary">
-        <div>Correct: <span id="finalCorrectAnswers" class="correct-count">0</span></div>
-        <div>Wrong: <span id="finalWrongAnswers" class="wrong-count">0</span></div>
-        <div>Skipped: <span id="finalSkippedQuestions" class="skipped-count">0</span></div>
-      </div>
-      <button class="quiz-navigation-button" onclick="retakeQuiz()"><i class="fas fa-redo"></i> Retake Quiz</button>
-      <button class="quiz-navigation-button view-answers" onclick="showDetailedResults()"><i class="fas fa-file-alt"></i> View Detailed Answers</button>
+      <p>Your Score: <span id="scoreDisplay"></span></p>
+      <p>Correct Answers: <span id="correctAnswersCount"></span></p>
+      <p>Wrong Answers: <span id="wrongAnswersCount"></span></p>
+      <p>Skipped Questions: <span id="skippedQuestionsCount"></span></p>
+      <p>Percentage: <span id="percentageScore"></span></p>
+      <button id="viewResultsButton">View My Answers</button>
+      <button id="returnToDashboardButton">Return to Dashboard</button>
     </div>
 
     <div class="quiz-results-details" id="quizResultsDetails">
-      <h3>Detailed Results:</h3>
-      </div>
-
+        <h3>Detailed Results:</h3>
+        <button class="back-to-score-btn" onclick="backToFinalScore()">Back to Score</button>
     </div>
 
+    <div id="previousQuizzesContainer" style="display:none;">
+        <h2>My Previous Quizzes</h2>
+        <p id="noPreviousQuizzesMessage" style="display:none; text-align: center; font-style: italic; color: #777;">No previous quiz data found.</p>
+        <table id="previousQuizzesTable" style="width:100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Quiz Name</th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Score</th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Percentage</th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Date/Time</th>
+                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="previousQuizzesTableBody">
+            </tbody>
+        </table>
+    </div>
+
+  </div>
+
   <script>
-    // Get username from localStorage
-    const user = localStorage.getItem('loggedInUser');
-    const welcomeMessageDiv = document.getElementById('welcomeMessage');
-    const loginSuccessMessage = document.getElementById('loginSuccessMessage');
-    const quizCompletedMessage = document.getElementById('quizCompletedMessage');
-    const logoutSuccessMessage = document.getElementById('logoutSuccessMessage');
-
-    // Quiz Info Box elements
-    const quizInfoHeading = document.getElementById('quizInfoHeading');
-    const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
-    const lastQuizScoreSpan = document.getElementById('lastQuizScore');
-    const lastQuizTotalQuestionsSpan = document.getElementById('lastQuizTotalQuestions');
-
-
-    if (!user) {
-      window.location.href = "index.html";
-    } else {
-      document.getElementById('userName').textContent = `Hello, ${user}`;
-      welcomeMessageDiv.textContent = `${user}'s Dashboard`;
-
-      const hasShownLoginMessage = localStorage.getItem('hasShownLoginMessage');
-      if (hasShownLoginMessage === 'false' || hasShownLoginMessage === null) {
-        loginSuccessMessage.classList.add('show');
-        localStorage.setItem('hasShownLoginMessage', 'true');
-        setTimeout(() => {
-          loginSuccessMessage.classList.remove('show');
-        }, 3000); // Duration for login success message (3 seconds)
-      }
-    }
-
-    function logout() {
-      // 1. Clear all relevant localStorage items immediately
-      const userBeforeLogout = localStorage.getItem('loggedInUser'); // Capture the user before clearing 'loggedInUser'
-      localStorage.removeItem('loggedInUser');
-      localStorage.removeItem('hasShownLoginMessage');
-      localStorage.removeItem('quizJustCompleted');
-      localStorage.removeItem('quizStatus');
-      localStorage.removeItem('lastQuizScore');
-      localStorage.removeItem('lastQuizTotal');
-
-      // Clear user-specific quiz history on logout (This can remain if you want to clear specific user quiz data on logout)
-      if (userBeforeLogout) {
-          localStorage.removeItem(`user_${userBeforeLogout}_quizzes`);
-      }
-
-      // 2. Show the logout success message
-      // This will make it visible *before* the redirection occurs.
-      logoutSuccessMessage.classList.add('show');
-
-      // 3. Delay the redirection to allow the user to see the logout message
-      // The message will be visible for this duration before the page changes.
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 2000); // Display for 2 seconds (adjust this duration as needed for logout message)
-    }
-
-    const quizData = [
-      {
-        question: "The figure given below is of Tobacco Mosaic Virus. Identify the label (a)",
-        options: [
-          "RNA",
-          "dsDNA",
-          "ssDNA",
-          "Capsid"
-        ],
-        answer: "RNA",
-        timeLimit: 60, // Default time limit
-        imageUrl: "1.png", // Add this line for questions with images
-        userAnswer: null,
-        isCorrect: null
-      },
-      {
-        question: "What is the function of the cell marked as (a)",
-        options: [
-          "Fix atmospheric oxygen",
-          "Fix atmospheric nitrogen",
-          "Fix atmospheric carbon dioxide",
-          "Utilise sunlight"
-        ],
-        answer: "Fix atmospheric nitrogen",
-        timeLimit: 60, // Default time limit
-        imageUrl: "2.png", // Or simply omit the property if no image
-        userAnswer: null,
-        isCorrect: null
-      },
-      {
-        question: "Mark the correct answer with relation to aestivation in the diagram",
-        options: [
-          "Valvate- Calotropis",
-          "Twisted- China rose",
-          "Valvate- China rose",
-          "Twisted- Calotropis"
-        ],
-        answer: "Valvate- Calotropis",
-        timeLimit: 60, // Default time limit
-        imageUrl: "3.png", // Or simply omit the property if no image
-        userAnswer: null,
-        isCorrect: null
-      },
-      {
-        question: "What is the common location of the type of epithelium that has been shown in the figure",
-        options: [
-          "Blood vessel",
-          "Alveoli",
-          "PCT",
-          "Intestinal lining"
-        ],
-        answer: "PCT",
-        timeLimit: 90, // Default time limit
-        imageUrl: "4.png", // Or simply omit the property if no image
-        userAnswer: null,
-        isCorrect: null
-      },
-      {
-        question: "The experiment demonstrated in the figure was carried out by",
-        options: [
-          "Engelmann",
-          "Priestley",
-          "Ingenhousz",
-          "Von Sachs"
-        ],
-        answer: "Priestley",
-        timeLimit: 60, // Default time limit
-        imageUrl: "5.png", // Or simply omit the property if no image
-        userAnswer: null,
-        isCorrect: null
-      },
-      {
-        question: "What is the function of structure labelled as (a)",
-        options: [
-          "Absorption of glucose",
-          "Absorption of amino acids",
-          "Absorption of fats",
-          "Supply blood to villi"
-        ],
-        answer: "Absorption of fats",
-        timeLimit: 60, // Default time limit
-        imageUrl: "6.png", // Or simply omit the property if no image
-        userAnswer: null,
-        isCorrect: null
-      },
-      {
-        question: "Which is the hormone synthesized by (a) part of pituitary",
-        options: [
-          "FSH",
-          "TSH",
-          "ADH",
-          "None of these"
-        ],
-        answer: "None of these",
-        timeLimit: 60, // Default time limit
-        imageUrl: "7.png", // Or simply omit the property if no image
-        userAnswer: null,
-        isCorrect: null
-      },
-      {
-        question: "What is happening to diaphragm in the given figure",
-        options: [
-          "Relaxation",
-          "Contraction",
-          "neither contraction nor relaxation",
-          "First contraction then relaxation"
-        ],
-        answer: "Contraction",
-        timeLimit: 60, // Default time limit
-        imageUrl: "8.png", // Or simply omit the property if no image
-        userAnswer: null,
-        isCorrect: null
-      },
-      {
-        question: "What is the site of action of ADH",
-        options: [
-          "PCT",
-          "Descending limb of Loop of Henle",
-          "Asending libm of Loop of Henle",
-          "DCT"
-        ],
-        answer: "Asending libm of Loop of Henle",
-        timeLimit: 60, // Default time limit
-        imageUrl: "9.png", // Or simply omit the property if no image
-        userAnswer: null,
-        isCorrect: null
-      },
-            {
-        question: "What is incorrect about (b)",
-        options: [
-          "When mature contain 2 cells",
-          "Develops from microspore",
-          "While developing, it derives nutrition ",
-          "None of these"
-        ],
-        answer: "None of these",
-        timeLimit: 60, // Default time limit
-        imageUrl: "10.png", // Or simply omit the property if no image
-        userAnswer: null,
-        isCorrect: null
-      },
-
-    ];
-
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let wrongAnswers = 0;
-    let skippedQuestionsCount = 0;
-    let timer;
-    let timeLeft;
-    let questionAttempted = false;
-
-    const quizDiv = document.getElementById('quiz');
-    const feedbackDiv = document.getElementById('feedback');
-    const submitBtn = document.getElementById('submitBtn');
-    const skipBtn = document.getElementById('skipBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const timerDisplay = document.getElementById('timer');
+    const quizInfoBox = document.getElementById('quizInfoBox');
     const quizContainer = document.getElementById('quizContainer');
     const finalScoreContainer = document.getElementById('finalScoreContainer');
-    const finalScoreSpan = document.getElementById('finalScore');
-    const totalQuestionsSpan = document.getElementById('totalQuestions');
-    const quizInfoBox = document.getElementById('quizInfoBox');
-    const startQuizBtn = document.getElementById('startQuizBtn');
-    const infoTotalQuestions = document.getElementById('infoTotalQuestions');
-    const infoTimePerQuestion = document.getElementById('infoTimePerQuestion');
-    const quizResultsDetails = document.getElementById('quizResultsDetails');
-    // const previousQuizzesContainer = document.getElementById('previousQuizzesContainer'); // Removed
-    // const previousQuizList = document.getElementById('previousQuizList'); // Removed
+    const quizResultsDetails = document.getElementById('quizResultsDetails'); // Detailed results container
+    const previousQuizzesContainer = document.getElementById('previousQuizzesContainer'); // Previous quizzes list
 
-    const finalCorrectAnswersSpan = document.getElementById('finalCorrectAnswers');
-    const finalWrongAnswersSpan = document.getElementById('finalWrongAnswers');
-    const finalSkippedQuestionsSpan = document.getElementById('finalSkippedQuestions');
+    const startQuizButton = document.getElementById('startQuizButton');
+    const quizTitle = document.getElementById('quizTitle');
+    const questionText = document.getElementById('questionText');
+    const questionImage = document.getElementById('questionImage');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const prevButton = document.getElementById('prevButton');
+    const skipButton = document.getElementById('skipButton');
+    const nextButton = document.getElementById('nextButton');
+    const submitButton = document.getElementById('submitButton');
+    const progressBar = document.getElementById('progressBar');
+    const timerDisplay = document.getElementById('timerDisplay'); // Timer display element
 
-    const progressBarFill = document.getElementById('progressBarFill');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const correctAnswersCount = document.getElementById('correctAnswersCount');
+    const wrongAnswersCount = document.getElementById('wrongAnswersCount');
+    const skippedQuestionsCount = document.getElementById('skippedQuestionsCount');
+    const percentageScore = document.getElementById('percentageScore');
+    const viewResultsButton = document.getElementById('viewResultsButton');
+    const returnToDashboardButton = document.getElementById('returnToDashboardButton');
 
-    infoTotalQuestions.textContent = quizData.length;
-    const averageTime = quizData.reduce((acc, q) => acc + q.timeLimit, 0) / quizData.length;
-    infoTimePerQuestion.textContent = `${averageTime.toFixed(1)} (average)`;
+    const dashboardLink = document.getElementById('dashboardLink');
+    const startQuizLink = document.getElementById('startQuizLink');
+    const previousQuizzesLink = document.getElementById('previousQuizzesLink');
+    const logoutLink = document.getElementById('logoutLink');
+    const headerLogoutButton = document.getElementById('headerLogoutButton');
 
-    startQuizBtn.addEventListener('click', () => {
-      quizInfoBox.style.display = 'none';
-      quizContainer.style.display = 'block';
-      welcomeMessageDiv.style.display = 'none';
-      // Clear quiz status and last score when starting a new quiz
-      localStorage.removeItem('quizStatus');
-      localStorage.removeItem('lastQuizScore');
-      localStorage.removeItem('lastQuizTotal');
-      loadQuestion();
+    const welcomeHeading = document.getElementById('welcomeHeading');
+    const usernameDisplay = document.getElementById('usernameDisplay');
+    const loginSuccessMessage = document.getElementById('loginSuccessMessage');
+    const quizCompletedMessage = document.getElementById('quizCompletedMessage');
+    const quizInfoHeading = document.getElementById('quizInfoHeading');
+    const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
+    const welcomeMessageDiv = document.querySelector('.welcome-message'); // For initial login message
+
+    let currentQuiz = null;
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+    let correctAnswersTotal = 0;
+    let wrongAnswersTotal = 0;
+    let skippedQuestionsTotal = 0;
+    let quizDetailsForDisplay = []; // To store question, user answer, correct answer, and correctness
+
+    // Timer variables
+    let timeLeft = 0; // Initialize to 0, will be set when loading a question
+    let timerInterval;
+
+    // --- Authentication and Initial Load ---
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+            window.location.href = "index.html"; // Redirect to login if not logged in
+        } else {
+            usernameDisplay.textContent = loggedInUser;
+            welcomeHeading.textContent = `Welcome, ${loggedInUser}!`;
+            
+            // Show login success message only once per login session
+            const hasShownLoginMessage = localStorage.getItem('hasShownLoginMessage');
+            if (hasShownLoginMessage === 'false') {
+                loginSuccessMessage.classList.add('show');
+                localStorage.setItem('hasShownLoginMessage', 'true');
+                setTimeout(() => {
+                    loginSuccessMessage.classList.remove('show');
+                }, 3000);
+            }
+            goToDashboard(); // Show dashboard by default
+        }
     });
 
+    logoutLink.addEventListener('click', logout);
+    headerLogoutButton.addEventListener('click', logout);
+
+    function logout() {
+        localStorage.removeItem('loggedInUser');
+        localStorage.removeItem('hasShownLoginMessage'); // Clear this on logout
+        window.location.href = "index.html";
+    }
+
+    // --- Navigation ---
+    dashboardLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveLink(dashboardLink);
+        goToDashboard();
+    });
+
+    startQuizLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveLink(startQuizLink);
+        showStartQuizSection();
+    });
+
+    previousQuizzesLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveLink(previousQuizzesLink);
+        showPreviousQuizzesSection();
+    });
+
+    function setActiveLink(activeLink) {
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.classList.remove('active');
+        });
+        activeLink.classList.add('active');
+    }
+
+    // --- Quiz Data (Example Quizzes) ---
+    const quizzes = [
+        {
+            name: "Biology Class 11/12",
+            questions: [
+                {
+                    question: "The figure given below is of Tobacco Mosaic Virus. Identify the label (a)",
+                    options: [
+                    "RNA",
+                    "dsDNA", 
+                    "ssDNA", 
+                    "Capsid"],
+                    answer: "RNA",
+                    imageUrl: "1.png", // No image for this question
+                    timeLimit: 60 // Added time limit for this question
+                },
+                {
+                    question: "What is the function of the cell marked as (a)",
+                    options: [
+                        "Fixed atmospheric oxygen", 
+                        "Fix atmospheric nitrogen", 
+                        "fix atmospheric carbon dioxide", 
+                        "Utilise sunlight"],
+                    answer: "Fix atmospheric nitrogen",
+                    imageUrl: "2.png",
+                    timeLimit: 60 // Added time limit for this question
+                },
+                {
+                    question: "Mark the correct answer with relation to aestivation in the diagram",
+                    options: [
+                    "Valvate- Calotropis", 
+                    "Twisted- China rose", 
+                    "Valvate- China rose", 
+                    "twisted- Calotropis"],
+                    answer: "Valvate- Calotropis",
+                    imageUrl: "3.png",
+                    timeLimit: 60 // Added time limit for this question
+                },
+                {
+                    question: "The experiment demonstrated in the figure was carried out by",
+                    options: [
+                    "Engelmann", 
+                    "Priestley", 
+                    "Ingenhousz", 
+                    "Von Sachs"],
+                    answer: "Priestley",
+                    imageUrl: "5.png",
+                    timeLimit: 60 // Added time limit for this question
+                },
+                {
+                    question: "What is the function of structured labelled as(a)",
+                    options: [
+                    "Absorption of glucose", 
+                    "Absorption ofamino acid", 
+                    "Absorption of fats", 
+                    "Supply blood to villi"],
+                    answer: "Absorption of fats",
+                    imageUrl: "6.png",
+                    timeLimit: 60 // Added time limit for this question
+                },
+                {
+                    question: "Which is the hormone synthesized by (a) part of pituitary",
+                    options: [
+                    "FSH", 
+                    "TSH", 
+                    "ADH", 
+                    "None of these"],
+                    answer: "None of these",
+                    imageUrl: "7.png",
+                    timeLimit: 60 // Added time limit for this question
+                },
+                {
+                    question: "What is happening to diaphragm in the given figure",
+                    options: [
+                    "Relaxation", 
+                    "Contraction", 
+                    "Neither contraction nor relaxation", 
+                    "first contraction then relaxation"],
+                    answer: "Contraction",
+                    imageUrl: "8.png",
+                    timeLimit: 60 // Added time limit for this question
+                },
+                {
+                    question: "What is the site of action of ADH",
+                    options: [
+                    "PCT", 
+                    "Descending libm of loop of Henle", 
+                    "Ascending limb of Loop Henle", 
+                    "DCT"],
+                    answer: "DCT",
+                    imageUrl: "9.png",
+                    timeLimit: 60 // Added time limit for this question
+                },
+                {
+                    question: "Mark the option with correct label",
+                    options: [
+                    "Secondary follicle", 
+                    "Tertiary follicle", 
+                    "Corpusluteum", 
+                    "Graafian follicle"],
+                    answer: "Tertiary follicle",
+                    imageUrl: "10.png",
+                    timeLimit: 60 // Added time limit for this question
+                },
+
+
+
+
+            ]
+        },
+    ];
+
+    // --- Quiz Flow Functions ---
+    startQuizButton.addEventListener('click', startRandomQuiz);
+
+    function startRandomQuiz() {
+        if (quizzes.length === 0) {
+            alert("No quizzes available to start!");
+            return;
+        }
+        const randomIndex = Math.floor(Math.random() * quizzes.length);
+        currentQuiz = quizzes[randomIndex];
+        currentQuestionIndex = 0;
+        userAnswers = Array(currentQuiz.questions.length).fill(null); // Initialize user answers with null
+        correctAnswersTotal = 0;
+        wrongAnswersTotal = 0;
+        skippedQuestionsTotal = 0;
+        quizDetailsForDisplay = []; // Clear previous quiz details
+
+        quizInfoBox.style.display = 'none';
+        finalScoreContainer.style.display = 'none';
+        quizResultsDetails.style.display = 'none';
+        previousQuizzesContainer.style.display = 'none';
+        quizContainer.style.display = 'block';
+
+        quizTitle.textContent = currentQuiz.name;
+        loadQuestion();
+        updateProgressBar();
+    }
+
     function startTimer() {
-      clearInterval(timer);
-      timeLeft = quizData[currentQuestionIndex].timeLimit;
-      timerDisplay.textContent = `Time left: ${timeLeft}s`;
-      timerDisplay.style.color = '#d9534f';
+        clearInterval(timerInterval); // Clear any existing timer
 
-      timer = setInterval(() => {
-        timeLeft--;
-        timerDisplay.textContent = `Time left: ${timeLeft}s`;
+        const question = currentQuiz.questions[currentQuestionIndex];
+        timeLeft = question.timeLimit; // Set timeLeft to the current question's timeLimit
 
-        if (timeLeft <= 5 && timeLeft > 0) {
-          timerDisplay.style.color = 'red';
+        // Initial update of display and class
+        timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+        timerDisplay.classList.remove('warning', 'critical');
+        if (timeLeft <= 10 && timeLeft > 5) { // Example: Warning for last 10 seconds
+            timerDisplay.classList.add('warning');
+        } else if (timeLeft <= 5) { // Example: Critical for last 5 seconds
+            timerDisplay.classList.add('critical');
         }
 
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          feedbackDiv.textContent = "Time's up! The correct answer was: " + quizData[currentQuestionIndex].answer;
-          feedbackDiv.classList.add('incorrect');
-          disableOptions();
-          submitBtn.style.display = 'none';
-          skipBtn.style.display = 'none';
-          questionAttempted = true;
 
-          quizData[currentQuestionIndex].userAnswer = "Time's up!";
-          quizData[currentQuestionIndex].isCorrect = false;
-          wrongAnswers++;
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = `Time Left: ${timeLeft}s`;
 
-          setTimeout(() => {
-            if (currentQuestionIndex < quizData.length - 1) {
-              nextQuestion();
-            } else {
-              showFinalScore();
+            // Update classes based on time left
+            timerDisplay.classList.remove('warning', 'critical'); // Remove previous states
+            if (timeLeft <= 10 && timeLeft > 5) { // Example: Warning for last 10 seconds
+                timerDisplay.classList.add('warning');
+            } else if (timeLeft <= 5) { // Example: Critical for last 5 seconds
+                timerDisplay.classList.add('critical');
             }
-          }, 1500);
-        }
-      }, 1000);
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                // Automatically move to the next question or submit if it's the last one
+                if (userAnswers[currentQuestionIndex] === null) {
+                    userAnswers[currentQuestionIndex] = "Time Out"; // Mark as time out
+                }
+                if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                    updateProgressBar();
+                } else {
+                    submitQuiz();
+                }
+            }
+        }, 1000);
     }
 
-    function disableOptions() {
-      const options = document.querySelectorAll('input[name="quizOption"]');
-      options.forEach(option => {
-        option.disabled = true;
-      });
+    function stopTimer() {
+        clearInterval(timerInterval);
     }
 
-    function enableOptions() {
-      const options = document.querySelectorAll('input[name="quizOption"]');
-      options.forEach(option => {
-        option.disabled = false;
-      });
-    }
-
-    function updateProgressBar() {
-      let progress = (currentQuestionIndex / quizData.length) * 100;
-      if (currentQuestionIndex === quizData.length) {
-        progress = 100;
-      }
-      progressBarFill.style.width = `${progress}%`;
-    }
 
     function loadQuestion() {
-      questionAttempted = false;
-      feedbackDiv.textContent = '';
-      feedbackDiv.className = 'quiz-feedback';
-      submitBtn.style.display = 'inline-block';
-      skipBtn.style.display = 'inline-block';
-      nextBtn.style.display = 'none';
-      enableOptions();
+        stopTimer(); // Stop timer before loading new question
+        const question = currentQuiz.questions[currentQuestionIndex];
+        questionText.textContent = question.question;
+        optionsContainer.innerHTML = ''; // Clear previous options
 
-      if (currentQuestionIndex < quizData.length) {
-        const currentQuiz = quizData[currentQuestionIndex];
-        let quizHTML = `<p class="quiz-question">${currentQuestionIndex + 1}. ${currentQuiz.question}</p>`;
-        if (currentQuiz.imageUrl) {
-            quizHTML += `<img src="${currentQuiz.imageUrl}" alt="Question Image" class="question-image">`;
-        }
-        quizHTML += `<div class="quiz-options">`;
-        currentQuiz.options.forEach((option, index) => {
-          quizHTML += `
-            <label>
-              <input type="radio" name="quizOption" value="${option}">
-              ${option}
-            </label>
-          `;
-        });
-        quizHTML += `</div>`;
-        quizDiv.innerHTML = quizHTML;
-        startTimer();
-        updateProgressBar();
-      } else {
-        showFinalScore();
-      }
-    }
-
-    function submitAnswer() {
-      if (questionAttempted) return;
-      questionAttempted = true;
-
-      clearInterval(timer);
-
-      const selectedOption = document.querySelector('input[name="quizOption"]:checked');
-      disableOptions();
-      submitBtn.style.display = 'none';
-      skipBtn.style.display = 'none';
-
-      const currentQuestion = quizData[currentQuestionIndex];
-
-      if (selectedOption) {
-        const userAnswer = selectedOption.value;
-        const correctAnswer = currentQuestion.answer;
-
-        currentQuestion.userAnswer = userAnswer;
-
-        if (userAnswer === correctAnswer) {
-          feedbackDiv.textContent = "Correct!";
-          feedbackDiv.classList.add('correct');
-          score++;
-          currentQuestion.isCorrect = true;
+        if (question.imageUrl) {
+            questionImage.src = question.imageUrl;
+            questionImage.style.display = 'block';
         } else {
-          feedbackDiv.textContent = `Incorrect. The correct answer was: ${correctAnswer}`;
-          feedbackDiv.classList.add('incorrect');
-          wrongAnswers++;
-          currentQuestion.isCorrect = false;
+            questionImage.style.display = 'none';
         }
-      } else {
-        feedbackDiv.textContent = `No answer selected. The correct answer was: ${currentQuestion.answer}`;
-        feedbackDiv.className = 'quiz-feedback incorrect';
-        currentQuestion.userAnswer = "No answer selected";
-        currentQuestion.isCorrect = false;
-        wrongAnswers++;
-      }
 
-      setTimeout(() => {
-        if (currentQuestionIndex < quizData.length - 1) {
-          nextQuestion();
-        } else {
-          showFinalScore();
-        }
-      }, 1500);
-    }
+        question.options.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.classList.add('option');
+            optionDiv.textContent = option;
+            optionDiv.addEventListener('click', () => selectOption(index));
 
-    function skipQuestion() {
-        if (questionAttempted) return;
-        questionAttempted = true;
-
-        clearInterval(timer);
-        disableOptions();
-        submitBtn.style.display = 'none';
-        skipBtn.style.display = 'none';
-
-        quizData[currentQuestionIndex].userAnswer = "Skipped";
-        quizData[currentQuestionIndex].isCorrect = false;
-        skippedQuestionsCount++;
-
-        feedbackDiv.textContent = "Question skipped.";
-        feedbackDiv.className = 'quiz-feedback';
-
-        setTimeout(() => {
-            if (currentQuestionIndex < quizData.length - 1) {
-                nextQuestion();
-            } else {
-                showFinalScore();
+            // If user has already answered this question, show their selection
+            if (userAnswers[currentQuestionIndex] === option) {
+                optionDiv.classList.add('selected');
             }
-        }, 1500);
+            optionsContainer.appendChild(optionDiv);
+        });
+
+        updateNavigationButtons();
+        startTimer(); // Start timer for the new question
     }
 
-    function nextQuestion() {
-      currentQuestionIndex++;
-      loadQuestion();
+    function selectOption(selectedIndex) {
+        stopTimer(); // Stop timer when an option is selected
+        const options = optionsContainer.querySelectorAll('.option');
+        options.forEach((option, index) => {
+            option.classList.remove('selected');
+            if (index === selectedIndex) {
+                option.classList.add('selected');
+                userAnswers[currentQuestionIndex] = options[selectedIndex].textContent;
+            }
+        });
     }
+
+    function updateNavigationButtons() {
+        prevButton.disabled = currentQuestionIndex === 0;
+        nextButton.style.display = currentQuestionIndex < currentQuiz.questions.length - 1 ? 'inline-block' : 'none';
+        skipButton.style.display = currentQuestionIndex < currentQuiz.questions.length - 1 ? 'inline-block' : 'none';
+        submitButton.style.display = currentQuestionIndex === currentQuiz.questions.length - 1 ? 'inline-block' : 'none';
+    }
+
+    nextButton.addEventListener('click', () => {
+        stopTimer(); // Stop timer when moving to next question
+        if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+            currentQuestionIndex++;
+            loadQuestion();
+            updateProgressBar();
+        }
+    });
+
+    prevButton.addEventListener('click', () => {
+        stopTimer(); // Stop timer when moving to previous question
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            loadQuestion();
+            updateProgressBar();
+        }
+    });
+
+    skipButton.addEventListener('click', () => {
+        stopTimer(); // Stop timer when skipping
+        if (userAnswers[currentQuestionIndex] === null) { // Only mark as skipped if not already answered/timed out
+            userAnswers[currentQuestionIndex] = "Skipped"; // Mark as skipped
+        }
+        
+        if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+            currentQuestionIndex++;
+            loadQuestion();
+            updateProgressBar();
+        } else {
+            // If skipped on the last question, submit
+            submitQuiz();
+        }
+    });
+
+    submitButton.addEventListener('click', () => {
+        stopTimer(); // Stop timer on submit
+        submitQuiz();
+    });
+
+    function updateProgressBar() {
+        const progress = ((currentQuestionIndex + 1) / currentQuiz.questions.length) * 100;
+        progressBar.style.width = `${progress}%`;
+        progressBar.textContent = `${Math.round(progress)}%`;
+    }
+
+    function submitQuiz() {
+        stopTimer(); // Ensure timer is stopped when quiz is submitted
+        correctAnswersTotal = 0;
+        wrongAnswersTotal = 0;
+        skippedQuestionsTotal = 0;
+        quizDetailsForDisplay = []; // Clear for new submission
+
+        currentQuiz.questions.forEach((question, index) => {
+            const userAnswer = userAnswers[index];
+            const isCorrect = (userAnswer === question.answer);
+
+            if (userAnswer === question.answer) {
+                correctAnswersTotal++;
+            } else if (userAnswer === "Skipped" || userAnswer === "Time Out") { // Account for "Time Out" as skipped
+                skippedQuestionsTotal++;
+            } else {
+                wrongAnswersTotal++;
+            }
+
+            quizDetailsForDisplay.push({
+                question: question.question,
+                imageUrl: question.imageUrl,
+                userAnswer: userAnswer || "Not Answered", // Handle cases where user might not select and not skip
+                answer: question.answer,
+                isCorrect: isCorrect
+            });
+        });
+
+        displayFinalScore();
+        saveQuizResult();
+
+        localStorage.setItem('quizJustCompleted', 'true');
+        updateQuizInfoBox(); // Update dashboard with latest score
+    }
+
+    function displayFinalScore() {
+        quizContainer.style.display = 'none';
+        finalScoreContainer.style.display = 'block';
+        quizResultsDetails.style.display = 'none';
+        previousQuizzesContainer.style.display = 'none';
+        quizInfoBox.style.display = 'none'; // Hide info box when showing score
+
+        const totalQuestions = currentQuiz.questions.length;
+        scoreDisplay.textContent = `${correctAnswersTotal} / ${totalQuestions}`;
+        correctAnswersCount.textContent = correctAnswersTotal;
+        wrongAnswersCount.textContent = wrongAnswersTotal;
+        skippedQuestionsCount.textContent = skippedQuestionsTotal;
+
+        const percentage = totalQuestions > 0 ? ((correctAnswersTotal / totalQuestions) * 100).toFixed(2) : 0;
+        percentageScore.textContent = `${percentage}%`;
+    }
+
+    viewResultsButton.addEventListener('click', () => {
+        renderQuizResultsDetails(quizDetailsForDisplay);
+        finalScoreContainer.style.display = 'none';
+        quizResultsDetails.style.display = 'block';
+    });
+
+    function backToFinalScore() {
+        quizResultsDetails.style.display = 'none';
+        finalScoreContainer.style.display = 'block';
+    }
+
+    returnToDashboardButton.addEventListener('click', goToDashboard);
 
     function saveQuizResult() {
         const loggedInUser = localStorage.getItem('loggedInUser');
-        if (!loggedInUser) {
-            console.error("No logged-in user found to save quiz result.");
-            return;
-        }
+        let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
 
-        const finalScoreCorrect = score;
-        const totalQuizQuestions = quizData.length;
-
-        // Create a deep copy of quizData to store with the result
-        const quizDataForStorage = quizData.map(q => ({
-            question: q.question,
-            options: [...q.options], // Deep copy options array
-            answer: q.answer,
-            userAnswer: q.userAnswer,
-            isCorrect: q.isCorrect,
-            imageUrl: q.imageUrl // Include imageUrl in stored data
-            // Do not store timeLimit if it's not relevant for past results display
-        }));
-
-        const newSubmission = {
+        const totalQuestions = currentQuiz.questions.length;
+        const newResult = {
             user: loggedInUser,
-            score: `${finalScoreCorrect}/${totalQuizQuestions}`,
-            numericScore: finalScoreCorrect,
-            totalQuestions: totalQuizQuestions,
-            wrongAnswers: wrongAnswers,
-            skippedQuestionsCount: skippedQuestionsCount,
+            quizName: currentQuiz.name,
+            score: `${correctAnswersTotal}/${totalQuestions}`,
+            numericScore: correctAnswersTotal, // Store numeric score for calculations
+            totalQuestions: totalQuestions, // Store total questions for percentage calculation
+            wrongAnswers: wrongAnswersTotal,
+            skippedQuestionsCount: skippedQuestionsTotal,
             timestamp: new Date().toLocaleString(),
-            quizDetails: quizDataForStorage
+            quizDetails: quizDetailsForDisplay // Store detailed answers
         };
-
-        // Save to global quizResults (for admin) - Keep this if you need a global record
-        let adminQuizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-        adminQuizResults.push(newSubmission);
-        localStorage.setItem('quizResults', JSON.stringify(adminQuizResults));
-
-        // The user-specific quiz history part is now commented out/removed as per requirement.
-        // If you still want to store user-specific quiz results (even if not displayed by "Previous Quizzes" button),
-        // you can keep this section. However, since the button and its display are removed,
-        // I'm commenting this out for consistency.
-        /*
-        let userPreviousQuizzes = JSON.parse(localStorage.getItem(`user_${loggedInUser}_quizzes`)) || [];
-        userPreviousQuizzes.push(newSubmission);
-        localStorage.setItem(`user_${loggedInUser}_quizzes`, JSON.stringify(userPreviousQuizzes));
-        */
-
-        console.log(`Quiz result for ${loggedInUser} (${finalScoreCorrect}/${totalQuizQuestions}) saved.`);
+        quizResults.push(newResult);
+        localStorage.setItem('quizResults', JSON.stringify(quizResults));
     }
-
-    function showFinalScore() {
-      clearInterval(timer);
-      quizContainer.style.display = 'none';
-      quizInfoBox.style.display = 'none';
-      welcomeMessageDiv.style.display = 'none';
-      // previousQuizzesContainer.style.display = 'none'; // Removed this line
-
-      finalScoreContainer.style.display = 'block';
-      finalScoreSpan.textContent = score;
-      totalQuestionsSpan.textContent = quizData.length;
-
-      finalCorrectAnswersSpan.textContent = score;
-      finalWrongAnswersSpan.textContent = wrongAnswers;
-      finalSkippedQuestionsSpan.textContent = skippedQuestionsCount;
-
-      updateProgressBar();
-
-      saveQuizResult();
-
-      localStorage.setItem('quizJustCompleted', 'true');
-      localStorage.setItem('quizStatus', 'completed'); // Set quiz status
-      localStorage.setItem('lastQuizScore', score); // Store last quiz score
-      localStorage.setItem('lastQuizTotal', quizData.length); // Store last quiz total
-
-      renderQuizResultsDetails(quizData); // Render detailed results for the just completed quiz
-      quizResultsDetails.style.display = 'none'; // Keep detailed results hidden initially
-    }
-
-    // New function to show detailed results
-    function showDetailedResults() {
-        // Hide other main containers to show only detailed results
-        quizInfoBox.style.display = 'none';
-        quizContainer.style.display = 'none';
-        finalScoreContainer.style.display = 'none';
-        // previousQuizzesContainer.style.display = 'none'; // Removed this line
-        welcomeMessageDiv.style.display = 'none';
-
-        // Re-render the detailed results for the just completed quiz, if quizData is still in scope.
-        // Assuming quizData still holds the results of the last completed quiz.
-        renderQuizResultsDetails(quizData);
-        quizResultsDetails.style.display = 'block'; // Show the detailed results
-    }
-
-
-    function renderQuizResultsDetails(dataToRender) {
-      quizResultsDetails.innerHTML = '<h3>Detailed Results:</h3>';
-
-      if (!dataToRender || dataToRender.length === 0) {
-          quizResultsDetails.innerHTML += '<p>No detailed results available.</p>';
-          return;
-      }
-
-      dataToRender.forEach((q, index) => {
-        const resultItem = document.createElement('div');
-        resultItem.classList.add('result-item');
-
-        const questionP = document.createElement('p');
-        questionP.classList.add('question');
-        questionP.textContent = `${index + 1}. ${q.question}`;
-        resultItem.appendChild(questionP);
-
-        // Add image if available
-        if (q.imageUrl) {
-            const questionImage = document.createElement('img');
-            questionImage.src = q.imageUrl;
-            questionImage.alt = "Question Image";
-            questionImage.classList.add('question-image');
-            resultItem.appendChild(questionImage);
-        }
-
-        const yourAnswerP = document.createElement('p');
-        yourAnswerP.textContent = `Your Answer: ${q.userAnswer}`;
-        if (q.isCorrect === true) {
-          yourAnswerP.classList.add('your-answer', 'correct');
-        } else if (q.userAnswer === "Skipped") {
-          yourAnswerP.classList.add('your-answer', 'skipped');
-        } else {
-          yourAnswerP.classList.add('your-answer');
-        }
-        resultItem.appendChild(yourAnswerP);
-
-        if (q.isCorrect === false || q.userAnswer === "Skipped") {
-          const correctAnswerP = document.createElement('p');
-          correctAnswerP.classList.add('correct-answer');
-          correctAnswerP.textContent = `Correct Answer: ${q.answer}`;
-          resultItem.appendChild(correctAnswerP);
-        }
-
-        quizResultsDetails.appendChild(resultItem);
-      });
-    }
-
-    function retakeQuiz() {
-      currentQuestionIndex = 0;
-      score = 0;
-      wrongAnswers = 0;
-      skippedQuestionsCount = 0;
-      quizData.forEach(q => {
-        q.userAnswer = null;
-        q.isCorrect = null;
-      });
-      finalScoreContainer.style.display = 'none';
-      quizResultsDetails.style.display = 'none';
-      // previousQuizzesContainer.style.display = 'none'; // Removed this line
-      quizInfoBox.style.display = 'block';
-      welcomeMessageDiv.style.display = 'block';
-      localStorage.removeItem('quizJustCompleted');
-      localStorage.removeItem('quizStatus'); // Clear quiz status when retaking
-      localStorage.removeItem('lastQuizScore'); // Clear last quiz score when retaking
-      localStorage.removeItem('lastQuizTotal'); // Clear last quiz total when retaking
-      updateQuizInfoBox(); // Update info box to default state
-      updateProgressBar();
-    }
-
-    // Removed showPreviousQuizzes function and related load/view/delete functions
-    /*
-    function showPreviousQuizzes() {
-        quizInfoBox.style.display = 'none';
-        quizContainer.style.display = 'none';
-        finalScoreContainer.style.display = 'none';
-        quizResultsDetails.style.display = 'none'; // Ensure detailed results are hidden
-        welcomeMessageDiv.style.display = 'none';
-        localStorage.removeItem('quizJustCompleted');
-        localStorage.removeItem('quizStatus'); // Clear quiz status if viewing previous quizzes
-        localStorage.removeItem('lastQuizScore'); // Clear last quiz score
-        localStorage.removeItem('lastQuizTotal'); // Clear last quiz total
-
-        previousQuizzesContainer.style.display = 'block';
-        updateQuizInfoBox(); // Update info box to default state if coming from previous quizzes
-        loadPreviousQuizzes();
-    }
-
-    function loadPreviousQuizzes() {
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        const userPreviousQuizzes = JSON.parse(localStorage.getItem(`user_${loggedInUser}_quizzes`)) || [];
-        previousQuizList.innerHTML = ''; // Clear existing entries
-
-        if (userPreviousQuizzes.length === 0) {
-            previousQuizList.innerHTML = '<p class="no-previous-quizzes">You have not completed any quizzes yet.</p>';
-            return;
-        }
-
-        userPreviousQuizzes.forEach((quiz, index) => {
-            const quizEntry = document.createElement('div');
-            quizEntry.classList.add('quiz-entry');
-            quizEntry.innerHTML = `
-                <p>Quiz ${index + 1}: Score ${quiz.score} (Correct: ${quiz.numericScore}, Wrong: ${quiz.wrongAnswers}, Skipped: ${quiz.skippedQuestionsCount}) - ${quiz.timestamp}</p>
-                <div class="action-buttons">
-                    <button class="view-details-btn" onclick="viewPreviousQuizDetails(${index})">View Details</button>
-                    <button class="delete-details-btn" onclick="deletePreviousQuizEntry(${index})">Delete Details</button>
-                </div>
-            `;
-            previousQuizList.appendChild(quizEntry);
-        });
-    }
-
-    function viewPreviousQuizDetails(index) {
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        const userPreviousQuizzes = JSON.parse(localStorage.getItem(`user_${loggedInUser}_quizzes`)) || [];
-
-        if (index >= 0 && index < userPreviousQuizzes.length) {
-            const selectedQuiz = userPreviousQuizzes[index];
-
-            quizInfoBox.style.display = 'none';
-            quizContainer.style.display = 'none';
-            finalScoreContainer.style.display = 'none';
-            previousQuizzesContainer.style.display = 'none';
-            welcomeMessageDiv.style.display = 'none';
-            localStorage.removeItem('quizJustCompleted');
-            localStorage.removeItem('quizStatus'); // Clear quiz status if viewing details
-            localStorage.removeItem('lastQuizScore'); // Clear last quiz score
-            localStorage.removeItem('lastQuizTotal'); // Clear last quiz total
-
-            renderQuizResultsDetails(selectedQuiz.quizDetails);
-            quizResultsDetails.style.display = 'block';
-            updateQuizInfoBox(); // Update info box to default state if coming from details
-        } else {
-            console.error("Invalid quiz index for viewing details.");
-        }
-    }
-
-    function deletePreviousQuizEntry(index) {
-        if (!confirm("Are you sure you want to delete this quiz entry? This action cannot be undone.")) {
-            return; // Stop if user cancels
-        }
-
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        let userPreviousQuizzes = JSON.parse(localStorage.getItem(`user_${loggedInUser}_quizzes`)) || [];
-
-        if (index >= 0 && index < userPreviousQuizzes.length) {
-            const deletedQuiz = userPreviousQuizzes.splice(index, 1)[0]; // Remove the entry and get it
-
-            localStorage.setItem(`user_${loggedInUser}_quizzes`, JSON.stringify(userPreviousQuizzes));
-            console.log(`Quiz entry ${index} deleted for user ${loggedInUser}.`);
-
-            // Optional: Also delete from global 'quizResults' for admin view if a perfect match is found
-            let adminQuizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-            const initialAdminCount = adminQuizResults.length;
-            adminQuizResults = adminQuizResults.filter(quiz =>
-                !(quiz.user === deletedQuiz.user &&
-                  quiz.score === deletedQuiz.score &&
-                  quiz.timestamp === deletedQuiz.timestamp &&
-                  quiz.numericScore === deletedQuiz.numericScore)
-            );
-            if (adminQuizResults.length < initialAdminCount) {
-                localStorage.setItem('quizResults', JSON.stringify(adminQuizResults));
-                console.log("Corresponding entry removed from admin quiz results.");
-            }
-            loadPreviousQuizzes(); // Reload the list to reflect the deletion
-        } else {
-            console.error("Invalid quiz index for deletion.");
-        }
-    }
-    */
 
     function updateQuizInfoBox() {
-        const quizStatus = localStorage.getItem('quizStatus');
-        const lastScore = localStorage.getItem('lastQuizScore');
-        const lastTotal = localStorage.getItem('lastQuizTotal');
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+        const userQuizResults = quizResults.filter(result => result.user === loggedInUser);
 
-        if (quizStatus === 'completed' && lastScore !== null && lastTotal !== null) {
-            quizInfoHeading.textContent = "Last Quiz Completed!";
-            lastQuizScoreSpan.textContent = lastScore;
-            lastQuizTotalQuestionsSpan.textContent = lastTotal;
+        if (userQuizResults.length > 0) {
+            const lastQuiz = userQuizResults[userQuizResults.length - 1];
+            quizInfoHeading.textContent = "Your Last Quiz Score:";
+            
+            let percentage = 'N/A';
+            if (lastQuiz.numericScore !== undefined && lastQuiz.totalQuestions !== undefined && lastQuiz.totalQuestions > 0) {
+                percentage = ((lastQuiz.numericScore / lastQuiz.totalQuestions) * 100).toFixed(2) + '%';
+            }
+
+            lastQuizScoreDisplay.innerHTML = `<strong>${lastQuiz.quizName}:</strong> ${lastQuiz.score} (${percentage})`;
             lastQuizScoreDisplay.style.display = 'block';
         } else {
             quizInfoHeading.textContent = "Welcome to the Quiz!";
@@ -1332,15 +1089,15 @@
     }
 
     function goToDashboard() {
+        stopTimer(); // Ensure timer is stopped when navigating away from quiz
         quizContainer.style.display = 'none';
         finalScoreContainer.style.display = 'none';
         quizResultsDetails.style.display = 'none';
-        // previousQuizzesContainer.style.display = 'none'; // Removed this line
+        previousQuizzesContainer.style.display = 'none';
 
         quizInfoBox.style.display = 'block';
         welcomeMessageDiv.style.display = 'block';
 
-        // Check if a quiz was just completed and show message
         const quizJustCompleted = localStorage.getItem('quizJustCompleted');
         if (quizJustCompleted === 'true') {
             quizCompletedMessage.classList.add('show');
@@ -1350,19 +1107,134 @@
             }, 3000);
         }
 
-        updateQuizInfoBox(); // Update the info box content
+        updateQuizInfoBox();
     }
 
+    function showStartQuizSection() {
+        stopTimer(); // Ensure timer is stopped when navigating to start quiz section
+        quizContainer.style.display = 'none';
+        finalScoreContainer.style.display = 'none';
+        quizResultsDetails.style.display = 'none';
+        previousQuizzesContainer.style.display = 'none';
+        quizInfoBox.style.display = 'block'; // Show quiz info box to allow starting
+    }
+
+    function showPreviousQuizzesSection() {
+        stopTimer(); // Ensure timer is stopped when navigating to previous quizzes
+        quizContainer.style.display = 'none';
+        finalScoreContainer.style.display = 'none';
+        quizResultsDetails.style.display = 'none';
+        quizInfoBox.style.display = 'none';
+        previousQuizzesContainer.style.display = 'block';
+
+        loadPreviousQuizzesTable();
+    }
+
+    function loadPreviousQuizzesTable() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+        const userQuizResults = quizResults.filter(result => result.user === loggedInUser);
+
+        const previousQuizzesTableBody = document.getElementById('previousQuizzesTableBody');
+        const noPreviousQuizzesMessage = document.getElementById('noPreviousQuizzesMessage');
+        previousQuizzesTableBody.innerHTML = ''; // Clear existing rows
+
+        if (userQuizResults.length === 0) {
+            noPreviousQuizzesMessage.style.display = 'block';
+            return;
+        } else {
+            noPreviousQuizzesMessage.style.display = 'none';
+        }
+
+        userQuizResults.forEach((result, index) => {
+            const row = previousQuizzesTableBody.insertRow();
+            row.insertCell(0).textContent = result.quizName || 'N/A';
+            row.insertCell(1).textContent = result.score;
+
+            let percentage = 'N/A';
+            if (result.numericScore !== undefined && result.totalQuestions !== undefined && result.totalQuestions > 0) {
+                percentage = ((result.numericScore / result.totalQuestions) * 100).toFixed(2) + '%';
+            }
+            row.insertCell(2).textContent = percentage;
+            row.insertCell(3).textContent = result.timestamp;
+
+            const actionsCell = row.insertCell(4);
+            const viewDetailsButton = document.createElement('button');
+            viewDetailsButton.textContent = 'View Details';
+            viewDetailsButton.className = 'previous-quiz-view-btn'; // Apply new styling
+            viewDetailsButton.onclick = function() {
+                renderQuizResultsDetails(result.quizDetails);
+                previousQuizzesContainer.style.display = 'none';
+                quizResultsDetails.style.display = 'block';
+            };
+            actionsCell.appendChild(viewDetailsButton);
+        });
+    }
+
+    // Function to render detailed quiz results (used by both final score and previous quizzes)
+    function renderQuizResultsDetails(dataToRender) {
+        const quizResultsDetailsContainer = document.getElementById('quizResultsDetails');
+        // Clear previous content, but keep the H3 and Back button
+        const existingH3 = quizResultsDetailsContainer.querySelector('h3');
+        const existingBackButton = quizResultsDetailsContainer.querySelector('.back-to-score-btn');
+        quizResultsDetailsContainer.innerHTML = ''; // Clear all content
+        quizResultsDetailsContainer.appendChild(existingH3); // Re-add H3
+
+        if (!dataToRender || dataToRender.length === 0) {
+            const noDetailsP = document.createElement('p');
+            noDetailsP.textContent = 'No detailed results available for this submission.';
+            quizResultsDetailsContainer.appendChild(noDetailsP);
+        } else {
+            dataToRender.forEach((q, index) => {
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('result-item');
+
+                const questionP = document.createElement('p');
+                questionP.classList.add('question');
+                questionP.textContent = `${index + 1}. ${q.question}`;
+                resultItem.appendChild(questionP);
+
+                if (q.imageUrl) {
+                    const questionImage = document.createElement('img');
+                    questionImage.src = q.imageUrl;
+                    questionImage.alt = "Question Image";
+                    questionImage.classList.add('question-image');
+                    resultItem.appendChild(questionImage);
+                }
+
+                const yourAnswerP = document.createElement('p');
+                yourAnswerP.textContent = `Your Answer: ${q.userAnswer}`;
+                if (q.isCorrect === true) {
+                    yourAnswerP.classList.add('your-answer', 'correct');
+                } else if (q.userAnswer === "Skipped" || q.userAnswer === "Time Out") { // Include Time Out here
+                    yourAnswerP.classList.add('your-answer', 'skipped');
+                } else {
+                    yourAnswerP.classList.add('your-answer');
+                }
+                resultItem.appendChild(yourAnswerP);
+
+                if (q.isCorrect === false || q.userAnswer === "Skipped" || q.userAnswer === "Time Out") { // Include Time Out here
+                    const correctAnswerP = document.createElement('p');
+                    correctAnswerP.classList.add('correct-answer');
+                    correctAnswerP.textContent = `Correct Answer: ${q.answer}`;
+                    resultItem.appendChild(correctAnswerP);
+                }
+
+                quizResultsDetailsContainer.appendChild(resultItem);
+            });
+        }
+        quizResultsDetailsContainer.appendChild(existingBackButton); // Re-add Back button at the end
+    }
 
     // Initial setup: Hide specific quiz sections on load
     quizContainer.style.display = 'none';
     finalScoreContainer.style.display = 'none';
     quizResultsDetails.style.display = 'none';
-    // previousQuizzesContainer.style.display = 'none'; // Removed this line
+    previousQuizzesContainer.style.display = 'none';
     quizInfoBox.style.display = 'block';
     updateProgressBar();
-    updateQuizInfoBox(); // Call on initial load to reflect previous completion
-  </script>
+    updateQuizInfoBox(); // Call on initial load
 
+  </script>
 </body>
 </html>
