@@ -462,6 +462,13 @@
 
             let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
 
+            // Sort quizResults by timestamp in descending order (latest first)
+            quizResults.sort((a, b) => {
+                const dateA = new Date(a.timestamp);
+                const dateB = new Date(b.timestamp);
+                return dateB - dateA; // Descending order
+            });
+
             if (quizResults.length === 0) {
                 noDataMessage.style.display = 'block';
                 return;
@@ -530,6 +537,20 @@
 
         function showDetailedAdminResults(index) {
             const quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+            // IMPORTANT: If you are showing detailed results by index,
+            // ensure this index corresponds to the *sorted* array, not the original.
+            // However, the delete function reloads and re-sorts, so if an item is deleted
+            // while in detailed view, the index might become invalid.
+            // For simplicity, we'll proceed assuming the index remains valid for viewing.
+            // If deleting while viewing is a concern, a unique ID for each result would be better.
+            
+            // Re-sort to ensure the index matches the current display order
+            quizResults.sort((a, b) => {
+                const dateA = new Date(a.timestamp);
+                const dateB = new Date(b.timestamp);
+                return dateB - dateA; // Descending order
+            });
+
             const quizDataTable = document.getElementById('quizDataTable');
             const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
             
@@ -618,6 +639,14 @@
             showCustomConfirm("Are you sure you want to delete this quiz result?", (confirmed) => {
                 if (confirmed) {
                     let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+                    // To ensure correct deletion after sorting, find the original item
+                    // or re-sort and then delete. Re-sorting and using the new index is safer.
+                    quizResults.sort((a, b) => {
+                        const dateA = new Date(a.timestamp);
+                        const dateB = new Date(b.timestamp);
+                        return dateB - dateA; // Descending order for consistent indexing
+                    });
+
                     quizResults.splice(index, 1); // Remove the record at the given index
                     localStorage.setItem('quizResults', JSON.stringify(quizResults)); // Save updated array
                     loadQuizResults(); // Reload the table to reflect the deletion
