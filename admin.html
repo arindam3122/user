@@ -5,139 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="linkup.png">
     <title>LinkUp Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #0066FF;
+            --primary-blue-dark: #004BB3;
+            --success-green: #2DC25C;
+            --success-green-dark: #249A4A;
+            --danger-red: #FF4B5C;
+            --danger-red-dark: #CC3C4A;
+            --neutral-gray: #6c757d;
+            --neutral-gray-dark: #5a6268;
+            --text-color: #333;
+            --secondary-text-color: #555;
+            --light-bg: #f8f9fa;
+            --white-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-medium: 0 6px 25px rgba(0,0,0,0.1);
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f0f2f5;
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-bg);
             padding: 20px;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            color: var(--text-color);
         }
         .dashboard-container {
-            background: white;
+            background: var(--white-bg);
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-light);
             width: 100%;
-            max-width: 1300px; /* Increased max-width to accommodate new columns and buttons */
+            max-width: 1300px;
             box-sizing: border-box;
             text-align: center;
             flex-grow: 1;
+            margin-bottom: 20px; /* Space below container */
         }
         h1 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-size: 2.8em;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
         p {
-            color: #555;
+            color: var(--secondary-text-color);
             margin-bottom: 30px;
             font-size: 1.1em;
+            line-height: 1.6;
         }
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate; /* Use separate to allow border-radius on cells */
+            border-spacing: 0; /* Remove space between cell borders */
             margin-top: 20px;
+            border-radius: 8px; /* Apply border-radius to the table itself */
+            overflow: hidden; /* Hide overflowing content on rounded corners */
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
+            border: 1px solid var(--border-color);
+            padding: 15px 12px; /* Increased padding */
             text-align: left;
             font-size: 1em;
+            vertical-align: middle;
         }
         th {
-            background-color: #007bff; /* Original blue header background */
+            background-color: var(--primary-blue);
             color: white;
-            font-weight: bold;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            position: sticky;
+            top: 0; /* Make header sticky if container scrolls */
+            z-index: 10;
         }
+        /* Rounded corners for first and last th */
+        th:first-child { border-top-left-radius: 8px; }
+        th:last-child { border-top-right-radius: 8px; }
+
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: var(--light-bg); /* Softer stripe */
         }
         tr:hover {
-            background-color: #e9e9e9;
+            background-color: #e9f0f7; /* Light blue hover */
         }
         .buttons-container {
             margin-top: 30px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px; /* Increased gap */
             flex-wrap: wrap;
         }
         button {
-            background: linear-gradient(45deg, #007bff, #00c6ff);
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-blue-dark));
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
+            padding: 14px 30px; /* Slightly larger padding */
+            border-radius: 30px; /* More rounded */
             cursor: pointer;
             font-size: 1.1em;
-            font-weight: bold;
+            font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3); /* Shadow adjusted for new blue */
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.7px;
+            outline: none; /* Remove outline on focus */
         }
         button:hover {
-            background: linear-gradient(45deg, #0056b3, #009be0);
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
-            transform: translateY(-2px);
+            background: linear-gradient(45deg, var(--primary-blue-dark), #003680);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+            transform: translateY(-3px); /* More pronounced lift */
         }
         button.clear-btn {
-            background: linear-gradient(45deg, #6c757d, #5a6268);
+            background: linear-gradient(45deg, var(--neutral-gray), var(--neutral-gray-dark));
             box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
         }
         button.clear-btn:hover {
-            background: linear-gradient(45deg, #5a6268, #4e555b);
+            background: linear-gradient(45deg, var(--neutral-gray-dark), #474f56);
             box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
         }
         button.logout-btn {
-            background: linear-gradient(45deg, #dc3545, #c82333);
-            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+            background: linear-gradient(45deg, var(--danger-red), var(--danger-red-dark));
+            box-shadow: 0 4px 15px rgba(255, 75, 92, 0.3); /* Adjusted shadow for new red */
         }
         button.logout-btn:hover {
-            background: linear-gradient(45deg, #c82333, #bd2130);
-            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+            background: linear-gradient(45deg, var(--danger-red-dark), #a33b45);
+            box-shadow: 0 6px 20px rgba(255, 75, 92, 0.4);
         }
         .view-btn, .delete-btn, .back-btn {
-            background: linear-gradient(45deg, #28a745, #218838); /* Green gradient for view button */
+            background: linear-gradient(45deg, var(--success-green), var(--success-green-dark));
             color: white;
             border: none;
-            padding: 8px 15px; /* Smaller padding for individual buttons */
-            border-radius: 20px; /* Rounded corners */
+            padding: 10px 18px; /* Slightly larger padding for individual buttons */
+            border-radius: 25px; /* More rounded */
             cursor: pointer;
-            font-size: 0.9em;
-            font-weight: bold;
+            font-size: 0.95em;
+            font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin: 2px; /* Small margin between buttons */
+            box-shadow: 0 2px 10px rgba(45, 194, 92, 0.2); /* Adjusted shadow for green */
+            text-transform: capitalize; /* Make it look less like main buttons */
+            letter-spacing: 0.2px;
+            margin: 4px; /* More margin between buttons */
         }
         .view-btn:hover, .back-btn:hover {
-            background: linear-gradient(45deg, #218838, #1e7e34);
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
-            transform: translateY(-1px);
+            background: linear-gradient(45deg, var(--success-green-dark), #227a44);
+            box-shadow: 0 4px 12px rgba(45, 194, 92, 0.3);
+            transform: translateY(-2px);
         }
         .delete-btn {
-            background: linear-gradient(45deg, #dc3545, #bd2130); /* Red gradient for delete button */
-            box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+            background: linear-gradient(45deg, var(--danger-red), var(--danger-red-dark));
+            box-shadow: 0 2px 10px rgba(255, 75, 92, 0.2); /* Adjusted shadow for red */
         }
         .delete-btn:hover {
-            background: linear-gradient(45deg, #c82333, #a71d2a);
-            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
-            transform: translateY(-1px);
+            background: linear-gradient(45deg, var(--danger-red-dark), #a33b45);
+            box-shadow: 0 4px 12px rgba(255, 75, 92, 0.3);
+            transform: translateY(-2px);
         }
         .no-data-message {
-            margin-top: 20px;
+            margin-top: 30px;
             font-style: italic;
-            color: #777;
-            font-size: 1.1em;
+            color: var(--secondary-text-color);
+            font-size: 1.2em;
+            padding: 20px;
+            background-color: #f0f4f7;
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
         }
 
         /* Styles for Detailed Results */
@@ -145,72 +184,82 @@
             margin-top: 30px;
             padding: 30px;
             border-radius: 12px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background-color: var(--white-bg);
+            box-shadow: var(--shadow-light);
             text-align: left;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-color);
             display: none; /* Hidden by default */
         }
         .quiz-results-details h3 {
-            color: #007bff;
-            margin-bottom: 20px;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
             text-align: center;
-            font-size: 1.8em;
+            font-size: 2.2em;
+            font-weight: 600;
             border-bottom: 2px solid #eaf5ff;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
         .quiz-results-details .result-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px dashed #ddd;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed var(--border-color);
         }
         .quiz-results-details .result-item:last-child {
             border-bottom: none;
         }
         .quiz-results-details .question {
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 1.25em;
-            color: #555;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+        .quiz-results-details .your-answer,
+        .quiz-results-details .correct-answer {
+            font-size: 1.1em;
+            padding-left: 15px; /* Indent answers */
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
         }
         .quiz-results-details .your-answer {
-            color: #d9534f;
+            color: var(--danger-red-dark);
             font-style: italic;
-            margin-left: 10px;
-            font-size: 1.1em;
-        }
-        .quiz-results-details .correct-answer {
-            color: #28a745;
-            font-weight: bold;
-            margin-left: 10px;
-            font-size: 1.1em;
         }
         .quiz-results-details .your-answer.correct {
-            color: #28a745;
+            color: var(--success-green);
+            font-style: normal;
         }
         .quiz-results-details .your-answer.skipped {
-            color: #ffc107;
-            font-weight: bold;
+            color: #ffc107; /* Orange for skipped */
+            font-weight: 600;
+        }
+        .quiz-results-details .correct-answer {
+            color: var(--success-green-dark);
+            font-weight: 500;
         }
         .question-image {
             max-width: 80%;
             height: auto;
             display: block;
-            margin: 15px auto 25px auto; /* Center the image and add vertical spacing */
+            margin: 20px auto 30px auto; /* Center the image and add vertical spacing */
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
         }
 
         /* Styles for icons */
         .correct-icon {
-            color: #28a745; /* Green */
-            margin-left: 5px;
-            font-weight: bold;
+            color: var(--success-green);
+            margin-left: 8px;
+            font-weight: 700;
+            font-size: 1.2em;
         }
         .wrong-icon {
-            color: #dc3545; /* Red */
-            margin-left: 5px;
-            font-weight: bold;
+            color: var(--danger-red);
+            margin-left: 8px;
+            font-weight: 700;
+            font-size: 1.2em;
         }
 
         /* Custom Confirmation Modal Styles */
@@ -220,12 +269,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+            background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000; /* Ensure it's on top */
-            display: none; /* Hidden by default */
+            z-index: 1000;
+            display: none;
             opacity: 0;
             transition: opacity 0.2s ease-out;
         }
@@ -235,15 +284,16 @@
         }
 
         .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            background: var(--white-bg);
+            padding: 35px; /* More padding */
+            border-radius: 15px; /* More rounded */
+            box-shadow: var(--shadow-medium); /* Stronger shadow */
             text-align: center;
             width: 90%;
-            max-width: 400px;
-            transform: scale(0.95);
+            max-width: 450px; /* Slightly larger */
+            transform: scale(0.9); /* Start smaller for a pop effect */
             transition: transform 0.2s ease-out;
+            position: relative;
         }
 
         .modal-overlay.active .modal-content {
@@ -251,30 +301,48 @@
         }
 
         .modal-content p {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 25px;
-            line-height: 1.4;
+            font-size: 1.3em; /* Larger text */
+            color: var(--text-color);
+            margin-bottom: 30px; /* More space */
+            line-height: 1.5;
+            font-weight: 500;
         }
 
         .modal-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px; /* More gap */
         }
 
         .modal-buttons button {
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 1em;
-            min-width: 80px;
+            padding: 12px 25px; /* Larger buttons */
+            border-radius: 25px; /* More rounded */
+            font-size: 1.05em;
+            min-width: 100px;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1); /* Subtle shadow for modal buttons */
+        }
+        /* Override generic button styles for modal buttons */
+        .modal-buttons .view-btn {
+            background: linear-gradient(45deg, var(--success-green), var(--success-green-dark));
+        }
+        .modal-buttons .view-btn:hover {
+            background: linear-gradient(45deg, var(--success-green-dark), #227a44);
+            transform: translateY(-2px);
+        }
+        .modal-buttons .delete-btn {
+            background: linear-gradient(45deg, var(--danger-red), var(--danger-red-dark));
+        }
+        .modal-buttons .delete-btn:hover {
+            background: linear-gradient(45deg, var(--danger-red-dark), #a33b45);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
         <h1>LinkUp Admin Dashboard</h1>
-        <p>Welcome, Admin! Here you can view submitted quiz data.</p>
+        <p>Welcome, Admin! Here you can view and manage submitted quiz data.</p>
 
         <div id="quizDataTable">
             <table>
@@ -308,7 +376,6 @@
         </div>
     </div>
 
-    <!-- Custom Confirmation Modal -->
     <div id="customConfirmModal" class="modal-overlay">
         <div class="modal-content">
             <p id="confirmMessage"></p>
