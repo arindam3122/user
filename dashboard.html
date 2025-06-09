@@ -647,7 +647,6 @@
 
   </div>
 
-    <!-- Custom Info/Alert Modal -->
     <div id="infoModal" class="info-modal-overlay">
         <div class="info-modal-content">
             <p id="infoMessage"></p>
@@ -933,6 +932,14 @@
         updateProgressBar();
     }
 
+    function formatTime(totalSeconds) {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        const formattedSeconds = String(seconds).padStart(2, '0');
+        return `${formattedMinutes}m ${formattedSeconds}s`;
+    }
+
     function startTimer() {
         clearInterval(timerInterval); // Clear any existing timer
 
@@ -940,7 +947,7 @@
         timeLeft = question.timeLimit; // Set timeLeft to the current question's timeLimit
 
         // Initial update of display and class
-        timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+        timerDisplay.textContent = `Time Left: ${formatTime(timeLeft)}`;
         timerDisplay.classList.remove('warning', 'critical');
         if (timeLeft <= 10 && timeLeft > 5) { // Example: Warning for last 10 seconds
             timerDisplay.classList.add('warning');
@@ -951,7 +958,7 @@
 
         timerInterval = setInterval(() => {
             timeLeft--;
-            timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+            timerDisplay.textContent = `Time Left: ${formatTime(timeLeft)}`;
 
             // Update classes based on time left
             timerDisplay.classList.remove('warning', 'critical'); // Remove previous states
