@@ -8,21 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #0066FF;
-            --primary-blue-dark: #004BB3;
-            --success-green: #2DC25C;
-            --success-green-dark: #249A4A;
-            --danger-red: #FF4B5C;
-            --danger-red-dark: #CC3C4A;
-            --neutral-gray: #6c757d;
-            --neutral-gray-dark: #5a6268;
+            /* Refined Color Palette based on sample image */
+            --primary-blue: #1A73E8; /* Similar to the "Start New Quiz" button */
+            --primary-blue-dark: #155BB3;
+            --success-green: #4CAF50; /* Brighter green for success */
+            --success-green-dark: #388E3C;
+            --danger-red: #F44336; /* Brighter red for danger */
+            --danger-red-dark: #D32F2F;
+            --neutral-gray: #757575; /* Slightly darker neutral for clear button */
+            --neutral-gray-dark: #5A5A5A;
             --text-color: #333;
-            --secondary-text-color: #555;
-            --light-bg: #f8f9fa;
+            --secondary-text-color: #616161; /* Softer text color */
+            --light-bg: #f5f5f5; /* Very light gray background */
             --white-bg: #ffffff;
             --border-color: #e0e0e0;
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.08);
-            --shadow-medium: 0 6px 25px rgba(0,0,0,0.1);
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.05); /* Softer shadow */
+            --shadow-medium: 0 6px 25px rgba(0,0,0,0.12);
         }
 
         body {
@@ -46,126 +47,126 @@
             box-sizing: border-box;
             text-align: center;
             flex-grow: 1;
-            margin-bottom: 20px; /* Space below container */
+            margin-bottom: 20px;
         }
         h1 {
             color: var(--text-color);
-            margin-bottom: 15px;
+            margin-bottom: 10px; /* Separates from paragraph below */
             font-size: 2.8em;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
         p {
             color: var(--secondary-text-color);
-            margin-bottom: 30px;
+            margin-top: 5px; /* Separates from heading above */
+            margin-bottom: 30px; /* Space below paragraph */
             font-size: 1.1em;
             line-height: 1.6;
         }
         table {
             width: 100%;
-            border-collapse: separate; /* Use separate to allow border-radius on cells */
-            border-spacing: 0; /* Remove space between cell borders */
+            border-collapse: separate;
+            border-spacing: 0;
             margin-top: 20px;
-            border-radius: 8px; /* Apply border-radius to the table itself */
-            overflow: hidden; /* Hide overflowing content on rounded corners */
+            border-radius: 8px;
+            overflow: hidden;
         }
         th, td {
             border: 1px solid var(--border-color);
-            padding: 15px 12px; /* Increased padding */
+            padding: 15px 12px;
             text-align: left;
             font-size: 1em;
             vertical-align: middle;
         }
         th {
-            background-color: var(--primary-blue);
+            background-color: var(--primary-blue); /* Updated blue for header */
             color: white;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.8px;
             position: sticky;
-            top: 0; /* Make header sticky if container scrolls */
+            top: 0;
             z-index: 10;
         }
-        /* Rounded corners for first and last th */
         th:first-child { border-top-left-radius: 8px; }
         th:last-child { border-top-right-radius: 8px; }
 
         tr:nth-child(even) {
-            background-color: var(--light-bg); /* Softer stripe */
+            background-color: #fcfcfc; /* Even softer stripe */
         }
         tr:hover {
-            background-color: #e9f0f7; /* Light blue hover */
+            background-color: #eef5fc; /* Light blue hover */
         }
         .buttons-container {
             margin-top: 30px;
             display: flex;
             justify-content: center;
-            gap: 25px; /* Increased gap */
+            gap: 25px;
             flex-wrap: wrap;
         }
         button {
             background: linear-gradient(45deg, var(--primary-blue), var(--primary-blue-dark));
             color: white;
             border: none;
-            padding: 14px 30px; /* Slightly larger padding */
-            border-radius: 30px; /* More rounded */
+            padding: 14px 30px;
+            border-radius: 30px;
             cursor: pointer;
             font-size: 1.1em;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3); /* Shadow adjusted for new blue */
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3); /* Shadow adjusted for new blue */
             text-transform: uppercase;
             letter-spacing: 0.7px;
-            outline: none; /* Remove outline on focus */
+            outline: none;
         }
         button:hover {
-            background: linear-gradient(45deg, var(--primary-blue-dark), #003680);
-            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
-            transform: translateY(-3px); /* More pronounced lift */
+            background: linear-gradient(45deg, var(--primary-blue-dark), #104C8C);
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.4);
+            transform: translateY(-3px);
         }
         button.clear-btn {
             background: linear-gradient(45deg, var(--neutral-gray), var(--neutral-gray-dark));
-            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+            box-shadow: 0 4px 15px rgba(117, 117, 117, 0.3);
         }
         button.clear-btn:hover {
-            background: linear-gradient(45deg, var(--neutral-gray-dark), #474f56);
-            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+            background: linear-gradient(45deg, var(--neutral-gray-dark), #424242);
+            box-shadow: 0 6px 20px rgba(117, 117, 117, 0.4);
         }
         button.logout-btn {
             background: linear-gradient(45deg, var(--danger-red), var(--danger-red-dark));
-            box-shadow: 0 4px 15px rgba(255, 75, 92, 0.3); /* Adjusted shadow for new red */
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
         }
         button.logout-btn:hover {
-            background: linear-gradient(45deg, var(--danger-red-dark), #a33b45);
-            box-shadow: 0 6px 20px rgba(255, 75, 92, 0.4);
+            background: linear-gradient(45deg, var(--danger-red-dark), #C02D2D);
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
         }
         .view-btn, .delete-btn, .back-btn {
             background: linear-gradient(45deg, var(--success-green), var(--success-green-dark));
             color: white;
             border: none;
-            padding: 10px 18px; /* Slightly larger padding for individual buttons */
-            border-radius: 25px; /* More rounded */
+            padding: 10px 18px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 0.95em;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(45, 194, 92, 0.2); /* Adjusted shadow for green */
-            text-transform: capitalize; /* Make it look less like main buttons */
+            box-shadow: 0 2px 10px rgba(76, 175, 80, 0.2);
+            text-transform: capitalize;
             letter-spacing: 0.2px;
-            margin: 4px; /* More margin between buttons */
+            margin: 4px;
         }
         .view-btn:hover, .back-btn:hover {
-            background: linear-gradient(45deg, var(--success-green-dark), #227a44);
-            box-shadow: 0 4px 12px rgba(45, 194, 92, 0.3);
+            background: linear-gradient(45deg, var(--success-green-dark), #2E7D32);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
             transform: translateY(-2px);
         }
         .delete-btn {
             background: linear-gradient(45deg, var(--danger-red), var(--danger-red-dark));
-            box-shadow: 0 2px 10px rgba(255, 75, 92, 0.2); /* Adjusted shadow for red */
+            box-shadow: 0 2px 10px rgba(244, 67, 54, 0.2);
         }
         .delete-btn:hover {
-            background: linear-gradient(45deg, var(--danger-red-dark), #a33b45);
-            box-shadow: 0 4px 12px rgba(255, 75, 92, 0.3);
+            background: linear-gradient(45deg, var(--danger-red-dark), #C02D2D);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
             transform: translateY(-2px);
         }
         .no-data-message {
@@ -188,7 +189,7 @@
             box-shadow: var(--shadow-light);
             text-align: left;
             border: 1px solid var(--border-color);
-            display: none; /* Hidden by default */
+            display: none;
         }
         .quiz-results-details h3 {
             color: var(--primary-blue);
@@ -217,7 +218,7 @@
         .quiz-results-details .your-answer,
         .quiz-results-details .correct-answer {
             font-size: 1.1em;
-            padding-left: 15px; /* Indent answers */
+            padding-left: 15px;
             margin-top: 8px;
             display: flex;
             align-items: center;
@@ -231,7 +232,7 @@
             font-style: normal;
         }
         .quiz-results-details .your-answer.skipped {
-            color: #ffc107; /* Orange for skipped */
+            color: #ffc107;
             font-weight: 600;
         }
         .quiz-results-details .correct-answer {
@@ -242,7 +243,7 @@
             max-width: 80%;
             height: auto;
             display: block;
-            margin: 20px auto 30px auto; /* Center the image and add vertical spacing */
+            margin: 20px auto 30px auto;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
@@ -269,7 +270,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -285,13 +286,13 @@
 
         .modal-content {
             background: var(--white-bg);
-            padding: 35px; /* More padding */
-            border-radius: 15px; /* More rounded */
-            box-shadow: var(--shadow-medium); /* Stronger shadow */
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
             text-align: center;
             width: 90%;
-            max-width: 450px; /* Slightly larger */
-            transform: scale(0.9); /* Start smaller for a pop effect */
+            max-width: 450px;
+            transform: scale(0.9);
             transition: transform 0.2s ease-out;
             position: relative;
         }
@@ -301,9 +302,9 @@
         }
 
         .modal-content p {
-            font-size: 1.3em; /* Larger text */
+            font-size: 1.3em;
             color: var(--text-color);
-            margin-bottom: 30px; /* More space */
+            margin-bottom: 30px;
             line-height: 1.5;
             font-weight: 500;
         }
@@ -311,31 +312,65 @@
         .modal-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px; /* More gap */
+            gap: 20px;
         }
 
         .modal-buttons button {
-            padding: 12px 25px; /* Larger buttons */
-            border-radius: 25px; /* More rounded */
+            padding: 12px 25px;
+            border-radius: 25px;
             font-size: 1.05em;
             min-width: 100px;
             font-weight: 600;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1); /* Subtle shadow for modal buttons */
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
-        /* Override generic button styles for modal buttons */
         .modal-buttons .view-btn {
             background: linear-gradient(45deg, var(--success-green), var(--success-green-dark));
         }
         .modal-buttons .view-btn:hover {
-            background: linear-gradient(45deg, var(--success-green-dark), #227a44);
+            background: linear-gradient(45deg, var(--success-green-dark), #2E7D32);
             transform: translateY(-2px);
         }
         .modal-buttons .delete-btn {
             background: linear-gradient(45deg, var(--danger-red), var(--danger-red-dark));
         }
         .modal-buttons .delete-btn:hover {
-            background: linear-gradient(45deg, var(--danger-red-dark), #a33b45);
+            background: linear-gradient(45deg, var(--danger-red-dark), #C02D2D);
             transform: translateY(-2px);
+        }
+
+        /* Styles for percentage sort dropdown */
+        .percentage-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px; /* Space between text and dropdown */
+        }
+        .percentage-header select {
+            padding: 6px 10px;
+            padding-right: 30px; /* Increased padding-right to make space for the arrow */
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9em;
+            background-color: var(--white-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .percentage-header select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+        }
+        .percentage-header select option {
+            color: var(--text-color);
+            background-color: var(--white-bg);
         }
     </style>
 </head>
@@ -354,7 +389,14 @@
                         <th>Score</th>
                         <th>Wrong</th>
                         <th>Skipped</th>
-                        <th>Percentage</th>
+                        <th class="percentage-header">
+                            <span>Percentage</span>
+                            <select id="percentageSortOrder" onchange="sortQuizResultsByPercentage(this.value)">
+                                <option value="default">Default (Latest First)</option>
+                                <option value="desc">Highest to Lowest</option>
+                                <option value="asc">Lowest to Highest</option>
+                            </select>
+                        </th>
                         <th>Date/Time</th>
                         <th>Actions</th>
                     </tr>
@@ -396,6 +438,8 @@
             }
         });
 
+        let currentQuizResults = []; // Store current quiz results for sorting
+
         // Global variable to store the callback for the custom confirmation modal
         let currentConfirmCallback = null;
 
@@ -411,27 +455,25 @@
             const confirmNo = document.getElementById('confirmNo');
 
             msgElem.textContent = message;
-            modal.style.display = 'flex'; // Make modal visible
-            modal.classList.add('active'); // Add active class for CSS transitions
+            modal.style.display = 'flex';
+            modal.classList.add('active');
 
-            currentConfirmCallback = onConfirmCallback; // Store the callback
+            currentConfirmCallback = onConfirmCallback;
 
-            // Remove previous event listeners to prevent multiple bindings
             confirmYes.onclick = null;
             confirmNo.onclick = null;
 
-            // Attach new event listeners
             confirmYes.onclick = () => {
-                hideCustomConfirm(); // Hide the modal
+                hideCustomConfirm();
                 if (currentConfirmCallback) {
-                    currentConfirmCallback(true); // Call callback with true (confirmed)
+                    currentConfirmCallback(true);
                 }
             };
 
             confirmNo.onclick = () => {
-                hideCustomConfirm(); // Hide the modal
+                hideCustomConfirm();
                 if (currentConfirmCallback) {
-                    currentConfirmCallback(false); // Call callback with false (cancelled)
+                    currentConfirmCallback(false);
                 }
             };
         }
@@ -441,47 +483,49 @@
          */
         function hideCustomConfirm() {
             const modal = document.getElementById('customConfirmModal');
-            modal.classList.remove('active'); // Remove active class for CSS transitions
-            // Wait for transition to complete before setting display to 'none'
+            modal.classList.remove('active');
             setTimeout(() => {
                 modal.style.display = 'none';
-                currentConfirmCallback = null; // Clear the callback reference
-            }, 200); // This duration should match the CSS transition duration
+                currentConfirmCallback = null;
+            }, 200);
         }
-
 
         function loadQuizResults() {
             const quizDataTable = document.getElementById('quizDataTable');
             const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
-            quizDataTable.style.display = 'block'; // Ensure table is visible
-            quizDetailedResultsAdmin.style.display = 'none'; // Ensure detailed view is hidden
+            quizDataTable.style.display = 'block';
+            quizDetailedResultsAdmin.style.display = 'none';
 
-            const quizResultsBody = document.getElementById('quizResultsBody');
-            const noDataMessage = document.getElementById('noDataMessage');
-            quizResultsBody.innerHTML = ''; // Clear existing rows
+            currentQuizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
 
-            let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-
-            // Sort quizResults by timestamp in descending order (latest first)
-            quizResults.sort((a, b) => {
+            // Default sort by timestamp in descending order (latest first)
+            currentQuizResults.sort((a, b) => {
                 const dateA = new Date(a.timestamp);
                 const dateB = new Date(b.timestamp);
                 return dateB - dateA; // Descending order
             });
+            
+            renderQuizResultsTable(currentQuizResults);
+        }
 
-            if (quizResults.length === 0) {
+        function renderQuizResultsTable(results) {
+            const quizResultsBody = document.getElementById('quizResultsBody');
+            const noDataMessage = document.getElementById('noDataMessage');
+            quizResultsBody.innerHTML = '';
+
+            if (results.length === 0) {
                 noDataMessage.style.display = 'block';
                 return;
             } else {
                 noDataMessage.style.display = 'none';
             }
 
-            quizResults.forEach((result, index) => {
+            results.forEach((result, index) => {
                 const row = quizResultsBody.insertRow();
-                row.insertCell(0).textContent = index + 1; // Submission ID
-                row.insertCell(1).textContent = result.quizName || 'N/A'; // Quiz Name
-                row.insertCell(2).textContent = result.user; // User
-                row.insertCell(3).textContent = result.score; // Score (e.g., "3/10")
+                row.insertCell(0).textContent = index + 1;
+                row.insertCell(1).textContent = result.quizName || 'N/A';
+                row.insertCell(2).textContent = result.user;
+                row.insertCell(3).textContent = result.score;
                 row.insertCell(4).textContent = result.wrongAnswers !== undefined ? result.wrongAnswers : 'N/A';
                 row.insertCell(5).textContent = result.skippedQuestionsCount !== undefined ? result.skippedQuestionsCount : 'N/A';
 
@@ -489,77 +533,87 @@
                 if (result.numericScore !== undefined && result.totalQuestions !== undefined && result.totalQuestions > 0) {
                     percentage = ((result.numericScore / result.totalQuestions) * 100).toFixed(2) + '%';
                 }
-                row.insertCell(6).textContent = percentage; // Percentage
+                row.insertCell(6).textContent = percentage;
 
-                // Format the Date/Time
                 let displayDateTime = 'N/A';
                 if (result.timestamp) {
-                    const date = new Date(result.timestamp); // Attempt to parse the timestamp string
-                    // Check if the parsed date is valid
+                    const date = new Date(result.timestamp);
                     if (!isNaN(date.getTime())) {
                         const day = String(date.getDate()).padStart(2, '0');
-                        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+                        const month = String(date.getMonth() + 1).padStart(2, '0');
                         const year = date.getFullYear();
                         const hours = String(date.getHours()).padStart(2, '0');
                         const minutes = String(date.getMinutes()).padStart(2, '0');
                         const seconds = String(date.getSeconds()).padStart(2, '0');
                         displayDateTime = `${day}/${month}/${year}, ${hours}:${minutes}:${seconds}`;
                     } else {
-                        // Fallback: If the timestamp cannot be parsed, display the original string
                         console.warn("Could not parse timestamp:", result.timestamp);
                         displayDateTime = result.timestamp;
                     }
                 }
-                row.insertCell(7).textContent = displayDateTime; // Date/Time
+                row.insertCell(7).textContent = displayDateTime;
 
                 const actionsCell = row.insertCell(8);
-                actionsCell.style.whiteSpace = 'nowrap'; // Prevent buttons from wrapping
+                actionsCell.style.whiteSpace = 'nowrap';
                 
-                // View Response Button
                 const viewButton = document.createElement('button');
                 viewButton.textContent = 'View Response';
                 viewButton.className = 'view-btn';
+                // Pass the original index (from currentQuizResults array) to view detailed results
                 viewButton.onclick = function() {
-                    showDetailedAdminResults(index);
+                    showDetailedAdminResults(currentQuizResults.indexOf(result)); 
                 };
                 actionsCell.appendChild(viewButton);
 
-                // Delete Button
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
                 deleteButton.className = 'delete-btn';
+                // Pass the original index (from currentQuizResults array) to delete
                 deleteButton.onclick = function() {
-                    deleteQuizResult(index);
+                    deleteQuizResult(currentQuizResults.indexOf(result));
                 };
                 actionsCell.appendChild(deleteButton);
             });
         }
 
-        function showDetailedAdminResults(index) {
-            const quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-            // IMPORTANT: If you are showing detailed results by index,
-            // ensure this index corresponds to the *sorted* array, not the original.
-            // However, the delete function reloads and re-sorts, so if an item is deleted
-            // while in detailed view, the index might become invalid.
-            // For simplicity, we'll proceed assuming the index remains valid for viewing.
-            // If deleting while viewing is a concern, a unique ID for each result would be better.
-            
-            // Re-sort to ensure the index matches the current display order
-            quizResults.sort((a, b) => {
-                const dateA = new Date(a.timestamp);
-                const dateB = new Date(b.timestamp);
-                return dateB - dateA; // Descending order
-            });
+        function sortQuizResultsByPercentage(order) {
+            let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
 
+            if (order === 'default') {
+                quizResults.sort((a, b) => {
+                    const dateA = new Date(a.timestamp);
+                    const dateB = new Date(b.timestamp);
+                    return dateB - dateA; // Default: latest first
+                });
+            } else {
+                quizResults.sort((a, b) => {
+                    const percentageA = (a.numericScore / a.totalQuestions) || 0;
+                    const percentageB = (b.numericScore / b.totalQuestions) || 0;
+
+                    if (order === 'asc') {
+                        return percentageA - percentageB; // Lowest to Highest
+                    } else { // 'desc'
+                        return percentageB - percentageA; // Highest to Lowest
+                    }
+                });
+            }
+            currentQuizResults = quizResults; // Update the global array
+            renderQuizResultsTable(currentQuizResults);
+        }
+
+
+        function showDetailedAdminResults(originalIndex) {
+            const quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+            
             const quizDataTable = document.getElementById('quizDataTable');
             const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
             
-            if (index >= 0 && index < quizResults.length) {
-                const selectedQuiz = quizResults[index];
-                renderAdminQuizDetails(selectedQuiz.quizDetails); // Render the details
+            if (originalIndex >= 0 && originalIndex < quizResults.length) {
+                const selectedQuiz = quizResults[originalIndex];
+                renderAdminQuizDetails(selectedQuiz.quizDetails);
 
-                quizDataTable.style.display = 'none'; // Hide the table
-                quizDetailedResultsAdmin.style.display = 'block'; // Show the detailed view
+                quizDataTable.style.display = 'none';
+                quizDetailedResultsAdmin.style.display = 'block';
             } else {
                 console.error("Invalid quiz index for detailed results.");
             }
@@ -567,11 +621,10 @@
 
         function renderAdminQuizDetails(dataToRender) {
             const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
-            // Clear previous content, but keep the H3 and Back button
             const existingH3 = quizDetailedResultsAdmin.querySelector('h3');
             const existingBackButton = quizDetailedResultsAdmin.querySelector('.back-btn');
-            quizDetailedResultsAdmin.innerHTML = ''; // Clear all content
-            quizDetailedResultsAdmin.appendChild(existingH3); // Re-add H3
+            quizDetailedResultsAdmin.innerHTML = '';
+            quizDetailedResultsAdmin.appendChild(existingH3);
             
             if (!dataToRender || dataToRender.length === 0) {
                 const noDetailsP = document.createElement('p');
@@ -599,12 +652,12 @@
                     yourAnswerP.textContent = `Your Answer: ${q.userAnswer}`;
                     if (q.isCorrect === true) {
                         yourAnswerP.classList.add('your-answer', 'correct');
-                        yourAnswerP.innerHTML += '<span class="correct-icon">&#x2713;</span>'; // Green checkmark
+                        yourAnswerP.innerHTML += '<span class="correct-icon">&#x2713;</span>';
                     } else if (q.userAnswer === "Skipped") {
                         yourAnswerP.classList.add('your-answer', 'skipped');
                     } else {
                         yourAnswerP.classList.add('your-answer');
-                        yourAnswerP.innerHTML += '<span class="wrong-icon">&#x2717;</span>'; // Red cross
+                        yourAnswerP.innerHTML += '<span class="wrong-icon">&#x2717;</span>';
                     }
                     resultItem.appendChild(yourAnswerP);
 
@@ -612,44 +665,39 @@
                         const correctAnswerP = document.createElement('p');
                         correctAnswerP.classList.add('correct-answer');
                         correctAnswerP.textContent = `Correct Answer: ${q.answer}`;
-                        correctAnswerP.innerHTML += '<span class="correct-icon">&#x2713;</span>'; // Green checkmark
+                        correctAnswerP.innerHTML += '<span class="correct-icon">&#x2713;</span>';
                         resultItem.appendChild(correctAnswerP);
                     }
 
                     quizDetailedResultsAdmin.appendChild(resultItem);
                 });
             }
-            quizDetailedResultsAdmin.appendChild(existingBackButton); // Re-add Back button at the end
+            quizDetailedResultsAdmin.appendChild(existingBackButton);
         }
 
         function backToAdminDashboard() {
             const quizDataTable = document.getElementById('quizDataTable');
             const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
 
-            quizDataTable.style.display = 'block'; // Show the main table
-            quizDetailedResultsAdmin.style.display = 'none'; // Hide the detailed view
-            // No need to reload results, they are already loaded.
+            quizDataTable.style.display = 'block';
+            quizDetailedResultsAdmin.style.display = 'none';
         }
 
         /**
          * Deletes a quiz result after confirmation via custom modal.
-         * @param {number} index - The index of the quiz result to delete.
+         * @param {number} originalIndex - The original index of the quiz result to delete from localStorage.
          */
-        function deleteQuizResult(index) {
+        function deleteQuizResult(originalIndex) {
             showCustomConfirm("Are you sure you want to delete this quiz result?", (confirmed) => {
                 if (confirmed) {
                     let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-                    // To ensure correct deletion after sorting, find the original item
-                    // or re-sort and then delete. Re-sorting and using the new index is safer.
-                    quizResults.sort((a, b) => {
-                        const dateA = new Date(a.timestamp);
-                        const dateB = new Date(b.timestamp);
-                        return dateB - dateA; // Descending order for consistent indexing
-                    });
-
-                    quizResults.splice(index, 1); // Remove the record at the given index
-                    localStorage.setItem('quizResults', JSON.stringify(quizResults)); // Save updated array
-                    loadQuizResults(); // Reload the table to reflect the deletion
+                    if (originalIndex >= 0 && originalIndex < quizResults.length) {
+                        quizResults.splice(originalIndex, 1);
+                        localStorage.setItem('quizResults', JSON.stringify(quizResults));
+                        loadQuizResults(); // Reload the table to reflect the deletion
+                    } else {
+                        console.error("Attempted to delete with invalid original index:", originalIndex);
+                    }
                 }
             });
         }
