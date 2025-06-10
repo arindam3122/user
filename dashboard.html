@@ -222,13 +222,17 @@
     }
 
     .question-image {
-        max-width: 80%;
-        height: auto;
+        max-width: 80%; /* Keep this to ensure responsiveness */
+        width: 400px;    /* Set a fixed width */
+        height: 250px;   /* Set a fixed height */
+        object-fit: contain; /* Ensures the image fits within the bounds without cropping */
         display: block;
-        margin: 15px auto 25px auto; /* Center the image and add vertical spacing */
+        margin: 15px auto 25px auto;
         border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border: 2px solid black;
+        box-shadow: 4px 4px 14px rgb(9, 4, 4);
     }
+
 
     .question {
       font-size: 1.4em;
@@ -797,18 +801,18 @@
     // --- Quiz Data (Example Quizzes) ---
     const quizzes = [
         {
-            name: "Biology Class 11/12",
+            name: "Electrostatic potential And Capacitance",
             questions: [
                 {
-                    question: "The figure given below is of Tobacco Mosaic Virus. Identify the label (a)",
+                    question: "A capacitance of 4uF is connected as shown in the circuit. The internal resistance of the battery is 0.5 ohm. The amount of charge on the capacitor plate will be",
                     options: [
-                    "RNA",
-                    "dsDNA", 
-                    "ssDNA", 
-                    "Capsid"],
-                    answer: "RNA",
-                    imageUrl: "1.png", // No image for this question
-                    timeLimit: 60 // Added time limit for this question
+                    "0",
+                    "4uC", 
+                    "16uC", 
+                    "8uC"    ],
+                    answer: "8uC",
+                    imageUrl: "1.jpg", // No image for this question
+                    timeLimit: 300 // Added time limit for this question
                 },
                 {
                     question: "What is the function of the cell marked as (a)",
@@ -816,86 +820,9 @@
                         "Fixed atmospheric oxygen", 
                         "Fix atmospheric nitrogen", 
                         "fix atmospheric carbon dioxide", 
-                        "Utilise sunlight"],
+                        "Utilise sunlight"  ],
                     answer: "Fix atmospheric nitrogen",
-                    imageUrl: "2.png",
-                    timeLimit: 60 // Added time limit for this question
-                },
-                {
-                    question: "Mark the correct answer with relation to aestivation in the diagram",
-                    options: [
-                    "Valvate- Calotropis", 
-                    "Twisted- China rose", 
-                    "Valvate- China rose", 
-                    "twisted- Calotropis"],
-                    answer: "Valvate- Calotropis",
-                    imageUrl: "3.png",
-                    timeLimit: 60 // Added time limit for this question
-                },
-                {
-                    question: "The experiment demonstrated in the figure was carried out by",
-                    options: [
-                    "Engelmann", 
-                    "Priestley", 
-                    "Ingenhousz", 
-                    "Von Sachs"],
-                    answer: "Priestley",
-                    imageUrl: "5.png",
-                    timeLimit: 60 // Added time limit for this question
-                },
-                {
-                    question: "What is the function of structured labelled as(a)",
-                    options: [
-                    "Absorption of glucose", 
-                    "Absorption ofamino acid", 
-                    "Absorption of fats", 
-                    "Supply blood to villi"],
-                    answer: "Absorption of fats",
-                    imageUrl: "6.png",
-                    timeLimit: 60 // Added time limit for this question
-                },
-                {
-                    question: "Which is the hormone synthesized by (a) part of pituitary",
-                    options: [
-                    "FSH", 
-                    "TSH", 
-                    "ADH", 
-                    "None of these"],
-                    answer: "None of these",
-                    imageUrl: "7.png",
-                    timeLimit: 60 // Added time limit for this question
-                },
-                {
-                    question: "What is happening to diaphragm in the given figure",
-                    options: [
-                    "Relaxation", 
-                    "Contraction", 
-                    "Neither contraction nor relaxation", 
-                    "first contraction then relaxation"],
-                    answer: "Contraction",
-                    imageUrl: "8.png",
-                    timeLimit: 60 // Added time limit for this question
-                },
-                {
-                    question: "What is the site of action of ADH",
-                    options: [
-                    "PCT", 
-                    "Descending libm of loop of Henle", 
-                    "Ascending limb of Loop Henle", 
-                    "DCT"],
-                    answer: "DCT",
-                    imageUrl: "9.png",
-                    timeLimit: 60 // Added time limit for this question
-                },
-                {
-                    question: "Mark the option with correct label",
-                    options: [
-                    "Secondary follicle", 
-                    "Tertiary follicle", 
-                    "Corpusluteum", 
-                    "Graafian follicle"],
-                    answer: "Tertiary follicle",
-                    imageUrl: "10.png",
+                    imageUrl: "2.jpg",
                     timeLimit: 60 // Added time limit for this question
                 },
 
