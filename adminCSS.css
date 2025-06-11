@@ -231,14 +231,16 @@
             font-weight: 500;
         }
         .question-image {
-            max-width: 80%;
-            height: auto;
-            display: block;
-            margin: 20px auto 30px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-color);
-        }
+        max-width: 80%; /* Keep this to ensure responsiveness */
+        width: 400px;    /* Set a fixed width */
+        height: 250px;   /* Set a fixed height */
+        object-fit: contain; /* Ensures the image fits within the bounds without cropping */
+        display: block;
+        margin: 15px auto 25px auto;
+        border-radius: 8px;
+        border: 2px solid black;
+        box-shadow: 4px 4px 14px rgb(9, 4, 4);
+    }
 
         /* Styles for icons */
         .correct-icon {
