@@ -26,7 +26,7 @@
       <h1 id="welcomeHeading"></h1>
       <div class="user-info">
         <span id="usernameDisplay"></span>
-        <button id="headerLogoutButton">Logout</button>
+        <button id="headerLogoutButton"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </div>
     </header>
 
@@ -42,7 +42,7 @@
         <h2 id="quizInfoHeading">Welcome to the Quiz!</h2>
         <p>Test your knowledge with our exciting quizzes. Click the button below to start your first quiz.</p>
         <p id="lastQuizScoreDisplay" style="display:none;"></p>
-        <button id="startQuizButton">Start New Quiz</button>
+        <button id="startQuizButton"><i class="fas fa-play-circle"></i> Start Quiz</button>
     </div>
 
     <div class="quiz-container" id="quizContainer">
@@ -55,9 +55,9 @@
       <div class="options" id="optionsContainer">
         </div>
       <div class="quiz-navigation">
-        <button id="prevButton" disabled>Previous</button>
-        <button id="skipButton">Skip</button>
-        <button id="nextButton">Next</button>
+        <button id="prevButton" style="display: none;"><i class="fas fa-arrow-left"></i> Previous</button>
+        <button id="skipButton" style="display: none;"><i class="fas fa-forward"></i> Skip</button>
+        <button id="nextButton" style="display: none;">Next <i class="fas fa-arrow-right"></i></button>
         <button id="submitButton" style="display:none;">Submit Quiz</button>
       </div>
     </div>
