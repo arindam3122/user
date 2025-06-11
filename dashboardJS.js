@@ -1,4 +1,4 @@
- const quizInfoBox = document.getElementById('quizInfoBox');
+const quizInfoBox = document.getElementById('quizInfoBox');
     const quizContainer = document.getElementById('quizContainer');
     const finalScoreContainer = document.getElementById('finalScoreContainer');
     const quizResultsDetails = document.getElementById('quizResultsDetails'); // Detailed results container
@@ -153,17 +153,6 @@
                     imageUrl: "1.jpg", // No image for this question
                     timeLimit: 300 // Added time limit for this question
                 },
-                {
-                    question: "What is the function of the cell marked as (a)",
-                    options: [
-                        "Fixed atmospheric oxygen", 
-                        "Fix atmospheric nitrogen", 
-                        "fix atmospheric carbon dioxide", 
-                        "Utilise sunlight"  ],
-                    answer: "Fix atmospheric nitrogen",
-                    imageUrl: "2.jpg",
-                    timeLimit: 60 // Added time limit for this question
-                },
 
 
             ]
@@ -269,12 +258,26 @@
             questionImage.style.display = 'none';
         }
 
+        // Array for option labels (a, b, c, d, ...)
+        const optionLabels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']; 
+
         question.options.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.classList.add('option');
-            optionDiv.textContent = option;
-            optionDiv.addEventListener('click', () => selectOption(index));
+            
+            // Create a span for the label (a, b, c, d)
+            const labelSpan = document.createElement('span');
+            labelSpan.classList.add('option-label');
+            labelSpan.textContent = `${optionLabels[index]}. `;
+            optionDiv.appendChild(labelSpan);
 
+            // Create a span for the option text
+            const optionTextSpan = document.createElement('span');
+            optionTextSpan.classList.add('option-text');
+            optionTextSpan.textContent = option;
+            optionDiv.appendChild(optionTextSpan);
+
+            optionDiv.addEventListener('click', () => selectOption(option));
             // If user has already answered this question, show their selection
             if (userAnswers[currentQuestionIndex] === option) {
                 optionDiv.classList.add('selected');
@@ -286,14 +289,16 @@
         startTimer(); // Start timer for the new question
     }
 
-    function selectOption(selectedIndex) {
+    function selectOption(selectedOptionText) {
         stopTimer(); // Stop timer when an option is selected
         const options = optionsContainer.querySelectorAll('.option');
-        options.forEach((option, index) => {
-            option.classList.remove('selected');
-            if (index === selectedIndex) {
-                option.classList.add('selected');
-                userAnswers[currentQuestionIndex] = options[selectedIndex].textContent;
+        options.forEach((optionDiv) => {
+            optionDiv.classList.remove('selected');
+            // We now retrieve the text from the specific span for comparison
+            const optionTextElement = optionDiv.querySelector('.option-text');
+            if (optionTextElement && optionTextElement.textContent === selectedOptionText) {
+                optionDiv.classList.add('selected');
+                userAnswers[currentQuestionIndex] = selectedOptionText;
             }
         });
     }
@@ -567,6 +572,9 @@
         quizResultsDetailsContainer.innerHTML = ''; // Clear all content
         quizResultsDetailsContainer.appendChild(existingH3); // Re-add H3
 
+        // Array for option labels (a, b, c, d, ...) for detailed results
+        const optionLabels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']; 
+
         if (!dataToRender || dataToRender.length === 0) {
             const noDetailsP = document.createElement('p');
             noDetailsP.textContent = 'No detailed results available for this submission.';
@@ -590,7 +598,16 @@
                 }
 
                 const yourAnswerP = document.createElement('p');
-                yourAnswerP.textContent = `Your Answer: ${q.userAnswer}`;
+                // Find the index of the user's answer in the original question options to get its label
+                const originalQuestion = currentQuiz.questions.find(item => item.question === q.question);
+                let userAnswerWithLabel = q.userAnswer;
+                if (originalQuestion && q.userAnswer !== "Skipped" && q.userAnswer !== "Time Out" && q.userAnswer !== "Not Answered") {
+                    const userAnswerIndex = originalQuestion.options.indexOf(q.userAnswer);
+                    if (userAnswerIndex !== -1) {
+                        userAnswerWithLabel = `${optionLabels[userAnswerIndex]}. ${q.userAnswer}`;
+                    }
+                }
+                yourAnswerP.textContent = `Your Answer: ${userAnswerWithLabel}`;
                 if (q.isCorrect === true) {
                     yourAnswerP.classList.add('your-answer', 'correct');
                 } else if (q.userAnswer === "Skipped" || q.userAnswer === "Time Out") { // Include Time Out here
@@ -603,7 +620,16 @@
                 if (q.isCorrect === false || q.userAnswer === "Skipped" || q.userAnswer === "Time Out") { // Include Time Out here
                     const correctAnswerP = document.createElement('p');
                     correctAnswerP.classList.add('correct-answer');
-                    correctAnswerP.textContent = `Correct Answer: ${q.answer}`;
+                    
+                    // Find the index of the correct answer in the original question options to get its label
+                    let correctAnswerWithLabel = q.answer;
+                    if (originalQuestion) {
+                        const correctAnswerIndex = originalQuestion.options.indexOf(q.answer);
+                        if (correctAnswerIndex !== -1) {
+                            correctAnswerWithLabel = `${optionLabels[correctAnswerIndex]}. ${q.answer}`;
+                        }
+                    }
+                    correctAnswerP.textContent = `Correct Answer: ${correctAnswerWithLabel}`;
                     resultItem.appendChild(correctAnswerP);
                 }
 
@@ -620,4 +646,4 @@
     previousQuizzesContainer.style.display = 'none';
     quizInfoBox.style.display = 'block';
     updateProgressBar();
-    updateQuizInfoBox(); // Call on initial load
+    updateQuizInfoBox();

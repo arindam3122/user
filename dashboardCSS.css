@@ -232,37 +232,64 @@
       line-height: 1.5;
     }
 
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+/* ... (previous CSS code) */
 
-    .option {
-      background-color: #f8f8f8;
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-      font-size: 1.1em;
-      text-align: left;
-      color: #444;
-      display: flex;
-      align-items: center;
-    }
+/* Styling for the option labels (a, b, c, d) */
+.option-label {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #000000; /* Darker color for the label */
+    margin-right: 5px; /* Space between label and option text */
+}
 
-    .option:hover {
-      background-color: #e9f7ff;
-      border-color: #007bff;
-      transform: translateY(-2px);
-    }
+/* Styling for the actual option text */
+.option-text {
+    color: #000000; /* Slightly lighter color for the option text */
+    font-weight: normal;
+    font-size: 20px; /* Ensure it's not bold by default */
+}
 
-    .option.selected {
-      background-color: #e0f2fe; /* Light blue for selected */
-      border-color: #007bff;
-      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
-    }
+/* Example: When an option is selected */
+.option.selected .option-text {
+    color: #000000; /* White text when selected */
+}
+
+/* Example: When an option is hovered */
+.option:hover .option-text {
+    color: #121212; /* A different color on hover, for example */
+}
+
+/* You can also style the whole option div for visual feedback */
+.option {
+    display: flex; /* To align label and text */
+    align-items: center;
+    padding: 20px 20px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border: 2px solid #121111;
+    border-radius: 8px;
+    color: #0e0707;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.option:hover {
+    background-color: #c6c6c6;
+    border-color: #000000;
+}
+
+.option.selected {
+    background-color: #e1e1e1; /* Green for selected */
+    color: rgb(1, 1, 1);
+    border-color: #080908;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.option.selected .option-label {
+    color: rgb(1, 1, 1); /* Ensure label is white when selected */
+}
 
     .option.correct {
         background-color: #d4edda; /* Light green for correct */
