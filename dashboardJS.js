@@ -142,225 +142,280 @@ function setActiveLink(activeLink) {
 // --- Quiz Data (Example Quizzes) ---
 const quizzes = [
     {
-        name: "NEET MCQ on Animal Tissue & Cell",
+        name: "NEET MCQ on BOTANY/ZOOLOGY",
         questions: [
             {
-                question: "In connective tissue sheaths, this is the correct sequence stretching from the outermost to the innermost layer",
+                question: "  In angiosperm, the haploid, diploid and triploid structures of a fertilized embryo sac sequentially are:",
                 options: [
-                "epineurium, endoneurium, perineurium",
-                "perineurium, epineurium, endoneurium",
-                "perineurium, endoneurium, epineurium",
-                "epineurium, perineurium, endoneurium"    ],
-                answer: "epineurium, perineurium, endoneurium",
+                "Synergids, Primary endosperm nucleus and zygote",
+                "Antipodals, synergids, and primary endosperm nucleus",
+                "Synergids, Zygote and Primary endosperm nucleus",
+                "Synergids, antipodals and Polar nuclei"    ],
+                answer: "Synergids, Zygote and Primary endosperm nucleus",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: " What is the difference between a nerve and a neuron",
+                question: "Movement and accumulation of ions across a membrane against their concentration gradient can be explained by",
                 options: [
-                "consists of different number of cells",
-                "one has motor and other has sensory function",
-                "nerves are made of grey matter while neurons of white matter",
-                "nerves are present in central nervous system only"    ],
-                answer: "consists of different number of cells",
+                "Osmosis",
+                "Facilitated Diffusion",
+                "Passive Transport",
+                "Active Transport"    ],
+                answer: "Active Transport",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "The only connective tissue without fibroblasts is",
+                question: "Large, colourful, fragrant flowers with nectar are seen in ",
                 options: [
-                "areolar connective tissue",
-                "bone",
-                "cartilage",
-                "blood"    ],
-                answer: "blood",
+                "Insect pollinated plants",
+                "Bird pollinated plants",
+                "Bat pollinated plants",
+                "Wind pollinated plants"    ],
+                answer: "Insect pollinated plants",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "In these tissue cells, Lacunae are enclosed",
+                question: "The phenomenon of pleiotropism refers to ",
                 options: [
-                "Cartilage",
-                "Bone tissue",
-                "both (a) and (b)",
-                "muscular tissue"    ],
-                answer: "both (a) and (b)",
+                "Presence of several alleles of a single gene controlling a single crossover",
+                "Presence of two alleles, each of the two genes controlling a single trait",
+                "A single gene affecting multiple phenotypic expression",
+                "More than two genes affecting a single character"    ],
+                answer: "A single gene affecting multiple phenotypic expression",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "Mast cells are linked to",
+                question: "Which hormone promotes internode/petiole elongation in deep water rice?",
                 options: [
-                "neural tissue",
-                "areolar connective tissue",
-                "endocrine glands",
-                "exocrine glands"    ],
-                answer: "areolar connective tissue",
+                "GA3",
+                "Kinetin",
+                "Ethylene",
+                "2, 4-D"    ],
+                answer: "Ethylene",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "These are brain macrophages",
+                question: "Among 'The Evil Quartet', which one is considered the most important cause driving extinction of species?",
                 options: [
-                "astrocytes",
-                "microglial cells",
-                "ependymal cells",
-                "oligodendrocytes"    ],
-                answer: "microglial cells",
+                "Habitat loss and fragmentation",
+                "Over exploitation for economic gain",
+                "Alien species invasions",
+                "Сo-extinctions"    ],
+                answer: "Habitat loss and fragmentation",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "This is not a function of neuroglia",
+                question: "Upon exposure to UV radiation, DNA stained with ethidium bromide will show",
                 options: [
-                "phagocytosis",
-                "isolation of neurons",
-                "secretion of cerebrospinal fluid",
-                "information processing"    ],
-                answer: "information processing",
+                "Bright red colour",
+                "Bright blue colour",
+                "Bright yellow colour",
+                "Bright orange colour"    ],
+                answer: "Bright orange colour",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "This cell is not a type of neuroglia found in CNS",
+                question: "Which micronutrient is required for splitting of water molecule during photosynthesis?",
                 options: [
-                "microglia",
-                "astrocytes",
-                "ependymal cells",
-                "Schwann cells"    ],
-                answer: "Schwann cells",
+                "Manganese",
+                "Molybdenum",
+                "Magnesium",
+                "Copper"    ],
+                answer: "Manganese",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "Categorization of epithelial tissue is based on this",
+                question: "Axile placentation is observed in",
                 options: [
-                "function",
-                "type of matrix",
-                "structural modification",
-                "non voluntary or voluntary action"    ],
-                answer: "structural modification",
+                "Mustard, Cucumber and Primrose",
+                "China rose, Beans and Lupin",
+                "Tomato, Dianthus and Pea",
+                "China rose, Petunia and Lemon"    ],
+                answer: "China rose, Petunia and Lemon",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "This is correct about epithelial tissue",
+                question: " The process of appearance of recombination nodules occurs at which sub stage of prophase I in meiosis?",
                 options: [
-                "lack of nerve supply",
-                "lack of blood supply",
-                "lack of free surface",
-                "lack of intercellular matrix"    ],
-                answer: "lack of blood supply",
+                "Zygotene",
+                "Pachytene",
+                "Diplotene",
+                "Diakinesis"    ],
+                answer: "Pachytene",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "This cell is the longest in the human body",
+                question: "The reaction centre in PS II has an absorption maxima at",
                 options: [
-                "Muscle cells",
-                "Nerve cells",
-                "Bone cells",
-                "Gland cells"    ],
-                answer: "Nerve cells",
+                "680 nm",
+                "700 nm",
+                "660 nm",
+                "780 nm"    ],
+                answer: "680 nm",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "This tissue includes the blood tissue",
+                question: "Unequivocal proof that DNA is the genetic material was first proposed by",
                 options: [
-                "Muscle tissue",
-                "Connective tissue",
-                "Epithelial tissue",
-                "Nervous tissue"    ],
-                answer: "Connective tissue",
+                "Frederick Griffith",
+                "Alfred Hershey and Martha Chase",
+                "Avery, Macleoid and McCarthy",
+                "Wilkins and Franklin"    ],
+                answer: "Alfred Hershey and Martha Chase",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "Which of this is/are examples of an organ containing a smooth muscle",
+                question: "Among eukaryotes, replication of DNA takes place in:",
                 options: [
-                "Iris of eye",
-                "Bronchi only",
-                "Uterus only",
-                "All of the above"    ],
-                answer: "All of the above",
+                "M phase",
+                "S phase",
+                "G1 phase",
+                "G2 phase"    ],
+                answer: "S phase",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "This structure of the plant cell is non-living",
+                question: "In tissue culture experiments, leaf mesophyll cells are put in a culture medium to form callus. This phenomenon may be called as",
                 options: [
-                "Nucleus",
-                "cell wall",
-                "cytoplasm",
-                "Mitochondrion"    ],
-                answer: "cell wall",
+                "Differentiation",
+                "Dedifferentiation",
+                "Development",
+                "Senescence"    ],
+                answer: "Dedifferentiation",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "This cell organelle does not contain DNA",
+                question: "Cellulose does not form blue colour with lodine because",
                 options: [
-                "Nucleus",
-                "Mitochondria",
-                "Lysosomes",
-                "Chloroplast"    ],
-                answer: "Lysosomes",
+                "It is a disaccharide",
+                "It is a helical molecule",
+                "It does not contain complex helices and hence cannot hold iodine molecules",
+                "It breaks down when iodine reacts with it"    ],
+                answer: "It does not contain complex helices and hence cannot hold iodine molecules",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "The main difference between human cheek cells and onion peel cells is",
+                question: "Spraying of which of the following phytohormone on juvenile conifers helps hastening the maturity period,that leads early seed production?",
                 options: [
-                "Presence of cell wall in onion peel cells",
-                "Presence of mitochondria in onion peel cells",
-                "Absence of endoplasmic reticulum in cheek cells",
-                "Absence of the plasma membrane in cheek cells"    ],
-                answer: "Presence of cell wall in onion peel cells",
+                "Indole-3-butyric Acid",
+                "Gibberellic Acid",
+                "Zeatin",
+                "Abscisic Acid"    ],
+                answer: "Gibberellic Acid",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "This jellylike substance inside the plasma membrane in which all cell organelles are floating is",
+                question: "Given below are two statements:",
                 options: [
-                "Cytoplasm",
-                "Tonoplasm",
-                "Karyoplasm",
-                "Cell sap"    ],
-                answer: "Cytoplasm",
+                "Both Statement I and Statement II are correct",
+                "Both Statement I and Statement II are incorrect",
+                "Statement I is correct but Statement II is incorrect",
+                "Statement I is incorrect but Statement II is correct"    ],
+                answer: "Both Statement I and Statement II are correct",
+                imageUrl: "1.png", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Identify the correct statements:",
+                options: [
+                "A, B, C only",
+                "B, C, D only",
+                "C, D, E only",
+                "D, E, A only"    ],
+                answer: "A, B, C only",
+                imageUrl: "2.png", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "The organelle serving as a primary packaging area for molecules that will be distributed throughout the cell is",
+                question: "",
                 options: [
-                "Vacuole",
-                "Plastids",
-                "Mitochondria",
-                "Golgi apparatus"    ],
-                answer: "Golgi apparatus",
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "Animal cells are interconnected by",
+                question: "",
                 options: [
-                "Plasma membrane",
-                "Cell wall",
-                "Desmosomes",
-                "Plasmodesmata"    ],
-                answer: "Desmosomes",
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "The Cell theory is not applicable to",
+                question: "",
                 options: [
-                "Fungi",
-                "Algae",
-                "Virus",
-                "Microbes"    ],
-                answer: "Virus",
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },

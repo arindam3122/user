@@ -213,9 +213,9 @@ header h1 {
 }
 
 .question-image {
-    max-width: 80%;
+    max-width: 100%;
     width: 400px;
-    height: 250px;
+    height: 350px;
     object-fit: contain;
     display: block;
     margin: 15px auto 25px auto;
