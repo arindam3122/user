@@ -1,7 +1,7 @@
 // Sample user data for validation - now includes both general and admin users
     const users = {
       "Arindam Mitra": "Arindam",
-      "Shreaya Dey": "sister",
+      "Shreaya Dey": "none",
       "Prerana Ghosh": "none",
       // General user
       "admin": "12345", // Admin user
