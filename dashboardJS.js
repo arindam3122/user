@@ -153,7 +153,73 @@ const quizzes = [
                 "phosphodiester"    ],
                 answer: "glycosidic",
                 imageUrl: "", // No image for this question
-                timeLimit: 300 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
+            },
+            {
+                question: "Sucrose is a _____ chemical, and the hydrolysis product combination is ______in nature.",
+                options: [
+                "dextrorotatory; dextrorotatory",
+                "laevorotatory; laevorotatory",
+                "laevorotatory; dextrorotatory",
+                "dextrorotatory; laevorotatory"    ],
+                answer: "dextrorotatory; laevorotatory",
+                imageUrl: "", // No image for this question
+                timeLimit: 90 // Added time limit for this question
+            },
+            {
+                question: "Which of the following statements about maltose is incorrect?",
+                options: [
+                "It consists of two glucopyranose units",
+                "It is a disaccharide",
+                "Glycosidic bond between C1 of one unit and C4 of the other unit",
+                "It is a non-reducing sugar"    ],
+                answer: "It is a non-reducing sugar",
+                imageUrl: "", // No image for this question
+                timeLimit: 90 // Added time limit for this question
+            },
+            {
+                question: "Which of the following statements about starch is incorrect?",
+                options: [
+                "It gives blue colour with iodine",
+                "It is a polymer of α-D-glucose",
+                "It is a reducing carbohydrate",
+                "It consists of branched chains"    ],
+                answer: "It is a reducing carbohydrate",
+                imageUrl: "", // No image for this question
+                timeLimit: 90 // Added time limit for this question
+            },
+            {
+                question: "RNA lacks the nitrogen base of _______",
+                options: [
+                "Thymine",
+                "Cytosine",
+                "Uracil",
+                "Adenine"    ],
+                answer: "Thymine",
+                imageUrl: "", // No image for this question
+                timeLimit: 90 // Added time limit for this question
+            },
+            {
+                question: "Lysine is an example of a polar but uncharged amino acid,",
+                options: [
+                "Serine",
+                "Aspartate",
+                "Lysine",
+                "Arginine"    ],
+                answer: "Serine",
+                imageUrl: "", // No image for this question
+                timeLimit: 90 // Added time limit for this question
+            },
+            {
+                question: "Which of the following chemical classes does not belong to the vast group of carbohydrates?",
+                options: [
+                "Polyhydroxy ketones",
+                "Polyhalo aldehydes",
+                "Polyamino aldehydes",
+                " Polyhydroxy carboxylic acids"    ],
+                answer: "Polyhydroxy ketones",
+                imageUrl: "", // No image for this question
+                timeLimit: 90 // Added time limit for this question
             },
 
 
