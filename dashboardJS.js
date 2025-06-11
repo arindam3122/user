@@ -38,6 +38,7 @@ const quizCompletedMessage = document.getElementById('quizCompletedMessage');
 const quizInfoHeading = document.getElementById('quizInfoHeading');
 const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
 const welcomeMessageDiv = document.querySelector('.welcome-message'); // For initial login message
+const totalQuizzesCompleted = document.getElementById('totalQuizzesCompleted'); // NEW ELEMENT
 
 let currentQuiz = null;
 let currentQuestionIndex = 0;
@@ -141,17 +142,17 @@ function setActiveLink(activeLink) {
 // --- Quiz Data (Example Quizzes) ---
 const quizzes = [
     {
-        name: "Electrostatic potential And Capacitance",
+        name: "Class 12 Biomolecules MCQs",
         questions: [
             {
-                question: "A capacitance of 4uF is connected as shown in the circuit. The internal resistance of the battery is 0.5 ohm. The amount of charge on the capacitor plate will be",
+                question: "A disaccharide is formed when two monosaccharides are bonded together by a bond.",
                 options: [
-                "0",
-                "4uC",
-                "16uC",
-                "8uC"    ],
-                answer: "8uC",
-                imageUrl: "1.jpg", // No image for this question
+                "glycosidic",
+                "peptide",
+                "ionic",
+                "phosphodiester"    ],
+                answer: "glycosidic",
+                imageUrl: "", // No image for this question
                 timeLimit: 300 // Added time limit for this question
             },
 
@@ -249,7 +250,7 @@ function stopTimer() {
 function loadQuestion() {
     stopTimer(); // Stop timer before loading new question
     const question = currentQuiz.questions[currentQuestionIndex];
-    questionText.textContent = question.question;
+    questionText.textContent = `${currentQuestionIndex + 1}. ${question.question}`; // MODIFIED LINE
     optionsContainer.innerHTML = ''; // Clear previous options
 
     if (question.imageUrl) {
@@ -292,7 +293,7 @@ function loadQuestion() {
 
 function selectOption(selectedOptionText) {
     // Timer should not stop when an option is selected.
-    // stopTimer(); 
+    // stopTimer();
     const options = optionsContainer.querySelectorAll('.option');
     options.forEach((optionDiv) => {
         optionDiv.classList.remove('selected');
@@ -458,9 +459,14 @@ function updateQuizInfoBox() {
 
         lastQuizScoreDisplay.innerHTML = `<strong>${lastQuiz.quizName}:</strong> ${lastQuiz.score} (${percentage})`;
         lastQuizScoreDisplay.style.display = 'block';
+
+        // NEW: Display total quizzes completed
+        totalQuizzesCompleted.textContent = `Total Quizzes Completed: ${userQuizResults.length}`;
+        totalQuizzesCompleted.style.display = 'block';
     } else {
         quizInfoHeading.textContent = "Welcome to the Quiz!";
         lastQuizScoreDisplay.style.display = 'none';
+        totalQuizzesCompleted.style.display = 'none'; // Hide if no quizzes completed
     }
 }
 
