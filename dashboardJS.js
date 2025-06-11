@@ -255,13 +255,112 @@ const quizzes = [
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "",
+                question: "This cell is the longest in the human body",
                 options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "Thymine",
+                "Muscle cells",
+                "Nerve cells",
+                "Bone cells",
+                "Gland cells"    ],
+                answer: "Nerve cells",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "This tissue includes the blood tissue",
+                options: [
+                "Muscle tissue",
+                "Connective tissue",
+                "Epithelial tissue",
+                "Nervous tissue"    ],
+                answer: "Connective tissue",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Which of this is/are examples of an organ containing a smooth muscle",
+                options: [
+                "Iris of eye",
+                "Bronchi only",
+                "Uterus only",
+                "All of the above"    ],
+                answer: "All of the above",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "This structure of the plant cell is non-living",
+                options: [
+                "Nucleus",
+                "cell wall",
+                "cytoplasm",
+                "Mitochondrion"    ],
+                answer: "cell wall",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "This cell organelle does not contain DNA",
+                options: [
+                "Nucleus",
+                "Mitochondria",
+                "Lysosomes",
+                "Chloroplast"    ],
+                answer: "Lysosomes",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "The main difference between human cheek cells and onion peel cells is",
+                options: [
+                "Presence of cell wall in onion peel cells",
+                "Presence of mitochondria in onion peel cells",
+                "Absence of endoplasmic reticulum in cheek cells",
+                "Absence of the plasma membrane in cheek cells"    ],
+                answer: "Presence of cell wall in onion peel cells",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "This jellylike substance inside the plasma membrane in which all cell organelles are floating is",
+                options: [
+                "Cytoplasm",
+                "Tonoplasm",
+                "Karyoplasm",
+                "Cell sap"    ],
+                answer: "Cytoplasm",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "The organelle serving as a primary packaging area for molecules that will be distributed throughout the cell is",
+                options: [
+                "Vacuole",
+                "Plastids",
+                "Mitochondria",
+                "Golgi apparatus"    ],
+                answer: "Golgi apparatus",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Animal cells are interconnected by",
+                options: [
+                "Plasma membrane",
+                "Cell wall",
+                "Desmosomes",
+                "Plasmodesmata"    ],
+                answer: "Desmosomes",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "The Cell theory is not applicable to",
+                options: [
+                "Fungi",
+                "Algae",
+                "Virus",
+                "Microbes"    ],
+                answer: "Virus",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
