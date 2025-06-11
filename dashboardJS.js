@@ -142,84 +142,128 @@ function setActiveLink(activeLink) {
 // --- Quiz Data (Example Quizzes) ---
 const quizzes = [
     {
-        name: "Class 12 Biomolecules MCQs",
+        name: "NEET MCQ on Animal Tissue & Cell",
         questions: [
             {
-                question: "A disaccharide is formed when two monosaccharides are bonded together by a bond.",
+                question: "In connective tissue sheaths, this is the correct sequence stretching from the outermost to the innermost layer",
                 options: [
-                "glycosidic",
-                "peptide",
-                "ionic",
-                "phosphodiester"    ],
-                answer: "glycosidic",
+                "epineurium, endoneurium, perineurium",
+                "perineurium, epineurium, endoneurium",
+                "perineurium, endoneurium, epineurium",
+                "epineurium, perineurium, endoneurium"    ],
+                answer: "epineurium, perineurium, endoneurium",
                 imageUrl: "", // No image for this question
-                timeLimit: 90 // Added time limit for this question
+                timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "Sucrose is a _____ chemical, and the hydrolysis product combination is ______in nature.",
+                question: " What is the difference between a nerve and a neuron",
                 options: [
-                "dextrorotatory; dextrorotatory",
-                "laevorotatory; laevorotatory",
-                "laevorotatory; dextrorotatory",
-                "dextrorotatory; laevorotatory"    ],
-                answer: "dextrorotatory; laevorotatory",
+                "consists of different number of cells",
+                "one has motor and other has sensory function",
+                "nerves are made of grey matter while neurons of white matter",
+                "nerves are present in central nervous system only"    ],
+                answer: "consists of different number of cells",
                 imageUrl: "", // No image for this question
-                timeLimit: 90 // Added time limit for this question
+                timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "Which of the following statements about maltose is incorrect?",
+                question: "The only connective tissue without fibroblasts is",
                 options: [
-                "It consists of two glucopyranose units",
-                "It is a disaccharide",
-                "Glycosidic bond between C1 of one unit and C4 of the other unit",
-                "It is a non-reducing sugar"    ],
-                answer: "It is a non-reducing sugar",
+                "areolar connective tissue",
+                "bone",
+                "cartilage",
+                "blood"    ],
+                answer: "blood",
                 imageUrl: "", // No image for this question
-                timeLimit: 90 // Added time limit for this question
+                timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "Which of the following statements about starch is incorrect?",
+                question: "In these tissue cells, Lacunae are enclosed",
                 options: [
-                "It gives blue colour with iodine",
-                "It is a polymer of α-D-glucose",
-                "It is a reducing carbohydrate",
-                "It consists of branched chains"    ],
-                answer: "It is a reducing carbohydrate",
+                "Cartilage",
+                "Bone tissue",
+                "both (a) and (b)",
+                "muscular tissue"    ],
+                answer: "both (a) and (b)",
                 imageUrl: "", // No image for this question
-                timeLimit: 90 // Added time limit for this question
+                timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "RNA lacks the nitrogen base of _______",
+                question: "Mast cells are linked to",
                 options: [
-                "Thymine",
-                "Cytosine",
-                "Uracil",
-                "Adenine"    ],
+                "neural tissue",
+                "areolar connective tissue",
+                "endocrine glands",
+                "exocrine glands"    ],
+                answer: "areolar connective tissue",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "These are brain macrophages",
+                options: [
+                "astrocytes",
+                "microglial cells",
+                "ependymal cells",
+                "oligodendrocytes"    ],
+                answer: "microglial cells",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "This is not a function of neuroglia",
+                options: [
+                "phagocytosis",
+                "isolation of neurons",
+                "secretion of cerebrospinal fluid",
+                "information processing"    ],
+                answer: "information processing",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "This cell is not a type of neuroglia found in CNS",
+                options: [
+                "microglia",
+                "astrocytes",
+                "ependymal cells",
+                "Schwann cells"    ],
+                answer: "Schwann cells",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Categorization of epithelial tissue is based on this",
+                options: [
+                "function",
+                "type of matrix",
+                "structural modification",
+                "non voluntary or voluntary action"    ],
+                answer: "structural modification",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "This is correct about epithelial tissue",
+                options: [
+                "lack of nerve supply",
+                "lack of blood supply",
+                "lack of free surface",
+                "lack of intercellular matrix"    ],
+                answer: "lack of blood supply",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
                 answer: "Thymine",
                 imageUrl: "", // No image for this question
-                timeLimit: 90 // Added time limit for this question
-            },
-            {
-                question: "Lysine is an example of a polar but uncharged amino acid,",
-                options: [
-                "Serine",
-                "Aspartate",
-                "Lysine",
-                "Arginine"    ],
-                answer: "Serine",
-                imageUrl: "", // No image for this question
-                timeLimit: 90 // Added time limit for this question
-            },
-            {
-                question: "Which of the following chemical classes does not belong to the vast group of carbohydrates?",
-                options: [
-                "Polyhydroxy ketones",
-                "Polyhalo aldehydes",
-                "Polyamino aldehydes",
-                " Polyhydroxy carboxylic acids"    ],
-                answer: "Polyhydroxy ketones",
-                imageUrl: "", // No image for this question
-                timeLimit: 90 // Added time limit for this question
+                timeLimit: 60 // Added time limit for this question
             },
 
 
