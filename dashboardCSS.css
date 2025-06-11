@@ -212,16 +212,23 @@ header h1 {
     line-height: 18px;
 }
 
-.question-image {
-    max-width: 100%;
-    width: 400px;
-    height: 350px;
-    object-fit: contain;
+.question-image { /* Assuming your image has a class 'question-image' or adjust accordingly */
+    max-width: 80%; /* Adjust this percentage to make it bigger, e.g., 80% or 90% */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below image */
+    margin: 15px auto; /* Center the image and add some vertical space */
+    border-radius: 8px; /* Optional: adds rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+}
+
+/* If you target the image directly by its ID, like 'questionImage' */
+#questionImage {
+    max-width: 80%; /* Adjust as needed */
+    height: auto;
     display: block;
-    margin: 15px auto 25px auto;
+    margin: 15px auto;
     border-radius: 8px;
-    border: 2px solid black;
-    box-shadow: 4px 4px 14px rgb(9, 4, 4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .question {
