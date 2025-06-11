@@ -1,0 +1,365 @@
+:root {
+            /* Refined Color Palette based on sample image */
+            --primary-blue: #1A73E8; /* Similar to the "Start New Quiz" button */
+            --primary-blue-dark: #155BB3;
+            --success-green: #4CAF50; /* Brighter green for success */
+            --success-green-dark: #388E3C;
+            --danger-red: #F44336; /* Brighter red for danger */
+            --danger-red-dark: #D32F2F;
+            --neutral-gray: #757575; /* Slightly darker neutral for clear button */
+            --neutral-gray-dark: #5A5A5A;
+            --text-color: #333;
+            --secondary-text-color: #616161; /* Softer text color */
+            --light-bg: #f5f5f5; /* Very light gray background */
+            --white-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.05); /* Softer shadow */
+            --shadow-medium: 0 6px 25px rgba(0,0,0,0.12);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-bg);
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+        .dashboard-container {
+            background: var(--white-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            width: 100%;
+            max-width: 1300px;
+            box-sizing: border-box;
+            text-align: center;
+            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: var(--text-color);
+            margin-bottom: 10px; /* Separates from paragraph below */
+            font-size: 2.8em;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        p {
+            color: var(--secondary-text-color);
+            margin-top: 5px; /* Separates from heading above */
+            margin-bottom: 30px; /* Space below paragraph */
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 1em;
+            vertical-align: middle;
+        }
+        th {
+            background-color: var(--primary-blue); /* Updated blue for header */
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        th:first-child { border-top-left-radius: 8px; }
+        th:last-child { border-top-right-radius: 8px; }
+
+        tr:nth-child(even) {
+            background-color: #fcfcfc; /* Even softer stripe */
+        }
+        tr:hover {
+            background-color: #eef5fc; /* Light blue hover */
+        }
+        .buttons-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-blue-dark));
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3); /* Shadow adjusted for new blue */
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            outline: none;
+        }
+        button:hover {
+            background: linear-gradient(45deg, var(--primary-blue-dark), #104C8C);
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.4);
+            transform: translateY(-3px);
+        }
+        button.clear-btn {
+            background: linear-gradient(45deg, var(--neutral-gray), var(--neutral-gray-dark));
+            box-shadow: 0 4px 15px rgba(117, 117, 117, 0.3);
+        }
+        button.clear-btn:hover {
+            background: linear-gradient(45deg, var(--neutral-gray-dark), #424242);
+            box-shadow: 0 6px 20px rgba(117, 117, 117, 0.4);
+        }
+        button.logout-btn {
+            background: linear-gradient(45deg, var(--danger-red), var(--danger-red-dark));
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+        }
+        button.logout-btn:hover {
+            background: linear-gradient(45deg, var(--danger-red-dark), #C02D2D);
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+        }
+        .view-btn, .delete-btn, .back-btn {
+            background: linear-gradient(45deg, var(--success-green), var(--success-green-dark));
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(76, 175, 80, 0.2);
+            text-transform: capitalize;
+            letter-spacing: 0.2px;
+            margin: 4px;
+        }
+        .view-btn:hover, .back-btn:hover {
+            background: linear-gradient(45deg, var(--success-green-dark), #2E7D32);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+            transform: translateY(-2px);
+        }
+        .delete-btn {
+            background: linear-gradient(45deg, var(--danger-red), var(--danger-red-dark));
+            box-shadow: 0 2px 10px rgba(244, 67, 54, 0.2);
+        }
+        .delete-btn:hover {
+            background: linear-gradient(45deg, var(--danger-red-dark), #C02D2D);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+            transform: translateY(-2px);
+        }
+        .no-data-message {
+            margin-top: 30px;
+            font-style: italic;
+            color: var(--secondary-text-color);
+            font-size: 1.2em;
+            padding: 20px;
+            background-color: #f0f4f7;
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+
+        /* Styles for Detailed Results */
+        .quiz-results-details {
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 12px;
+            background-color: var(--white-bg);
+            box-shadow: var(--shadow-light);
+            text-align: left;
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+        .quiz-results-details h3 {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: 600;
+            border-bottom: 2px solid #eaf5ff;
+            padding-bottom: 15px;
+        }
+        .quiz-results-details .result-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        .quiz-results-details .result-item:last-child {
+            border-bottom: none;
+        }
+        .quiz-results-details .question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+        .quiz-results-details .your-answer,
+        .quiz-results-details .correct-answer {
+            font-size: 1.1em;
+            padding-left: 15px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .quiz-results-details .your-answer {
+            color: var(--danger-red-dark);
+            font-style: italic;
+        }
+        .quiz-results-details .your-answer.correct {
+            color: var(--success-green);
+            font-style: normal;
+        }
+        .quiz-results-details .your-answer.skipped {
+            color: #ffc107;
+            font-weight: 600;
+        }
+        .quiz-results-details .correct-answer {
+            color: var(--success-green-dark);
+            font-weight: 500;
+        }
+        .question-image {
+            max-width: 80%;
+            height: auto;
+            display: block;
+            margin: 20px auto 30px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Styles for icons */
+        .correct-icon {
+            color: var(--success-green);
+            margin-left: 8px;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        .wrong-icon {
+            color: var(--danger-red);
+            margin-left: 8px;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        /* Custom Confirmation Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.2s ease-out;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--white-bg);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            transform: scale(0.9);
+            transition: transform 0.2s ease-out;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content p {
+            font-size: 1.3em;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .modal-buttons button {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.05em;
+            min-width: 100px;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .modal-buttons .view-btn {
+            background: linear-gradient(45deg, var(--success-green), var(--success-green-dark));
+        }
+        .modal-buttons .view-btn:hover {
+            background: linear-gradient(45deg, var(--success-green-dark), #2E7D32);
+            transform: translateY(-2px);
+        }
+        .modal-buttons .delete-btn {
+            background: linear-gradient(45deg, var(--danger-red), var(--danger-red-dark));
+        }
+        .modal-buttons .delete-btn:hover {
+            background: linear-gradient(45deg, var(--danger-red-dark), #C02D2D);
+            transform: translateY(-2px);
+        }
+
+        /* Styles for percentage sort dropdown */
+        .percentage-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px; /* Space between text and dropdown */
+        }
+        .percentage-header select {
+            padding: 6px 10px;
+            padding-right: 30px; /* Increased padding-right to make space for the arrow */
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9em;
+            background-color: var(--white-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .percentage-header select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+        }
+        .percentage-header select option {
+            color: var(--text-color);
+            background-color: var(--white-bg);
+        }
