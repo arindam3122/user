@@ -291,7 +291,8 @@ function loadQuestion() {
 }
 
 function selectOption(selectedOptionText) {
-    stopTimer(); // Stop timer when an option is selected
+    // Timer should not stop when an option is selected.
+    // stopTimer(); 
     const options = optionsContainer.querySelectorAll('.option');
     options.forEach((optionDiv) => {
         optionDiv.classList.remove('selected');
