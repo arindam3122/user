@@ -419,6 +419,282 @@ const quizzes = [
                 imageUrl: "6.png", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
+            {
+                question: "Choose the correct answer from the options given below:",
+                options: [
+                "A-III, B-I, C-IV, D-II",
+                "A-III, B-IV, C-II, D-I",
+                "A-II, B-III, C-I, D-IV",
+                "A-IV, B-II, C-I, D-III"    ],
+                answer: "A-III, B-IV, C-II, D-I",
+                imageUrl: "7.png", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "In the light of the above statements, choose the correct answer from the options given below:",
+                options: [
+                "Both Statement I and Statement II are true.",
+                "Both Statement I and Statement II are false.",
+                "Statement I is correct but Statement II is false.",
+                "Statement I is incorrect but Statement II is true."    ],
+                answer: "Both Statement I and Statement II are true.",
+                imageUrl: "8.png", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Which of the following statements is correct?",
+                options: [
+                "Eutrophication refers to increase in domestic sewage and waste water in lakes.",
+                "Biomagnification refers to increase in concentration of the toxicant at successive trophic levels.",
+                "Presence of large amount of nutrients in water restricts 'Algal Bloom'",
+                "Algal Bloom decreases fish mortality"    ],
+                answer: "Biomagnification refers to increase in concentration of the toxicant at successive trophic levels.",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Which one of the following common sexually transmitted diseases is completely curable when detected early and treated properly?",
+                options: [
+                "Genital herpes",
+                "Gonorrhoea",
+                "Hepatitis-B",
+                "HIV Infection"    ],
+                answer: "Gonorrhoea",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Choose the correct answer from the options given below:",
+                options: [
+                "A-II, B-I, C-IV, D-III",
+                "A-I, B-II, C-III, D-IV",
+                "A-IV, B-III, C-II, D-I",
+                "A-III, B-IV, C-I, D-II"    ],
+                answer: "A-II, B-I, C-IV, D-III",
+                imageUrl: "9.png", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "In the light of the above statements, choose the correct answer from the options given below:",
+                options: [
+                "Both A and R are true and R is the correct explanation of A.",
+                "Both A and R are true but R is NOT the correct explanation of A.",
+                "A is true but R is false.",
+                "A is false but R is true."    ],
+                answer: "Both A and R are true but R is NOT the correct explanation of A.",
+                imageUrl: "10.png", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Choose the most appropriate answer from the options given below.",
+                options: [
+                "A and D only",
+                "A and B only",
+                "A, B and C only",
+                "A, C and D only"    ],
+                answer: "A, C and D only",
+                imageUrl: "11.png", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "In which blood corpuscles, the HIV undergoes replication and produces progeny viruses?",
+                options: [
+                "TH cells",
+                "Basophils",
+                "Eosinophils",
+                "B-lymphocytes"    ],
+                answer: "TH cells",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Which of the following is not a cloning vector?",
+                options: [
+                "BAC",
+                "pBR322",
+                "YAC",
+                "Probe"    ],
+                answer: "Probe",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "The unique mammalian characteristics are:",
+                options: [
+                "hairs, tympanic membrane and mammary glands",
+                "hairs, pinna and mammary glands",
+                "hairs, pinna and indirect development",
+                "pinna, monocondylic skull and mammary glands"    ],
+                answer: "hairs, pinna and mammary glands",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "The parts of human brain that helps in regulation of sexual behaviour, expression of excitement, pleasure, rage, fear etc. are:",
+                options: [
+                "Limbic system and hypothalamus",
+                "Corpora quadrigemina and hippocampus",
+                "Brain stem and epithalamus",
+                "Corpus callosum and thalamus"    ],
+                answer: "Limbic system and hypothalamus",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Which of the following is characteristic feature of cockroach regarding sexual dimorphism?",
+                options: [
+                "Dark brown body colour and anal cerci",
+                "Presence of anal styles",
+                "Presence of sclerites",
+                "Presence of anal cerci"    ],
+                answer: "Presence of anal styles",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Which one of the following is NOT an advantage of inbreeding?",
+                options: [
+                "It decreases homozygosity.",
+                "It exposes harmful recessive genes but are eliminated by selection.",
+                "Elimination of less desirable genes and accumulation of superior genes takes place due to it.",
+                "It decreases the productivity of inbred population, after continuous inbreeding."    ],
+                answer: "It decreases the productivity of inbred population, after continuous inbreeding.",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            
+             {
+                question: "If the galvanometer G does not show any deflection in the circuit shown, the value of R is given by",
+                options: [
+                "200 Ω",
+                "100 Ω",
+                "50 Ω",
+                "400 Ω"    ],
+                answer: "100 Ω",
+                imageUrl: "12.png", // No image for this question
+                timeLimit: 120 // Added time limit for this question
+            },
+            {
+                question: "A 12 V, 60 W lamp is connected to the secondary of a step-down transformer, whose primary is connected to ac mains of 220 V. Assuming the transformer to be ideal, what is the current in the primary winding?",
+                options: [
+                "0.27 A",
+                "3.7 A",
+                "2.7 A",
+                "0.37 A"    ],
+                answer: "0.27 A",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "The angular acceleration of a body, moving along the circumference of a circle, is",
+                options: [
+                "Along the radius, away from centre",
+                "Along the tangent to its position",
+                "Along the radius towards the centre",
+                "Along the axis of rotation"    ],
+                answer: "Along the axis of rotation",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "A vehicle travels half the distance with speed v and the remaining distance with speed 2v. Its average speed is",
+                options: [
+                "v/3",
+                "4v/3",
+                "2v/3",
+                "3v/4"    ],
+                answer: "4v/3",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "The net magnetic flux through any closed surface is",
+                options: [
+                "Zero",
+                "Infinity",
+                "Positive",
+                "Negative"    ],
+                answer: "Zero",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "",
+                options: [
+                "",
+                "",
+                "",
+                ""    ],
+                answer: "",
+                imageUrl: "", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
 
 
         ]
