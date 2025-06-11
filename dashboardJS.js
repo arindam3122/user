@@ -321,7 +321,7 @@ const quizzes = [
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "Given below are two statements:",
+                question: "In the light of the above statements, choose the most appropriate answer from the options given below:",
                 options: [
                 "Both Statement I and Statement II are correct",
                 "Both Statement I and Statement II are incorrect",
@@ -343,80 +343,80 @@ const quizzes = [
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "",
+                question: "The thickness of ozone in a column of air in the atmosphere is measured in terms of :",
                 options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
+                "Dobson units",
+                "Decameter",
+                "Decibels",
+                "Kilobase"    ],
+                answer: "Dobson units",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "",
+                question: "In the light of the above statements, choose the correct answer from the options given below:",
                 options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
+                "Both A and R are true and R is the correct explanation of A",
+                "Both A and R are true but R is NOT the correct explanation of A",
+                "A is true but R is false",
+                "A is false but R is true"    ],
+                answer: "Both A and R are true and R is the correct explanation of A",
+                imageUrl: "3.png", // No image for this question
+                timeLimit: 60 // Added time limit for this question
+            },
+            {
+                question: "Which of the following stages of meiosis involves division of centromere?",
+                options: [
+                "Metaphase I",
+                "Anaphase II",
+                "Metaphase II",
+                "Telophase"    ],
+                answer: "Anaphase II",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "",
+                question: "How many ATP and NADPH2 are required for the synthesis of one molecule of Glucose during Calvin cycle?",
                 options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
+                "12 ATP and 12 NADPH2",
+                "18 ATP and 12 NADPH2",
+                "12 ATP and 16 NADPH2",
+                "18 ATP and 16 NADPH2"    ],
+                answer: "18 ATP and 12 NADPH2",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "",
+                question: "In the light of the above statements, choose the correct answer from the options given below:",
                 options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
+                "Both Statement I and Statement II are true",
+                "Both Statement I and Statement II are false",
+                "Statement I is correct but Statement II is false",
+                "Statement I is incorrect but Statement II is true"    ],
+                answer: "Statement I is incorrect but Statement II is true",
+                imageUrl: "4.png", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "",
+                question: "In the light of the above statements, choose the correct answer from the options given below:",
                 options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
+                "Both A and R are true and R is the correct explanation of A.",
+                "Both A and R are true but R is NOT the correct explanation of A.",
+                "A is true but R is false.",
+                "A is false but R is true."    ],
+                answer: "Both A and R are true and R is the correct explanation of A.",
+                imageUrl: "5.png", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
             {
-                question: "",
+                question: "Choose the correct answer from the options given below:",
                 options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
-            },
-            {
-                question: "",
-                options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
+                "A and B only",
+                "C and D only",
+                "B and E only",
+                "A and E only"    ],
+                answer: "B and E only",
+                imageUrl: "6.png", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
 

@@ -236,6 +236,7 @@ header h1 {
     color: #333;
     margin-bottom: 25px;
     line-height: 1.5;
+    user-select: none;
 }
 
 /* Styling for the option labels (a, b, c, d) with a round design */
