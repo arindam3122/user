@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 const dateB = new Date(b.timestamp);
                 return dateB - dateA; // Descending order
             });
-            
+
             renderQuizResultsTable(currentQuizResults);
         }
 
@@ -124,15 +124,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
                 const actionsCell = row.insertCell(8);
                 actionsCell.style.whiteSpace = 'nowrap';
-                
-                const viewButton = document.createElement('button');
-                viewButton.textContent = 'View Response';
-                viewButton.className = 'view-btn';
-                // Pass the original index (from currentQuizResults array) to view detailed results
-                viewButton.onclick = function() {
-                    showDetailedAdminResults(currentQuizResults.indexOf(result)); 
-                };
-                actionsCell.appendChild(viewButton);
+
+                // The 'View Response' button code has been removed from here.
 
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
@@ -173,10 +166,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         function showDetailedAdminResults(originalIndex) {
             const quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-            
+
             const quizDataTable = document.getElementById('quizDataTable');
             const quizDetailedResultsAdmin = document.getElementById('quizDetailedResultsAdmin');
-            
+
             if (originalIndex >= 0 && originalIndex < quizResults.length) {
                 const selectedQuiz = quizResults[originalIndex];
                 renderAdminQuizDetails(selectedQuiz.quizDetails);
@@ -194,7 +187,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const existingBackButton = quizDetailedResultsAdmin.querySelector('.back-btn');
             quizDetailedResultsAdmin.innerHTML = '';
             quizDetailedResultsAdmin.appendChild(existingH3);
-            
+
             if (!dataToRender || dataToRender.length === 0) {
                 const noDetailsP = document.createElement('p');
                 noDetailsP.textContent = 'No detailed results available for this submission.';
