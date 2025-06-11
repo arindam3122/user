@@ -411,15 +411,13 @@ function displayFinalScore() {
 }
 
 viewResultsButton.addEventListener('click', () => {
-    renderQuizResultsDetails(quizDetailsForDisplay);
+    // Pass false to indicate it's from the final score screen
+    renderQuizResultsDetails(quizDetailsForDisplay, false);
     finalScoreContainer.style.display = 'none';
     quizResultsDetails.style.display = 'block';
 });
 
-function backToFinalScore() {
-    quizResultsDetails.style.display = 'none';
-    finalScoreContainer.style.display = 'block';
-}
+// The redundant backToFinalScore function is removed as its logic is now within renderQuizResultsDetails
 
 returnToDashboardButton.addEventListener('click', goToDashboard);
 
@@ -558,30 +556,25 @@ function loadPreviousQuizzesTable() {
         viewDetailsButton.textContent = 'View Details';
         viewDetailsButton.className = 'previous-quiz-view-btn'; // Apply new styling
         viewDetailsButton.onclick = function() {
-            renderQuizResultsDetails(result.quizDetails);
+            // Pass true to indicate it's from the previous quizzes screen
+            renderQuizResultsDetails(result.quizDetails, true);
             previousQuizzesContainer.style.display = 'none';
             quizResultsDetails.style.display = 'block';
-
-            // Dynamically change the back button's functionality to go back to previous quizzes
-            const backButton = quizResultsDetails.querySelector('.back-to-score-btn');
-            if (backButton) { // Ensure button exists
-                backButton.textContent = 'Back to Previous Quizzes';
-                backButton.onclick = function() {
-                    quizResultsDetails.style.display = 'none';
-                    previousQuizzesContainer.style.display = 'block';
-                };
-            }
         };
         actionsCell.appendChild(viewDetailsButton);
     });
 }
 
 // Function to render detailed quiz results (used by both final score and previous quizzes)
-function renderQuizResultsDetails(dataToRender) {
+function renderQuizResultsDetails(dataToRender, fromPreviousQuizzes = false) { // Added a flag
     const quizResultsDetailsContainer = document.getElementById('quizResultsDetails');
     // Clear previous content, but keep the H3 and Back button
     const existingH3 = quizResultsDetailsContainer.querySelector('h3');
     const existingBackButton = quizResultsDetailsContainer.querySelector('.back-to-score-btn');
+
+    // Remove existing event listeners to prevent multiple bindings
+    existingBackButton.onclick = null; // Clear existing handler
+
     quizResultsDetailsContainer.innerHTML = ''; // Clear all content
     quizResultsDetailsContainer.appendChild(existingH3); // Re-add H3
 
@@ -648,7 +641,23 @@ function renderQuizResultsDetails(dataToRender) {
             quizResultsDetailsContainer.appendChild(resultItem);
         });
     }
+
     quizResultsDetailsContainer.appendChild(existingBackButton); // Re-add Back button at the end
+
+    // Set the correct onclick handler based on where it came from
+    if (fromPreviousQuizzes) {
+        existingBackButton.textContent = 'Back to Previous Quizzes';
+        existingBackButton.onclick = function() {
+            quizResultsDetails.style.display = 'none';
+            previousQuizzesContainer.style.display = 'block';
+        };
+    } else {
+        existingBackButton.textContent = 'Back to Score';
+        existingBackButton.onclick = function() {
+            quizResultsDetails.style.display = 'none';
+            finalScoreContainer.style.display = 'block';
+        };
+    }
 }
 
 // Initial setup: Hide specific quiz sections on load
