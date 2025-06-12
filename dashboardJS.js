@@ -142,7 +142,7 @@ function setActiveLink(activeLink) {
 // --- Quiz Data (Example Quizzes) ---
 const quizzes = [
     {
-        name: "NEET MCQ on BOTANY/ZOOLOGY",
+        name: "NEET MCQ on BOTANY/ZOOLOGY/PHYSICS",
         questions: [
             {
                 question: "  In angiosperm, the haploid, diploid and triploid structures of a fertilized embryo sac sequentially are:",
