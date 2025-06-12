@@ -329,7 +329,7 @@ const quizzes = [
                 "Statement I is incorrect but Statement II is correct"    ],
                 answer: "Both Statement I and Statement II are correct",
                 imageUrl: "1.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "Identify the correct statements:",
@@ -340,7 +340,7 @@ const quizzes = [
                 "D, E, A only"    ],
                 answer: "A, B, C only",
                 imageUrl: "2.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "The thickness of ozone in a column of air in the atmosphere is measured in terms of :",
@@ -362,7 +362,7 @@ const quizzes = [
                 "A is false but R is true"    ],
                 answer: "Both A and R are true and R is the correct explanation of A",
                 imageUrl: "3.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "Which of the following stages of meiosis involves division of centromere?",
@@ -395,7 +395,7 @@ const quizzes = [
                 "Statement I is incorrect but Statement II is true"    ],
                 answer: "Statement I is incorrect but Statement II is true",
                 imageUrl: "4.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "In the light of the above statements, choose the correct answer from the options given below:",
@@ -406,7 +406,7 @@ const quizzes = [
                 "A is false but R is true."    ],
                 answer: "Both A and R are true and R is the correct explanation of A.",
                 imageUrl: "5.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "Choose the correct answer from the options given below:",
@@ -417,7 +417,7 @@ const quizzes = [
                 "A and E only"    ],
                 answer: "B and E only",
                 imageUrl: "6.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "Choose the correct answer from the options given below:",
@@ -428,7 +428,7 @@ const quizzes = [
                 "A-IV, B-II, C-I, D-III"    ],
                 answer: "A-III, B-IV, C-II, D-I",
                 imageUrl: "7.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "In the light of the above statements, choose the correct answer from the options given below:",
@@ -439,7 +439,7 @@ const quizzes = [
                 "Statement I is incorrect but Statement II is true."    ],
                 answer: "Both Statement I and Statement II are true.",
                 imageUrl: "8.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "Which of the following statements is correct?",
@@ -472,7 +472,7 @@ const quizzes = [
                 "A-III, B-IV, C-I, D-II"    ],
                 answer: "A-II, B-I, C-IV, D-III",
                 imageUrl: "9.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "In the light of the above statements, choose the correct answer from the options given below:",
@@ -483,7 +483,7 @@ const quizzes = [
                 "A is false but R is true."    ],
                 answer: "Both A and R are true but R is NOT the correct explanation of A.",
                 imageUrl: "10.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "Choose the most appropriate answer from the options given below.",
@@ -494,7 +494,7 @@ const quizzes = [
                 "A, C and D only"    ],
                 answer: "A, C and D only",
                 imageUrl: "11.png", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "In which blood corpuscles, the HIV undergoes replication and produces progeny viruses?",
@@ -572,7 +572,7 @@ const quizzes = [
                 "400 Ω"    ],
                 answer: "100 Ω",
                 imageUrl: "12.png", // No image for this question
-                timeLimit: 120 // Added time limit for this question
+                timeLimit: 180 // Added time limit for this question
             },
             {
                 question: "A 12 V, 60 W lamp is connected to the secondary of a step-down transformer, whose primary is connected to ac mains of 220 V. Assuming the transformer to be ideal, what is the current in the primary winding?",
@@ -583,7 +583,7 @@ const quizzes = [
                 "0.37 A"    ],
                 answer: "0.27 A",
                 imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 180 // Added time limit for this question
             },
             {
                 question: "The angular acceleration of a body, moving along the circumference of a circle, is",
@@ -594,7 +594,7 @@ const quizzes = [
                 "Along the axis of rotation"    ],
                 answer: "Along the axis of rotation",
                 imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "A vehicle travels half the distance with speed v and the remaining distance with speed 2v. Its average speed is",
@@ -605,7 +605,7 @@ const quizzes = [
                 "3v/4"    ],
                 answer: "4v/3",
                 imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
+                timeLimit: 90 // Added time limit for this question
             },
             {
                 question: "The net magnetic flux through any closed surface is",
@@ -615,83 +615,6 @@ const quizzes = [
                 "Positive",
                 "Negative"    ],
                 answer: "Zero",
-                imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
-            },
-            {
-                question: "",
-                options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
-            },
-            {
-                question: "",
-                options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
-            },
-            {
-                question: "",
-                options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
-            },
-            {
-                question: "",
-                options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
-            },
-            {
-                question: "",
-                options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
-            },
-            {
-                question: "",
-                options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
-                imageUrl: "", // No image for this question
-                timeLimit: 60 // Added time limit for this question
-            },
-            {
-                question: "",
-                options: [
-                "",
-                "",
-                "",
-                ""    ],
-                answer: "",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
