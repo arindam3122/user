@@ -38,28 +38,35 @@
         Quiz completed successfully!
     </div>
 
+    <div class="quiz-selection-container" id="quizSelectionContainer">
+      <h2>Select a Quiz to Start</h2>
+      <div id="quizList" class="quiz-list">
+        </div>
+    </div>
+
     <div class="quiz-info-box" id="quizInfoBox">
         <h2 id="quizInfoHeading">Welcome to the Quiz!</h2>
-        <p>Test your knowledge with our exciting quizzes. Click the button below to start your first quiz.</p>
+        <p>Test your knowledge with our exciting quizzes. Click "Start Quiz" in the navigation to choose one.</p>
         <p id="lastQuizScoreDisplay" style="display:none;"></p>
-        <button id="startQuizButton"><i class="fas fa-play-circle"></i> Start Quiz</button>
+        <div id="totalQuizzesCompleted" style="display:none;"></div>
     </div>
 
     <div class="quiz-container" id="quizContainer">
-      <h2 id="quizTitle"></h2>
-      <div class="timer-container" id="timerDisplay">Time Left: --s</div> <div class="progress-bar-container">
-        <div class="progress-bar" id="progressBar">0%</div>
-      </div>
-      <img id="questionImage" class="question-image" src="" alt="Question Image" style="display:none;">
-      <p class="question" id="questionText"></p>
-      <div class="options" id="optionsContainer">
+        <h2 id="quizTitle"></h2>
+        <div class="timer-container" id="timerDisplay">Time Left: --s</div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar">0%</div>
         </div>
-      <div class="quiz-navigation">
-        <button id="prevButton" style="display: none;"><i class="fas fa-arrow-left"></i> Previous</button>
-        <button id="skipButton" style="display: none;"><i class="fas fa-forward"></i> Skip</button>
-        <button id="nextButton" style="display: none;">Next <i class="fas fa-arrow-right"></i></button>
-        <button id="submitButton" style="display:none;">Submit Quiz</button>
-      </div>
+        <img id="questionImage" class="question-image" src="" alt="Question Image" style="display:none;">
+        <p class="question" id="questionText"></p>
+        <div class="options" id="optionsContainer">
+            </div>
+        <div class="quiz-navigation">
+            <button id="prevButton"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button id="skipButton"><i class="fas fa-forward"></i> Skip</button>
+            <button id="nextButton"><i class="fas fa-arrow-right"></i> Next</button>
+            <button id="submitButton" style="display:none;"><i class="fas fa-check-circle"></i> Submit Quiz</button>
+        </div>
     </div>
 
     <div class="final-score-container" id="finalScoreContainer">
@@ -69,26 +76,28 @@
       <p>Wrong Answers: <span id="wrongAnswersCount"></span></p>
       <p>Skipped Questions: <span id="skippedQuestionsCount"></span></p>
       <p>Percentage: <span id="percentageScore"></span></p>
-      <button id="viewResultsButton">View My Answers</button>
-      <button id="returnToDashboardButton">Return to Dashboard</button>
+      <button id="viewResultsButton" class="results-btn"><i class="fas fa-poll"></i> View Detailed Results</button>
+      <button id="returnToDashboardButton" class="back-to-score-btn"><i class="fas fa-home"></i> Return to Dashboard</button>
     </div>
 
     <div class="quiz-results-details" id="quizResultsDetails">
-        <h3>Detailed Results:</h3>
-        <button class="back-to-score-btn">Back to Score</button>
+        <h2>Detailed Results</h2>
+        <div id="quizResultsDetailsContainer" class="results-grid">
+            </div>
+        <button class="back-to-score-btn" id="quizResultsBackButton">Back</button>
     </div>
 
-    <div id="previousQuizzesContainer" style="display:none;">
+    <div class="previous-quizzes-container" id="previousQuizzesContainer">
         <h2>My Previous Quizzes</h2>
         <p id="noPreviousQuizzesMessage" style="display:none; text-align: center; font-style: italic; color: #777;">No previous quiz data found.</p>
-        <table id="previousQuizzesTable" style="width:100%; border-collapse: collapse; margin-top: 20px;">
+        <table id="previousQuizzesTable">
             <thead>
                 <tr>
-                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Quiz Name</th>
-                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Score</th>
-                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Percentage</th>
-                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Date/Time</th>
-                    <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #46aa8c; color: white;">Actions</th>
+                    <th>Quiz Name</th>
+                    <th>Score</th>
+                    <th>Percentage</th>
+                    <th>Date/Time</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="previousQuizzesTableBody">
@@ -101,9 +110,10 @@
     <div id="infoModal" class="info-modal-overlay">
         <div class="info-modal-content">
             <p id="infoMessage"></p>
-            <button id="infoOkButton">OK</button>
+            <button id="infoOkButton" class="info-ok-btn">OK</button>
         </div>
     </div>
-<script src="dashboardJS.js"></script>
+
+  <script src="dashboardJS.js"></script>
 </body>
 </html>

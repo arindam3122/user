@@ -1,21 +1,24 @@
 const quizInfoBox = document.getElementById('quizInfoBox');
 const quizContainer = document.getElementById('quizContainer');
 const finalScoreContainer = document.getElementById('finalScoreContainer');
-const quizResultsDetails = document.getElementById('quizResultsDetails'); // Detailed results container
-const previousQuizzesContainer = document.getElementById('previousQuizzesContainer'); // Previous quizzes list
+const quizResultsDetails = document.getElementById('quizResultsDetails');
+const previousQuizzesContainer = document.getElementById('previousQuizzesContainer');
+const quizSelectionContainer = document.getElementById('quizSelectionContainer');
+const quizList = document.getElementById('quizList');
 
-const startQuizButton = document.getElementById('startQuizButton');
+// Corrected this variable name as it was removed from HTML previously
+// const startQuizButton = document.getElementById('startQuizButton'); // This button from original quizInfoBox is now conceptually replaced by individual quiz buttons
+
 const quizTitle = document.getElementById('quizTitle');
 const questionText = document.getElementById('questionText');
 const questionImage = document.getElementById('questionImage');
 const optionsContainer = document.getElementById('optionsContainer');
 const prevButton = document.getElementById('prevButton');
 const skipButton = document.getElementById('skipButton');
-// FIX: Corrected document.all to document.getElementById
 const nextButton = document.getElementById('nextButton');
 const submitButton = document.getElementById('submitButton');
 const progressBar = document.getElementById('progressBar');
-const timerDisplay = document.getElementById('timerDisplay'); // Timer display element
+const timerDisplay = document.getElementById('timerDisplay');
 
 const scoreDisplay = document.getElementById('scoreDisplay');
 const correctAnswersCount = document.getElementById('correctAnswersCount');
@@ -37,8 +40,8 @@ const loginSuccessMessage = document.getElementById('loginSuccessMessage');
 const quizCompletedMessage = document.getElementById('quizCompletedMessage');
 const quizInfoHeading = document.getElementById('quizInfoHeading');
 const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
-const welcomeMessageDiv = document.querySelector('.welcome-message'); // For initial login message
-const totalQuizzesCompleted = document.getElementById('totalQuizzesCompleted'); // NEW ELEMENT
+// const welcomeMessageDiv = document.querySelector('.welcome-message'); // This was causing an issue by selecting both messages
+const totalQuizzesCompleted = document.getElementById('totalQuizzesCompleted');
 
 let currentQuiz = null;
 let currentQuestionIndex = 0;
@@ -46,10 +49,9 @@ let userAnswers = [];
 let correctAnswersTotal = 0;
 let wrongAnswersTotal = 0;
 let skippedQuestionsTotal = 0;
-let quizDetailsForDisplay = []; // To store question, user answer, correct answer, and correctness
+let quizDetailsForDisplay = [];
 
-// Timer variables
-let timeLeft = 0; // Initialize to 0, will be set when loading a question
+let timeLeft = 0;
 let timerInterval;
 
 /**
@@ -62,8 +64,8 @@ function showInfoModal(message) {
     const okButton = document.getElementById('infoOkButton');
 
     msgElem.textContent = message;
-    modal.style.display = 'flex'; // Make modal visible
-    modal.classList.add('active'); // Add active class for CSS transitions
+    modal.style.display = 'flex';
+    modal.classList.add('active');
 
     okButton.onclick = () => {
         hideInfoModal();
@@ -75,10 +77,10 @@ function showInfoModal(message) {
  */
 function hideInfoModal() {
     const modal = document.getElementById('infoModal');
-    modal.classList.remove('active'); // Remove active class for CSS transitions
+    modal.classList.remove('active');
     setTimeout(() => {
         modal.style.display = 'none';
-    }, 200); // This duration should match the CSS transition duration
+    }, 200);
 }
 
 
@@ -91,7 +93,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         usernameDisplay.textContent = loggedInUser;
         welcomeHeading.textContent = `Welcome, ${loggedInUser}!`;
 
-        // Show login success message only once per login session
         const hasShownLoginMessage = localStorage.getItem('hasShownLoginMessage');
         if (hasShownLoginMessage === 'false') {
             loginSuccessMessage.classList.add('show');
@@ -100,7 +101,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 loginSuccessMessage.classList.remove('show');
             }, 3000);
         }
-        goToDashboard(); // Show dashboard by default
+        goToDashboard();
     }
 });
 
@@ -109,7 +110,7 @@ headerLogoutButton.addEventListener('click', logout);
 
 function logout() {
     localStorage.removeItem('loggedInUser');
-    localStorage.removeItem('hasShownLoginMessage'); // Clear this on logout
+    localStorage.removeItem('hasShownLoginMessage');
     window.location.href = "index.html";
 }
 
@@ -123,7 +124,7 @@ dashboardLink.addEventListener('click', (e) => {
 startQuizLink.addEventListener('click', (e) => {
     e.preventDefault();
     setActiveLink(startQuizLink);
-    showStartQuizSection();
+    showQuizSelection();
 });
 
 previousQuizzesLink.addEventListener('click', (e) => {
@@ -142,10 +143,12 @@ function setActiveLink(activeLink) {
 // --- Quiz Data (Example Quizzes) ---
 const quizzes = [
     {
-        name: "NEET MCQ on BOTANY/ZOOLOGY/PHYSICS",
+        id: "neet-biology",
+        name: "NEET Biology MCQ",
+        description: "A comprehensive quiz covering Botany, Zoology, and Physics topics for NEET.",
         questions: [
             {
-                question: "  In angiosperm, the haploid, diploid and triploid structures of a fertilized embryo sac sequentially are:",
+                question: "In angiosperm, the haploid, diploid and triploid structures of a fertilized embryo sac sequentially are:",
                 options: [
                 "Synergids, Primary endosperm nucleus and zygote",
                 "Antipodals, synergids, and primary endosperm nucleus",
@@ -481,7 +484,7 @@ const quizzes = [
                 "Both A and R are true but R is NOT the correct explanation of A.",
                 "A is true but R is false.",
                 "A is false but R is true."    ],
-                answer: "Both A and R are true but R is NOT the correct explanation of A.",
+                answer: "Both A and R are true and R is the correct explanation of A.",
                 imageUrl: "10.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
             },
@@ -562,8 +565,7 @@ const quizzes = [
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
-            
-             {
+            {
                 question: "If the galvanometer G does not show any deflection in the circuit shown, the value of R is given by",
                 options: [
                 "200 Ω",
@@ -618,202 +620,267 @@ const quizzes = [
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
             },
-
-
         ]
     },
+    {
+        id: "gk-quiz",
+        name: "General Knowledge Quiz",
+        description: "Test your general knowledge with a variety of questions.",
+        questions: [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Rome"],
+                answer: "Paris",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Earth", "Mars", "Jupiter", "Venus"],
+                answer: "Mars",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Who painted the Mona Lisa?",
+                options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"],
+                answer: "Leonardo da Vinci",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                answer: "Pacific Ocean",
+                imageUrl: "",
+                timeLimit: 30
+            }
+        ]
+    }
 ];
 
-// --- Quiz Flow Functions ---
-startQuizButton.addEventListener('click', startRandomQuiz);
 
-function startRandomQuiz() {
-    if (quizzes.length === 0) {
-        showInfoModal("No quizzes available to start!"); // Replaced alert()
-        return;
-    }
-    const randomIndex = Math.floor(Math.random() * quizzes.length);
-    currentQuiz = quizzes[randomIndex];
-    currentQuestionIndex = 0;
-    userAnswers = Array(currentQuiz.questions.length).fill(null); // Initialize user answers with null
-    correctAnswersTotal = 0;
-    wrongAnswersTotal = 0;
-    skippedQuestionsTotal = 0;
-    quizDetailsForDisplay = []; // Clear previous quiz details
-
+// --- Helper Functions to Show/Hide Sections ---
+function hideAllSections() {
     quizInfoBox.style.display = 'none';
+    quizContainer.style.display = 'none';
     finalScoreContainer.style.display = 'none';
     quizResultsDetails.style.display = 'none';
     previousQuizzesContainer.style.display = 'none';
+    quizSelectionContainer.style.display = 'none';
+    loginSuccessMessage.classList.remove('show'); // Ensure login message is hidden when navigating
+    quizCompletedMessage.classList.remove('show');
+}
+
+function goToDashboard() {
+    hideAllSections();
+    quizInfoBox.style.display = 'block';
+    updateDashboardInfo(); // Update information on the dashboard
+    setActiveLink(dashboardLink);
+}
+
+function showQuizSelection() {
+    hideAllSections();
+    quizSelectionContainer.style.display = 'block';
+    renderQuizList();
+}
+
+function showQuizSection() {
+    hideAllSections();
     quizContainer.style.display = 'block';
-
-    quizTitle.textContent = currentQuiz.name;
-    loadQuestion();
-    updateProgressBar();
 }
 
-function formatTime(totalSeconds) {
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    const formattedSeconds = String(seconds).padStart(2, '0');
-    return `${formattedMinutes}m ${formattedSeconds}s`;
+function showFinalScoreSection() {
+    hideAllSections();
+    finalScoreContainer.style.display = 'block';
 }
 
-function startTimer() {
-    clearInterval(timerInterval); // Clear any existing timer
+function showQuizResultsDetailsSection() {
+    hideAllSections();
+    quizResultsDetails.style.display = 'block';
+}
 
-    const question = currentQuiz.questions[currentQuestionIndex];
-    timeLeft = question.timeLimit; // Set timeLeft to the current question's timeLimit
+function showPreviousQuizzesSection() {
+    hideAllSections();
+    previousQuizzesContainer.style.display = 'block';
+    loadPreviousQuizzes();
+}
 
-    // Initial update of display and class
-    timerDisplay.textContent = `Time Left: ${formatTime(timeLeft)}`;
-    timerDisplay.classList.remove('warning', 'critical');
-    if (timeLeft <= 10 && timeLeft > 5) { // Example: Warning for last 10 seconds
-        timerDisplay.classList.add('warning');
-    } else if (timeLeft <= 5) { // Example: Critical for last 5 seconds
-        timerDisplay.classList.add('critical');
+
+// --- Dashboard Info Update ---
+function updateDashboardInfo() {
+    const previousQuizzes = JSON.parse(localStorage.getItem('previousQuizzes')) || [];
+    const totalQuizzes = previousQuizzes.length;
+    totalQuizzesCompleted.textContent = `Total Quizzes Completed: ${totalQuizzes}`;
+
+    if (totalQuizzes > 0) {
+        const lastQuiz = previousQuizzes[previousQuizzes.length - 1];
+        lastQuizScoreDisplay.textContent = `Your last quiz (${lastQuiz.quizName}) score: ${lastQuiz.score}/${lastQuiz.totalQuestions} (${lastQuiz.percentage}%)`;
+        lastQuizScoreDisplay.style.display = 'block';
+    } else {
+        lastQuizScoreDisplay.style.display = 'none';
+    }
+    totalQuizzesCompleted.style.display = 'block';
+}
+
+
+// --- Quiz Selection ---
+function renderQuizList() {
+    quizList.innerHTML = ''; // Clear existing quiz cards
+    quizzes.forEach(quiz => {
+        const quizCard = document.createElement('div');
+        quizCard.classList.add('quiz-card');
+        quizCard.innerHTML = `
+            <h3>${quiz.name}</h3>
+            <p>${quiz.description}</p>
+            <button class="start-quiz-card-btn" data-quiz-id="${quiz.id}">Start Quiz</button>
+        `;
+        quizList.appendChild(quizCard);
+    });
+
+    // Add event listeners to the new "Start Quiz" buttons
+    document.querySelectorAll('.start-quiz-card-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const quizId = e.target.dataset.quizId;
+            startQuiz(quizId);
+        });
+    });
+}
+
+
+// --- Quiz Logic ---
+function startQuiz(quizId) {
+    currentQuiz = quizzes.find(q => q.id === quizId);
+    if (!currentQuiz) {
+        showInfoModal('Quiz not found!');
+        return;
     }
 
+    currentQuestionIndex = 0;
+    userAnswers = new Array(currentQuiz.questions.length).fill(null); // Initialize user answers
+    correctAnswersTotal = 0;
+    wrongAnswersTotal = 0;
+    skippedQuestionsTotal = 0;
+    quizDetailsForDisplay = []; // Clear previous detailed results
 
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        timerDisplay.textContent = `Time Left: ${formatTime(timeLeft)}`;
+    showQuizSection();
+    loadQuestion();
+    startTimer();
 
-        // Update classes based on time left
-        timerDisplay.classList.remove('warning', 'critical'); // Remove previous states
-        if (timeLeft <= 10 && timeLeft > 5) { // Example: Warning for last 10 seconds
-            timerDisplay.classList.add('warning');
-        } else if (timeLeft <= 5) { // Example: Critical for last 5 seconds
-            timerDisplay.classList.add('critical');
-        }
+    // Attach event listeners for navigation buttons
+    prevButton.removeEventListener('click', handlePrevButtonClick); // Remove old listeners to prevent duplicates
+    skipButton.removeEventListener('click', handleSkipButtonClick);
+    nextButton.removeEventListener('click', handleNextButtonClick);
+    submitButton.removeEventListener('click', handleSubmitButtonClick);
 
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            // Automatically move to the next question or submit if it's the last one
-            if (userAnswers[currentQuestionIndex] === null) {
-                userAnswers[currentQuestionIndex] = "Time Out"; // Mark as time out
-            }
-            if (currentQuestionIndex < currentQuiz.questions.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion();
-                updateProgressBar();
-            } else {
-                submitQuiz();
-            }
-        }
-    }, 1000);
+    prevButton.addEventListener('click', handlePrevButtonClick);
+    skipButton.addEventListener('click', handleSkipButtonClick);
+    nextButton.addEventListener('click', handleNextButtonClick);
+    submitButton.addEventListener('click', handleSubmitButtonClick);
 }
-
-function stopTimer() {
-    clearInterval(timerInterval);
-}
-
 
 function loadQuestion() {
-    stopTimer(); // Stop timer before loading new question
-    const question = currentQuiz.questions[currentQuestionIndex];
-    questionText.textContent = `${currentQuestionIndex + 1}. ${question.question}`; // MODIFIED LINE
-    optionsContainer.innerHTML = ''; // Clear previous options
+    if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
+        return;
+    }
 
-    if (question.imageUrl) {
-        questionImage.src = question.imageUrl;
+    const questionData = currentQuiz.questions[currentQuestionIndex];
+    quizTitle.textContent = currentQuiz.name;
+    questionText.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
+
+    if (questionData.imageUrl) {
+        questionImage.src = questionData.imageUrl;
         questionImage.style.display = 'block';
     } else {
         questionImage.style.display = 'none';
+        questionImage.src = ''; // Clear the src if no image
     }
 
-    // Array for option labels (a, b, c, d, ...)
-    const optionLabels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-
-    question.options.forEach((option, index) => {
+    optionsContainer.innerHTML = '';
+    questionData.options.forEach((option, index) => {
         const optionDiv = document.createElement('div');
         optionDiv.classList.add('option');
+        optionDiv.innerHTML = `<span class="option-label">${String.fromCharCode(65 + index)}.</span> <span class="option-text">${option}</span>`;
+        optionDiv.dataset.option = option; // Store the option text
+        optionDiv.addEventListener('click', () => selectOption(optionDiv, option));
+        optionsContainer.appendChild(optionDiv);
 
-        // Create a span for the label (a, b, c, d)
-        const labelSpan = document.createElement('span');
-        labelSpan.classList.add('option-label');
-        labelSpan.textContent = `${optionLabels[index]}. `;
-        optionDiv.appendChild(labelSpan);
-
-        // Create a span for the option text
-        const optionTextSpan = document.createElement('span');
-        optionTextSpan.classList.add('option-text');
-        optionTextSpan.textContent = option;
-        optionDiv.appendChild(optionTextSpan);
-
-        optionDiv.addEventListener('click', () => selectOption(option));
-        // If user has already answered this question, show their selection
+        // Highlight selected option if already answered
         if (userAnswers[currentQuestionIndex] === option) {
             optionDiv.classList.add('selected');
         }
-        optionsContainer.appendChild(optionDiv);
     });
 
+    updateProgressBar();
     updateNavigationButtons();
-    startTimer(); // Start timer for the new question
+    resetTimer(questionData.timeLimit);
 }
 
-function selectOption(selectedOptionText) {
-    // Timer should not stop when an option is selected.
-    // stopTimer();
-    const options = optionsContainer.querySelectorAll('.option');
-    options.forEach((optionDiv) => {
-        optionDiv.classList.remove('selected');
-        // We now retrieve the text from the specific span for comparison
-        const optionTextElement = optionDiv.querySelector('.option-text');
-        if (optionTextElement && optionTextElement.textContent === selectedOptionText) {
-            optionDiv.classList.add('selected');
-            userAnswers[currentQuestionIndex] = selectedOptionText;
-        }
+function selectOption(selectedOptionDiv, optionText) {
+    // Remove 'selected' class from all options first
+    document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('selected');
     });
+    // Add 'selected' class to the clicked option
+    selectedOptionDiv.classList.add('selected');
+    userAnswers[currentQuestionIndex] = optionText;
 }
 
-function updateNavigationButtons() {
-    prevButton.disabled = currentQuestionIndex === 0;
-    nextButton.style.display = currentQuestionIndex < currentQuiz.questions.length - 1 ? 'inline-block' : 'none';
-    skipButton.style.display = currentQuestionIndex < currentQuiz.questions.length - 1 ? 'inline-block' : 'none';
-    submitButton.style.display = currentQuestionIndex === currentQuiz.questions.length - 1 ? 'inline-block' : 'none';
-}
-
-nextButton.addEventListener('click', () => {
-    stopTimer(); // Stop timer when moving to next question
-    if (currentQuestionIndex < currentQuiz.questions.length - 1) {
-        currentQuestionIndex++;
-        loadQuestion();
-        updateProgressBar();
-    }
-});
-
-prevButton.addEventListener('click', () => {
-    stopTimer(); // Stop timer when moving to previous question
+function handlePrevButtonClick() {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
         loadQuestion();
-        updateProgressBar();
     }
-});
+}
 
-skipButton.addEventListener('click', () => {
-    stopTimer(); // Stop timer when skipping
-    if (userAnswers[currentQuestionIndex] === null) { // Only mark as skipped if not already answered/timed out
-        userAnswers[currentQuestionIndex] = "Skipped"; // Mark as skipped
+function handleSkipButtonClick() {
+    // If the user has selected an answer, they cannot skip.
+    // If no answer is selected, mark as skipped.
+    if (userAnswers[currentQuestionIndex] === null) {
+        // userAnswers[currentQuestionIndex] remains null for skipped questions
+        showInfoModal("Question skipped!");
+    } else {
+        showInfoModal("You have already answered this question, cannot skip.");
+        return; // Do not advance if already answered
     }
 
     if (currentQuestionIndex < currentQuiz.questions.length - 1) {
         currentQuestionIndex++;
         loadQuestion();
-        updateProgressBar();
     } else {
-        // If skipped on the last question, submit
-        submitQuiz();
+        // If it's the last question and skipped, go to results
+        handleSubmitButtonClick();
     }
-});
+}
 
-submitButton.addEventListener('click', () => {
-    stopTimer(); // Stop timer on submit
-    submitQuiz();
-});
+
+function handleNextButtonClick() {
+    // Check if an option is selected for the current question
+    if (userAnswers[currentQuestionIndex] === null) {
+        showInfoModal("Please select an option or skip the question.");
+        return; // Prevent advancing if no option is selected
+    }
+
+    if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion();
+    } else {
+        // If it's the last question, submit the quiz
+        handleSubmitButtonClick();
+    }
+}
+
+function handleSubmitButtonClick() {
+    clearInterval(timerInterval); // Stop the timer when quiz is submitted
+    calculateResults();
+    saveQuizResult();
+    showFinalScoreSection();
+    quizCompletedMessage.classList.add('show'); // Show quiz completed message
+    localStorage.setItem('hasShownLoginMessage', 'false'); // Reset login message flag
+    setTimeout(() => {
+        quizCompletedMessage.classList.remove('show');
+    }, 3000);
+}
 
 function updateProgressBar() {
     const progress = ((currentQuestionIndex + 1) / currentQuiz.questions.length) * 100;
@@ -821,320 +888,237 @@ function updateProgressBar() {
     progressBar.textContent = `${Math.round(progress)}%`;
 }
 
-function submitQuiz() {
-    stopTimer(); // Ensure timer is stopped when quiz is submitted
+function updateNavigationButtons() {
+    prevButton.style.display = currentQuestionIndex === 0 ? 'none' : 'inline-flex';
+    nextButton.style.display = currentQuestionIndex === currentQuiz.questions.length - 1 ? 'none' : 'inline-flex';
+    submitButton.style.display = currentQuestionIndex === currentQuiz.questions.length - 1 ? 'inline-flex' : 'none';
+    skipButton.style.display = 'inline-flex'; // Always show skip button
+}
+
+
+// --- Timer Logic ---
+function startTimer() {
+    clearInterval(timerInterval); // Clear any existing timer
+    const questionTimeLimit = currentQuiz.questions[currentQuestionIndex].timeLimit;
+    timeLeft = questionTimeLimit;
+    timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            // Automatically skip if time runs out and no answer is selected
+            if (userAnswers[currentQuestionIndex] === null) {
+                showInfoModal("Time's up! Question skipped.");
+            } else {
+                showInfoModal("Time's up!");
+            }
+
+            if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                handleSubmitButtonClick(); // Submit if last question
+            }
+        }
+    }, 1000);
+}
+
+function resetTimer(timeLimit) {
+    clearInterval(timerInterval);
+    timeLeft = timeLimit;
+    timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+    startTimer();
+}
+
+
+// --- Result Calculation and Display ---
+function calculateResults() {
     correctAnswersTotal = 0;
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
-    quizDetailsForDisplay = []; // Clear for new submission
+    quizDetailsForDisplay = [];
 
     currentQuiz.questions.forEach((question, index) => {
         const userAnswer = userAnswers[index];
-        const isCorrect = (userAnswer === question.answer);
+        const isCorrect = userAnswer === question.answer;
 
-        if (userAnswer === question.answer) {
-            correctAnswersTotal++;
-        } else if (userAnswer === "Skipped" || userAnswer === "Time Out") { // Account for "Time Out" as skipped
+        if (userAnswer === null) {
             skippedQuestionsTotal++;
+            quizDetailsForDisplay.push({
+                question: question.question,
+                userAnswer: "Skipped",
+                correctAnswer: question.answer,
+                isCorrect: false, // For display purposes, skipped is not correct
+                skipped: true
+            });
+        } else if (isCorrect) {
+            correctAnswersTotal++;
+            quizDetailsForDisplay.push({
+                question: question.question,
+                userAnswer: userAnswer,
+                correctAnswer: question.answer,
+                isCorrect: true,
+                skipped: false
+            });
         } else {
             wrongAnswersTotal++;
+            quizDetailsForDisplay.push({
+                question: question.question,
+                userAnswer: userAnswer,
+                correctAnswer: question.answer,
+                isCorrect: false,
+                skipped: false
+            });
         }
-
-        // Store detailed results, including options for robust display
-        quizDetailsForDisplay.push({
-            question: question.question,
-            imageUrl: question.imageUrl,
-            userAnswer: userAnswer || "Not Answered", // Handle cases where user might not select and not skip
-            answer: question.answer,
-            isCorrect: isCorrect,
-            options: question.options // IMPORTANT: Store options here
-        });
     });
 
-    displayFinalScore();
-    saveQuizResult();
-
-    localStorage.setItem('quizJustCompleted', 'true');
-    updateQuizInfoBox(); // Update dashboard with latest score
-}
-
-function displayFinalScore() {
-    quizContainer.style.display = 'none';
-    finalScoreContainer.style.display = 'block';
-    quizResultsDetails.style.display = 'none';
-    previousQuizzesContainer.style.display = 'none';
-    quizInfoBox.style.display = 'none'; // Hide info box when showing score
-
     const totalQuestions = currentQuiz.questions.length;
-    scoreDisplay.textContent = `${correctAnswersTotal} / ${totalQuestions}`;
+    const percentage = (correctAnswersTotal / totalQuestions) * 100;
+
+    scoreDisplay.textContent = `${correctAnswersTotal}/${totalQuestions}`;
     correctAnswersCount.textContent = correctAnswersTotal;
     wrongAnswersCount.textContent = wrongAnswersTotal;
     skippedQuestionsCount.textContent = skippedQuestionsTotal;
+    percentageScore.textContent = `${percentage.toFixed(2)}%`;
 
-    const percentage = totalQuestions > 0 ? ((correctAnswersTotal / totalQuestions) * 100).toFixed(2) : 0;
-    percentageScore.textContent = `${percentage}%`;
+    // Add event listeners for final score buttons
+    viewResultsButton.onclick = displayDetailedResults;
+    returnToDashboardButton.onclick = goToDashboard;
 }
 
-viewResultsButton.addEventListener('click', () => {
-    // Pass false to indicate it's from the final score screen
-    renderQuizResultsDetails(quizDetailsForDisplay, false);
-    finalScoreContainer.style.display = 'none';
-    quizResultsDetails.style.display = 'block';
-});
+function displayDetailedResults() {
+    showQuizResultsDetailsSection();
+    const resultsContainer = document.getElementById('quizResultsDetailsContainer');
+    resultsContainer.innerHTML = ''; // Clear previous results
 
-// The redundant backToFinalScore function is removed as its logic is now within renderQuizResultsDetails
-
-returnToDashboardButton.addEventListener('click', goToDashboard);
-
-function saveQuizResult() {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-
-    const totalQuestions = currentQuiz.questions.length;
-    const newResult = {
-        user: loggedInUser,
-        quizName: currentQuiz.name,
-        score: `${correctAnswersTotal}/${totalQuestions}`,
-        numericScore: correctAnswersTotal, // Store numeric score for calculations
-        totalQuestions: totalQuestions, // Store total questions for percentage calculation
-        wrongAnswers: wrongAnswersTotal,
-        skippedQuestionsCount: skippedQuestionsTotal,
-        timestamp: new Date().toLocaleString(), // Keep as is for now, will format later in display
-        quizDetails: quizDetailsForDisplay // Store detailed answers
-    };
-    quizResults.push(newResult);
-    localStorage.setItem('quizResults', JSON.stringify(quizResults));
-}
-
-function updateQuizInfoBox() {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-    const userQuizResults = quizResults.filter(result => result.user === loggedInUser);
-
-    if (userQuizResults.length > 0) {
-        const lastQuiz = userQuizResults[userQuizResults.length - 1];
-        quizInfoHeading.textContent = "Your Last Quiz Score:";
-
-        let percentage = 'N/A';
-        if (lastQuiz.numericScore !== undefined && lastQuiz.totalQuestions !== undefined && lastQuiz.totalQuestions > 0) {
-            percentage = ((lastQuiz.numericScore / lastQuiz.totalQuestions) * 100).toFixed(2) + '%';
+    quizDetailsForDisplay.forEach(detail => {
+        const resultItem = document.createElement('div');
+        resultItem.classList.add('result-item');
+        if (detail.isCorrect) {
+            resultItem.classList.add('correct');
+        } else if (detail.skipped) {
+            resultItem.classList.add('skipped');
+        } else {
+            resultItem.classList.add('wrong');
         }
 
-        lastQuizScoreDisplay.innerHTML = `<strong>${lastQuiz.quizName}:</strong> ${lastQuiz.score} (${percentage})`;
-        lastQuizScoreDisplay.style.display = 'block';
+        resultItem.innerHTML = `
+            <p class="question-text-result">${detail.question}</p>
+            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : 'user-answer')}">${detail.userAnswer}</span></p>
+            <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
+        `;
+        resultsContainer.appendChild(resultItem);
+    });
 
-        // NEW: Display total quizzes completed
-        totalQuizzesCompleted.textContent = `Total Quizzes Completed: ${userQuizResults.length}`;
-        totalQuizzesCompleted.style.display = 'block';
-    } else {
-        quizInfoHeading.textContent = "Welcome to the Quiz!";
-        lastQuizScoreDisplay.style.display = 'none';
-        totalQuizzesCompleted.style.display = 'none'; // Hide if no quizzes completed
-    }
+    document.getElementById('quizResultsBackButton').onclick = showFinalScoreSection;
 }
 
-function goToDashboard() {
-    stopTimer(); // Ensure timer is stopped when navigating away from quiz
-    quizContainer.style.display = 'none';
-    finalScoreContainer.style.display = 'none';
-    quizResultsDetails.style.display = 'none';
-    previousQuizzesContainer.style.display = 'none';
+// --- Local Storage for Previous Quizzes ---
+function saveQuizResult() {
+    const previousQuizzes = JSON.parse(localStorage.getItem('previousQuizzes')) || [];
+    const now = new Date();
+    const formattedDate = now.toLocaleString(); // e.g., "M/D/YYYY, H:MM:SS AM/PM"
 
-    quizInfoBox.style.display = 'block';
-    welcomeMessageDiv.style.display = 'block';
-
-    const quizJustCompleted = localStorage.getItem('quizJustCompleted');
-    if (quizJustCompleted === 'true') {
-        quizCompletedMessage.classList.add('show');
-        localStorage.removeItem('quizJustCompleted');
-        setTimeout(() => {
-            quizCompletedMessage.classList.remove('show');
-        }, 3000);
-    }
-
-    updateQuizInfoBox();
+    const result = {
+        quizId: currentQuiz.id,
+        quizName: currentQuiz.name,
+        score: correctAnswersTotal,
+        totalQuestions: currentQuiz.questions.length,
+        percentage: ((correctAnswersTotal / currentQuiz.questions.length) * 100).toFixed(2),
+        date: formattedDate,
+        details: quizDetailsForDisplay
+    };
+    previousQuizzes.push(result);
+    localStorage.setItem('previousQuizzes', JSON.stringify(previousQuizzes));
 }
 
-function showStartQuizSection() {
-    stopTimer(); // Ensure timer is stopped when navigating to start quiz section
-    quizContainer.style.display = 'none';
-    finalScoreContainer.style.display = 'none';
-    quizResultsDetails.style.display = 'none';
-    previousQuizzesContainer.style.display = 'none';
-    quizInfoBox.style.display = 'block'; // Show quiz info box to allow starting
-}
+function loadPreviousQuizzes() {
+    const previousQuizzes = JSON.parse(localStorage.getItem('previousQuizzes')) || [];
+    const tableBody = document.getElementById('previousQuizzesTableBody');
+    tableBody.innerHTML = ''; // Clear existing rows
+    const noQuizzesMessage = document.getElementById('noPreviousQuizzesMessage');
 
-function showPreviousQuizzesSection() {
-    stopTimer(); // Ensure timer is stopped when navigating to previous quizzes
-    quizContainer.style.display = 'none';
-    finalScoreContainer.style.display = 'none';
-    quizResultsDetails.style.display = 'none';
-    quizInfoBox.style.display = 'none';
-    previousQuizzesContainer.style.display = 'block';
-
-    loadPreviousQuizzesTable();
-}
-
-function loadPreviousQuizzesTable() {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
-    const userQuizResults = quizResults.filter(result => result.user === loggedInUser);
-
-    const previousQuizzesTableBody = document.getElementById('previousQuizzesTableBody');
-    const noPreviousQuizzesMessage = document.getElementById('noPreviousQuizzesMessage');
-    previousQuizzesTableBody.innerHTML = ''; // Clear existing rows
-
-    if (userQuizResults.length === 0) {
-        noPreviousQuizzesMessage.style.display = 'block';
+    if (previousQuizzes.length === 0) {
+        noQuizzesMessage.style.display = 'block';
         return;
     } else {
-        noPreviousQuizzesMessage.style.display = 'none';
+        noQuizzesMessage.style.display = 'none';
     }
 
-    userQuizResults.forEach((result, index) => {
-        const row = previousQuizzesTableBody.insertRow();
-        row.insertCell(0).textContent = result.quizName || 'N/A';
-        row.insertCell(1).textContent = result.score;
+    // Sort quizzes by date in descending order (most recent first)
+    previousQuizzes.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        let percentage = 'N/A';
-        if (result.numericScore !== undefined && result.totalQuestions !== undefined && result.totalQuestions > 0) {
-            percentage = ((result.numericScore / result.totalQuestions) * 100).toFixed(2) + '%';
+    previousQuizzes.forEach((result) => { // Removed 'index' as it's not used directly here
+        const row = tableBody.insertRow();
+        // Ensure properties exist before trying to access them
+        row.insertCell(0).textContent = result.quizName || 'N/A'; // Quiz Name
+        row.insertCell(1).textContent = `${result.score !== undefined ? result.score : 'N/A'}/${result.totalQuestions !== undefined ? result.totalQuestions : 'N/A'}`; // Score
+        
+        let displayPercentage = 'N/A';
+        if (result.percentage !== undefined && result.percentage !== null && !isNaN(parseFloat(result.percentage))) {
+            displayPercentage = `${parseFloat(result.percentage).toFixed(2)}%`;
         }
-        row.insertCell(2).textContent = percentage;
-
-        // Format the Date/Time for previous quizzes table
-        let displayDateTime = 'N/A';
-        if (result.timestamp) {
-            const date = new Date(result.timestamp); // Attempt to parse the timestamp string
-            if (!isNaN(date.getTime())) { // Check if the parsed date is valid
-                const day = String(date.getDate()).padStart(2, '0');
-                const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
-                const year = date.getFullYear();
-                const hours = String(date.getHours()).padStart(2, '0');
-                const minutes = String(date.getMinutes()).padStart(2, '0');
-                const seconds = String(date.getSeconds()).padStart(2, '0');
-                displayDateTime = `${day}/${month}/${year}, ${hours}:${minutes}:${seconds}`;
-            } else {
-                console.warn("Could not parse timestamp in previous quizzes table:", result.timestamp);
-                displayDateTime = result.timestamp; // Fallback to original string
-            }
-        }
-        row.insertCell(3).textContent = displayDateTime;
+        row.insertCell(2).textContent = displayPercentage; // Percentage
+        
+        row.insertCell(3).textContent = result.date || 'N/A'; // Date/Time
 
         const actionsCell = row.insertCell(4);
-        const viewDetailsButton = document.createElement('button');
-        viewDetailsButton.textContent = 'View Details';
-        viewDetailsButton.className = 'previous-quiz-view-btn'; // Apply new styling
-        viewDetailsButton.onclick = function() {
-            // Pass true to indicate it's from the previous quizzes screen
-            renderQuizResultsDetails(result.quizDetails, true);
-            previousQuizzesContainer.style.display = 'none';
-            quizResultsDetails.style.display = 'block';
-        };
-        actionsCell.appendChild(viewDetailsButton);
+        const viewButton = document.createElement('button');
+        viewButton.textContent = 'View Details';
+        viewButton.classList.add('view-details-btn');
+        // Pass the entire result object to showQuizResultsDetails
+        viewButton.onclick = () => showQuizResultsDetails(result); // Removed 'index' from here too as it's not needed by showQuizResultsDetails
+        actionsCell.appendChild(viewButton);
     });
 }
 
-// Function to render detailed quiz results (used by both final score and previous quizzes)
-function renderQuizResultsDetails(dataToRender, fromPreviousQuizzes = false) { // Added a flag
-    const quizResultsDetailsContainer = document.getElementById('quizResultsDetails');
-    // Clear previous content, but keep the H3 and Back button
-    const existingH3 = quizResultsDetailsContainer.querySelector('h3');
-    const existingBackButton = quizResultsDetailsContainer.querySelector('.back-to-score-btn');
+function showQuizResultsDetails(result) { // Removed 'index' from parameters as it was unused
+    showQuizResultsDetailsSection();
+    const resultsContainer = document.getElementById('quizResultsDetailsContainer');
+    resultsContainer.innerHTML = ''; // Clear previous results
 
-    // Remove existing event listeners to prevent multiple bindings
-    existingBackButton.onclick = null; // Clear existing handler
-
-    quizResultsDetailsContainer.innerHTML = ''; // Clear all content
-    quizResultsDetailsContainer.appendChild(existingH3); // Re-add H3
-
-    // Array for option labels (a, b, c, d, ...) for detailed results
-    const optionLabels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-
-    if (!dataToRender || dataToRender.length === 0) {
-        const noDetailsP = document.createElement('p');
-        noDetailsP.textContent = 'No detailed results available for this submission.';
-        quizResultsDetailsContainer.appendChild(noDetailsP);
-    } else {
-        dataToRender.forEach((q, index) => {
-            const resultItem = document.createElement('div');
-            resultItem.classList.add('result-item');
-
-            const questionP = document.createElement('p');
-            questionP.classList.add('question');
-            questionP.textContent = `${index + 1}. ${q.question}`;
-            resultItem.appendChild(questionP);
-
-            if (q.imageUrl) {
-                const questionImage = document.createElement('img');
-                questionImage.src = q.imageUrl;
-                questionImage.alt = "Question Image";
-                questionImage.classList.add('question-image');
-                resultItem.appendChild(questionImage);
-            }
-
-            const yourAnswerP = document.createElement('p');
-            // Use q.options to get the label if available
-            let userAnswerWithLabel = q.userAnswer;
-            if (q.options && q.userAnswer !== "Skipped" && q.userAnswer !== "Time Out" && q.userAnswer !== "Not Answered") {
-                const userAnswerIndex = q.options.indexOf(q.userAnswer);
-                if (userAnswerIndex !== -1) {
-                    userAnswerWithLabel = `${optionLabels[userAnswerIndex]}. ${q.userAnswer}`;
-                }
-            }
-            yourAnswerP.textContent = `Your Answer: ${userAnswerWithLabel}`;
-            if (q.isCorrect === true) {
-                yourAnswerP.classList.add('your-answer', 'correct');
-            } else if (q.userAnswer === "Skipped" || q.userAnswer === "Time Out") {
-                yourAnswerP.classList.add('your-answer', 'skipped');
-            } else {
-                yourAnswerP.classList.add('your-answer');
-            }
-            resultItem.appendChild(yourAnswerP);
-
-            if (q.isCorrect === false || q.userAnswer === "Skipped" || q.userAnswer === "Time Out") {
-                const correctAnswerP = document.createElement('p');
-                correctAnswerP.classList.add('correct-answer');
-
-                // Find the index of the correct answer in the stored options to get its label
-                let correctAnswerWithLabel = q.answer;
-                if (q.options) {
-                    const correctAnswerIndex = q.options.indexOf(q.answer);
-                    if (correctAnswerIndex !== -1) {
-                        correctAnswerWithLabel = `${optionLabels[correctAnswerIndex]}. ${q.answer}`;
-                    }
-                }
-                correctAnswerP.textContent = `Correct Answer: ${correctAnswerWithLabel}`;
-                resultItem.appendChild(correctAnswerP);
-            }
-
-            quizResultsDetailsContainer.appendChild(resultItem);
-        });
+    if (!result || !result.details || result.details.length === 0) {
+        resultsContainer.innerHTML = '<p style="text-align: center; color: #777;">No detailed results available for this quiz.</p>';
+        document.getElementById('quizResultsBackButton').onclick = showPreviousQuizzesSection;
+        return;
     }
 
-    quizResultsDetailsContainer.appendChild(existingBackButton); // Re-add Back button at the end
+    result.details.forEach(detail => {
+        const resultItem = document.createElement('div');
+        resultItem.classList.add('result-item');
+        if (detail.isCorrect) {
+            resultItem.classList.add('correct');
+        } else if (detail.skipped) {
+            resultItem.classList.add('skipped');
+        } else {
+            resultItem.classList.add('wrong');
+        }
 
-    // Set the correct onclick handler based on where it came from
-    if (fromPreviousQuizzes) {
-        existingBackButton.textContent = 'Back to Previous Quizzes';
-        existingBackButton.onclick = function() {
-            quizResultsDetails.style.display = 'none';
-            previousQuizzesContainer.style.display = 'block';
-        };
-    } else {
-        existingBackButton.textContent = 'Back to Score';
-        existingBackButton.onclick = function() {
-            quizResultsDetails.style.display = 'none';
-            finalScoreContainer.style.display = 'block';
-        };
-    }
+        resultItem.innerHTML = `
+            <p class="question-text-result">${detail.question}</p>
+            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : 'user-answer')}">${detail.userAnswer}</span></p>
+            <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
+        `;
+        resultsContainer.appendChild(resultItem);
+    });
+
+    document.getElementById('quizResultsBackButton').onclick = showPreviousQuizzesSection;
 }
 
+
 // Initial setup: Hide specific quiz sections on load
+// Ensure quizSelectionContainer is hidden here as well
 quizContainer.style.display = 'none';
 finalScoreContainer.style.display = 'none';
 quizResultsDetails.style.display = 'none';
 previousQuizzesContainer.style.display = 'none';
-quizInfoBox.style.display = 'block';
-updateProgressBar();
-updateQuizInfoBox();
+quizSelectionContainer.style.display = 'none'; // Added this line for initial hide
+quizInfoBox.style.display = 'none'; // Initially hide info box, show dashboard after login check
+
+// Adjustments to initial load flow
+document.addEventListener('DOMContentLoaded', () => {
+    // This block already handles initial redirection/display, but ensure goToDashboard is called last
+    // The previous DOMContentLoaded listener handles auth, then calls goToDashboard
+});
