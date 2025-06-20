@@ -682,7 +682,7 @@ const quizzes = [
                 ],
                 answer: "A collection of software to manipulate databases",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "Which of the following is the main purpose of DBMS?",
@@ -694,7 +694,7 @@ const quizzes = [
                 ],
                 answer: "To provide a mechanism for data retrieval and storage",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "Which of the following is not a type of DBMS?",
@@ -706,7 +706,7 @@ const quizzes = [
                 ],
                 answer: "Text-based DBMS",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "What are the main objectives of a DBMS?",
@@ -718,7 +718,7 @@ const quizzes = [
                 ],
                 answer: "Data consistency, data retrieval, and data storage",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "Which of the following is part of a DBMS architecture?",
@@ -730,7 +730,7 @@ const quizzes = [
                 ],
                 answer: "All of the above",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "The three levels of DBMS architecture are:",
@@ -742,7 +742,7 @@ const quizzes = [
                 ],
                 answer: "External, Conceptual, Internal",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "The Data Dictionary in DBMS is used to store:",
@@ -754,7 +754,7 @@ const quizzes = [
                 ],
                 answer: "Metadata about the database",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "Which DBMS component is responsible for handling queries?",
@@ -766,7 +766,7 @@ const quizzes = [
                 ],
                 answer: "Query Processor",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "Which of the following is a feature of RDBMS?",
@@ -778,7 +778,7 @@ const quizzes = [
                 ],
                 answer: "All of the above",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "In a relational database, what is a relation?",
@@ -790,7 +790,7 @@ const quizzes = [
                 ],
                 answer: "A table with rows and columns",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "Which of the following is a primary key constraint in RDBMS?",
@@ -802,7 +802,7 @@ const quizzes = [
                 ],
                 answer: " It uniquely identifies each record in a table.",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "What does SQL stand for?",
@@ -814,7 +814,7 @@ const quizzes = [
                 ],
                 answer: "Structured Query Language",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "Which SQL statement is used to retrieve data from a database?",
@@ -826,7 +826,7 @@ const quizzes = [
                 ],
                 answer: "SELECT",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "What SQL command is used to remove a table from a database?",
@@ -838,7 +838,7 @@ const quizzes = [
                 ],
                 answer: "DROP",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
             },
             {
                 question: "Which SQL keyword is used to filter records in a SELECT query?",
@@ -850,7 +850,196 @@ const quizzes = [
                 ],
                 answer: "WHERE",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 60
+            },
+
+        ]
+    },
+    {
+        id: "FCOS",
+        name: "Fundamentals of Computers & Operating Systems",
+        description: "Test on Fundamentals of Computers & Operating Systems (ADCA)",
+        enabled: false, // to enable put as true or false
+        questions: [
+            {
+                question: "Who is considered the father of computers?",
+                options: [
+                    "Charles Babbage",
+                    "Alan Turing",
+                    "John von Neumann",
+                    "Blaise Pascal"
+                ],
+                answer: "Charles Babbage",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which was the first general-purpose electronic digital computer?",
+                options: [
+                    "UNIVAC",
+                    "ENIAC",
+                    "EDVAC",
+                    "Mark I"
+                ],
+                answer: "ENIAC",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "The first generation of computers used:",
+                options: [
+                    "Transistors",
+                    "Vacuum tubes",
+                    "Integrated Circuits",
+                    "Microprocessors"
+                ],
+                answer: "Vacuum tubes",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which generation of computers introduced microprocessors?",
+                options: [
+                    "First",
+                    "Second",
+                    "Third",
+                    "Fourth"
+                ],
+                answer: "Fourth",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Supercomputers are mainly used for:",
+                options: [
+                    "Scientific calculations",
+                    "Personal computing",
+                    "Word processing",
+                    "Gaming"
+                ],
+                answer: "Scientific calculations",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following is NOT an example of hardware?",
+                options: [
+                    "Monitor",
+                    "Operating system",
+                    "Keyboard",
+                    "Hard disk"
+                ],
+                answer: "Operating system",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following is a type of system software?",
+                options: [
+                    "Word Processor",
+                    "Antivirus",
+                    "Compiler",
+                    "Spreadsheet"
+                ],
+                answer: "Compiler",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "ROM stands for:",
+                options: [
+                    "Read On Memory",
+                    "Read Only Memory",
+                    "Random Output Memory",
+                    "Random Only Memory"
+                ],
+                answer: "Read Only Memory",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following is an example of secondary memory?",
+                options: [
+                    "RAM",
+                    "Cache",
+                    "Hard Drive",
+                    "Register"
+                ],
+                answer: "Hard Drive",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "A touchpad is commonly used in:",
+                options: [
+                    "Desktop computers",
+                    "Laptops",
+                    "Servers",
+                    "Mainframes"
+                ],
+                answer: "Laptops",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "The smallest unit of data in a computer is:",
+                options: [
+                    "Byte",
+                    "Bit",
+                    "Nibble",
+                    "Word"
+                ],
+                answer: "Bit",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following is NOT an operating system?",
+                options: [
+                    "Windows",
+                    "Linux",
+                    "MS Office",
+                    "macOS"
+                ],
+                answer: "MS Office",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "What does the Recycle Bin store?",
+                options: [
+                    "Temporary files",
+                    "Deleted files",
+                    "System files",
+                    "Program files"
+                ],
+                answer: "Deleted files",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "The speed of a processor is measured in:",
+                options: [
+                    "Hertz (Hz)",
+                    "Bits",
+                    "Bytes",
+                    "Joules"
+                ],
+                answer: "Hertz (Hz)",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "What is the full form of DPI in printers?",
+                options: [
+                    "Dots Per Inch",
+                    "Data Processing Interface",
+                    "Digital Processing Index",
+                    "Dual Process Integration"
+                ],
+                answer: "Dots Per Inch",
+                imageUrl: "",
+                timeLimit: 60
             },
 
         ]
