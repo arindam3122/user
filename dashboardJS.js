@@ -1071,8 +1071,32 @@ function loadPreviousQuizzes() {
         // Pass the entire result object to showQuizResultsDetails
         viewButton.onclick = () => showQuizResultsDetails(result); // Removed 'index' from here too as it's not needed by showQuizResultsDetails
         actionsCell.appendChild(viewButton);
+
+        // --- Start of New Code for Delete Button ---
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-quiz-btn'); // Add a class for styling if needed
+        deleteButton.onclick = () => deleteQuizResult(result.quizId, result.date);
+        actionsCell.appendChild(deleteButton);
+        // --- End of New Code for Delete Button ---
     });
 }
+
+// --- New function to delete a quiz result ---
+function deleteQuizResult(quizIdToDelete, dateToDelete) {
+    let previousQuizzes = JSON.parse(localStorage.getItem('previousQuizzes')) || [];
+    
+    // Filter out the quiz that matches both quizId and date
+    const updatedQuizzes = previousQuizzes.filter(quiz => 
+        !(quiz.quizId === quizIdToDelete && quiz.date === dateToDelete)
+    );
+    
+    localStorage.setItem('previousQuizzes', JSON.stringify(updatedQuizzes));
+    showInfoModal('Quiz result deleted successfully!');
+    loadPreviousQuizzes(); // Reload the table to reflect the deletion
+    updateDashboardInfo(); // Update dashboard info as total quizzes completed might change
+}
+
 
 function showQuizResultsDetails(result) { // Removed 'index' from parameters as it was unused
     showQuizResultsDetailsSection();

@@ -622,11 +622,29 @@ header h1 {
     cursor: pointer;
     font-size: 0.85em;
     transition: background-color 0.3s ease;
+    margin-right: 5px; /* Add some space between View Details and Delete buttons */
 }
 
 .view-details-btn:hover {
     background-color: #138496;
 }
+
+/* --- New Styles for Delete Button --- */
+.delete-quiz-btn {
+    background-color: #dc3545; /* Red color for delete action */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: background-color 0.3s ease;
+}
+
+.delete-quiz-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+/* --- End of New Styles for Delete Button --- */
 
 /* Info Modal Styles */
 .info-modal-overlay {
@@ -839,7 +857,8 @@ header h1 {
         font-size: 0.85em;
     }
 
-    .view-details-btn {
+    .view-details-btn,
+    .delete-quiz-btn { /* Apply responsive styles to delete button as well */
         padding: 6px 10px;
         font-size: 0.8em;
     }
