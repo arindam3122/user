@@ -667,10 +667,10 @@ const quizzes = [
         ]
     },
     {
-        id: "gk-quiz",
+        id: "DBMS-quiz",
         name: "Database Management System (DBMS)",
         description: "Test on DBMS from ADCA",
-        enabled: false, // This quiz is now disabled by default for demonstration
+        enabled: false, // to enable put as true or false
         questions: [
             {
                 question: "What is DBMS?",
@@ -685,43 +685,20 @@ const quizzes = [
                 timeLimit: 30
             },
             {
-                question: "Which planet is known as the Red Planet?",
+                question: "Which of the following is the main purpose of DBMS?",
                 options: [
-                    "Earth",
-                    "Mars",
-                    "Jupiter",
-                    "Venus"
+                    "To store data permanently",
+                    "To manage hardware resources",
+                    "To provide a mechanism for data retrieval and storage",
+                    "To perform arithmetic operations"
                 ],
-                answer: "Mars",
+                answer: "To provide a mechanism for data retrieval and storage",
                 imageUrl: "",
                 timeLimit: 30
             },
-            {
-                question: "Who painted the Mona Lisa?",
-                options: [
-                    "Vincent van Gogh",
-                    "Pablo Picasso",
-                    "Leonardo da Vinci",
-                    "Claude Monet"
-                ],
-                answer: "Leonardo da Vinci",
-                imageUrl: "",
-                timeLimit: 30
-            },
-            {
-                question: "What is the largest ocean on Earth?",
-                options: [
-                    "Atlantic Ocean",
-                    "Indian Ocean",
-                    "Arctic Ocean",
-                    "Pacific Ocean"
-                ],
-                answer: "Pacific Ocean",
-                imageUrl: "",
-                timeLimit: 30
-            }
+
         ]
-    }
+    },
 ];
 
 
