@@ -889,3 +889,12 @@ header h1 {
         margin: 5px 0;
     }
 }
+
+
+
+
+.disabled-button {
+    background-color: #cccccc; /* Greyed out background */
+    cursor: not-allowed; /* No-go cursor */
+    opacity: 0.7; /* Slightly transparent */
+}

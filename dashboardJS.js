@@ -146,6 +146,7 @@ const quizzes = [
         id: "neet-biology",
         name: "NEET Biology MCQ",
         description: "A comprehensive quiz covering Botany, Zoology, and Physics topics for NEET.",
+        enabled: true, // New property: set to true to enable the quiz, false to disable
         questions: [
             {
                 question: "In angiosperm, the haploid, diploid and triploid structures of a fertilized embryo sac sequentially are:",
@@ -153,7 +154,8 @@ const quizzes = [
                 "Synergids, Primary endosperm nucleus and zygote",
                 "Antipodals, synergids, and primary endosperm nucleus",
                 "Synergids, Zygote and Primary endosperm nucleus",
-                "Synergids, antipodals and Polar nuclei"    ],
+                "Synergids, antipodals and Polar nuclei"
+                ],
                 answer: "Synergids, Zygote and Primary endosperm nucleus",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -164,7 +166,8 @@ const quizzes = [
                 "Osmosis",
                 "Facilitated Diffusion",
                 "Passive Transport",
-                "Active Transport"    ],
+                "Active Transport"
+                ],
                 answer: "Active Transport",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -175,7 +178,8 @@ const quizzes = [
                 "Insect pollinated plants",
                 "Bird pollinated plants",
                 "Bat pollinated plants",
-                "Wind pollinated plants"    ],
+                "Wind pollinated plants"
+                ],
                 answer: "Insect pollinated plants",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -186,7 +190,8 @@ const quizzes = [
                 "Presence of several alleles of a single gene controlling a single crossover",
                 "Presence of two alleles, each of the two genes controlling a single trait",
                 "A single gene affecting multiple phenotypic expression",
-                "More than two genes affecting a single character"    ],
+                "More than two genes affecting a single character"
+                ],
                 answer: "A single gene affecting multiple phenotypic expression",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -197,7 +202,8 @@ const quizzes = [
                 "GA3",
                 "Kinetin",
                 "Ethylene",
-                "2, 4-D"    ],
+                "2, 4-D"
+                ],
                 answer: "Ethylene",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -208,7 +214,8 @@ const quizzes = [
                 "Habitat loss and fragmentation",
                 "Over exploitation for economic gain",
                 "Alien species invasions",
-                "Сo-extinctions"    ],
+                "Сo-extinctions"
+                ],
                 answer: "Habitat loss and fragmentation",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -219,7 +226,8 @@ const quizzes = [
                 "Bright red colour",
                 "Bright blue colour",
                 "Bright yellow colour",
-                "Bright orange colour"    ],
+                "Bright orange colour"
+                ],
                 answer: "Bright orange colour",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -230,7 +238,8 @@ const quizzes = [
                 "Manganese",
                 "Molybdenum",
                 "Magnesium",
-                "Copper"    ],
+                "Copper"
+                ],
                 answer: "Manganese",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -241,7 +250,8 @@ const quizzes = [
                 "Mustard, Cucumber and Primrose",
                 "China rose, Beans and Lupin",
                 "Tomato, Dianthus and Pea",
-                "China rose, Petunia and Lemon"    ],
+                "China rose, Petunia and Lemon"
+                ],
                 answer: "China rose, Petunia and Lemon",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -252,7 +262,8 @@ const quizzes = [
                 "Zygotene",
                 "Pachytene",
                 "Diplotene",
-                "Diakinesis"    ],
+                "Diakinesis"
+                ],
                 answer: "Pachytene",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -263,7 +274,8 @@ const quizzes = [
                 "680 nm",
                 "700 nm",
                 "660 nm",
-                "780 nm"    ],
+                "780 nm"
+                ],
                 answer: "680 nm",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -274,7 +286,8 @@ const quizzes = [
                 "Frederick Griffith",
                 "Alfred Hershey and Martha Chase",
                 "Avery, Macleoid and McCarthy",
-                "Wilkins and Franklin"    ],
+                "Wilkins and Franklin"
+                ],
                 answer: "Alfred Hershey and Martha Chase",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -285,7 +298,8 @@ const quizzes = [
                 "M phase",
                 "S phase",
                 "G1 phase",
-                "G2 phase"    ],
+                "G2 phase"
+                ],
                 answer: "S phase",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -296,7 +310,8 @@ const quizzes = [
                 "Differentiation",
                 "Dedifferentiation",
                 "Development",
-                "Senescence"    ],
+                "Senescence"
+                ],
                 answer: "Dedifferentiation",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -307,7 +322,8 @@ const quizzes = [
                 "It is a disaccharide",
                 "It is a helical molecule",
                 "It does not contain complex helices and hence cannot hold iodine molecules",
-                "It breaks down when iodine reacts with it"    ],
+                "It breaks down when iodine reacts with it"
+                ],
                 answer: "It does not contain complex helices and hence cannot hold iodine molecules",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -318,7 +334,8 @@ const quizzes = [
                 "Indole-3-butyric Acid",
                 "Gibberellic Acid",
                 "Zeatin",
-                "Abscisic Acid"    ],
+                "Abscisic Acid"
+                ],
                 answer: "Gibberellic Acid",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -329,7 +346,8 @@ const quizzes = [
                 "Both Statement I and Statement II are correct",
                 "Both Statement I and Statement II are incorrect",
                 "Statement I is correct but Statement II is incorrect",
-                "Statement I is incorrect but Statement II is correct"    ],
+                "Statement I is incorrect but Statement II is correct"
+                ],
                 answer: "Both Statement I and Statement II are correct",
                 imageUrl: "1.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -340,7 +358,8 @@ const quizzes = [
                 "A, B, C only",
                 "B, C, D only",
                 "C, D, E only",
-                "D, E, A only"    ],
+                "D, E, A only"
+                ],
                 answer: "A, B, C only",
                 imageUrl: "2.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -351,7 +370,8 @@ const quizzes = [
                 "Dobson units",
                 "Decameter",
                 "Decibels",
-                "Kilobase"    ],
+                "Kilobase"
+                ],
                 answer: "Dobson units",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -362,7 +382,8 @@ const quizzes = [
                 "Both A and R are true and R is the correct explanation of A",
                 "Both A and R are true but R is NOT the correct explanation of A",
                 "A is true but R is false",
-                "A is false but R is true"    ],
+                "A is false but R is true"
+                ],
                 answer: "Both A and R are true and R is the correct explanation of A",
                 imageUrl: "3.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -373,7 +394,8 @@ const quizzes = [
                 "Metaphase I",
                 "Anaphase II",
                 "Metaphase II",
-                "Telophase"    ],
+                "Telophase"
+                ],
                 answer: "Anaphase II",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -384,7 +406,8 @@ const quizzes = [
                 "12 ATP and 12 NADPH2",
                 "18 ATP and 12 NADPH2",
                 "12 ATP and 16 NADPH2",
-                "18 ATP and 16 NADPH2"    ],
+                "18 ATP and 16 NADPH2"
+                ],
                 answer: "18 ATP and 12 NADPH2",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -395,7 +418,8 @@ const quizzes = [
                 "Both Statement I and Statement II are true",
                 "Both Statement I and Statement II are false",
                 "Statement I is correct but Statement II is false",
-                "Statement I is incorrect but Statement II is true"    ],
+                "Statement I is incorrect but Statement II is true"
+                ],
                 answer: "Statement I is incorrect but Statement II is true",
                 imageUrl: "4.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -406,7 +430,8 @@ const quizzes = [
                 "Both A and R are true and R is the correct explanation of A.",
                 "Both A and R are true but R is NOT the correct explanation of A.",
                 "A is true but R is false.",
-                "A is false but R is true."    ],
+                "A is false but R is true."
+                ],
                 answer: "Both A and R are true and R is the correct explanation of A.",
                 imageUrl: "5.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -417,7 +442,8 @@ const quizzes = [
                 "A and B only",
                 "C and D only",
                 "B and E only",
-                "A and E only"    ],
+                "A and E only"
+                ],
                 answer: "B and E only",
                 imageUrl: "6.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -428,7 +454,8 @@ const quizzes = [
                 "A-III, B-I, C-IV, D-II",
                 "A-III, B-IV, C-II, D-I",
                 "A-II, B-III, C-I, D-IV",
-                "A-IV, B-II, C-I, D-III"    ],
+                "A-IV, B-II, C-I, D-III"
+                ],
                 answer: "A-III, B-IV, C-II, D-I",
                 imageUrl: "7.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -439,7 +466,8 @@ const quizzes = [
                 "Both Statement I and Statement II are true.",
                 "Both Statement I and Statement II are false.",
                 "Statement I is correct but Statement II is false.",
-                "Statement I is incorrect but Statement II is true."    ],
+                "Statement I is incorrect but Statement II is true."
+                ],
                 answer: "Both Statement I and Statement II are true.",
                 imageUrl: "8.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -450,7 +478,8 @@ const quizzes = [
                 "Eutrophication refers to increase in domestic sewage and waste water in lakes.",
                 "Biomagnification refers to increase in concentration of the toxicant at successive trophic levels.",
                 "Presence of large amount of nutrients in water restricts 'Algal Bloom'",
-                "Algal Bloom decreases fish mortality"    ],
+                "Algal Bloom decreases fish mortality"
+                ],
                 answer: "Biomagnification refers to increase in concentration of the toxicant at successive trophic levels.",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -461,7 +490,8 @@ const quizzes = [
                 "Genital herpes",
                 "Gonorrhoea",
                 "Hepatitis-B",
-                "HIV Infection"    ],
+                "HIV Infection"
+                ],
                 answer: "Gonorrhoea",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -472,7 +502,8 @@ const quizzes = [
                 "A-II, B-I, C-IV, D-III",
                 "A-I, B-II, C-III, D-IV",
                 "A-IV, B-III, C-II, D-I",
-                "A-III, B-IV, C-I, D-II"    ],
+                "A-III, B-IV, C-I, D-II"
+                ],
                 answer: "A-II, B-I, C-IV, D-III",
                 imageUrl: "9.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -483,7 +514,8 @@ const quizzes = [
                 "Both A and R are true and R is the correct explanation of A.",
                 "Both A and R are true but R is NOT the correct explanation of A.",
                 "A is true but R is false.",
-                "A is false but R is true."    ],
+                "A is false but R is true."
+                ],
                 answer: "Both A and R are true and R is the correct explanation of A.",
                 imageUrl: "10.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -494,7 +526,8 @@ const quizzes = [
                 "A and D only",
                 "A and B only",
                 "A, B and C only",
-                "A, C and D only"    ],
+                "A, C and D only"
+                ],
                 answer: "A, C and D only",
                 imageUrl: "11.png", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -505,7 +538,8 @@ const quizzes = [
                 "TH cells",
                 "Basophils",
                 "Eosinophils",
-                "B-lymphocytes"    ],
+                "B-lymphocytes"
+                ],
                 answer: "TH cells",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -516,7 +550,8 @@ const quizzes = [
                 "BAC",
                 "pBR322",
                 "YAC",
-                "Probe"    ],
+                "Probe"
+                ],
                 answer: "Probe",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -527,7 +562,8 @@ const quizzes = [
                 "hairs, tympanic membrane and mammary glands",
                 "hairs, pinna and mammary glands",
                 "hairs, pinna and indirect development",
-                "pinna, monocondylic skull and mammary glands"    ],
+                "pinna, monocondylic skull and mammary glands"
+                ],
                 answer: "hairs, pinna and mammary glands",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -538,7 +574,8 @@ const quizzes = [
                 "Limbic system and hypothalamus",
                 "Corpora quadrigemina and hippocampus",
                 "Brain stem and epithalamus",
-                "Corpus callosum and thalamus"    ],
+                "Corpus callosum and thalamus"
+                ],
                 answer: "Limbic system and hypothalamus",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -549,7 +586,8 @@ const quizzes = [
                 "Dark brown body colour and anal cerci",
                 "Presence of anal styles",
                 "Presence of sclerites",
-                "Presence of anal cerci"    ],
+                "Presence of anal cerci"
+                ],
                 answer: "Presence of anal styles",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -560,7 +598,8 @@ const quizzes = [
                 "It decreases homozygosity.",
                 "It exposes harmful recessive genes but are eliminated by selection.",
                 "Elimination of less desirable genes and accumulation of superior genes takes place due to it.",
-                "It decreases the productivity of inbred population, after continuous inbreeding."    ],
+                "It decreases the productivity of inbred population, after continuous inbreeding."
+                ],
                 answer: "It decreases the productivity of inbred population, after continuous inbreeding.",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -571,7 +610,8 @@ const quizzes = [
                 "200 Ω",
                 "100 Ω",
                 "50 Ω",
-                "400 Ω"    ],
+                "400 Ω"
+                ],
                 answer: "100 Ω",
                 imageUrl: "12.png", // No image for this question
                 timeLimit: 180 // Added time limit for this question
@@ -582,7 +622,8 @@ const quizzes = [
                 "0.27 A",
                 "3.7 A",
                 "2.7 A",
-                "0.37 A"    ],
+                "0.37 A"
+                ],
                 answer: "0.27 A",
                 imageUrl: "", // No image for this question
                 timeLimit: 180 // Added time limit for this question
@@ -593,7 +634,8 @@ const quizzes = [
                 "Along the radius, away from centre",
                 "Along the tangent to its position",
                 "Along the radius towards the centre",
-                "Along the axis of rotation"    ],
+                "Along the axis of rotation"
+                ],
                 answer: "Along the axis of rotation",
                 imageUrl: "", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -604,7 +646,8 @@ const quizzes = [
                 "v/3",
                 "4v/3",
                 "2v/3",
-                "3v/4"    ],
+                "3v/4"
+                ],
                 answer: "4v/3",
                 imageUrl: "", // No image for this question
                 timeLimit: 90 // Added time limit for this question
@@ -615,7 +658,8 @@ const quizzes = [
                 "Zero",
                 "Infinity",
                 "Positive",
-                "Negative"    ],
+                "Negative"
+                ],
                 answer: "Zero",
                 imageUrl: "", // No image for this question
                 timeLimit: 60 // Added time limit for this question
@@ -624,33 +668,54 @@ const quizzes = [
     },
     {
         id: "gk-quiz",
-        name: "General Knowledge Quiz",
-        description: "Test your general knowledge with a variety of questions.",
+        name: "Database Management System (DBMS)",
+        description: "Test on DBMS from ADCA",
+        enabled: false, // This quiz is now disabled by default for demonstration
         questions: [
             {
-                question: "What is the capital of France?",
-                options: ["Berlin", "Madrid", "Paris", "Rome"],
-                answer: "Paris",
+                question: "What is DBMS?",
+                options: [
+                    "A tool for analyzing data",
+                    "A collection of data organized in a systematic way",
+                    "A system for managing hardware resources",
+                    "A collection of software to manipulate databases"
+                ],
+                answer: "A collection of software to manipulate databases",
                 imageUrl: "",
                 timeLimit: 30
             },
             {
                 question: "Which planet is known as the Red Planet?",
-                options: ["Earth", "Mars", "Jupiter", "Venus"],
+                options: [
+                    "Earth",
+                    "Mars",
+                    "Jupiter",
+                    "Venus"
+                ],
                 answer: "Mars",
                 imageUrl: "",
                 timeLimit: 30
             },
             {
                 question: "Who painted the Mona Lisa?",
-                options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"],
+                options: [
+                    "Vincent van Gogh",
+                    "Pablo Picasso",
+                    "Leonardo da Vinci",
+                    "Claude Monet"
+                ],
                 answer: "Leonardo da Vinci",
                 imageUrl: "",
                 timeLimit: 30
             },
             {
                 question: "What is the largest ocean on Earth?",
-                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                options: [
+                    "Atlantic Ocean",
+                    "Indian Ocean",
+                    "Arctic Ocean",
+                    "Pacific Ocean"
+                ],
                 answer: "Pacific Ocean",
                 imageUrl: "",
                 timeLimit: 30
@@ -733,17 +798,20 @@ function renderQuizList() {
         quizCard.innerHTML = `
             <h3>${quiz.name}</h3>
             <p>${quiz.description}</p>
-            <button class="start-quiz-card-btn" data-quiz-id="${quiz.id}">Start Quiz</button>
+            <button class="start-quiz-card-btn" data-quiz-id="${quiz.id}">${quiz.enabled ? 'Start Quiz' : 'Disabled'}</button>
         `;
+        const startButton = quizCard.querySelector('.start-quiz-card-btn');
+        if (!quiz.enabled) {
+            startButton.disabled = true; // Disable the button
+            startButton.classList.add('disabled-button'); // Add a class for styling
+            startButton.textContent = 'Quiz Disabled'; // Change button text
+        } else {
+            startButton.addEventListener('click', (e) => {
+                const quizId = e.target.dataset.quizId;
+                startQuiz(quizId);
+            });
+        }
         quizList.appendChild(quizCard);
-    });
-
-    // Add event listeners to the new "Start Quiz" buttons
-    document.querySelectorAll('.start-quiz-card-btn').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const quizId = e.target.dataset.quizId;
-            startQuiz(quizId);
-        });
     });
 }
 
@@ -753,6 +821,12 @@ function startQuiz(quizId) {
     currentQuiz = quizzes.find(q => q.id === quizId);
     if (!currentQuiz) {
         showInfoModal('Quiz not found!');
+        return;
+    }
+
+    // Ensure quiz is enabled before starting
+    if (!currentQuiz.enabled) {
+        showInfoModal('This quiz is currently disabled and cannot be started.');
         return;
     }
 
