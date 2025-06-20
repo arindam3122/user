@@ -454,7 +454,7 @@ const quizzes = [
                 "A-III, B-I, C-IV, D-II",
                 "A-III, B-IV, C-II, D-I",
                 "A-II, B-III, C-I, D-IV",
-                "A-IV, B-II, C-I, D-III"
+                "A-IV, B-2, C-I, D-III"
                 ],
                 answer: "A-III, B-IV, C-II, D-I",
                 imageUrl: "7.png", // No image for this question
@@ -952,11 +952,11 @@ function startTimer() {
     clearInterval(timerInterval); // Clear any existing timer
     const questionTimeLimit = currentQuiz.questions[currentQuestionIndex].timeLimit;
     timeLeft = questionTimeLimit;
-    timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+    updateTimerDisplay(); // Initial display
 
     timerInterval = setInterval(() => {
         timeLeft--;
-        timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+        updateTimerDisplay(); // Update display every second
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
             // Automatically skip if time runs out and no answer is selected
@@ -976,10 +976,19 @@ function startTimer() {
     }, 1000);
 }
 
+function updateTimerDisplay() {
+    if (timerDisplay) {
+        const minutes = Math.floor(timeLeft / 60); // Calculate minutes
+        const seconds = timeLeft % 60; // Calculate remaining seconds
+        // Pad with leading zero if seconds is less than 10
+        timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+}
+
 function resetTimer(timeLimit) {
     clearInterval(timerInterval);
     timeLeft = timeLimit;
-    timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+    updateTimerDisplay(); // Initial display after reset
     startTimer();
 }
 
