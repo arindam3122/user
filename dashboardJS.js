@@ -696,6 +696,162 @@ const quizzes = [
                 imageUrl: "",
                 timeLimit: 30
             },
+            {
+                question: "Which of the following is not a type of DBMS?",
+                options: [
+                    "Hierarchical DBMS",
+                    "Relational DBMS",
+                    "Object-oriented DBMS",
+                    "Text-based DBMS"
+                ],
+                answer: "Text-based DBMS",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "What are the main objectives of a DBMS?",
+                options: [
+                    "Data integrity, data security, and data redundancy",
+                    "Data manipulation and data analysis",
+                    "Data consistency, data retrieval, and data storage",
+                    "Data input and data output"
+                ],
+                answer: "Data consistency, data retrieval, and data storage",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Which of the following is part of a DBMS architecture?",
+                options: [
+                    "User Interface",
+                    "Query Processor",
+                    "Data Storage Management",
+                    "All of the above"
+                ],
+                answer: "All of the above",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "The three levels of DBMS architecture are:",
+                options: [
+                    "External, Conceptual, Internal",
+                    "Physical, Logical, Conceptual",
+                    "Logical, Physical, Conceptual",
+                    "Internal, Conceptual, Logical"
+                ],
+                answer: "External, Conceptual, Internal",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "The Data Dictionary in DBMS is used to store:",
+                options: [
+                    "Data in a tabular format",
+                    "Metadata about the database",
+                    "Application programs",
+                    "Backup data"
+                ],
+                answer: "Metadata about the database",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Which DBMS component is responsible for handling queries?",
+                options: [
+                    "Query Processor",
+                    "Transaction Manager",
+                    "Database Engine",
+                    "Storage Manager"
+                ],
+                answer: "Query Processor",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Which of the following is a feature of RDBMS?",
+                options: [
+                    "Uses tables for storing data",
+                    "Supports SQL for querying",
+                    "Allows multiple users to access data",
+                    "All of the above"
+                ],
+                answer: "All of the above",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "In a relational database, what is a relation?",
+                options: [
+                    "A table with rows and columns",
+                    "A database with multiple tables",
+                    "A set of related files",
+                    "None of the above"
+                ],
+                answer: "A table with rows and columns",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Which of the following is a primary key constraint in RDBMS?",
+                options: [
+                    "It uniquely identifies each record in a table.",
+                    "It allows duplicate values.",
+                    "It can be null.",
+                    "It refers to another table’s primary key"
+                ],
+                answer: " It uniquely identifies each record in a table.",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "What does SQL stand for?",
+                options: [
+                    "Structured Query Logic",
+                    "Structured Query Language",
+                    "Simple Query Language",
+                    "Sequential Query Language"
+                ],
+                answer: "Structured Query Language",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Which SQL statement is used to retrieve data from a database?",
+                options: [
+                    "SELECT",
+                    "INSERT",
+                    "UPDATE",
+                    "DELETE"
+                ],
+                answer: "SELECT",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "What SQL command is used to remove a table from a database?",
+                options: [
+                    "DELETE",
+                    "DROP",
+                    "REMOVE",
+                    "TRUNCATE"
+                ],
+                answer: "DROP",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Which SQL keyword is used to filter records in a SELECT query?",
+                options: [
+                    "FILTER",
+                    "WHERE",
+                    "HAVING",
+                    "ORDER BY"
+                ],
+                answer: "WHERE",
+                imageUrl: "",
+                timeLimit: 30
+            },
 
         ]
     },
