@@ -1,10 +1,8 @@
-// Sample user data for validation - now includes both general and admin users
+// Sample user data for validation - now includes only general users
     const users = {
       "Arindam Mitra": "Arindam",
       "Shreaya Dey": "none",
       "Prerana Ghosh": "Prerana Ghosh",
-      // General user
-      "admin": "12345", // Admin user
     };
 
     function validateLogin() {
@@ -30,12 +28,8 @@
         localStorage.setItem('loggedInUser', username);
         localStorage.setItem('hasShownLoginMessage', 'false');
 
-        // Conditional redirection based on username
-        if (username === "admin") {
-          window.location.href = "admin.html"; // Redirect admin to admin page
-        } else {
-          window.location.href = "dashboard.html"; // Redirect other users to dashboard
-        }
+        // Redirect all users to dashboard
+        window.location.href = "dashboard.html";
       } else {
         errorDiv.textContent = "Invalid username or password.";
         errorDiv.classList.add('show'); // Show the error message
