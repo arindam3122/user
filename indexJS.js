@@ -2,7 +2,7 @@
     const users = {
       "Arindam Mitra": "Arindam",
       "Shreaya Dey": "none",
-      "Prerana Ghosh": "none",
+      "Prerana Ghosh": "Prerana Ghosh",
       // General user
       "admin": "12345", // Admin user
     };
