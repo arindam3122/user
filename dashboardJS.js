@@ -859,7 +859,7 @@ const quizzes = [
         id: "FCOS",
         name: "Fundamentals of Computers & Operating Systems",
         description: "Test on Fundamentals of Computers & Operating Systems (ADCA)",
-        enabled: false, // to enable put as true or false
+        enabled: true, // to enable put as true or false
         questions: [
             {
                 question: "Who is considered the father of computers?",
@@ -1044,6 +1044,422 @@ const quizzes = [
 
         ]
     },
+    {
+        id: "MS Office & productivity tools",
+        name: "Microsoft Office & Productivity Tools",
+        description: "Test on MS Office & Productivity Tools (ADCA)",
+        enabled: false, // to enable put as true or false
+        questions: [
+            {
+                question: "What is the default font in Microsoft Word?",
+                options: [
+                    "Arial",
+                    "Times New Roman",
+                    "Calibri",
+                    "Courier New"
+                ],
+                answer: "Courier New",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following is NOT a page layout option in MS Word?",
+                options: [
+                    "Portrait",
+                    "Landscape",
+                    "Square",
+                    "Normal"
+                ],
+                answer: "Square",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "How can you apply a template to a new document in Word?",
+                options: [
+                    "Click on File > New > Template",
+                    "Click on Home > Template",
+                    "Click on Insert > Template",
+                    "Templates cannot be used in Word"
+                ],
+                answer: "Click on File > New > Template",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which keyboard shortcut is used to save a document in MS Word?",
+                options: [
+                    "Ctrl + S",
+                    "Ctrl + P",
+                    "Ctrl + A",
+                    "Ctrl + D"
+                ],
+                answer: "Ctrl + S",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "How can you check the spelling and grammar of a document in MS Word?",
+                options: [
+                    "Tools > Spelling and Grammar",
+                    "Review > Spelling & Grammar",
+                    "Home > Proofing",
+                    "File > Check"
+                ],
+                answer: "Review > Spelling & Grammar",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which option allows you to insert a new slide in PowerPoint?",
+                options: [
+                    "Ctrl + N",
+                    "Home > New Slide",
+                    "Insert > New Slide",
+                    "File > Insert Slide"
+                ],
+                answer: "Home > New Slide",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "How do you add a header in MS Excel?",
+                options: [
+                    "Insert > Header",
+                    "View > Header",
+                    "Layout > Header",
+                    "Insert > Text > Header & Footer"
+                ],
+                answer: "Insert > Text > Header & Footer",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "What is a Query in MS Access?",
+                options: [
+                    "A type of table",
+                    "A question asked to a database",
+                    "A form",
+                    "A report"
+                ],
+                answer: "A question asked to a database",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following is an example of conditional formatting in Excel?",
+                options: [
+                    "Changing text color based on cell value",
+                    "Adding a chart to a sheet",
+                    "Creating a pivot table",
+                    "Formatting cells with borders"
+                ],
+                answer: "Changing text color based on cell value",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following features is NOT available in MS PowerPoint?",
+                options: [
+                    "Slide sorter view",
+                    "Slide transitions",
+                    "Pivot tables",
+                    "Slide layouts"
+                ],
+                answer: "Pivot tables",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following can be created in MS Word?",
+                options: [
+                    "Table of Contents",
+                    "Charts",
+                    "Index",
+                    "All of the above"
+                ],
+                answer: "All of the above",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "What feature is used to protect a document in MS Word?",
+                options: [
+                    "Password",
+                    "Read-Only",
+                    "Both a and b",
+                    "Encryption"
+                ],
+                answer: "Both a and b",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which Office program is best for creating a presentation?",
+                options: [
+                    "MS Word",
+                    "MS Excel",
+                    "MS PowerPoint",
+                    "MS Access"
+                ],
+                answer: "MS PowerPoint",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following is used to create a hyperlink in MS Word?",
+                options: [
+                    "Right-click > Hyperlink",
+                    "Insert > Link",
+                    "Ctrl + K",
+                    "All of the above"
+                ],
+                answer: "All of the above",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "Which of the following is a valid way to enter data into an Access database?",
+                options: [
+                    "Enter data directly in the datasheet view",
+                    "Enter data through a form",
+                    "Import data from an external file",
+                    "All of the above"
+                ],
+                answer: "All of the above",
+                imageUrl: "",
+                timeLimit: 60
+            },
+        ]
+        },
+        {
+        id: "",
+        name: "",
+        description: "",
+        enabled: false, // to enable put as true or false
+        questions: [
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+        ]
+        },
+        {
+        id: "",
+        name: "",
+        description: "",
+        enabled: false, // to enable put as true or false
+        questions: [
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+        ]
+        },
+        {
+        id: "",
+        name: "",
+        description: "",
+        enabled: false, // to enable put as true or false
+        questions: [
+            {
+                question: "",
+                options: [
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+                answer: "",
+                imageUrl: "",
+                timeLimit: 60
+            },
+        ]
+        },
 ];
 
 
