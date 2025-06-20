@@ -38,7 +38,7 @@ body {
     }
     .input-field-wrapper input {
       width: 100%; /* Make input fill the wrapper */
-      padding: 15px 45px 15px 45px; /* Left padding for icon, right padding for eye icon */
+      padding: 15px 15px 15px 45px; /* Adjust right padding as eye icon is removed */
       border: 1px solid #ddd; /* Lighter border */
       border-radius: 8px; /* Rounded input fields */
       font-size: 1.1em;
@@ -59,27 +59,6 @@ body {
         background: url('https://api.iconify.design/heroicons-solid/lock-closed.svg?color=%23888') no-repeat 15px center;
         background-size: 20px;
     }
-
-    .toggle-password {
-      position: absolute;
-      right: 15px; /* Position inside the input field's padding area */
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      width: 24px;
-      height: 24px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      /* Initial state: eye-slash icon */
-      background-image: url('https://api.iconify.design/heroicons-solid/eye-slash.svg?color=%23888');
-      z-index: 2; /* Ensure the toggle button is above the input field */
-    }
-    .toggle-password.active {
-      /* Active state: eye icon */
-      background-image: url('https://api.iconify.design/heroicons-solid/eye.svg?color=%23888');
-    }
-
     button {
       background: linear-gradient(45deg, #007bff, #00c6ff); /* Gradient button */
       color: white;
