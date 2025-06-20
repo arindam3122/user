@@ -91,7 +91,7 @@ header {
 }
 
 header h1 {
-    color: #007bff;
+    color: #1e9d10;
     margin: 0;
     font-size: 2em;
 }
@@ -105,7 +105,7 @@ header h1 {
     font-weight: bold;
     margin-right: 15px;
     color: #555;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 #headerLogoutButton {
@@ -889,9 +889,6 @@ header h1 {
         margin: 5px 0;
     }
 }
-
-
-
 
 .disabled-button {
     background-color: #cccccc; /* Greyed out background */
