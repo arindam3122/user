@@ -670,7 +670,7 @@ const quizzes = [
         id: "DBMS-quiz",
         name: "Database Management System (DBMS)",
         description: "Test on DBMS from ADCA",
-        enabled: false, // to enable put as true or false
+        enabled: true, // to enable put as true or false
         questions: [
             {
                 question: "What is DBMS?",
@@ -1048,7 +1048,7 @@ const quizzes = [
         id: "MS Office & productivity tools",
         name: "Microsoft Office & Productivity Tools",
         description: "Test on MS Office & Productivity Tools (ADCA)",
-        enabled: false, // to enable put as true or false
+        enabled: true, // to enable put as true or false
         questions: [
             {
                 question: "What is the default font in Microsoft Word?",
@@ -1233,188 +1233,188 @@ const quizzes = [
         ]
         },
         {
-        id: "",
-        name: "",
-        description: "",
-        enabled: false, // to enable put as true or false
+        id: "Internet & Web Technology:",
+        name: "Internet & Web Technology:",
+        description: "Test on Internet & Web Technology (ADCA)",
+        enabled: true, // to enable put as true or false
         questions: [
             {
-                question: "",
+                question: "What is the main function of a web browser?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Send emails",
+                    "Access web pages",
+                    "Store files",
+                    "Connect to Wi-Fi"
                 ],
-                answer: "",
+                answer: "Access web pages",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "Which of the following is not a web browser?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Google Chrome",
+                    "Microsoft Edge",
+                    "Mozilla Firefox",
+                    "Microsoft Office"
                 ],
-                answer: "",
+                answer: "Microsoft Office",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What does the HTTP protocol stand for?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "HyperText Transfer Protocol",
+                    "HyperTerminal Transfer Protocol",
+                    "HyperText Terminal Protocol",
+                    "Hyper Transfer Protocol"
                 ],
-                answer: "",
+                answer: "HyperText Transfer Protocol",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What does the URL “www.example.com” represent?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "The protocol",
+                    "The domain name",
+                    "The file location",
+                    "The IP address"
                 ],
-                answer: "",
+                answer: "The domain name",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "Which search engine is the most popular globally?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Bing",
+                    "Yahoo",
+                    "Google",
+                    "DuckDuckGo"
                 ],
-                answer: "",
+                answer: "Google",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What is SEO in the context of web search?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Search Engine Optimization",
+                    "Simple Entry Options",
+                    "Secure Encryption Online",
+                    "Search Evaluation Operation"
                 ],
-                answer: "",
+                answer: "Search Engine Optimization",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "Which of the following is NOT a search engine?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Google",
+                    "Bing",
+                    "Amazon",
+                    "Yahoo"
                 ],
-                answer: "",
+                answer: "Amazon",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "Which of the following is a widely used email service?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Gmail",
+                    "Skype",
+                    "Facebook Messenger",
+                    "WhatsApp"
                 ],
-                answer: "",
+                answer: "Gmail",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What is the primary purpose of cloud storage?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Store software",
+                    "Store files online for remote access",
+                    "Send emails",
+                    "Generate random passwords"
                 ],
-                answer: "",
+                answer: "Store files online for remote access",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What social media platform is primarily for professional networking?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Instagram",
+                    "LinkedIn",
+                    "Snapchat",
+                    "Twitter"
                 ],
-                answer: "",
+                answer: "LinkedIn",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What is the primary function of social media platforms?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "File storage",
+                    "User interaction and content sharing",
+                    "Secure communication",
+                    "Software downloads"
                 ],
-                answer: "",
+                answer: "User interaction and content sharing",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What does the acronym “DM” stand for in social media?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Digital Media",
+                    "Direct Message",
+                    "Download Manager",
+                    "Data Management"
                 ],
-                answer: "",
+                answer: "Direct Message",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What is the purpose of using a strong password?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "To make passwords easier to remember",
+                    "To prevent unauthorized access to accounts",
+                    "To store sensitive data",
+                    "To manage multiple accounts"
                 ],
-                answer: "",
+                answer: "To prevent unauthorized access to accounts",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "Which of the following is an example of two-factor authentication (2FA)?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "A password and a CAPTCHA",
+                    "A password and a fingerprint scan",
+                    "A password and a phone call",
+                    "A password and a username"
                 ],
-                answer: "",
+                answer: "A password and a fingerprint scan",
                 imageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What is a VPN (Virtual Private Network) primarily used for?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "To boost the speed of the internet",
+                    "To hide the user's IP address and encrypt their connection",
+                    "To enhance social media usage",
+                    "To store data securely"
                 ],
-                answer: "",
+                answer: "To hide the user's IP address and encrypt their connection",
                 imageUrl: "",
                 timeLimit: 60
             },
