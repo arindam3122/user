@@ -1967,3 +1967,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // This block already handles initial redirection/display, but ensure goToDashboard is called last
     // The previous DOMContentLoaded listener handles auth, then calls goToDashboard
 });
+
+
+
+
+
+
+
+function renderQuizList() {
+    quizList.innerHTML = ''; // Clear existing quiz cards
+
+    // Separate enabled and disabled quizzes
+    const enabledQuizzes = quizzes.filter(quiz => quiz.enabled);
+    const disabledQuizzes = quizzes.filter(quiz => !quiz.enabled);
+
+    // Combine them, with enabled quizzes first
+    const sortedQuizzes = [...enabledQuizzes, ...disabledQuizzes];
+
+    sortedQuizzes.forEach(quiz => { // Use the sorted list
+        const quizCard = document.createElement('div');
+        quizCard.classList.add('quiz-card');
+        quizCard.innerHTML = `
+            <h3>${quiz.name}</h3>
+            <p>${quiz.description}</p>
+            <button class="start-quiz-card-btn" data-quiz-id="${quiz.id}">${quiz.enabled ? 'Start Quiz' : 'Disabled'}</button>
+        `;
+        const startButton = quizCard.querySelector('.start-quiz-card-btn');
+        if (!quiz.enabled) {
+            startButton.disabled = true; // Disable the button
+            startButton.classList.add('disabled-button'); // Add a class for styling
+            startButton.textContent = 'Quiz Disabled'; // Change button text
+        } else {
+            startButton.addEventListener('click', (e) => {
+                const quizId = e.target.dataset.quizId;
+                startQuiz(quizId);
+            });
+        }
+        quizList.appendChild(quizCard);
+    });
+}
