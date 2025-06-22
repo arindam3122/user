@@ -2,7 +2,7 @@
     const users = {
       "Arindam Mitra": "Arindam",
       "Shreaya Dey": "none",
-      "Prerana Ghosh": "Prerana Ghosh",
+      "Prerana": "Pre",
     };
 
     function validateLogin() {
