@@ -146,7 +146,7 @@ const quizzes = [
         id: "neet-biology",
         name: "NEET Biology MCQ",
         description: "A comprehensive quiz covering Botany, Zoology, and Physics topics for NEET.",
-        enabled: true, // New property: set to true to enable the quiz, false to disable
+        enabled: false, // New property: set to true to enable the quiz, false to disable
         questions: [
             {
                 question: "In angiosperm, the haploid, diploid and triploid structures of a fertilized embryo sac sequentially are:",
@@ -670,7 +670,7 @@ const quizzes = [
         id: "DBMS-quiz",
         name: "Database Management System (DBMS)",
         description: "Test on DBMS from ADCA",
-        enabled: true, // to enable put as true or false
+        enabled: false, // to enable put as true or false
         questions: [
             {
                 question: "What is DBMS?",
@@ -859,7 +859,7 @@ const quizzes = [
         id: "FCOS",
         name: "Fundamentals of Computers & Operating Systems",
         description: "Test on Fundamentals of Computers & Operating Systems (ADCA)",
-        enabled: true, // to enable put as true or false
+        enabled: false, // to enable put as true or false
         questions: [
             {
                 question: "Who is considered the father of computers?",
@@ -1048,7 +1048,7 @@ const quizzes = [
         id: "MS Office & productivity tools",
         name: "Microsoft Office & Productivity Tools",
         description: "Test on MS Office & Productivity Tools (ADCA)",
-        enabled: true, // to enable put as true or false
+        enabled: false, // to enable put as true or false
         questions: [
             {
                 question: "What is the default font in Microsoft Word?",
@@ -1421,22 +1421,58 @@ const quizzes = [
         ]
         },
         {
-        id: "",
-        name: "",
-        description: "",
-        enabled: false, // to enable put as true or false
+        id: "gk",
+        name: "GK Quize",
+        description: "A small demo to my new update. Contains 4 QS of 30sec each.",
+        enabled: true, // to enable put as true or false
         questions: [
             {
-                question: "",
+                question: "Which of the following is NOT a fundamental right in the Indian Constitution?",
                 options: [
-                    "",
-                    "",
-                    "",
-                    ""
+                    "Right to Equality",
+                    "Right to Freedom",
+                    "Right to Property",
+                    "Right to Constitutional Remedies"
                 ],
-                answer: "",
+                answer: "Right to Property",
                 imageUrl: "",
-                timeLimit: 60
+                timeLimit: 30
+            },
+            {
+                question: "What is the name of the first Indian woman to win an Olympic medal?",
+                options: [
+                    "P.T. Usha",
+                    "Karnam Malleswari",
+                    "Saina Nehwal",
+                    "Sania Mirza"
+                ],
+                answer: "Karnam Malleswari",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Which country hosted the 2018 FIFA World Cup?",
+                options: [
+                    "Brazil",
+                    "Germany",
+                    "Russia",
+                    "France"
+                ],
+                answer: "Russia",
+                imageUrl: "",
+                timeLimit: 30
+            },
+            {
+                question: "Which of the following is NOT a greenhouse gas?",
+                options: [
+                    "Carbon Dioxide",
+                    "Methane",
+                    "Oxygen",
+                    "Nitrous Oxide"
+                ],
+                answer: "Oxygen",
+                imageUrl: "",
+                timeLimit: 30
             },
         ]
         },
