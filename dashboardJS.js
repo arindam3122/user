@@ -336,7 +336,7 @@ const quizzes = [
         id: "FCOS",
         name: "Fundamentals of Computers & Operating Systems",
         description: "Test on Fundamentals of Computers & Operating Systems (ADCA)",
-        enabled: false, // to enable put as true or false
+        enabled: true, // to enable put as true or false
         questions: [
             {
                 question: "Who is considered the father of computers?",
