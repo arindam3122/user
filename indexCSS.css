@@ -39,7 +39,7 @@ body {
     .input-field-wrapper input {
       width: 100%; /* Make input fill the wrapper */
       padding: 15px 15px 15px 45px; /* Adjust right padding as eye icon is removed */
-      border: 1px solid #ddd; /* Lighter border */
+      border: 1px solid #490b0b; /* Lighter border */
       border-radius: 8px; /* Rounded input fields */
       font-size: 1.1em;
       transition: border-color 0.3s ease;
