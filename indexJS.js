@@ -1,7 +1,6 @@
 // Sample user data for validation - now includes only general users
     const users = {
       "Arindam Mitra": "Arindam",
-      "Shreaya Dey": "none",
       "Prerana": "Pre",
     };
 
