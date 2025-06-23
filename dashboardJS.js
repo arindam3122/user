@@ -1363,7 +1363,17 @@ function saveQuizResult() {
     const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
 
     const now = new Date();
-    const formattedDate = now.toLocaleString();
+    // Format date as dd/mm/yyyy
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const year = now.getFullYear();
+
+    // Format time as hour:min:sec
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 
     const result = {
         quizId: currentQuiz.id,
@@ -1371,7 +1381,7 @@ function saveQuizResult() {
         score: correctAnswersTotal,
         totalQuestions: currentQuiz.questions.length,
         percentage: ((correctAnswersTotal / currentQuiz.questions.length) * 100).toFixed(2),
-        date: formattedDate,
+        date: formattedDate, // Now includes date and time
         details: quizDetailsForDisplay
     };
 
