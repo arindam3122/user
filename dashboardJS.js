@@ -1548,7 +1548,11 @@ function showPreviousQuizzesSection() {
 
 // --- Dashboard Info Update ---
 function updateDashboardInfo() {
-    const previousQuizzes = JSON.parse(localStorage.getItem('previousQuizzes')) || [];
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) return;
+
+    const userKey = `previousQuizzes_${loggedInUser}`;
+    const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
     const totalQuizzes = previousQuizzes.length;
     totalQuizzesCompleted.textContent = `Total Quizzes Completed: ${totalQuizzes}`;
 
@@ -1559,6 +1563,7 @@ function updateDashboardInfo() {
     } else {
         lastQuizScoreDisplay.style.display = 'none';
     }
+
     totalQuizzesCompleted.style.display = 'block';
 }
 
@@ -1874,9 +1879,14 @@ function displayDetailedResults() {
 
 // --- Local Storage for Previous Quizzes ---
 function saveQuizResult() {
-    const previousQuizzes = JSON.parse(localStorage.getItem('previousQuizzes')) || [];
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) return;
+
+    const userKey = `previousQuizzes_${loggedInUser}`;
+    const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+
     const now = new Date();
-    const formattedDate = now.toLocaleString(); // e.g., "M/D/YYYY, H:MM:SS AM/PM"
+    const formattedDate = now.toLocaleString();
 
     const result = {
         quizId: currentQuiz.id,
@@ -1887,14 +1897,21 @@ function saveQuizResult() {
         date: formattedDate,
         details: quizDetailsForDisplay
     };
+
     previousQuizzes.push(result);
-    localStorage.setItem('previousQuizzes', JSON.stringify(previousQuizzes));
+    localStorage.setItem(userKey, JSON.stringify(previousQuizzes));
 }
 
+
 function loadPreviousQuizzes() {
-    const previousQuizzes = JSON.parse(localStorage.getItem('previousQuizzes')) || [];
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) return;
+
+    const userKey = `previousQuizzes_${loggedInUser}`;
+    const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+
     const tableBody = document.getElementById('previousQuizzesTableBody');
-    tableBody.innerHTML = ''; // Clear existing rows
+    tableBody.innerHTML = '';
     const noQuizzesMessage = document.getElementById('noPreviousQuizzesMessage');
 
     if (previousQuizzes.length === 0) {
@@ -1904,54 +1921,45 @@ function loadPreviousQuizzes() {
         noQuizzesMessage.style.display = 'none';
     }
 
-    // Sort quizzes by date in descending order (most recent first)
     previousQuizzes.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    previousQuizzes.forEach((result) => { // Removed 'index' as it's not used directly here
+    previousQuizzes.forEach((result) => {
         const row = tableBody.insertRow();
-        // Ensure properties exist before trying to access them
-        row.insertCell(0).textContent = result.quizName || 'N/A'; // Quiz Name
-        row.insertCell(1).textContent = `${result.score !== undefined ? result.score : 'N/A'}/${result.totalQuestions !== undefined ? result.totalQuestions : 'N/A'}`; // Score
-        
-        let displayPercentage = 'N/A';
-        if (result.percentage !== undefined && result.percentage !== null && !isNaN(parseFloat(result.percentage))) {
-            displayPercentage = `${parseFloat(result.percentage).toFixed(2)}%`;
-        }
-        row.insertCell(2).textContent = displayPercentage; // Percentage
-        
-        row.insertCell(3).textContent = result.date || 'N/A'; // Date/Time
+        row.insertCell(0).textContent = result.quizName || 'N/A';
+        row.insertCell(1).textContent = `${result.score}/${result.totalQuestions}`;
+        row.insertCell(2).textContent = `${parseFloat(result.percentage).toFixed(2)}%`;
+        row.insertCell(3).textContent = result.date;
 
         const actionsCell = row.insertCell(4);
         const viewButton = document.createElement('button');
         viewButton.textContent = 'View Details';
         viewButton.classList.add('view-details-btn');
-        // Pass the entire result object to showQuizResultsDetails
-        viewButton.onclick = () => showQuizResultsDetails(result); // Removed 'index' from here too as it's not needed by showQuizResultsDetails
+        viewButton.onclick = () => showQuizResultsDetails(result);
         actionsCell.appendChild(viewButton);
 
-        // --- Start of New Code for Delete Button ---
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
-        deleteButton.classList.add('delete-quiz-btn'); // Add a class for styling if needed
+        deleteButton.classList.add('delete-quiz-btn');
         deleteButton.onclick = () => deleteQuizResult(result.quizId, result.date);
         actionsCell.appendChild(deleteButton);
-        // --- End of New Code for Delete Button ---
     });
 }
 
+
 // --- New function to delete a quiz result ---
 function deleteQuizResult(quizIdToDelete, dateToDelete) {
-    let previousQuizzes = JSON.parse(localStorage.getItem('previousQuizzes')) || [];
-    
-    // Filter out the quiz that matches both quizId and date
-    const updatedQuizzes = previousQuizzes.filter(quiz => 
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) return;
+
+    const userKey = `previousQuizzes_${loggedInUser}`;
+    let previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+
+    const updatedQuizzes = previousQuizzes.filter(quiz =>
         !(quiz.quizId === quizIdToDelete && quiz.date === dateToDelete)
     );
-    
-    localStorage.setItem('previousQuizzes', JSON.stringify(updatedQuizzes));
-    showInfoModal('Quiz result deleted successfully!');
-    loadPreviousQuizzes(); // Reload the table to reflect the deletion
-    updateDashboardInfo(); // Update dashboard info as total quizzes completed might change
+
+    localStorage.setItem(userKey, JSON.stringify(updatedQuizzes));
+    loadPreviousQuizzes(); // Refresh the view
 }
 
 
