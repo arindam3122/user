@@ -2,7 +2,7 @@
     const users = {
       "Arindam Mitra": "Arindam",
       "Prerana": "Pre",
-      "Shreaya Dey": "14062006"
+      "Shreaya Dey": "14062006",
     };
 
     function validateLogin() {
