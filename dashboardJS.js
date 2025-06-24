@@ -991,7 +991,7 @@ const quizzes = [
         id: "",
         name: "",
         description: "",
-        enabled: true, // to enable put as true or false
+        enabled: false, // to enable put as true or false
         questions: [
             {
                 question: "",
