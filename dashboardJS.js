@@ -935,7 +935,7 @@ const quizzes = [
         id: "gk",
         name: "GK Quize",
         description: "A small demo to my new update. Contains 4 QS of 30sec each.",
-        enabled: true, // to enable put as true or false
+        enabled: false, // to enable put as true or false
         questions: [
             {
                 question: "Which of the following is NOT a fundamental right in the Indian Constitution?",
