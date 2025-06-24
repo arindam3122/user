@@ -25,6 +25,7 @@ body {
       width: 180px; /* Further increased logo size */
       height: 180px; /* Further increased logo size */
       object-fit: contain;
+      border-radius: 30px;
     }
     h2 {
       color: #333;
