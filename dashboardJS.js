@@ -559,7 +559,7 @@ const quizzes = [
         id: "MS Office & productivity tools",
         name: "Microsoft Office & Productivity Tools",
         description: "Test on MS Office & Productivity Tools (ADCA)",
-        enabled: true, // to enable put as true or false
+        enabled: false, // to enable put as true or false
         questions: [
             {
                 question: "What is the default font in Microsoft Word?",
@@ -935,7 +935,7 @@ const quizzes = [
         id: "gk",
         name: "GK Quize",
         description: "A small demo to my new update. Contains 4 QS of 30sec each.",
-        enabled: false, // to enable put as true or false
+        enabled: true, // to enable put as true or false
         questions: [
             {
                 question: "Which of the following is NOT a fundamental right in the Indian Constitution?",
