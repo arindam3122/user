@@ -53,6 +53,7 @@ let quizDetailsForDisplay = [];
 
 let timeLeft = 0;
 let timerInterval;
+let timeUpMessageTimeout; // Added for the temporary time-up message
 
 /**
  * Displays a custom information/alert modal.
@@ -81,6 +82,31 @@ function hideInfoModal() {
     setTimeout(() => {
         modal.style.display = 'none';
     }, 200);
+}
+
+/**
+ * Displays a temporary "Time's Up" message.
+ */
+function showTimeUpMessage() {
+    let timeUpMessageElement = document.getElementById('timeUpMessage');
+    if (!timeUpMessageElement) {
+        timeUpMessageElement = document.createElement('div');
+        timeUpMessageElement.id = 'timeUpMessage';
+        timeUpMessageElement.className = 'time-up-message';
+        // Append to main-content or body, depending on desired overlay behavior
+        document.querySelector('.main-content').appendChild(timeUpMessageElement); 
+    }
+
+    timeUpMessageElement.textContent = "Time's up! Moving to the next question.";
+    timeUpMessageElement.classList.add('show');
+
+    if (timeUpMessageTimeout) {
+        clearTimeout(timeUpMessageTimeout);
+    }
+
+    timeUpMessageTimeout = setTimeout(() => {
+        timeUpMessageElement.classList.remove('show');
+    }, 3000); // Message visible for 3 seconds
 }
 
 
@@ -1204,6 +1230,13 @@ function handleNextButtonClick() {
 
 function handleSubmitButtonClick() {
     clearInterval(timerInterval); // Stop the timer when quiz is submitted
+    if (timeUpMessageTimeout) { // Clear any pending time-up message timeout
+        clearTimeout(timeUpMessageTimeout);
+        const timeUpMessageElement = document.getElementById('timeUpMessage');
+        if (timeUpMessageElement) {
+            timeUpMessageElement.classList.remove('show');
+        }
+    }
     calculateResults();
     saveQuizResult();
     showFinalScoreSection();
@@ -1243,11 +1276,12 @@ function startTimer() {
             // If time runs out, mark the answer as 'Time_Up_Auto_Answer'
             if (userAnswers[currentQuestionIndex] === null) {
                 userAnswers[currentQuestionIndex] = "Time_Up_Auto_Answer"; // Use a unique string to mark 'time up'
-                showInfoModal("Time's up! Question moved to next."); // Inform the user
-            } else {
-                // If an answer was already selected but time ran out before clicking next/submit
-                showInfoModal("Time's up!");
-            }
+                showTimeUpMessage(); // Display temporary time-up message
+            } 
+            // else {
+            //     // If an answer was already selected but time ran out before clicking next/submit
+            //     // No modal needed, as behavior is to simply advance or submit
+            // }
 
             if (currentQuestionIndex < currentQuiz.questions.length - 1) {
                 currentQuestionIndex++;
