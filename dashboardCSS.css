@@ -8,6 +8,11 @@ body {
     min-height: 100vh; /* Ensures body takes at least full viewport height */
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
+.heading{
+    color: #1d8836;
+    font-weight: 700;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
 /* Navigation Bar - Left Sidebar */
 nav {
