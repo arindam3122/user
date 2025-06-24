@@ -24,65 +24,74 @@
 
   <div class="main-content">
     <header>
-      <h1 id="welcomeHeading"></h1>
+      <h1>Quiz Dashboard</h1>
       <div class="user-info">
-        <span id="usernameDisplay"></span>
-        <button id="headerLogoutButton"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        <span>Welcome, <span id="usernameDisplay"></span>!</span>
+        <button id="headerLogoutButton">Logout <i class="fas fa-sign-out-alt"></i></button>
       </div>
     </header>
 
     <div class="welcome-message" id="loginSuccessMessage">
-        You have successfully logged in!
+      Login successful! Welcome to your Dashboard.
     </div>
 
     <div class="welcome-message" id="quizCompletedMessage">
-        Quiz completed successfully!
-    </div>
-
-    <div class="quiz-selection-container" id="quizSelectionContainer">
-      <h2>Select a Quiz to Start</h2>
-      <div id="quizList" class="quiz-list">
-        </div>
+        Quiz completed! Check your results.
     </div>
 
     <div class="quiz-info-box" id="quizInfoBox">
-        <h2 id="quizInfoHeading">Welcome to LinkUp!</h2>
-        <p><strong>To start please go to "Start Quize" tab.</strong> </strong></p>
-        <p id="lastQuizScoreDisplay" style="display:none;"></p>
-        <div id="totalQuizzesCompleted" style="display:none;"></div>
+      <h2 id="quizInfoHeading">Your Dashboard</h2>
+      <p id="totalQuizzesCompleted">Total Quizzes Completed: 0</p>
+      <p id="lastQuizScoreDisplay" style="display: none;"></p>
+      <p>Select a quiz from the "Start Quiz" section or view your past results.</p>
+    </div>
+
+    <div class="quiz-selection-container" id="quizSelectionContainer">
+        <h2>Select a Quiz</h2>
+        <div id="quizList" class="quiz-list">
+            </div>
     </div>
 
     <div class="quiz-container" id="quizContainer">
-        <h2 id="quizTitle"></h2>
-        <div class="timer-container" id="timerDisplay">Time Left: --s</div>
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar">0%</div>
+      <h2 id="quizTitle"></h2>
+      <div class="timer-container">
+        <span id="timerDisplay">Time Left: --:--</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar">0%</div>
+      </div>
+      <img id="questionImage" class="question-image" src="" alt="Question Image" style="display: none;">
+      <p class="question" id="questionText"></p>
+      <div class="options" id="optionsContainer">
         </div>
-        <img id="questionImage" class="question-image" src="" alt="Question Image" style="display:none;">
-        <p class="question" id="questionText"></p>
-        <div class="options" id="optionsContainer">
-            </div>
-        <div class="quiz-navigation">
-            <button id="prevButton"><i class="fas fa-arrow-left"></i> Previous</button>
-            <button id="skipButton"><i class="fas fa-forward"></i> Skip</button>
-            <button id="nextButton"><i class="fas fa-arrow-right"></i> Next</button>
-            <button id="submitButton" style="display:none;"><i class="fas fa-check-circle"></i> Submit Quiz</button>
-        </div>
+      <div class="quiz-navigation">
+        <button id="prevButton"><i class="fas fa-arrow-left"></i> Previous</button>
+        <button id="skipButton"><i class="fas fa-forward"></i> Skip</button>
+        <button id="nextButton">Next <i class="fas fa-arrow-right"></i></button>
+        <button id="submitButton">Submit <i class="fas fa-check-circle"></i></button>
+      </div>
     </div>
 
     <div class="final-score-container" id="finalScoreContainer">
-      <h2>Quiz Completed!</h2>
-      <p>Your Score: <span id="scoreDisplay"></span></p>
-      <p>Correct Answers: <span id="correctAnswersCount"></span></p>
-      <p>Wrong Answers: <span id="wrongAnswersCount"></span></p>
-      <p>Skipped Questions: <span id="skippedQuestionsCount"></span></p>
-      <p>Percentage: <span id="percentageScore"></span></p>
+      <h2>Quiz Finished!</h2>
+      <p>Your Score: <span id="scoreDisplay" class="score-value">0/0</span></p>
+      <p>Correct Answers: <span id="correctAnswersCount" class="score-value">0</span></p>
+      <p>Wrong Answers: <span id="wrongAnswersCount" class="score-value">0</span></p>
+      <p>Skipped Questions: <span id="skippedQuestionsCount" class="score-value">0</span></p>
+      <p>Percentage: <span id="percentageScore" class="score-value">0%</span></p>
       <button id="viewResultsButton" class="results-btn"><i class="fas fa-poll"></i> View Detailed Results</button>
       <button id="returnToDashboardButton" class="back-to-score-btn"><i class="fas fa-home"></i> Return to Dashboard</button>
     </div>
 
     <div class="quiz-results-details" id="quizResultsDetails">
         <h2>Detailed Results</h2>
+        <div class="results-summary">
+            <p>Correct: <span id="summaryCorrect">0</span></p>
+            <p>Wrong: <span id="summaryWrong">0</span></p>
+            <p>Skipped: <span id="summarySkipped">0</span></p>
+            <p>Time's Up: <span id="summaryTimeUp">0</span></p>
+            <p>Total Questions: <span id="summaryTotalQuestions">0</span></p>
+        </div>
         <div id="quizResultsDetailsContainer" class="results-grid">
             </div>
         <button class="back-to-score-btn" id="quizResultsBackButton">Back</button>
@@ -114,6 +123,8 @@
             <button id="infoOkButton" class="info-ok-btn">OK</button>
         </div>
     </div>
+
+    <div id="timeUpMessage" class="time-up-message"></div>
 
   <script src="dashboardJS.js"></script>
 </body>

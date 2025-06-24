@@ -43,6 +43,14 @@ const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
 // const welcomeMessageDiv = document.querySelector('.welcome-message'); // This was causing an issue by selecting both messages
 const totalQuizzesCompleted = document.getElementById('totalQuizzesCompleted');
 
+// Add these new const declarations for the summary elements
+const summaryCorrect = document.getElementById('summaryCorrect');
+const summaryWrong = document.getElementById('summaryWrong');
+const summarySkipped = document.getElementById('summarySkipped');
+const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
+const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
+
+
 let currentQuiz = null;
 let currentQuestionIndex = 0;
 let userAnswers = [];
@@ -939,7 +947,7 @@ const quizzes = [
                 ],
                 answer: "Right to Property",
                 imageUrl: "",
-                timeLimit: 2
+                timeLimit: 3
             },
             {
                 question: "What is the name of the first Indian woman to win an Olympic medal?",
@@ -1315,7 +1323,7 @@ function calculateResults() {
     correctAnswersTotal = 0;
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
-    let timeUpQuestionsTotal = 0; // New counter for time-up questions
+    let timeUpQuestionsTotal = 0; // Ensure this is locally declared here
     quizDetailsForDisplay = [];
 
     currentQuiz.questions.forEach((question, index) => {
@@ -1374,15 +1382,25 @@ function calculateResults() {
     scoreDisplay.textContent = `${correctAnswersTotal}/${totalQuestions}`;
     correctAnswersCount.textContent = correctAnswersTotal;
     wrongAnswersCount.textContent = wrongAnswersTotal;
-    // Update skippedQuestionsCount to include both explicit skips and time-ups if you wish,
-    // or display timeUpQuestionsTotal separately. For now, let's update skipped to include both for simplicity on the dashboard.
-    // If you want "Time's Up" to be a completely distinct count on the summary, you'll need another display element.
-    skippedQuestionsCount.textContent = skippedQuestionsTotal + timeUpQuestionsTotal; // Showing total unattempted/timed-out
+    // Update skippedQuestionsCount for the final score page to show explicit skips only
+    // If you want time-up to be part of "skipped" here, keep previous logic.
+    // If you want it separate on dashboard summary, you'd need another element there.
+    skippedQuestionsCount.textContent = skippedQuestionsTotal;
 
     percentageScore.textContent = `${percentage.toFixed(2)}%`;
 
     viewResultsButton.onclick = displayDetailedResults;
     returnToDashboardButton.onclick = goToDashboard;
+
+    // Store these values for the detailed results summary if needed elsewhere,
+    // or just pass them to displayDetailedResults
+    this.quizSummaryData = { // Store on a common object, or directly pass
+        correct: correctAnswersTotal,
+        wrong: wrongAnswersTotal,
+        skipped: skippedQuestionsTotal,
+        timeUp: timeUpQuestionsTotal,
+        total: totalQuestions
+    };
 }
 
 function displayDetailedResults() {
@@ -1390,13 +1408,29 @@ function displayDetailedResults() {
     const resultsContainer = document.getElementById('quizResultsDetailsContainer');
     resultsContainer.innerHTML = ''; // Clear previous results
 
-    // This check was only relevant if 'result' was passed as a parameter,
-    // but here we are using quizDetailsForDisplay directly.
-    // if (!result || !result.details || result.details.length === 0) {
-    //     resultsContainer.innerHTML = '<p style="text-align: center; color: #777;">No detailed results available for this quiz.</p>';
-    //     document.getElementById('quizResultsBackButton').onclick = showPreviousQuizzesSection;
-    //     return;
-    // }
+    // Update the summary section
+    if (this.quizSummaryData) { // Check if summary data exists
+        summaryCorrect.textContent = this.quizSummaryData.correct;
+        summaryWrong.textContent = this.quizSummaryData.wrong;
+        summarySkipped.textContent = this.quizSummaryData.skipped;
+        summaryTimeUp.textContent = this.quizSummaryData.timeUp; // Set the new time-up count
+        summaryTotalQuestions.textContent = this.quizSummaryData.total;
+    } else {
+        // Fallback if summary data isn't set (shouldn't happen with current flow)
+        summaryCorrect.textContent = correctAnswersTotal;
+        summaryWrong.textContent = wrongAnswersTotal;
+        summarySkipped.textContent = skippedQuestionsTotal;
+        // For time-up, you'd need to re-calculate or pass it here if not stored
+        summaryTimeUp.textContent = quizDetailsForDisplay.filter(d => d.timeUp).length;
+        summaryTotalQuestions.textContent = currentQuiz.questions.length;
+    }
+
+
+    if (!quizDetailsForDisplay || quizDetailsForDisplay.length === 0) {
+        resultsContainer.innerHTML = '<p style="text-align: center; color: #777;">No detailed results available for this quiz.</p>';
+        document.getElementById('quizResultsBackButton').onclick = showPreviousQuizzesSection;
+        return;
+    }
 
     quizDetailsForDisplay.forEach(detail => {
         const resultItem = document.createElement('div');
@@ -1522,6 +1556,29 @@ function showQuizResultsDetails(result) { // Removed 'index' from parameters as 
     showQuizResultsDetailsSection();
     const resultsContainer = document.getElementById('quizResultsDetailsContainer');
     resultsContainer.innerHTML = ''; // Clear previous results
+
+    // Update the summary section for historical results
+    if (result && result.details) {
+        const correctCount = result.details.filter(d => d.isCorrect).length;
+        const wrongCount = result.details.filter(d => !d.isCorrect && !d.skipped && !d.timeUp).length;
+        const skippedCount = result.details.filter(d => d.skipped).length;
+        const timeUpCount = result.details.filter(d => d.timeUp).length;
+        const totalCount = result.details.length;
+
+        summaryCorrect.textContent = correctCount;
+        summaryWrong.textContent = wrongCount;
+        summarySkipped.textContent = skippedCount;
+        summaryTimeUp.textContent = timeUpCount;
+        summaryTotalQuestions.textContent = totalCount;
+    } else {
+        // Fallback or clear if no details are present
+        summaryCorrect.textContent = 0;
+        summaryWrong.textContent = 0;
+        summarySkipped.textContent = 0;
+        summaryTimeUp.textContent = 0;
+        summaryTotalQuestions.textContent = 0;
+    }
+
 
     if (!result || !result.details || result.details.length === 0) {
         resultsContainer.innerHTML = '<p style="text-align: center; color: #777;">No detailed results available for this quiz.</p>';
