@@ -1323,7 +1323,7 @@ function calculateResults() {
     correctAnswersTotal = 0;
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
-    let timeUpQuestionsTotal = 0; // Ensure this is locally declared here
+    let timeUpQuestionsTotal = 0; // This variable is correctly declared here.
     quizDetailsForDisplay = [];
 
     currentQuiz.questions.forEach((question, index) => {
@@ -1344,11 +1344,12 @@ function calculateResults() {
         } else if (userAnswer === "Time_Up_Auto_Answer") {
             // Handle questions where time ran out - count separately
             timeUpQuestionsTotal++; // Increment new counter
+            // DO NOT increment wrongAnswersTotal for time-up questions
             quizDetailsForDisplay.push({
                 question: question.question,
                 userAnswer: "Time's Up", // Display "Time's Up" to the user
                 correctAnswer: question.answer,
-                isCorrect: false, // Not correct, but not necessarily "wrong" in the wrongAnswersTotal count
+                isCorrect: false, // Not correct, but also not counted as wrong for score deduction
                 skipped: false,
                 timeUp: true
             });
@@ -1377,15 +1378,17 @@ function calculateResults() {
     });
 
     const totalQuestions = currentQuiz.questions.length;
+    // The percentage calculation already only considers correctAnswersTotal,
+    // so no change is needed here for the score calculation.
     const percentage = (correctAnswersTotal / totalQuestions) * 100;
 
     scoreDisplay.textContent = `${correctAnswersTotal}/${totalQuestions}`;
     correctAnswersCount.textContent = correctAnswersTotal;
     wrongAnswersCount.textContent = wrongAnswersTotal;
-    // Update skippedQuestionsCount for the final score page to show explicit skips only
-    // If you want time-up to be part of "skipped" here, keep previous logic.
-    // If you want it separate on dashboard summary, you'd need another element there.
-    skippedQuestionsCount.textContent = skippedQuestionsTotal;
+    skippedQuestionsCount.textContent = skippedQuestionsTotal; // This is for explicit skips only
+    // Update the summary display for time-up questions
+    // This assumes you have an element to display timeUpQuestionsTotal on the final score screen.
+    // If you want it separate on the dashboard summary, you'd need another element there.
 
     percentageScore.textContent = `${percentage.toFixed(2)}%`;
 
@@ -1398,7 +1401,7 @@ function calculateResults() {
         correct: correctAnswersTotal,
         wrong: wrongAnswersTotal,
         skipped: skippedQuestionsTotal,
-        timeUp: timeUpQuestionsTotal,
+        timeUp: timeUpQuestionsTotal, // Now correctly reflecting the count for time-up
         total: totalQuestions
     };
 }
