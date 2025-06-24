@@ -947,7 +947,7 @@ const quizzes = [
                 ],
                 answer: "Right to Property",
                 imageUrl: "",
-                timeLimit: 360
+                timeLimit: 20
             },
             {
                 question: "What is the name of the first Indian woman to win an Olympic medal?",
@@ -959,7 +959,7 @@ const quizzes = [
                 ],
                 answer: "Karnam Malleswari",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 20
             },
             {
                 question: "Which country hosted the 2018 FIFA World Cup?",
@@ -971,7 +971,7 @@ const quizzes = [
                 ],
                 answer: "Russia",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 20
             },
             {
                 question: "Which of the following is NOT a greenhouse gas?",
@@ -983,7 +983,7 @@ const quizzes = [
                 ],
                 answer: "Oxygen",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 20
             },
         ]
         },
