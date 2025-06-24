@@ -542,6 +542,17 @@ header h1 {
     border-left: 5px solid #ffc107;
 }
 
+/* New CSS for 'Time's Up' */
+.result-item.time-up {
+    border-left: 5px solid #ffcc00; /* Amber/orange color for time up */
+    background-color: #fff8e1; /* Light yellow background */
+}
+
+.result-item .time-up-answer {
+    color: #ff8800; /* A distinct color for "Time's Up" answer text */
+    font-weight: bold;
+}
+
 .quiz-results-details .back-to-score-btn {
     background-color: #6c757d;
     color: white;

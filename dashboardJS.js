@@ -913,7 +913,7 @@ const quizzes = [
                 ],
                 answer: "Right to Property",
                 imageUrl: "",
-                timeLimit: 5
+                timeLimit: 2
             },
             {
                 question: "What is the name of the first Indian woman to win an Olympic medal?",
@@ -1170,7 +1170,7 @@ function handleSkipButtonClick() {
     // If no answer is selected, mark as skipped.
     if (userAnswers[currentQuestionIndex] === null) {
         // userAnswers[currentQuestionIndex] remains null for skipped questions
-        // showInfoModal("Question skipped!"); // REMOVE THIS LINE
+        // showInfoModal("Question skipped!"); // REMOVED THIS LINE
     } else {
         showInfoModal("You have already answered this question, cannot skip.");
         return; // Do not advance if already answered
@@ -1240,10 +1240,12 @@ function startTimer() {
         updateTimerDisplay(); // Update display every second
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            // Automatically skip if time runs out and no answer is selected
+            // If time runs out, mark the answer as 'Time_Up_Auto_Answer'
             if (userAnswers[currentQuestionIndex] === null) {
-                showInfoModal("Time's up! Question skipped.");
+                userAnswers[currentQuestionIndex] = "Time_Up_Auto_Answer"; // Use a unique string to mark 'time up'
+                showInfoModal("Time's up! Question moved to next."); // Inform the user
             } else {
+                // If an answer was already selected but time ran out before clicking next/submit
                 showInfoModal("Time's up!");
             }
 
@@ -1279,6 +1281,7 @@ function calculateResults() {
     correctAnswersTotal = 0;
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
+    let timeUpQuestionsTotal = 0; // New counter for time-up questions
     quizDetailsForDisplay = [];
 
     currentQuiz.questions.forEach((question, index) => {
@@ -1286,13 +1289,26 @@ function calculateResults() {
         const isCorrect = userAnswer === question.answer;
 
         if (userAnswer === null) {
+            // This still catches questions truly skipped by the user clicking 'Skip'
             skippedQuestionsTotal++;
             quizDetailsForDisplay.push({
                 question: question.question,
                 userAnswer: "Skipped",
                 correctAnswer: question.answer,
-                isCorrect: false, // For display purposes, skipped is not correct
-                skipped: true
+                isCorrect: false,
+                skipped: true,
+                timeUp: false
+            });
+        } else if (userAnswer === "Time_Up_Auto_Answer") {
+            // Handle questions where time ran out - count separately
+            timeUpQuestionsTotal++; // Increment new counter
+            quizDetailsForDisplay.push({
+                question: question.question,
+                userAnswer: "Time's Up", // Display "Time's Up" to the user
+                correctAnswer: question.answer,
+                isCorrect: false, // Not correct, but not necessarily "wrong" in the wrongAnswersTotal count
+                skipped: false,
+                timeUp: true
             });
         } else if (isCorrect) {
             correctAnswersTotal++;
@@ -1301,16 +1317,19 @@ function calculateResults() {
                 userAnswer: userAnswer,
                 correctAnswer: question.answer,
                 isCorrect: true,
-                skipped: false
+                skipped: false,
+                timeUp: false
             });
         } else {
+            // This is for explicitly wrong answers (user selected an option, but it was incorrect)
             wrongAnswersTotal++;
             quizDetailsForDisplay.push({
                 question: question.question,
                 userAnswer: userAnswer,
                 correctAnswer: question.answer,
                 isCorrect: false,
-                skipped: false
+                skipped: false,
+                timeUp: false
             });
         }
     });
@@ -1321,10 +1340,13 @@ function calculateResults() {
     scoreDisplay.textContent = `${correctAnswersTotal}/${totalQuestions}`;
     correctAnswersCount.textContent = correctAnswersTotal;
     wrongAnswersCount.textContent = wrongAnswersTotal;
-    skippedQuestionsCount.textContent = skippedQuestionsTotal;
+    // Update skippedQuestionsCount to include both explicit skips and time-ups if you wish,
+    // or display timeUpQuestionsTotal separately. For now, let's update skipped to include both for simplicity on the dashboard.
+    // If you want "Time's Up" to be a completely distinct count on the summary, you'll need another display element.
+    skippedQuestionsCount.textContent = skippedQuestionsTotal + timeUpQuestionsTotal; // Showing total unattempted/timed-out
+
     percentageScore.textContent = `${percentage.toFixed(2)}%`;
 
-    // Add event listeners for final score buttons
     viewResultsButton.onclick = displayDetailedResults;
     returnToDashboardButton.onclick = goToDashboard;
 }
@@ -1334,6 +1356,14 @@ function displayDetailedResults() {
     const resultsContainer = document.getElementById('quizResultsDetailsContainer');
     resultsContainer.innerHTML = ''; // Clear previous results
 
+    // This check was only relevant if 'result' was passed as a parameter,
+    // but here we are using quizDetailsForDisplay directly.
+    // if (!result || !result.details || result.details.length === 0) {
+    //     resultsContainer.innerHTML = '<p style="text-align: center; color: #777;">No detailed results available for this quiz.</p>';
+    //     document.getElementById('quizResultsBackButton').onclick = showPreviousQuizzesSection;
+    //     return;
+    // }
+
     quizDetailsForDisplay.forEach(detail => {
         const resultItem = document.createElement('div');
         resultItem.classList.add('result-item');
@@ -1341,13 +1371,15 @@ function displayDetailedResults() {
             resultItem.classList.add('correct');
         } else if (detail.skipped) {
             resultItem.classList.add('skipped');
+        } else if (detail.timeUp) {
+            resultItem.classList.add('time-up');
         } else {
             resultItem.classList.add('wrong');
         }
 
         resultItem.innerHTML = `
             <p class="question-text-result">${detail.question}</p>
-            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : 'user-answer')}">${detail.userAnswer}</span></p>
+            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
         `;
         resultsContainer.appendChild(resultItem);
@@ -1470,13 +1502,15 @@ function showQuizResultsDetails(result) { // Removed 'index' from parameters as 
             resultItem.classList.add('correct');
         } else if (detail.skipped) {
             resultItem.classList.add('skipped');
+        } else if (detail.timeUp) { // New condition for time up
+            resultItem.classList.add('time-up'); // Add a specific class for styling
         } else {
             resultItem.classList.add('wrong');
         }
 
         resultItem.innerHTML = `
             <p class="question-text-result">${detail.question}</p>
-            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : 'user-answer')}">${detail.userAnswer}</span></p>
+            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
         `;
         resultsContainer.appendChild(resultItem);
@@ -1500,10 +1534,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // This block already handles initial redirection/display, but ensure goToDashboard is called last
     // The previous DOMContentLoaded listener handles auth, then calls goToDashboard
 });
-
-
-
-
 
 
 
