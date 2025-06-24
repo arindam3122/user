@@ -559,7 +559,7 @@ const quizzes = [
         id: "MS Office & productivity tools",
         name: "Microsoft Office & Productivity Tools",
         description: "Test on MS Office & Productivity Tools (ADCA)",
-        enabled: false, // to enable put as true or false
+        enabled: true, // to enable put as true or false
         questions: [
             {
                 question: "What is the default font in Microsoft Word?",
