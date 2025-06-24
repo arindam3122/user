@@ -1168,7 +1168,7 @@ function handleSkipButtonClick() {
     // If no answer is selected, mark as skipped.
     if (userAnswers[currentQuestionIndex] === null) {
         // userAnswers[currentQuestionIndex] remains null for skipped questions
-        showInfoModal("Question skipped!");
+        // showInfoModal("Question skipped!"); // REMOVE THIS LINE
     } else {
         showInfoModal("You have already answered this question, cannot skip.");
         return; // Do not advance if already answered
