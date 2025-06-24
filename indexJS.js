@@ -3,6 +3,7 @@
       "Arindam Mitra": "Arindam",
       "Shreaya Dey": "14062006",
       "Shabnur Khatun": "Shabnur Khatun",
+      "Prerana Ghosh": "Pre",
     };
 
     function validateLogin() {
