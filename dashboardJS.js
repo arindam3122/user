@@ -1107,7 +1107,7 @@ function renderQuizList() {
             startButton.textContent = 'Quiz Disabled'; // Change button text
         } else {
             // Set innerHTML for enabled button including the icon
-            startButton.innerHTML = '<i class="fas fa-arrow-right"></i> Start Quiz'; // [MODIFICATION: Changed to fa-arrow-right]
+            startButton.innerHTML = 'Start Quiz <i class="fas fa-arrow-right"></i>'; // [MODIFICATION: Moved icon after text]
             startButton.addEventListener('click', (e) => {
                 const quizId = e.target.dataset.quizId;
                 startQuiz(quizId);
