@@ -10,17 +10,17 @@
   <link rel="stylesheet" href="dashboardCSS.css">
  </head>
   <body>
-  <nav>
-    <div class="logo-container">
-        <img src="linkup.png" alt="LinkUp Logo" class="logo">
-    </div>
-    <ul>
-      <li><a href="#" id="dashboardLink" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-      <li><a href="#" id="startQuizLink"><i class="fas fa-arrow-right"></i> Start Quiz</a></li>
-      <li><a href="#" id="previousQuizzesLink"><i class="fas fa-history"></i> Previous Quizzes</a></li>
-      <li><a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    </ul>
-  </nav>
+<nav id="sidebar">
+  <div class="logo-container">
+    <img src="linkup.png" alt="LinkUp Logo" class="logo">
+  </div>
+  <ul>
+    <li><a href="#" id="dashboardLink" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+    <li><a href="#" id="startQuizLink"><i class="fas fa-arrow-right"></i> Start Quiz</a></li>
+    <li><a href="#" id="previousQuizzesLink"><i class="fas fa-history"></i> Previous Quizzes</a></li>
+    <li><a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+  </ul>
+</nav>
 
   <div class="main-content">
     <header>
@@ -127,5 +127,6 @@
     <div id="timeUpMessage" class="time-up-message"></div>
 
   <script src="dashboardJS.js"></script>
+</script>
 </body>
 </html>

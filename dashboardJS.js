@@ -1534,13 +1534,13 @@ function loadPreviousQuizzes() {
 
         const actionsCell = row.insertCell(4);
         const viewButton = document.createElement('button');
-        viewButton.textContent = 'View Details';
+        viewButton.innerHTML = '<i class="fas fa-eye"></i> View Details';
         viewButton.classList.add('view-details-btn');
         viewButton.onclick = () => showQuizResultsDetails(result);
         actionsCell.appendChild(viewButton);
 
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
+        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
         deleteButton.classList.add('delete-quiz-btn');
         deleteButton.onclick = () => deleteQuizResult(result.quizId, result.date);
         actionsCell.appendChild(deleteButton);
