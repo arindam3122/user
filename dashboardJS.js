@@ -913,7 +913,7 @@ const quizzes = [
                 ],
                 answer: "Right to Property",
                 imageUrl: "",
-                timeLimit: 30
+                timeLimit: 5
             },
             {
                 question: "What is the name of the first Indian woman to win an Olympic medal?",
@@ -993,6 +993,8 @@ function goToDashboard() {
     quizInfoBox.style.display = 'block';
     updateDashboardInfo(); // Update information on the dashboard
     setActiveLink(dashboardLink);
+    // Clear the timer when navigating to the dashboard
+    clearInterval(timerInterval);
 }
 
 function showQuizSelection() {
