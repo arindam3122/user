@@ -947,7 +947,7 @@ const quizzes = [
                 ],
                 answer: "Right to Property",
                 imageUrl: "",
-                timeLimit: 3
+                timeLimit: 30
             },
             {
                 question: "What is the name of the first Indian woman to win an Olympic medal?",
@@ -991,7 +991,7 @@ const quizzes = [
         id: "",
         name: "",
         description: "",
-        enabled: false, // to enable put as true or false
+        enabled: true, // to enable put as true or false
         questions: [
             {
                 question: "",
