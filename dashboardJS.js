@@ -935,7 +935,7 @@ const quizzes = [
         id: "gk",
         name: "GK Quize",
         description: "A small demo to my new update. Contains 4 QS of 30sec each.",
-        enabled: true, // to enable put as true or false
+        enabled: false, // to enable put as true or false
         questions: [
             {
                 question: "Which of the following is NOT a fundamental right in the Indian Constitution?",
@@ -988,26 +988,44 @@ const quizzes = [
         ]
         },
         {
-        id: "",
-        name: "",
-        description: "",
-        enabled: false, // to enable put as true or false
-        questions: [
+           id: "mixed-demo-quiz",
+           name: "Mixed Question Types Demo",
+           description: "Includes both MCQ and Input-based questions. 3 QS only",
+           enabled: true,
+           questions: [
+    // --- MCQ Question ---
             {
-                question: "",
-                options: [
-                    "",
-                    "",
-                    "",
-                    ""
-                ],
-                answer: "",
-                imageUrl: "",
-                timeLimit: 60
+              question: "Which planet is known as the Red Planet?",
+              type: "mcq", // optional, default is mcq
+              options: [
+                       "Earth",
+                       "Mars",
+                       "Jupiter",
+                       "Venus"
+                    ],
+                    answer: "Mars",
+                    imageUrl: "",
+                    timeLimit: 30
             },
-        ]
-        },
-];
+
+    // --- Input Question ---
+            {
+               question: "20 chocolates cost Rs 320. Find the cost of 35 such chocolates.",
+               type: "input", // required for input-type
+               answer: "560",
+               imageUrl: "",
+               timeLimit: 130
+            },
+    // --- Another Input ---
+            {
+               question: "A car can cover a distance of 522 km on 36 litres of petrol. How far can it travel on 14 litres of petrol?",
+               type: "input",
+               answer: "203km",
+               timeLimit: 130
+             }
+                      ]
+               }
+          ]
 
 
 // --- Helper Functions to Show/Hide Sections ---
@@ -1155,42 +1173,35 @@ function startQuiz(quizId) {
     submitButton.addEventListener('click', handleSubmitButtonClick);
 }
 
-function loadQuestion() {
-    if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
-        return;
-    }
+optionsContainer.innerHTML = '';
 
-    const questionData = currentQuiz.questions[currentQuestionIndex];
-    quizTitle.textContent = currentQuiz.name;
-    questionText.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
+if (questionData.type === 'input') {
+    const inputField = document.createElement('input');
+    inputField.type = 'text';
+    inputField.classList.add('input-answer-field');
+    inputField.placeholder = 'Type your answer here...';
+    inputField.value = userAnswers[currentQuestionIndex] || '';
 
-    if (questionData.imageUrl) {
-        questionImage.src = questionData.imageUrl;
-        questionImage.style.display = 'block';
-    } else {
-        questionImage.style.display = 'none';
-        questionImage.src = ''; // Clear the src if no image
-    }
+    inputField.addEventListener('input', () => {
+        userAnswers[currentQuestionIndex] = inputField.value;
+    });
 
-    optionsContainer.innerHTML = '';
+    optionsContainer.appendChild(inputField);
+} else {
     questionData.options.forEach((option, index) => {
         const optionDiv = document.createElement('div');
         optionDiv.classList.add('option');
         optionDiv.innerHTML = `<span class="option-label">${String.fromCharCode(65 + index)}.</span> <span class="option-text">${option}</span>`;
-        optionDiv.dataset.option = option; // Store the option text
+        optionDiv.dataset.option = option;
         optionDiv.addEventListener('click', () => selectOption(optionDiv, option));
         optionsContainer.appendChild(optionDiv);
 
-        // Highlight selected option if already answered
         if (userAnswers[currentQuestionIndex] === option) {
             optionDiv.classList.add('selected');
         }
     });
-
-    updateProgressBar();
-    updateNavigationButtons();
-    resetTimer(questionData.timeLimit);
 }
+
 
 function selectOption(selectedOptionDiv, optionText) {
     // Remove 'selected' class from all options first
@@ -1231,17 +1242,23 @@ function handleSkipButtonClick() {
 
 
 function handleNextButtonClick() {
-    // Check if an option is selected for the current question
-    if (userAnswers[currentQuestionIndex] === null) {
+    const currentQuestion = currentQuiz.questions[currentQuestionIndex];
+    const answer = userAnswers[currentQuestionIndex];
+
+    if (currentQuestion.type === 'input') {
+        if (!answer || answer.trim() === '') {
+            showInfoModal("Please enter an answer or skip the question.");
+            return;
+        }
+    } else if (answer === null) {
         showInfoModal("Please select an option or skip the question.");
-        return; // Prevent advancing if no option is selected
+        return;
     }
 
     if (currentQuestionIndex < currentQuiz.questions.length - 1) {
         currentQuestionIndex++;
         loadQuestion();
     } else {
-        // If it's the last question, submit the quiz
         handleSubmitButtonClick();
     }
 }
@@ -1333,15 +1350,14 @@ function calculateResults() {
     correctAnswersTotal = 0;
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
-    let timeUpQuestionsTotal = 0; // This variable is correctly declared here.
+    let timeUpQuestionsTotal = 0;
     quizDetailsForDisplay = [];
 
     currentQuiz.questions.forEach((question, index) => {
         const userAnswer = userAnswers[index];
-        const isCorrect = userAnswer === question.answer;
+        let isCorrect = false;
 
         if (userAnswer === null) {
-            // This still catches questions truly skipped by the user clicking 'Skip'
             skippedQuestionsTotal++;
             quizDetailsForDisplay.push({
                 question: question.question,
@@ -1352,35 +1368,33 @@ function calculateResults() {
                 timeUp: false
             });
         } else if (userAnswer === "Time_Up_Auto_Answer") {
-            // Handle questions where time ran out - count separately
-            timeUpQuestionsTotal++; // Increment new counter
-            // DO NOT increment wrongAnswersTotal for time-up questions
+            timeUpQuestionsTotal++;
             quizDetailsForDisplay.push({
                 question: question.question,
-                userAnswer: "Time's Up", // Display "Time's Up" to the user
+                userAnswer: "Time's Up",
                 correctAnswer: question.answer,
-                isCorrect: false, // Not correct, but also not counted as wrong for score deduction
+                isCorrect: false,
                 skipped: false,
                 timeUp: true
             });
-        } else if (isCorrect) {
-            correctAnswersTotal++;
-            quizDetailsForDisplay.push({
-                question: question.question,
-                userAnswer: userAnswer,
-                correctAnswer: question.answer,
-                isCorrect: true,
-                skipped: false,
-                timeUp: false
-            });
         } else {
-            // This is for explicitly wrong answers (user selected an option, but it was incorrect)
-            wrongAnswersTotal++;
+            if (question.type === 'input') {
+                isCorrect = userAnswer.trim().toLowerCase() === question.answer.trim().toLowerCase();
+            } else {
+                isCorrect = userAnswer === question.answer;
+            }
+
+            if (isCorrect) {
+                correctAnswersTotal++;
+            } else {
+                wrongAnswersTotal++;
+            }
+
             quizDetailsForDisplay.push({
                 question: question.question,
                 userAnswer: userAnswer,
                 correctAnswer: question.answer,
-                isCorrect: false,
+                isCorrect,
                 skipped: false,
                 timeUp: false
             });
@@ -1388,30 +1402,22 @@ function calculateResults() {
     });
 
     const totalQuestions = currentQuiz.questions.length;
-    // The percentage calculation already only considers correctAnswersTotal,
-    // so no change is needed here for the score calculation.
     const percentage = (correctAnswersTotal / totalQuestions) * 100;
 
     scoreDisplay.textContent = `${correctAnswersTotal}/${totalQuestions}`;
     correctAnswersCount.textContent = correctAnswersTotal;
     wrongAnswersCount.textContent = wrongAnswersTotal;
-    skippedQuestionsCount.textContent = skippedQuestionsTotal; // This is for explicit skips only
-    // Update the summary display for time-up questions
-    // This assumes you have an element to display timeUpQuestionsTotal on the final score screen.
-    // If you want it separate on the dashboard summary, you'd need another element there.
-
+    skippedQuestionsCount.textContent = skippedQuestionsTotal;
     percentageScore.textContent = `${percentage.toFixed(2)}%`;
 
     viewResultsButton.onclick = displayDetailedResults;
     returnToDashboardButton.onclick = goToDashboard;
 
-    // Store these values for the detailed results summary if needed elsewhere,
-    // or just pass them to displayDetailedResults
-    this.quizSummaryData = { // Store on a common object, or directly pass
+    quizSummaryData = {
         correct: correctAnswersTotal,
         wrong: wrongAnswersTotal,
         skipped: skippedQuestionsTotal,
-        timeUp: timeUpQuestionsTotal, // Now correctly reflecting the count for time-up
+        timeUp: timeUpQuestionsTotal,
         total: totalQuestions
     };
 }
@@ -1564,6 +1570,56 @@ function deleteQuizResult(quizIdToDelete, dateToDelete) {
     loadPreviousQuizzes(); // Refresh the view
 }
 
+function loadQuestion() {
+    if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
+        return;
+    }
+
+    const questionData = currentQuiz.questions[currentQuestionIndex];
+    quizTitle.textContent = currentQuiz.name;
+    questionText.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
+
+    if (questionData.imageUrl) {
+        questionImage.src = questionData.imageUrl;
+        questionImage.style.display = 'block';
+    } else {
+        questionImage.style.display = 'none';
+        questionImage.src = ''; // Clear the src if no image
+    }
+
+    optionsContainer.innerHTML = '';
+
+    if (questionData.type === 'input') {
+        const inputField = document.createElement('input');
+        inputField.type = 'text';
+        inputField.classList.add('input-answer-field');
+        inputField.placeholder = 'Type your answer here...';
+        inputField.value = userAnswers[currentQuestionIndex] || '';
+
+        inputField.addEventListener('input', () => {
+            userAnswers[currentQuestionIndex] = inputField.value;
+        });
+
+        optionsContainer.appendChild(inputField);
+    } else {
+        questionData.options.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.classList.add('option');
+            optionDiv.innerHTML = `<span class="option-label">${String.fromCharCode(65 + index)}.</span> <span class="option-text">${option}</span>`;
+            optionDiv.dataset.option = option;
+            optionDiv.addEventListener('click', () => selectOption(optionDiv, option));
+            optionsContainer.appendChild(optionDiv);
+
+            if (userAnswers[currentQuestionIndex] === option) {
+                optionDiv.classList.add('selected');
+            }
+        });
+    }
+
+    updateProgressBar();
+    updateNavigationButtons();
+    resetTimer(questionData.timeLimit);
+}
 
 function showQuizResultsDetails(result) { // Removed 'index' from parameters as it was unused
     showQuizResultsDetailsSection();
