@@ -1010,7 +1010,7 @@ const quizzes = [
                },
                {
                 id: "test",
-                name: "Mindful eating a path to a healthy body (2nd CHAPTER)",
+                name: "Mindful eating a path to a healthy body (CHAPTER-2)",
                 description: "",
                 enabled: true,
                 questions: [
@@ -1078,42 +1078,42 @@ const quizzes = [
                         type: "input",
                         answer: "31",
                         imageUrl: "",
-                        timeLimit: 180
+                        timeLimit: 300
                     },
                     {
                         question: "A train travels 60 km in the first hour, 90 km in the second hour, and 120 km in the third hour. If the pattern continues, how far will the train travel in the fifth hour? (Write the answer without any units)",
                         type: "input",
                         answer: "180",
                         imageUrl: "",
-                        timeLimit: 180
+                        timeLimit: 300
                     },
                     {
                         question: "If ▲ + ▲ = 8, ▲ + ■ = 10, and ■ + ● = 14, what is the value of ▲ + ■ + ●?",
                         type: "input",
                         answer: "18",
                         imageUrl: "",
-                        timeLimit: 180
+                        timeLimit: 300
                     },
                     {
                         question: "What comes next in the series:- 2, 6, 12, 20, 30, ?",
                         type: "input",
                         answer: "42",
                         imageUrl: "",
-                        timeLimit: 180
+                        timeLimit: 300
                     },
                     {
                         question: "If MANGO = 50, and PEAR = 40, what is the value of APPLE?",
                         type: "input",
                         answer: "54",
                         imageUrl: "",
-                        timeLimit: 180
+                        timeLimit: 300
                     },
                     {
-                        question: "A boy walks 3 km north, then turns right and walks 4 km, then turns right again and walks 3 km. Which direction is he facing?",
+                        question: "A boy walks 3 km north, then turns right and walks 4 km, then turns right again and walks 3 km. Which direction is he facing? (WRITE YOUR ANSWER IN CAPITAL LETTERS ONLY)",
                         type: "input",
-                        answer: "East",
+                        answer: "EAST",
                         imageUrl: "",
-                        timeLimit: 180
+                        timeLimit: 300
                     },
                 ]
                },
