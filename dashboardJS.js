@@ -991,7 +991,7 @@ const quizzes = [
            id: "mixed-demo-quiz",
            name: "Diversity in Living World",
            description: "Includes both MCQ and Input-based questions. 3 QS only",
-           enabled: false,
+           enabled: true,
            questions: [
     // --- MCQ Question ---
             {
@@ -1678,44 +1678,78 @@ function deleteQuizResult(quizIdToDelete, dateToDelete) {
 }
 function downloadQuizResponse(quiz) {
     const doc = new jsPDF();
-    const marginLeft = 10;
+    const pageWidth = doc.internal.pageSize.getWidth();
     let y = 20;
+    const marginLeft = 15;
 
-    doc.setFontSize(16);
-    doc.text(`Quiz Report: ${quiz.quizName}`, marginLeft, y);
+    // Header Title
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.text("📘 Quiz Response Report", pageWidth / 2, y, { align: "center" });
     y += 10;
 
-    doc.setFontSize(12);
-    doc.text(`Date: ${quiz.date}`, marginLeft, y);
-    y += 8;
-    doc.text(`Score: ${quiz.score}/${quiz.totalQuestions}`, marginLeft, y);
-    y += 8;
-    doc.text(`Percentage: ${quiz.percentage}%`, marginLeft, y);
-    y += 12;
+    // Quiz Info Box
+    doc.setDrawColor(0);
+    doc.setFillColor(240, 240, 255); // Light blue background
+    doc.rect(marginLeft, y, pageWidth - 2 * marginLeft, 25, "F"); // Filled rectangle
 
-    doc.setFontSize(11);
+    doc.setFontSize(12);
+    doc.setTextColor(50, 50, 50);
+    y += 8;
+    doc.text(`Quiz Name: ${quiz.quizName}`, marginLeft + 5, y);
+    y += 6;
+    doc.text(`Date Taken: ${quiz.date}`, marginLeft + 5, y);
+    y += 6;
+    doc.text(`Score: ${quiz.score} / ${quiz.totalQuestions} (${quiz.percentage}%)`, marginLeft + 5, y);
+    y += 15;
+
+    // Questions Block
     if (quiz.details && Array.isArray(quiz.details)) {
         quiz.details.forEach((item, i) => {
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 128);
             doc.text(`Q${i + 1}: ${item.question}`, marginLeft, y);
+            y += 7;
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(11);
+
+            // User Answer
+            if (item.userAnswer === item.correctAnswer) {
+                doc.setTextColor(0, 150, 0); // Green
+            } else if (!item.userAnswer || item.userAnswer === "") {
+                doc.setTextColor(200, 100, 0); // Orange
+            } else {
+                doc.setTextColor(200, 0, 0); // Red
+            }
+            doc.text(`Your Answer: ${item.userAnswer || 'Skipped'}`, marginLeft + 5, y);
             y += 6;
-            doc.text(`Your Answer: ${item.userAnswer || 'Skipped'}`, marginLeft + 4, y);
-            y += 6;
-            doc.text(`Correct Answer: ${item.correctAnswer}`, marginLeft + 4, y);
+
+            // Correct Answer
+            doc.setTextColor(0, 0, 0);
+            doc.text(`Correct Answer: ${item.correctAnswer}`, marginLeft + 5, y);
             y += 10;
 
+            // Divider
+            doc.setDrawColor(180);
+            doc.line(marginLeft, y, pageWidth - marginLeft, y);
+            y += 6;
+
+            // Add new page if near bottom
             if (y > 270) {
                 doc.addPage();
                 y = 20;
             }
         });
     } else {
-        doc.text("No detailed answers available.", marginLeft, y);
+        doc.setTextColor(200, 0, 0);
+        doc.text("No answer details available.", marginLeft, y);
     }
 
     const fileName = `${quiz.quizName.replace(/\s+/g, '_')}_Response.pdf`;
     doc.save(fileName);
 }
-
 
 function loadQuestion() {
     if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
