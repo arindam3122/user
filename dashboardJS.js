@@ -935,7 +935,7 @@ const quizzes = [
         id: "gk",
         name: "GK Quize",
         description: "A small demo to my new update. Contains 4 QS of 30sec each.",
-        enabled: false, // to enable put as true or false
+        enabled: true, // to enable put as true or false
         questions: [
             {
                 question: "Which of the following is NOT a fundamental right in the Indian Constitution?",
@@ -1679,8 +1679,13 @@ function deleteQuizResult(quizIdToDelete, dateToDelete) {
 function downloadQuizResponse(quiz) {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
-    let y = 20;
     const marginLeft = 15;
+    const maxLineWidth = pageWidth - 2 * marginLeft;
+    const lineSpacing = 6;
+    let y = 20;
+
+    // Get logged-in user's name from localStorage
+    const loggedInUser = localStorage.getItem('loggedInUser') || 'Unknown User';
 
     // Header Title
     doc.setFontSize(18);
@@ -1688,55 +1693,71 @@ function downloadQuizResponse(quiz) {
     doc.text("📘 Quiz Response Report", pageWidth / 2, y, { align: "center" });
     y += 10;
 
+    // User Name
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(50, 50, 50);
+    doc.text(`User: ${loggedInUser}`, marginLeft, y);
+    y += 8;
+
     // Quiz Info Box
     doc.setDrawColor(0);
-    doc.setFillColor(240, 240, 255); // Light blue background
-    doc.rect(marginLeft, y, pageWidth - 2 * marginLeft, 25, "F"); // Filled rectangle
+    doc.setFillColor(240, 240, 255);
+    doc.rect(marginLeft, y, maxLineWidth, 25, "F");
 
-    doc.setFontSize(12);
-    doc.setTextColor(50, 50, 50);
     y += 8;
     doc.text(`Quiz Name: ${quiz.quizName}`, marginLeft + 5, y);
-    y += 6;
+    y += lineSpacing;
     doc.text(`Date Taken: ${quiz.date}`, marginLeft + 5, y);
-    y += 6;
+    y += lineSpacing;
     doc.text(`Score: ${quiz.score} / ${quiz.totalQuestions} (${quiz.percentage}%)`, marginLeft + 5, y);
     y += 15;
 
-    // Questions Block
+    // Loop through all question responses
     if (quiz.details && Array.isArray(quiz.details)) {
         quiz.details.forEach((item, i) => {
+            // Question
             doc.setFont("helvetica", "bold");
             doc.setFontSize(12);
             doc.setTextColor(0, 0, 128);
-            doc.text(`Q${i + 1}: ${item.question}`, marginLeft, y);
-            y += 7;
-
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(11);
+            const wrappedQuestion = doc.splitTextToSize(`Q${i + 1}: ${item.question}`, maxLineWidth);
+            doc.text(wrappedQuestion, marginLeft, y);
+            y += lineSpacing * wrappedQuestion.length;
 
             // User Answer
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(11);
+            let userAnswerColor;
             if (item.userAnswer === item.correctAnswer) {
-                doc.setTextColor(0, 150, 0); // Green
+                userAnswerColor = [0, 150, 0]; // Green
             } else if (!item.userAnswer || item.userAnswer === "") {
-                doc.setTextColor(200, 100, 0); // Orange
+                userAnswerColor = [200, 100, 0]; // Orange
             } else {
-                doc.setTextColor(200, 0, 0); // Red
+                userAnswerColor = [200, 0, 0]; // Red
             }
-            doc.text(`Your Answer: ${item.userAnswer || 'Skipped'}`, marginLeft + 5, y);
-            y += 6;
+            doc.setTextColor(...userAnswerColor);
+            doc.text("Your Answer:", marginLeft + 5, y);
+            y += lineSpacing;
 
-            // Correct Answer
-            doc.setTextColor(0, 0, 0);
-            doc.text(`Correct Answer: ${item.correctAnswer}`, marginLeft + 5, y);
-            y += 10;
+            const wrappedUserAnswer = doc.splitTextToSize(item.userAnswer || "Skipped", maxLineWidth - 5);
+            doc.text(wrappedUserAnswer, marginLeft + 10, y);
+            y += lineSpacing * wrappedUserAnswer.length;
 
-            // Divider
+            // Correct Answer (always green)
+            doc.setTextColor(0, 150, 0);
+            doc.text("Correct Answer:", marginLeft + 5, y);
+            y += lineSpacing;
+
+            const wrappedCorrectAnswer = doc.splitTextToSize(item.correctAnswer || "N/A", maxLineWidth - 5);
+            doc.text(wrappedCorrectAnswer, marginLeft + 10, y);
+            y += lineSpacing * wrappedCorrectAnswer.length;
+
+            // Divider line
             doc.setDrawColor(180);
             doc.line(marginLeft, y, pageWidth - marginLeft, y);
-            y += 6;
+            y += lineSpacing;
 
-            // Add new page if near bottom
+            // Add page if needed
             if (y > 270) {
                 doc.addPage();
                 y = 20;
@@ -1750,6 +1771,10 @@ function downloadQuizResponse(quiz) {
     const fileName = `${quiz.quizName.replace(/\s+/g, '_')}_Response.pdf`;
     doc.save(fileName);
 }
+s
+
+
+
 
 function loadQuestion() {
     if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
