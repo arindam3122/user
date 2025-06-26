@@ -1069,9 +1069,9 @@ const quizzes = [
 
                 {
                 id: "Logical Reasoning",
-                name: "Problems related to Logical reasoning",
+                name: "Logical reasoning",
                 description: "",
-                enabled: false,
+                enabled: true,
                 questions: [
                     {
                         question: "A number when divided by 5 leaves a remainder of 3, and when divided by 7 leaves a remainder of 4. What is the smallest such number?",
