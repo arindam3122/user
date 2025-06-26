@@ -989,40 +989,137 @@ const quizzes = [
         },
         {
            id: "mixed-demo-quiz",
-           name: "Mixed Question Types Demo",
+           name: "Diversity in Living World",
            description: "Includes both MCQ and Input-based questions. 3 QS only",
            enabled: true,
            questions: [
     // --- MCQ Question ---
             {
-              question: "Which planet is known as the Red Planet?",
+              question: "Which of the following plant types is characterized by a soft, green, and non-woody stem?",
               type: "mcq", // optional, default is mcq
               options: [
-                       "Earth",
-                       "Mars",
-                       "Jupiter",
-                       "Venus"
+                       "Trees",
+                       "Shrubs",
+                       "Herbs",
+                       "Both a and b"
                     ],
-                    answer: "Mars",
+                    answer: "Herbs",
                     imageUrl: "",
                     timeLimit: 30
             },
-
-    // --- Input Question ---
             {
-               question: "20 chocolates cost Rs 320. Find the cost of 35 such chocolates.",
+              question: "Plants that use structures like tendrils, hooks, or adventitious roots to grow vertically by taking support are known as:",
+              type: "mcq", // optional, default is mcq
+              options: [
+                       "Herbs",
+                       "Creepers",
+                       "Shrubs",
+                       "Climbers"
+                    ],
+                    answer: "Climbers",
+                    imageUrl: "",
+                    timeLimit: 30
+            },
+            {
+              question: "Which of the following is an example of a creeper?",
+              type: "mcq", // optional, default is mcq
+              options: [
+                       "Grapevine",
+                       "Pea plant",
+                       "Watermelon",
+                       "Money plant (when climbing a wall)"
+                    ],
+                    answer: "Watermelon",
+                    imageUrl: "",
+                    timeLimit: 30
+            },
+            
+            {
+               question: "What are different types of venatations found in leaves? (Write only two answers with and in between)",
                type: "input", // required for input-type
-               answer: "560",
+               answer: "Reticulate Venation and parallel parallel Venation",
                imageUrl: "",
                timeLimit: 130
             },
-    // --- Another Input ---
             {
-               question: "A car can cover a distance of 522 km on 36 litres of petrol. How far can it travel on 14 litres of petrol?",
-               type: "input",
-               answer: "203km",
+               question: "Identify the images given above",
+               type: "input", // required for input-type
+               answer: "Taproot and Fibrous root",
+               imageUrl: "1.png",
                timeLimit: 130
-             }
+            },
+            {
+              question: "Which of the following features is characteristic of a Monocot plant?",
+              type: "mcq", // optional, default is mcq
+              options: [
+                       "Two cotyledons in the embryo",
+                       "Taproot system",
+                       "Parallel venation in leaves",
+                       "Flower parts in multiples of four or five"
+                    ],
+                    answer: "Parallel venation in leaves",
+                    imageUrl: "",
+                    timeLimit: 30
+            },
+            {
+              question: "A plant with a taproot system and reticulate venation in its leaves is most likely a:",
+              type: "mcq", // optional, default is mcq
+              options: [
+                       "Monocot",
+                       "Gymnosperm",
+                       "Dicot",
+                       "Bryophyte"
+                    ],
+                    answer: "Dicot",
+                    imageUrl: "",
+                    timeLimit: 30
+            },
+            {
+              question: "Which camel has a very thick, shaggy coat to stay warm in cold, snowy places like Ladakh?",
+              type: "mcq", // optional, default is mcq
+              options: [
+                       "The camel from Rajasthan",
+                       "The camel from Ladakh",
+                       "The camel from Africa",
+                       "The camel from Australia"
+                    ],
+                    answer: "The camel from Ladakh",
+                    imageUrl: "",
+                    timeLimit: 30
+            },
+            {
+              question: "What is a common use for the camels in the Nubra Valley of Ladakh?",
+              type: "mcq", // optional, default is mcq
+              options: [
+                       "Riding in hot, sandy deserts",
+                       "Carrying heavy things in cold mountains",
+                       "Living in forests",
+                       "Swimming in rivers"
+                    ],
+                    answer: "Carrying heavy things in cold mountains",
+                    imageUrl: "",
+                    timeLimit: 30
+            },
+            {
+               question: " Describe the two types of Rhododendrons found in different places in planes and mountains:",
+               type: "input", // required for input-type
+               answer: "",
+               imageUrl: "",
+               timeLimit: 130
+            },
+        
+
+
+
+
+
+
+
+
+
+
+
+
                       ]
                }
           ]
