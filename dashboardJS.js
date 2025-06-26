@@ -1064,7 +1064,38 @@ const quizzes = [
                         timeLimit: 30
                     },
                 ]
-               }
+               },
+
+
+                {
+                id: "Logical Reasoning",
+                name: "Problems related to Logical reasoning",
+                description: "",
+                enabled: false,
+                questions: [
+                    {
+                        question: "A number when divided by 5 leaves a remainder of 3, and when divided by 7 leaves a remainder of 4. What is the smallest such number?",
+                        type: "input",
+                        answer: "31",
+                        imageUrl: "",
+                        timeLimit: 120
+                    },
+                    {
+                        question: "A train travels 60 km in the first hour, 90 km in the second hour, and 120 km in the third hour. If the pattern continues, how far will the train travel in the fifth hour? (Write the answer without any units)",
+                        type: "input",
+                        answer: "180",
+                        imageUrl: "",
+                        timeLimit: 120
+                    },
+                    {
+                        question: "If ▲ + ▲ = 8, ▲ + ■ = 10, and ■ + ● = 14, what is the value of ▲ + ■ + ●?",
+                        type: "input",
+                        answer: "18",
+                        imageUrl: "",
+                        timeLimit: 120
+                    },
+                ]
+               },
           ]
 
 
