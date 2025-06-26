@@ -959,11 +959,17 @@ const quizzes = [
                timeLimit: 130
             },
             {
-               question: "Identify the diagram",
-               type: "input", // required for input-type
-               answer: "",
-               imageUrl: "1.png",
-               timeLimit: 130
+                question: "Choose the correct option seeing the diagram?",
+                type: "MCQ",
+                options: [
+                    "Taproot & Fibrous root",
+                    "Fibrous root & Taproot",
+                    "Taproot & Taproot",
+                    "None of these"
+                ],
+                answer: "Taproot & Fibrous root",
+                imageUrl: "1.png",
+                timeLimit: 20
             },
             {
                question: "What are dicot and monocot. Explain their features",
@@ -1001,6 +1007,21 @@ const quizzes = [
                timeLimit: 130
             },
                       ]
+               },
+               {
+                id: "test",
+                name: "Mindful eating a path to a healthy body (2nd CHAPTER)",
+                description: "",
+                enabled: true,
+                questions: [
+                    {
+                        question: "What",
+                        type: "input",
+                        answer: "",
+                        imageUrl: "",
+                        timeLimit: 130
+                    },
+                ]
                }
           ]
 
