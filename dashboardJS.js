@@ -991,7 +991,7 @@ const quizzes = [
            id: "mixed-demo-quiz",
            name: "Diversity in Living World",
            description: "Includes both MCQ and Input-based questions. 3 QS only",
-           enabled: true,
+           enabled: false,
            questions: [
     // --- MCQ Question ---
             {
@@ -1628,7 +1628,7 @@ function loadPreviousQuizzes() {
 
     previousQuizzes.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    previousQuizzes.forEach((result) => {
+    previousQuizzes.forEach((result, index) => {
         const row = tableBody.insertRow();
         row.insertCell(0).textContent = result.quizName || 'N/A';
         row.insertCell(1).textContent = `${result.score}/${result.totalQuestions}`;
@@ -1636,17 +1636,27 @@ function loadPreviousQuizzes() {
         row.insertCell(3).textContent = result.date;
 
         const actionsCell = row.insertCell(4);
+
+        // View button
         const viewButton = document.createElement('button');
         viewButton.innerHTML = '<i class="fas fa-eye"></i> View Details';
         viewButton.classList.add('view-details-btn');
         viewButton.onclick = () => showQuizResultsDetails(result);
         actionsCell.appendChild(viewButton);
 
+        // Delete button
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
         deleteButton.classList.add('delete-quiz-btn');
         deleteButton.onclick = () => deleteQuizResult(result.quizId, result.date);
         actionsCell.appendChild(deleteButton);
+
+        // Download button
+        const downloadButton = document.createElement('button');
+        downloadButton.innerHTML = '<i class="fas fa-download"></i> Download';
+        downloadButton.classList.add('download-response-btn');
+        downloadButton.onclick = () => downloadQuizResponse(result);
+        actionsCell.appendChild(downloadButton);
     });
 }
 
@@ -1664,8 +1674,48 @@ function deleteQuizResult(quizIdToDelete, dateToDelete) {
     );
 
     localStorage.setItem(userKey, JSON.stringify(updatedQuizzes));
-    loadPreviousQuizzes(); // Refresh the view
+    loadPreviousQuizzes();
 }
+function downloadQuizResponse(quiz) {
+    const doc = new jsPDF();
+    const marginLeft = 10;
+    let y = 20;
+
+    doc.setFontSize(16);
+    doc.text(`Quiz Report: ${quiz.quizName}`, marginLeft, y);
+    y += 10;
+
+    doc.setFontSize(12);
+    doc.text(`Date: ${quiz.date}`, marginLeft, y);
+    y += 8;
+    doc.text(`Score: ${quiz.score}/${quiz.totalQuestions}`, marginLeft, y);
+    y += 8;
+    doc.text(`Percentage: ${quiz.percentage}%`, marginLeft, y);
+    y += 12;
+
+    doc.setFontSize(11);
+    if (quiz.details && Array.isArray(quiz.details)) {
+        quiz.details.forEach((item, i) => {
+            doc.text(`Q${i + 1}: ${item.question}`, marginLeft, y);
+            y += 6;
+            doc.text(`Your Answer: ${item.userAnswer || 'Skipped'}`, marginLeft + 4, y);
+            y += 6;
+            doc.text(`Correct Answer: ${item.correctAnswer}`, marginLeft + 4, y);
+            y += 10;
+
+            if (y > 270) {
+                doc.addPage();
+                y = 20;
+            }
+        });
+    } else {
+        doc.text("No detailed answers available.", marginLeft, y);
+    }
+
+    const fileName = `${quiz.quizName.replace(/\s+/g, '_')}_Response.pdf`;
+    doc.save(fileName);
+}
+
 
 function loadQuestion() {
     if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {

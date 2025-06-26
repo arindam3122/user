@@ -1101,3 +1101,18 @@ header h1 {
     color: #aaa;
     font-style: italic;
 }
+.download-response-btn {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+
+.download-response-btn:hover {
+    background-color: #16a085;
+    transform: translateY(-1px);
+}
