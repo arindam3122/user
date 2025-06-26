@@ -993,133 +993,69 @@ const quizzes = [
            description: "Includes both MCQ and Input-based questions. 3 QS only",
            enabled: true,
            questions: [
-    // --- MCQ Question ---
             {
-              question: "Which of the following plant types is characterized by a soft, green, and non-woody stem?",
-              type: "mcq", // optional, default is mcq
-              options: [
-                       "Trees",
-                       "Shrubs",
-                       "Herbs",
-                       "Both a and b"
-                    ],
-                    answer: "Herbs",
-                    imageUrl: "",
-                    timeLimit: 30
-            },
-            {
-              question: "Plants that use structures like tendrils, hooks, or adventitious roots to grow vertically by taking support are known as:",
-              type: "mcq", // optional, default is mcq
-              options: [
-                       "Herbs",
-                       "Creepers",
-                       "Shrubs",
-                       "Climbers"
-                    ],
-                    answer: "Climbers",
-                    imageUrl: "",
-                    timeLimit: 30
-            },
-            {
-              question: "Which of the following is an example of a creeper?",
-              type: "mcq", // optional, default is mcq
-              options: [
-                       "Grapevine",
-                       "Pea plant",
-                       "Watermelon",
-                       "Money plant (when climbing a wall)"
-                    ],
-                    answer: "Watermelon",
-                    imageUrl: "",
-                    timeLimit: 30
-            },
-            
-            {
-               question: "What are different types of venatations found in leaves? (Write only two answers with and in between)",
+               question: "Difference between Herbs, Sherbs and Trees?",
                type: "input", // required for input-type
-               answer: "Reticulate Venation and parallel parallel Venation",
+               answer: "Herbs are small, non-woody plants with soft, green stems. Shrubs are medium-sized plants with multiple woody stems branching from the base. Trees are large, woody plants with a single, thick, and hard stem called a trunk. ",
                imageUrl: "",
                timeLimit: 130
             },
             {
-               question: "Identify the images given above",
+               question: "What are climbers and creepers?",
                type: "input", // required for input-type
-               answer: "Taproot and Fibrous root",
+               answer: "Climbers and creepers are types of plants with weak stems that cannot stand upright on their own. Creepers grow along the ground, while climbers need support to grow upwards. ",
+               imageUrl: "",
+               timeLimit: 130
+            },
+            {
+               question: "What are different types of venation found in leaves?",
+               type: "input", // required for input-type
+               answer: "The two main types of venation found in leaves are reticulate venation and parallel venation. Reticulate venation features a network-like pattern of veins, while parallel venation has veins running parallel to each other. ",
+               imageUrl: "",
+               timeLimit: 130
+            },
+            {
+               question: "Identify the diagram",
+               type: "input", // required for input-type
+               answer: "",
                imageUrl: "1.png",
                timeLimit: 130
             },
             {
-              question: "Which of the following features is characteristic of a Monocot plant?",
-              type: "mcq", // optional, default is mcq
-              options: [
-                       "Two cotyledons in the embryo",
-                       "Taproot system",
-                       "Parallel venation in leaves",
-                       "Flower parts in multiples of four or five"
-                    ],
-                    answer: "Parallel venation in leaves",
-                    imageUrl: "",
-                    timeLimit: 30
+               question: "What are dicot and monocot. Explain their features",
+               type: "input", // required for input-type
+               answer: "Monocots and dicots are the two main groups of flowering plants (angiosperms), distinguished primarily by the number of cotyledons (seed leaves) in their seeds. Monocots have one cotyledon, while dicots have two. This fundamental difference in seed structure is associated with other distinct characteristics in their roots, stems, leaves, and flowers.",
+               imageUrl: "",
+               timeLimit: 130
             },
             {
-              question: "A plant with a taproot system and reticulate venation in its leaves is most likely a:",
-              type: "mcq", // optional, default is mcq
-              options: [
-                       "Monocot",
-                       "Gymnosperm",
-                       "Dicot",
-                       "Bryophyte"
-                    ],
-                    answer: "Dicot",
-                    imageUrl: "",
-                    timeLimit: 30
+               question: "Describe the features of camels found in Rajasthan and Ladakh",
+               type: "input", // required for input-type
+               answer: "Camels in Rajasthan and Ladakh exhibit distinct features adapted to their respective environments. Rajasthan's camels, primarily the dromedary (one-humped) type, are built for arid, hot deserts, while Ladakh's camels, the Bactrian (two-humped), are adapted to the cold, mountainous terrain",
+               imageUrl: "",
+               timeLimit: 130
             },
             {
-              question: "Which camel has a very thick, shaggy coat to stay warm in cold, snowy places like Ladakh?",
-              type: "mcq", // optional, default is mcq
-              options: [
-                       "The camel from Rajasthan",
-                       "The camel from Ladakh",
-                       "The camel from Africa",
-                       "The camel from Australia"
-                    ],
-                    answer: "The camel from Ladakh",
-                    imageUrl: "",
-                    timeLimit: 30
-            },
-            {
-              question: "What is a common use for the camels in the Nubra Valley of Ladakh?",
-              type: "mcq", // optional, default is mcq
-              options: [
-                       "Riding in hot, sandy deserts",
-                       "Carrying heavy things in cold mountains",
-                       "Living in forests",
-                       "Swimming in rivers"
-                    ],
-                    answer: "Carrying heavy things in cold mountains",
-                    imageUrl: "",
-                    timeLimit: 30
-            },
-            {
-               question: " Describe the two types of Rhododendrons found in different places in planes and mountains:",
+               question: "Describe the two types of Rhododendrons found in different places in planes and mountains:",
                type: "input", // required for input-type
                answer: "",
                imageUrl: "",
                timeLimit: 130
             },
-        
-
-
-
-
-
-
-
-
-
-
-
-
+            {
+               question: "What do you mean by Adaptation and what do you mean by Habitat?",
+               type: "input", // required for input-type
+               answer: "Habitat is the natural environment or place where an organism lives, providing the resources necessary for its survival. Adaptation refers to the process by which organisms develop traits or characteristics that enable them to thrive in their specific habitat. Essentially, adaptations are the features that help organisms survive and reproduce in their particular habitat. ",
+               imageUrl: "",
+               timeLimit: 130
+            },
+            {
+               question: "What do you mean by Terrestrial Aquatic and Amphibians animals?",
+               type: "input", // required for input-type
+               answer: "Terrestrial animals live primarily or exclusively on land, aquatic animals live primarily or exclusively in water, and amphibians are a group of animals that can live both on land and in water.",
+               imageUrl: "",
+               timeLimit: 130
+            },
                       ]
                }
           ]
