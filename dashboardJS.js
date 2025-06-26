@@ -932,65 +932,9 @@ const quizzes = [
         ]
         },
         {
-        id: "gk",
-        name: "GK Quize",
-        description: "A small demo to my new update. Contains 4 QS of 30sec each.",
-        enabled: true, // to enable put as true or false
-        questions: [
-            {
-                question: "Which of the following is NOT a fundamental right in the Indian Constitution?",
-                options: [
-                    "Right to Equality",
-                    "Right to Freedom",
-                    "Right to Property",
-                    "Right to Constitutional Remedies"
-                ],
-                answer: "Right to Property",
-                imageUrl: "",
-                timeLimit: 20
-            },
-            {
-                question: "What is the name of the first Indian woman to win an Olympic medal?",
-                options: [
-                    "P.T. Usha",
-                    "Karnam Malleswari",
-                    "Saina Nehwal",
-                    "Sania Mirza"
-                ],
-                answer: "Karnam Malleswari",
-                imageUrl: "",
-                timeLimit: 20
-            },
-            {
-                question: "Which country hosted the 2018 FIFA World Cup?",
-                options: [
-                    "Brazil",
-                    "Germany",
-                    "Russia",
-                    "France"
-                ],
-                answer: "Russia",
-                imageUrl: "",
-                timeLimit: 20
-            },
-            {
-                question: "Which of the following is NOT a greenhouse gas?",
-                options: [
-                    "Carbon Dioxide",
-                    "Methane",
-                    "Oxygen",
-                    "Nitrous Oxide"
-                ],
-                answer: "Oxygen",
-                imageUrl: "",
-                timeLimit: 20
-            },
-        ]
-        },
-        {
            id: "mixed-demo-quiz",
-           name: "Diversity in Living World",
-           description: "Includes both MCQ and Input-based questions. 3 QS only",
+           name: "Diversity in Living World (CHAPTER-1)",
+           description: "Test for class 6 SCIENCE",
            enabled: true,
            questions: [
             {
