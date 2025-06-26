@@ -1015,7 +1015,49 @@ const quizzes = [
                 enabled: true,
                 questions: [
                     {
-                        question: "What",
+                        question: "What are the locally grown crops found in Panjab?",
+                        type: "input",
+                        answer: "In Punjab, the major locally grown crops include wheat and rice, which are staples and form the foundation of the state's agricultural output. Other significant crops include sugarcane, maize, pulses, and oilseeds. Additionally, Punjab also produces various fruits and vegetables, such as kinnow (a type of mandarin orange), guava, mango, potatoes, onions, and tomatoes.",
+                        imageUrl: "",
+                        timeLimit: 130
+                    },
+                    {
+                        question: "Traditional food items eaten in karnataka",
+                        type: "input",
+                        answer: "Karnataka cuisine boasts a wide array of delicious and unique traditional dishes. Some of the most famous include Bisi Bele Bath, a wholesome rice and lentil dish, and Mysore Pak.",
+                        imageUrl: "",
+                        timeLimit: 130
+                    },
+                    {
+                        question: "What do you mean by cultivation?",
+                        type: "input",
+                        answer: "The word contivation is not a standard English word. It appears to be a misspelling or a non-standard variation of cultivation. Cultivation refers to the act of preparing land and growing crops, or the process of developing or improving something through care and attention. ",
+                        imageUrl: "",
+                        timeLimit: 130
+                    },
+                    {
+                        question: "What do you understand by the term culinary practices. Differentiate between Traditional cooking and modern cooking",
+                        type: "input",
+                        answer: "",
+                        imageUrl: "",
+                        timeLimit: 130
+                    },
+                    {
+                        question: "Carbohydrate and fats are also known as?",
+                        type: "input",
+                        answer: "macronutrients. They are essential nutrients that the body needs in large quantities to provide energy and maintain bodily functions.",
+                        imageUrl: "",
+                        timeLimit: 130
+                    },
+                    {
+                        question: "What is carbohydrate and fat? What is its primary source with examples?",
+                        type: "input",
+                        answer: "Carbohydrates and fats are both essential macronutrients that provide the body with energy. Carbohydrates are the body's primary source of quick energy, while fats are a more concentrated source of energy and also play roles in hormone production and cell structure.",
+                        imageUrl: "",
+                        timeLimit: 130
+                    },
+                    {
+                        question: "What is Protein? Another name for Protein?",
                         type: "input",
                         answer: "",
                         imageUrl: "",
