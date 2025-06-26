@@ -1115,6 +1115,20 @@ const quizzes = [
                         imageUrl: "",
                         timeLimit: 300
                     },
+                    {
+                        question: "A train travels 360 km at a uniform speed. If the speed had been 5 km/h more, it would have taken 48 minutes less. Find the speed. (WRITE WITHOUT UNITS)",
+                        type: "input",
+                        answer: "45",
+                        imageUrl: "",
+                        timeLimit: 300
+                    },
+                    {
+                        question: "The sum of the first 10 terms of an AP is 250. If the first term is 10, find the common difference.(WRITE ONLY THE ANSWER IN FORMAT a/b)",
+                        type: "input",
+                        answer: "10/9",
+                        imageUrl: "",
+                        timeLimit: 300
+                    },
                 ]
                },
           ]
