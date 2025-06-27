@@ -2,8 +2,8 @@
     const users = {
       "Arindam Mitra": "Arindam",
       "Shreaya Dey": "14062006",
-      "Shabnur Khatun": "Shabnur Khatun",
-      "Sourav Gangopadhya": "kapuida",
+      "Shabnur Khatun": "none",
+      "Prerana Ghosh": "Pre2007",
     };
 
     function validateLogin() {
