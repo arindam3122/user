@@ -1752,7 +1752,7 @@ function downloadQuizResponse(quiz) {
             doc.text(wrappedUserAnswer, marginLeft + 10, y);
             y += lineSpacing * wrappedUserAnswer.length;
 
-            // Correct Answer (always green)
+            // Correct Answer
             doc.setTextColor(0, 150, 0);
             doc.text("Correct Answer:", marginLeft + 5, y);
             y += lineSpacing;
@@ -1766,7 +1766,6 @@ function downloadQuizResponse(quiz) {
             doc.line(marginLeft, y, pageWidth - marginLeft, y);
             y += lineSpacing;
 
-            // Add page if needed
             if (y > 270) {
                 doc.addPage();
                 y = 20;
@@ -1779,8 +1778,10 @@ function downloadQuizResponse(quiz) {
 
     const fileName = `${quiz.quizName.replace(/\s+/g, '_')}_Response.pdf`;
     doc.save(fileName);
+
+    // Show a modal after saving
+    showInfoModal(`✅ Download completed. Please check your browser's default downloads folder for "${fileName}".`);
 }
-s
 
 
 
