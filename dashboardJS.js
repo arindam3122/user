@@ -935,7 +935,7 @@ const quizzes = [
            id: "mixed-demo-quiz",
            name: "Diversity in Living World (CHAPTER-1)",
            description: "Test for class 6 SCIENCE",
-           enabled: true,
+           enabled: false,
            questions: [
             {
                question: "Difference between Herbs, Sherbs and Trees?",
@@ -1012,7 +1012,7 @@ const quizzes = [
                 id: "test",
                 name: "Mindful eating a path to a healthy body (CHAPTER-2)",
                 description: "",
-                enabled: true,
+                enabled: false,
                 questions: [
                     {
                         question: "What are the locally grown crops found in Panjab?",
