@@ -232,69 +232,99 @@ function setActiveLink(activeLink) {
 // --- Quiz Data (Example Quizzes) ---
 const quizzes = [
 
-        
-                {
-                id: "Logical Reasoning",
-                name: "Logical Reasoning",
-                description: "",
-                enabled: true,
+               {
+                id: "cls-6",
+                name: "Logical Reasoning (PART-1)",
+                description: "Easy wordproblems",
+                enabled: false,
                 questions: [
                     {
-                        question: "A number when divided by 5 leaves a remainder of 3, and when divided by 7 leaves a remainder of 4. What is the smallest such number?",
+                        question: "Rita has 348 apples. She sells 125 apples. How many apples are left with her? (ANSWER THE NUMBER ONLY)",
                         type: "input",
-                        answer: "31",
+                        answer: "223",
                         imageUrl: "",
-                        timeLimit: 300
+                        timeLimit: 180
                     },
                     {
-                        question: "A train travels 60 km in the first hour, 90 km in the second hour, and 120 km in the third hour. If the pattern continues, how far will the train travel in the fifth hour? (Write the answer without any units)",
+                        question: "A packet has 24 chocolates. How many chocolates are there in 15 such packets? (NUMBER ONLY)",
                         type: "input",
-                        answer: "180",
+                        answer: "360",
                         imageUrl: "",
-                        timeLimit: 300
+                        timeLimit: 180
                     },
                     {
-                        question: "If ▲ + ▲ = 8, ▲ + ■ = 10, and ■ + ● = 14, what is the value of ▲ + ■ + ●?",
+                        question: "There are 480 mangoes packed equally in 12 boxes. How many mangoes are there in each box? (NUMBERS ONLY)",
                         type: "input",
-                        answer: "18",
+                        answer: "40",
                         imageUrl: "",
-                        timeLimit: 300
+                        timeLimit: 180
                     },
                     {
-                        question: "What comes next in the series:- 2, 6, 12, 20, 30, ?",
+                        question: "A movie starts at 3:15 PM and ends at 5:45PM. How long is the movie? (Answer in format a hours b min)",
                         type: "input",
-                        answer: "42",
+                        answer: "2 hours 30 min",
                         imageUrl: "",
-                        timeLimit: 300
+                        timeLimit: 180
                     },
                     {
-                        question: "If MANGO = 50, and PEAR = 40, what is the value of APPLE?",
+                        question: "Ankit has ₹500. He buys a book for ₹275. How much money is left with him? (Answer without any units)",
                         type: "input",
-                        answer: "54",
+                        answer: "225",
                         imageUrl: "",
-                        timeLimit: 300
+                        timeLimit: 180
                     },
                     {
-                        question: "A boy walks 3 km north, then turns right and walks 4 km, then turns right again and walks 3 km. Which direction is he facing? (WRITE YOUR ANSWER IN CAPITAL LETTERS ONLY)",
+                        question: "The ages of 4 children are 10, 12, 13 and 15 years. Find their average age.",
                         type: "input",
-                        answer: "EAST",
+                        answer: "12.5",
                         imageUrl: "",
-                        timeLimit: 300
+                        timeLimit: 180
+                    },
+
+                ]
+               },
+               {
+                id: "cls-10",
+                name: "Logical Reasoning (PART-2)",
+                description: "Medium Wordproblems",
+                enabled: false,
+                questions: [
+                    {
+                        question: "The sum of two numbers is 50. One number is 8 more than the other. Find the numbers. (Format a and b)",
+                        type: "input",
+                        answer: "21 and 29",
+                        imageUrl: "",
+                        timeLimit: 180
                     },
                     {
-                        question: "A train travels 360 km at a uniform speed. If the speed had been 5 km/h more, it would have taken 48 minutes less. Find the speed. (WRITE WITHOUT UNITS)",
+                        question: "A rectangular plot has an area of 180m2. Its length is 5m more than its width. Find its dimentions.(Write as a,b where a=width and b=length)",
                         type: "input",
-                        answer: "45",
+                        answer: "12,17",
                         imageUrl: "",
-                        timeLimit: 300
+                        timeLimit: 180
                     },
                     {
-                        question: "The sum of the first 10 terms of an AP is 250. If the first term is 10, find the common difference.(WRITE ONLY THE ANSWER IN FORMAT a/b)",
+                        question: "",
                         type: "input",
-                        answer: "10/9",
+                        answer: "",
                         imageUrl: "",
-                        timeLimit: 300
+                        timeLimit: 180
                     },
+                    {
+                        question: "",
+                        type: "input",
+                        answer: "",
+                        imageUrl: "",
+                        timeLimit: 180
+                    },
+                    {
+                        question: "",
+                        type: "input",
+                        answer: "",
+                        imageUrl: "",
+                        timeLimit: 180
+                    },
+
                 ]
                },
           ]
