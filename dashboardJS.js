@@ -1130,37 +1130,53 @@ function updateDashboardInfo() {
 function renderQuizList() {
     quizList.innerHTML = ''; // Clear existing quiz cards
 
+    // get user and previous quiz data once
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    const userKey = `previousQuizzes_${loggedInUser}`;
+    const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+
     // Separate enabled and disabled quizzes
     const enabledQuizzes = quizzes.filter(quiz => quiz.enabled);
     const disabledQuizzes = quizzes.filter(quiz => !quiz.enabled);
 
-    // Combine them, with enabled quizzes first
     const sortedQuizzes = [...enabledQuizzes, ...disabledQuizzes];
 
-    sortedQuizzes.forEach(quiz => { // Use the sorted list
+    sortedQuizzes.forEach(quiz => {
         const quizCard = document.createElement('div');
         quizCard.classList.add('quiz-card');
+
         quizCard.innerHTML = `
             <h3>${quiz.name}</h3>
             <p>${quiz.description}</p>
             <button class="start-quiz-card-btn" data-quiz-id="${quiz.id}"></button>
         `;
+
         const startButton = quizCard.querySelector('.start-quiz-card-btn');
+
+        // check if user has already attempted this quiz
+        const alreadyAttempted = previousQuizzes.find(q => q.quizId === quiz.id);
+
         if (!quiz.enabled) {
-            startButton.disabled = true; // Disable the button
-            startButton.classList.add('disabled-button'); // Add a class for styling
-            startButton.textContent = 'Quiz Disabled'; // Change button text
+            startButton.disabled = true;
+            startButton.classList.add('disabled-button');
+            startButton.textContent = 'Quiz Disabled';
+        } else if (alreadyAttempted) {
+            startButton.disabled = true;
+            startButton.classList.add('disabled-button');
+            startButton.textContent = 'Already Attempted';
         } else {
-            // Set innerHTML for enabled button including the icon
-            startButton.innerHTML = 'Start Quiz <i class="fas fa-arrow-right"></i>'; // [MODIFICATION: Moved icon after text]
+            startButton.innerHTML = 'Start Quiz <i class="fas fa-arrow-right"></i>';
             startButton.addEventListener('click', (e) => {
                 const quizId = e.target.dataset.quizId;
                 startQuiz(quizId);
             });
         }
+
         quizList.appendChild(quizCard);
     });
 }
+
+
 
 
 // --- Quiz Logic ---
@@ -1171,27 +1187,37 @@ function startQuiz(quizId) {
         return;
     }
 
-    // Ensure quiz is enabled before starting
     if (!currentQuiz.enabled) {
         showInfoModal('This quiz is currently disabled and cannot be started.');
         return;
     }
 
+    // ✅ check if already attempted
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    const userKey = `previousQuizzes_${loggedInUser}`;
+    const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+    const alreadyAttempted = previousQuizzes.find(q => q.quizId === quizId);
+
+    if (alreadyAttempted) {
+        showInfoModal('You have already attempted this quiz. Only one attempt is allowed.');
+        return;
+    }
+
+    // continue with the quiz as normal:
     currentQuestionIndex = 0;
-    userAnswers = new Array(currentQuiz.questions.length).fill(null); // Initialize user answers
+    userAnswers = new Array(currentQuiz.questions.length).fill(null);
     correctAnswersTotal = 0;
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
-    quizDetailsForDisplay = []; // Clear previous detailed results
-    tabSwitchCount = 0; // Reset tab switch count for a new quiz
-    quizActive = true; // Set quiz as active
+    quizDetailsForDisplay = [];
+    tabSwitchCount = 0;
+    quizActive = true;
 
     showQuizSection();
     loadQuestion();
     startTimer();
 
-    // Attach event listeners for navigation buttons
-    prevButton.removeEventListener('click', handlePrevButtonClick); // Remove old listeners to prevent duplicates
+    prevButton.removeEventListener('click', handlePrevButtonClick);
     skipButton.removeEventListener('click', handleSkipButtonClick);
     nextButton.removeEventListener('click', handleNextButtonClick);
     submitButton.removeEventListener('click', handleSubmitButtonClick);
@@ -1201,6 +1227,7 @@ function startQuiz(quizId) {
     nextButton.addEventListener('click', handleNextButtonClick);
     submitButton.addEventListener('click', handleSubmitButtonClick);
 }
+
 
 // NOTE: The following block of code was misplaced in the original `dashboardJS.js` outside of any function.
 // It is assumed to be part of the `loadQuestion` function, specifically within the `else` block for options rendering.
