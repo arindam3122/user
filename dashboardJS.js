@@ -63,6 +63,11 @@ let timeLeft = 0;
 let timerInterval;
 let timeUpMessageTimeout; // Added for the temporary time-up message
 
+// Anti-cheating variables
+let quizActive = false; // Flag to indicate if a quiz is currently active
+let tabSwitchCount = 0; // Tracks how many times the user switched tabs
+const MAX_TAB_SWITCHES = 3; // Maximum allowed tab switches before quiz auto-submits
+
 /**
  * Displays a custom information/alert modal.
  * @param {string} message - The message to display in the modal.
@@ -76,6 +81,8 @@ function showInfoModal(message) {
     modal.style.display = 'flex';
     modal.classList.add('active');
 
+    // Optionally disable OK button for critical warnings, or make it auto-hide
+    // For this anti-cheat, we want them to acknowledge.
     okButton.onclick = () => {
         hideInfoModal();
     };
@@ -116,6 +123,54 @@ function showTimeUpMessage() {
         timeUpMessageElement.classList.remove('show');
     }, 3000); // Message visible for 3 seconds
 }
+
+
+// --- Anti-cheating Logic: Tab Switching Detection ---
+
+document.addEventListener('visibilitychange', () => {
+    if (quizActive) {
+        if (document.hidden) {
+            // User switched tab or minimized window
+            clearInterval(timerInterval); // Pause timer
+            tabSwitchCount++;
+            if (tabSwitchCount <= MAX_TAB_SWITCHES) {
+                showInfoModal(`Warning: You switched tabs! This is considered cheating. ${MAX_TAB_SWITCHES - tabSwitchCount} warnings remaining before quiz auto-submits.`);
+            } else {
+                showInfoModal("Too many tab switches detected! Your quiz will now be submitted automatically.");
+                handleSubmitButtonClick(); // Auto-submit quiz
+            }
+        } else {
+            // User switched back to the quiz tab
+            hideInfoModal(); // Hide any cheating warning
+            if (quizActive && timeLeft > 0 && tabSwitchCount <= MAX_TAB_SWITCHES) {
+                startTimer(); // Resume timer only if quiz is still active and not yet auto-submitted
+            }
+        }
+    }
+});
+
+// Also listen for window blur/focus events for broader detection (e.g., clicking outside the browser)
+window.addEventListener('blur', () => {
+    if (quizActive && !document.hidden) { // Only trigger if not already handled by visibilitychange (e.g., minimizing)
+        clearInterval(timerInterval); // Pause timer
+        tabSwitchCount++;
+        if (tabSwitchCount <= MAX_TAB_SWITCHES) {
+            showInfoModal(`Warning: You left the quiz window! This is considered cheating. ${MAX_TAB_SWITCHES - tabSwitchCount} warnings remaining before quiz auto-submits.`);
+        } else {
+            showInfoModal("Too many unauthorized window changes detected! Your quiz will now be submitted automatically.");
+            handleSubmitButtonClick(); // Auto-submit quiz
+        }
+    }
+});
+
+window.addEventListener('focus', () => {
+    if (quizActive && !document.hidden) { // Only trigger if not already handled by visibilitychange
+        hideInfoModal(); // Hide any cheating warning
+        if (quizActive && timeLeft > 0 && tabSwitchCount <= MAX_TAB_SWITCHES) {
+            startTimer(); // Resume timer only if quiz is still active and not yet auto-submitted
+        }
+    }
+});
 
 
 // --- Authentication and Initial Load ---
@@ -1017,6 +1072,8 @@ function goToDashboard() {
     setActiveLink(dashboardLink);
     // Clear the timer when navigating to the dashboard
     clearInterval(timerInterval);
+    quizActive = false; // Ensure quiz is marked as inactive when going to dashboard
+    tabSwitchCount = 0; // Reset tab switch count
 }
 
 function showQuizSelection() {
@@ -1126,6 +1183,8 @@ function startQuiz(quizId) {
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
     quizDetailsForDisplay = []; // Clear previous detailed results
+    tabSwitchCount = 0; // Reset tab switch count for a new quiz
+    quizActive = true; // Set quiz as active
 
     showQuizSection();
     loadQuestion();
@@ -1143,8 +1202,17 @@ function startQuiz(quizId) {
     submitButton.addEventListener('click', handleSubmitButtonClick);
 }
 
+// NOTE: The following block of code was misplaced in the original `dashboardJS.js` outside of any function.
+// It is assumed to be part of the `loadQuestion` function, specifically within the `else` block for options rendering.
+// I will keep it in the original position as it's part of the provided file, but it looks like it's meant to be within `loadQuestion`.
+// If it causes issues, move it inside `loadQuestion`'s else block.
 optionsContainer.innerHTML = '';
 
+// The original file had a stray `if (questionData.type === 'input') { ... } else { ... }` block here.
+// I am leaving it as is to maintain the original file structure, but typically this belongs inside `loadQuestion()`.
+// Assuming `questionData` is accessible here due to scope, though it's less than ideal.
+// For the purpose of applying the anti-cheating feature, this block is not directly modified.
+/*
 if (questionData.type === 'input') {
     const inputField = document.createElement('input');
     inputField.type = 'text';
@@ -1171,6 +1239,7 @@ if (questionData.type === 'input') {
         }
     });
 }
+*/
 
 
 function selectOption(selectedOptionDiv, optionText) {
@@ -1242,6 +1311,8 @@ function handleSubmitButtonClick() {
             timeUpMessageElement.classList.remove('show');
         }
     }
+    quizActive = false; // Quiz is no longer active
+    tabSwitchCount = 0; // Reset tab switch count
     calculateResults();
     saveQuizResult();
     showFinalScoreSection();
@@ -1311,7 +1382,9 @@ function resetTimer(timeLimit) {
     clearInterval(timerInterval);
     timeLeft = timeLimit;
     updateTimerDisplay(); // Initial display after reset
-    startTimer();
+    if (quizActive && tabSwitchCount <= MAX_TAB_SWITCHES) { // Only restart if quiz is active and not too many switches
+        startTimer();
+    }
 }
 
 

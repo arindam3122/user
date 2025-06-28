@@ -1144,3 +1144,68 @@ header h1 {
     background-color: #16a085;
     transform: translateY(-1px);
 }
+/* Styles for the Info Modal (if not already present and active) */
+.info-modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.info-modal-overlay.active {
+    opacity: 1;
+    display: flex;
+}
+
+.info-modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more specific, e.g., 500px */
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: center;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+}
+
+.info-modal-overlay.active .info-modal-content {
+    transform: translateY(0);
+}
+
+.info-modal-content p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.info-ok-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.info-ok-btn:hover {
+    background-color: #45a049;
+}
+
+/* Ensure time-up message also has a good z-index */
+.time-up-message {
+    z-index: 999; /* Lower than modal, higher than other content */
+}
