@@ -49,6 +49,7 @@ const summaryWrong = document.getElementById('summaryWrong');
 const summarySkipped = document.getElementById('summarySkipped');
 const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
+const ADMIN_USERS = ['Arindam Mitra', ];// Add usernames here
 
 
 let currentQuiz = null;
@@ -236,7 +237,7 @@ const quizzes = [
                 id: "cls-6",
                 name: "Logical Reasoning (PART-1)",
                 description: "Easy wordproblems",
-                enabled: false,
+                enabled: true,
                 questions: [
                     {
                         question: "Rita has 348 apples. She sells 125 apples. How many apples are left with her? (ANSWER THE NUMBER ONLY)",
@@ -287,7 +288,7 @@ const quizzes = [
                 id: "cls-10",
                 name: "Logical Reasoning (PART-2)",
                 description: "Medium Wordproblems",
-                enabled: false,
+                enabled: true,
                 questions: [
                     {
                         question: "The sum of two numbers is 50. One number is 8 more than the other. Find the numbers. (Format a and b)",
@@ -878,6 +879,9 @@ function loadPreviousQuizzes() {
 
     previousQuizzes.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Check if the current logged-in user is an admin
+    const isCurrentUserAdmin = ADMIN_USERS.includes(loggedInUser); //
+
     previousQuizzes.forEach((result, index) => {
         const row = tableBody.insertRow();
         row.insertCell(0).textContent = result.quizName || 'N/A';
@@ -894,12 +898,14 @@ function loadPreviousQuizzes() {
         viewButton.onclick = () => showQuizResultsDetails(result);
         actionsCell.appendChild(viewButton);
 
-        // Delete button
-        const deleteButton = document.createElement('button');
-        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
-        deleteButton.classList.add('delete-quiz-btn');
-        deleteButton.onclick = () => deleteQuizResult(result.quizId, result.date);
-        actionsCell.appendChild(deleteButton);
+        // Delete button - Only append if the current user is an admin
+        if (isCurrentUserAdmin) { //
+            const deleteButton = document.createElement('button');
+            deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
+            deleteButton.classList.add('delete-quiz-btn');
+            deleteButton.onclick = () => deleteQuizResult(result.quizId, result.date);
+            actionsCell.appendChild(deleteButton);
+        }
 
         // Download button
         const downloadButton = document.createElement('button');
