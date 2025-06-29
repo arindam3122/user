@@ -8,6 +8,14 @@ const quizzes = [
         enabled: true,
         questions: [
             {
+                question: "Which of the following is a prime number?",
+                type: "mcq", // New type for MCQ
+                options: ["4", "6", "7", "9"], // Array of options
+                answer: "7", // Correct answer
+                imageUrl: "",
+                timeLimit: 180
+            },
+            {
                 question: "Rita has 348 apples. She sells 125 apples. How many apples are left with her? (ANSWER THE NUMBER ONLY)",
                 type: "input",
                 answer: "223",
