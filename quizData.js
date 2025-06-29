@@ -55,7 +55,7 @@ const quizzes = [
         id: "cls-10",
         name: "Logical Reasoning (PART-2)",
         description: "Medium Wordproblems",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "The sum of two numbers is 50. One number is 8 more than the other. Find the numbers. (Format a and b)",
