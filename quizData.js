@@ -72,23 +72,23 @@ const quizzes = [
                 timeLimit: 180
             },
             {
-                question: "",
+                question: "A bag has 4 red and 6 green balls. One is drawn at random. What is the probability that it is green? (Answer in format a/b)",
                 type: "input",
-                answer: "",
+                answer: "3/5",
                 imageUrl: "",
                 timeLimit: 180
             },
             {
-                question: "",
+                question: "The first term of an AP is 7 and its common difference is 3. What is the 15th term?",
                 type: "input",
-                answer: "",
+                answer: "49",
                 imageUrl: "",
                 timeLimit: 180
             },
             {
-                question: "",
+                question: "Find the mean of the following data:- 10, 20, 30, 40 and 50",
                 type: "input",
-                answer: "",
+                answer: "30",
                 imageUrl: "",
                 timeLimit: 180
             },
