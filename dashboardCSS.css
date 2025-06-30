@@ -1108,12 +1108,14 @@ header h1 {
     max-width: 400px;
     min-width: 250px;
     padding: 12px 18px;
-    font-size: 1.1em;
-    border: 2px solid #ccc;
+    font-size: 1.2em;
+    border: 2px solid #3cb30e;
     border-radius: 8px;
     outline: none;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
     background-color: #fff;
     color: #333;
     margin: 0 auto; /* Center the box horizontally */
@@ -1125,7 +1127,7 @@ header h1 {
 }
 
 .input-answer-field:focus {
-    border-color: #3498db;
+    border-color: #046c25;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
