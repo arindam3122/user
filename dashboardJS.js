@@ -27,7 +27,6 @@ const quizTitle = document.getElementById('quizTitle');
 const questionText = document.getElementById('questionText');
 const questionImage = document.getElementById('questionImage');
 const optionsContainer = document.getElementById('optionsContainer');
-const prevButton = document.getElementById('prevButton');
 const skipButton = document.getElementById('skipButton');
 const nextButton = document.getElementById('nextButton');
 const submitButton = document.getElementById('submitButton');
@@ -409,12 +408,12 @@ function startQuiz(quizId) {
     loadQuestion();
     // Timer starts inside loadQuestion via resetTimer
 
-    prevButton.removeEventListener('click', handlePrevButtonClick);
+    // prevButton.removeEventListener('click', handlePrevButtonClick); // Removed as previous button is removed
     skipButton.removeEventListener('click', handleSkipButtonClick);
     nextButton.removeEventListener('click', handleNextButtonClick);
     submitButton.removeEventListener('click', handleSubmitButtonClick);
 
-    prevButton.addEventListener('click', handlePrevButtonClick);
+    // prevButton.addEventListener('click', handlePrevButtonClick); // Removed as previous button is removed
     skipButton.addEventListener('click', handleSkipButtonClick);
     nextButton.addEventListener('click', handleNextButtonClick);
     submitButton.addEventListener('click', handleSubmitButtonClick);
@@ -442,6 +441,8 @@ function updateTimeTakenBeforeMoving() {
     }
 }
 
+/*
+// Removed as previous button is removed
 function handlePrevButtonClick() {
     if (currentQuestionIndex > 0) {
         updateTimeTakenBeforeMoving(); // Record time for the question just left
@@ -449,6 +450,7 @@ function handlePrevButtonClick() {
         loadQuestion();
     }
 }
+*/
 
 function handleSkipButtonClick() {
     // If the user has selected an answer, they cannot skip.
@@ -524,7 +526,7 @@ function updateProgressBar() {
 }
 
 function updateNavigationButtons() {
-    prevButton.style.display = currentQuestionIndex === 0 ? 'none' : 'inline-flex';
+    // prevButton.style.display = currentQuestionIndex === 0 ? 'none' : 'inline-flex'; // Removed
     nextButton.style.display = currentQuestionIndex === currentQuiz.questions.length - 1 ? 'none' : 'inline-flex';
     submitButton.style.display = currentQuestionIndex === currentQuiz.questions.length - 1 ? 'inline-flex' : 'none';
     skipButton.style.display = 'inline-flex'; // Always show skip button

@@ -13,49 +13,49 @@ const quizzes = [
                 options: ["4", "6", "7", "9"], // Array of options
                 answer: "7", // Correct answer
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 30
             },
             {
                 question: "Rita has 348 apples. She sells 125 apples. How many apples are left with her? (ANSWER THE NUMBER ONLY)",
                 type: "input",
                 answer: "223",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 60
             },
             {
                 question: "A packet has 24 chocolates. How many chocolates are there in 15 such packets? (NUMBER ONLY)",
                 type: "input",
                 answer: "360",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 60
             },
             {
                 question: "There are 480 mangoes packed equally in 12 boxes. How many mangoes are there in each box? (NUMBERS ONLY)",
                 type: "input",
                 answer: "40",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 60
             },
             {
                 question: "A movie starts at 3:15 PM and ends at 5:45PM. How long is the movie? (Answer in format a hours b min)",
                 type: "input",
                 answer: "2 hours 30 min",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 60
             },
             {
                 question: "Ankit has ₹500. He buys a book for ₹275. How much money is left with him? (Answer without any units)",
                 type: "input",
                 answer: "225",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 60
             },
             {
                 question: "The ages of 4 children are 10, 12, 13 and 15 years. Find their average age.",
                 type: "input",
                 answer: "12.5",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 60
             },
         ]
     },
