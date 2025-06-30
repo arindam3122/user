@@ -1118,6 +1118,10 @@ header h1 {
     color: #333;
     margin: 0 auto; /* Center the box horizontally */
     display: block; /* Make margin auto work */
+    /* Add for textarea */
+    min-height: 20px; /* Minimum height for textarea */
+    resize: vertical; /* Allow vertical resizing only */
+    line-height: 1.5; /* Improve readability for multiline text */
 }
 
 .input-answer-field:focus {

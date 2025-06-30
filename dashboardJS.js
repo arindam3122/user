@@ -953,14 +953,19 @@ function loadQuestion() {
     optionsContainer.innerHTML = '';
 
     if (questionData.type === 'input') {
-        const inputField = document.createElement('input');
-        inputField.type = 'text';
+        const inputField = document.createElement('textarea'); // Changed from 'input' to 'textarea'
+        // inputField.type = 'text'; // Remove this line, as textarea doesn't have a type attribute
         inputField.classList.add('input-answer-field');
         inputField.placeholder = 'Type your answer here...';
         inputField.value = userAnswers[currentQuestionIndex] || '';
+        inputField.rows = 1; // Set an initial number of rows for visibility
+        inputField.spellcheck = true; // Enable spellcheck for longer text
 
         inputField.addEventListener('input', () => {
             userAnswers[currentQuestionIndex] = inputField.value;
+            // Optional: Auto-adjust height based on content
+            inputField.style.height = 'auto';
+            inputField.style.height = (inputField.scrollHeight) + 'px';
         });
 
         optionsContainer.appendChild(inputField);
