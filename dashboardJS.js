@@ -1,3 +1,20 @@
+// Add this helper function somewhere in your dashboardJS.js file, for example, near other helper functions.
+/**
+ * Converts seconds into a formatted string "MM min : SS sec".
+ * @param {number} totalSeconds - The total number of seconds.
+ * @returns {string} Formatted time string (e.g., "01 min : 30 sec" for 90 seconds).
+ */
+function formatTime(totalSeconds) {
+    if (totalSeconds === undefined || totalSeconds === null || isNaN(totalSeconds)) {
+        return 'N/A';
+    }
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+    return `${formattedMinutes} min : ${formattedSeconds} sec`;
+}
+
 const quizInfoBox = document.getElementById('quizInfoBox');
 const quizContainer = document.getElementById('quizContainer');
 const finalScoreContainer = document.getElementById('finalScoreContainer');
@@ -689,7 +706,7 @@ function displayDetailedResults() {
             <p class="question-text-result">${detail.question}</p>
             <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
-            <p>Time Taken: <span>${detail.timeTaken !== undefined ? detail.timeTaken + ' seconds' : 'N/A'}</span></p>  `;
+            <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>`; // Use formatTime helper
         resultsContainer.appendChild(resultItem);
     });
 
@@ -881,11 +898,11 @@ function downloadQuizResponse(quiz) {
             doc.text(wrappedCorrectAnswer, marginLeft + 10, y);
             y += lineSpacing * wrappedCorrectAnswer.length;
 
-            // Time Taken
+            // Time Taken - MODIFIED LINE HERE
             doc.setTextColor(50, 50, 50); // Gray for time taken
             doc.text("Time Taken:", marginLeft + 5, y);
             y += lineSpacing;
-            doc.text(`${item.timeTaken !== undefined ? item.timeTaken + ' seconds' : 'N/A'}`, marginLeft + 10, y);
+            doc.text(`${formatTime(item.timeTaken)}`, marginLeft + 10, y); // Use formatTime helper
             y += lineSpacing;
 
 
@@ -1017,7 +1034,7 @@ function showQuizResultsDetails(result) {
             <p class="question-text-result">${detail.question}</p>
             <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
-            <p>Time Taken: <span>${detail.timeTaken !== undefined ? detail.timeTaken + ' seconds' : 'N/A'}</span></p> `;
+            <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>`; // Use formatTime helper
         resultsContainer.appendChild(resultItem);
     });
 
