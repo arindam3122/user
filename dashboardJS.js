@@ -6,9 +6,6 @@ const previousQuizzesContainer = document.getElementById('previousQuizzesContain
 const quizSelectionContainer = document.getElementById('quizSelectionContainer');
 const quizList = document.getElementById('quizList');
 
-// Corrected this variable name as it was removed from HTML previously
-// const startQuizButton = document.getElementById('startQuizButton'); // This button from original quizInfoBox is now conceptually replaced by individual quiz buttons
-
 const quizTitle = document.getElementById('quizTitle');
 const questionText = document.getElementById('questionText');
 const questionImage = document.getElementById('questionImage');
@@ -40,7 +37,6 @@ const loginSuccessMessage = document.getElementById('loginSuccessMessage');
 const quizCompletedMessage = document.getElementById('quizCompletedMessage');
 const quizInfoHeading = document.getElementById('quizInfoHeading');
 const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
-// const welcomeMessageDiv = document.querySelector('.welcome-message'); // This was causing an issue by selecting both messages
 const totalQuizzesCompleted = document.getElementById('totalQuizzesCompleted');
 
 // Add these new const declarations for the summary elements
@@ -63,6 +59,10 @@ let quizDetailsForDisplay = [];
 let timeLeft = 0;
 let timerInterval;
 let timeUpMessageTimeout; // Added for the temporary time-up message
+
+// --- New variables for time tracking per question ---
+let questionStartTime; // Stores the Date.now() when a question is loaded
+let questionTimesTaken = []; // Array to store time taken for each question in seconds
 
 // Anti-cheating variables
 let quizActive = false; // Flag to indicate if a quiz is currently active
@@ -353,8 +353,6 @@ function renderQuizList() {
 }
 
 
-
-
 // --- Quiz Logic ---
 function startQuiz(quizId) {
     currentQuiz = quizzes.find(q => q.id === quizId);
@@ -382,6 +380,7 @@ function startQuiz(quizId) {
     // continue with the quiz as normal:
     currentQuestionIndex = 0;
     userAnswers = new Array(currentQuiz.questions.length).fill(null);
+    questionTimesTaken = new Array(currentQuiz.questions.length).fill(0); // Initialize time taken array
     correctAnswersTotal = 0;
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
@@ -391,7 +390,7 @@ function startQuiz(quizId) {
 
     showQuizSection();
     loadQuestion();
-    startTimer();
+    // Timer starts inside loadQuestion via resetTimer
 
     prevButton.removeEventListener('click', handlePrevButtonClick);
     skipButton.removeEventListener('click', handleSkipButtonClick);
@@ -405,46 +404,6 @@ function startQuiz(quizId) {
 }
 
 
-// NOTE: The following block of code was misplaced in the original `dashboardJS.js` outside of any function.
-// It is assumed to be part of the `loadQuestion` function, specifically within the `else` block for options rendering.
-// I will keep it in the original position as it's part of the provided file, but it looks like it's meant to be within `loadQuestion`.
-// If it causes issues, move it inside `loadQuestion`'s else block.
-optionsContainer.innerHTML = '';
-
-// The original file had a stray `if (questionData.type === 'input') { ... } else { ... }` block here.
-// I am leaving it as is to maintain the original file structure, but typically this belongs inside `loadQuestion()`.
-// Assuming `questionData` is accessible here due to scope, though it's less than ideal.
-// For the purpose of applying the anti-cheating feature, this block is not directly modified.
-/*
-if (questionData.type === 'input') {
-    const inputField = document.createElement('input');
-    inputField.type = 'text';
-    inputField.classList.add('input-answer-field');
-    inputField.placeholder = 'Type your answer here...';
-    inputField.value = userAnswers[currentQuestionIndex] || '';
-
-    inputField.addEventListener('input', () => {
-        userAnswers[currentQuestionIndex] = inputField.value;
-    });
-
-    optionsContainer.appendChild(inputField);
-} else {
-    questionData.options.forEach((option, index) => {
-        const optionDiv = document.createElement('div');
-        optionDiv.classList.add('option');
-        optionDiv.innerHTML = `<span class="option-label">${String.fromCharCode(65 + index)}.</span> <span class="option-text">${option}</span>`;
-        optionDiv.dataset.option = option;
-        optionDiv.addEventListener('click', () => selectOption(optionDiv, option));
-        optionsContainer.appendChild(optionDiv);
-
-        if (userAnswers[currentQuestionIndex] === option) {
-            optionDiv.classList.add('selected');
-        }
-    });
-}
-*/
-
-
 function selectOption(selectedOptionDiv, optionText) {
     // Remove 'selected' class from all options first
     document.querySelectorAll('.option').forEach(opt => {
@@ -453,10 +412,22 @@ function selectOption(selectedOptionDiv, optionText) {
     // Add 'selected' class to the clicked option
     selectedOptionDiv.classList.add('selected');
     userAnswers[currentQuestionIndex] = optionText;
+    // Time taken will be recorded when navigating away from the question
+}
+
+// Helper function to update time taken for the current question before moving
+function updateTimeTakenBeforeMoving() {
+    if (currentQuestionIndex >= 0 && currentQuestionIndex < currentQuiz.questions.length) {
+        if (questionStartTime) { // Ensure questionStartTime was set
+            const timeElapsed = Math.round((new Date().getTime() - questionStartTime) / 1000); // Time in seconds
+            questionTimesTaken[currentQuestionIndex] = timeElapsed; // Store time taken
+        }
+    }
 }
 
 function handlePrevButtonClick() {
     if (currentQuestionIndex > 0) {
+        updateTimeTakenBeforeMoving(); // Record time for the question just left
         currentQuestionIndex--;
         loadQuestion();
     }
@@ -466,8 +437,7 @@ function handleSkipButtonClick() {
     // If the user has selected an answer, they cannot skip.
     // If no answer is selected, mark as skipped.
     if (userAnswers[currentQuestionIndex] === null) {
-        // userAnswers[currentQuestionIndex] remains null for skipped questions
-        // showInfoModal("Question skipped!"); // REMOVED THIS LINE
+        updateTimeTakenBeforeMoving(); // Record time for this skipped question
     } else {
         showInfoModal("You have already answered this question, cannot skip.");
         return; // Do not advance if already answered
@@ -497,6 +467,8 @@ function handleNextButtonClick() {
         return;
     }
 
+    updateTimeTakenBeforeMoving(); // Record time for the question just left
+
     if (currentQuestionIndex < currentQuiz.questions.length - 1) {
         currentQuestionIndex++;
         loadQuestion();
@@ -506,6 +478,8 @@ function handleNextButtonClick() {
 }
 
 function handleSubmitButtonClick() {
+    updateTimeTakenBeforeMoving(); // Ensure time for the last question is recorded
+
     clearInterval(timerInterval); // Stop the timer when quiz is submitted
     if (timeUpMessageTimeout) { // Clear any pending time-up message timeout
         clearTimeout(timeUpMessageTimeout);
@@ -555,13 +529,10 @@ function startTimer() {
             // If time runs out, mark the answer as 'Time_Up_Auto_Answer'
             if (userAnswers[currentQuestionIndex] === null) {
                 userAnswers[currentQuestionIndex] = "Time_Up_Auto_Answer"; // Use a unique string to mark 'time up'
+                questionTimesTaken[currentQuestionIndex] = questionTimeLimit; // Time taken is the full limit
                 showTimeUpMessage(); // Display temporary time-up message
             } 
-            // else {
-            //     // If an answer was already selected but time ran out before clicking next/submit
-            //     // No modal needed, as behavior is to simply advance or submit
-            // }
-
+            
             if (currentQuestionIndex < currentQuiz.questions.length - 1) {
                 currentQuestionIndex++;
                 loadQuestion();
@@ -602,6 +573,7 @@ function calculateResults() {
     currentQuiz.questions.forEach((question, index) => {
         const userAnswer = userAnswers[index];
         let isCorrect = false;
+        const timeSpent = questionTimesTaken[index] !== undefined ? questionTimesTaken[index] : 0; // Get time spent
 
         if (userAnswer === null) {
             skippedQuestionsTotal++;
@@ -611,7 +583,8 @@ function calculateResults() {
                 correctAnswer: question.answer,
                 isCorrect: false,
                 skipped: true,
-                timeUp: false
+                timeUp: false,
+                timeTaken: timeSpent // Include time taken
             });
         } else if (userAnswer === "Time_Up_Auto_Answer") {
             timeUpQuestionsTotal++;
@@ -621,7 +594,8 @@ function calculateResults() {
                 correctAnswer: question.answer,
                 isCorrect: false,
                 skipped: false,
-                timeUp: true
+                timeUp: true,
+                timeTaken: timeSpent // Include time taken
             });
         } else {
             if (question.type === 'input') {
@@ -642,7 +616,8 @@ function calculateResults() {
                 correctAnswer: question.answer,
                 isCorrect,
                 skipped: false,
-                timeUp: false
+                timeUp: false,
+                timeTaken: timeSpent // Include time taken
             });
         }
     });
@@ -714,7 +689,7 @@ function displayDetailedResults() {
             <p class="question-text-result">${detail.question}</p>
             <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
-        `;
+            <p>Time Taken: <span>${detail.timeTaken !== undefined ? detail.timeTaken + ' seconds' : 'N/A'}</span></p>  `;
         resultsContainer.appendChild(resultItem);
     });
 
@@ -884,8 +859,8 @@ function downloadQuizResponse(quiz) {
             let userAnswerColor;
             if (item.userAnswer === item.correctAnswer) {
                 userAnswerColor = [0, 150, 0]; // Green
-            } else if (!item.userAnswer || item.userAnswer === "") {
-                userAnswerColor = [200, 100, 0]; // Orange
+            } else if (!item.userAnswer || item.userAnswer === "" || item.skipped || item.timeUp) { // Handle skipped/timeup for color
+                userAnswerColor = [200, 100, 0]; // Orange for unanswered/skipped/time-up
             } else {
                 userAnswerColor = [200, 0, 0]; // Red
             }
@@ -905,6 +880,14 @@ function downloadQuizResponse(quiz) {
             const wrappedCorrectAnswer = doc.splitTextToSize(item.correctAnswer || "N/A", maxLineWidth - 5);
             doc.text(wrappedCorrectAnswer, marginLeft + 10, y);
             y += lineSpacing * wrappedCorrectAnswer.length;
+
+            // Time Taken
+            doc.setTextColor(50, 50, 50); // Gray for time taken
+            doc.text("Time Taken:", marginLeft + 5, y);
+            y += lineSpacing;
+            doc.text(`${item.timeTaken !== undefined ? item.timeTaken + ' seconds' : 'N/A'}`, marginLeft + 10, y);
+            y += lineSpacing;
+
 
             // Divider line
             doc.setDrawColor(180);
@@ -979,10 +962,11 @@ function loadQuestion() {
 
     updateProgressBar();
     updateNavigationButtons();
+    questionStartTime = new Date().getTime(); // Set start time for the current question
     resetTimer(questionData.timeLimit);
 }
 
-function showQuizResultsDetails(result) { // Removed 'index' from parameters as it was unused
+function showQuizResultsDetails(result) { 
     showQuizResultsDetailsSection();
     const resultsContainer = document.getElementById('quizResultsDetailsContainer');
     resultsContainer.innerHTML = ''; // Clear previous results
@@ -1033,7 +1017,7 @@ function showQuizResultsDetails(result) { // Removed 'index' from parameters as 
             <p class="question-text-result">${detail.question}</p>
             <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
-        `;
+            <p>Time Taken: <span>${detail.timeTaken !== undefined ? detail.timeTaken + ' seconds' : 'N/A'}</span></p> `;
         resultsContainer.appendChild(resultItem);
     });
 
