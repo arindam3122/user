@@ -26,7 +26,7 @@ nav {
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
     width: 220px; /* Slightly wider nav */
     flex-shrink: 0; /* Prevents nav from shrinking */
-    transition: width 0.3s ease; /* Smooth transition for width if resized */
+    transition: width 0.3s ease, transform 0.3s ease; /* Smooth transition for width and transform */
     position: sticky; /* Make it sticky */
     top: 0; /* Stick to the top */
     height: 100vh; /* Make it full height */
@@ -811,6 +811,45 @@ header h1 {
 
 
 /* Responsive Design */
+/* Hamburger menu icon */
+.hamburger-menu {
+    display: none; /* Hidden by default, shown on smaller screens */
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    color: #2c3e50; /* Color of the icon */
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 15px; /* Space from heading */
+    transition: color 0.3s ease;
+}
+
+.hamburger-menu:hover {
+    color: #1abc9c;
+}
+
+/* Overlay for sidebar when active on mobile */
+.sidebar-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 999; /* Below sidebar, above main content */
+}
+
+/* Styles for when the sidebar is active (mobile) */
+body.sidebar-active #sidebar {
+    transform: translateX(0); /* Slide in from left */
+}
+
+body.sidebar-active .sidebar-overlay {
+    display: block; /* Show overlay */
+}
+
+
 @media (max-width: 1024px) {
     nav {
         width: 180px;
@@ -907,190 +946,73 @@ header h1 {
 
 @media (max-width: 768px) {
     body {
-        flex-direction: column; /* Stack nav and main content */
+        flex-direction: row; /* Keep body as row, but adjust nav behavior */
     }
 
     nav {
-        width: 100%; /* Full width nav */
-        height: auto; /* Auto height */
-        padding: 15px 20px;
-        flex-direction: row; /* Horizontal nav */
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        position: relative; /* No longer sticky on top */
-        overflow-x: auto; /* Allow horizontal scroll for nav items */
+        position: fixed; /* Fixed position for off-canvas menu */
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 250px; /* Width of the off-canvas menu */
+        transform: translateX(-100%); /* Initially hide off-screen */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Stronger shadow when open */
+        z-index: 1001; /* Higher than overlay */
     }
 
     nav .logo-container {
-        margin-bottom: 0;
-        margin-right: 20px;
-    }
-
-    nav .logo {
-        max-width: 100px;
+        margin-bottom: 40px; /* Restore margin for vertical layout */
+        margin-right: 0; /* Remove horizontal margin */
     }
 
     nav ul {
-        flex-direction: row; /* Horizontal list items */
-        flex-grow: 0;
-        width: auto;
-        justify-content: flex-end; /* Push items to the right */
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: flex-start; /* Align items to the start */
     }
 
     nav ul li {
-        margin-bottom: 0;
-        margin-left: 15px; /* Space between horizontal items */
+        margin-bottom: 15px; /* Restore vertical spacing */
+        margin-left: 0; /* Remove horizontal spacing */
+        width: 100%; /* Full width for list items */
     }
 
     nav ul li a {
-        padding: 8px 12px;
-        font-size: 0.9em;
+        padding: 12px 15px; /* Restore padding */
+        font-size: 1.1em; /* Restore font size */
     }
 
     nav ul li a i {
-        margin-right: 5px;
-        font-size: 1em;
+        margin-right: 12px; /* Restore icon spacing */
+        font-size: 1.2em; /* Restore icon size */
     }
 
-    .main-content {
-        padding: 15px;
+    .hamburger-menu {
+        display: block; /* Show hamburger on small screens */
     }
 
     header {
-        flex-direction: column; /* Stack header elements */
-        align-items: flex-start;
-        gap: 15px;
+        flex-direction: row; /* Keep header elements in a row */
+        justify-content: flex-start; /* Align items to the start */
+        gap: 0; /* Remove gap */
         padding: 15px 20px;
-    }
-
-    .user-info {
-        width: 100%; /* Full width for user info */
-        justify-content: space-between;
     }
 
     header h1 {
         font-size: 1.6em;
-    }
-
-    .welcome-message {
-        padding: 12px 18px;
-    }
-
-    .quiz-card {
-        padding: 20px;
-    }
-
-    .quiz-card h3 {
-        font-size: 1.3em;
-    }
-
-    .start-quiz-card-btn {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
-
-    .timer-container {
-        font-size: 1.1em;
-    }
-
-    .question {
-        font-size: 1.2em;
-    }
-
-    .options {
-        gap: 10px;
-    }
-
-    .option {
-        padding: 12px 18px;
-        font-size: 1em;
-    }
-
-    .quiz-navigation {
-        flex-direction: column; /* Stack navigation buttons */
-        gap: 10px;
-    }
-
-    .quiz-navigation button {
-        width: 100%; /* Full width buttons */
-    }
-
-    .results-summary {
-        flex-direction: column; /* Stack summary items vertically */
-        align-items: center;
-        padding: 15px;
-        gap: 10px;
-        font-size: 1em;
-    }
-
-    .final-score-container h2 {
-        font-size: 2em;
-    }
-
-    .final-score-container p {
-        font-size: 1.1em;
-    }
-
-    .final-score-container .results-btn,
-    .final-score-container .back-to-score-btn {
-        padding: 10px 20px;
-        font-size: 0.9em;
-    }
-
-    .quiz-results-details h2,
-    .previous-quizzes-container h2 {
-        font-size: 1.8em;
-    }
-
-    .results-grid {
-        grid-template-columns: 1fr; /* Stack results on small screens */
-    }
-
-    #previousQuizzesTable th,
-    #previousQuizzesTable td {
-        padding: 10px;
-        font-size: 0.85em;
-    }
-
-    .view-details-btn,
-    .delete-quiz-btn { /* Apply responsive styles to delete button as well */
-        padding: 6px 10px;
-        font-size: 0.8em;
-    }
-}
-
-@media (max-width: 480px) {
-    nav ul {
-        flex-wrap: wrap; /* Allow nav links to wrap if too many */
-    }
-
-    nav ul li {
-        flex-basis: 45%; /* Two items per row */
-        margin-left: 0;
-        margin-bottom: 10px; /* Add some vertical spacing */
-    }
-
-    nav .logo-container {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    nav {
-        flex-direction: column; /* Re-stack nav if needed */
-        align-items: center;
+        flex-grow: 1; /* Allow heading to take space */
+        text-align: center; /* Center the heading */
     }
 
     .user-info {
-        flex-direction: column; /* Stack user info elements */
-        gap: 10px;
-        align-items: flex-start;
+        flex-direction: row; /* Keep user info in a row */
+        justify-content: flex-end; /* Push logout button to the right */
+        width: auto; /* Auto width */
+        margin-left: auto; /* Push to right */
     }
 
     #headerLogoutButton {
-        width: 100%;
-        justify-content: center;
+        width: auto; /* Auto width */
+        justify-content: flex-end; /* Align button content to end */
     }
 
     .quiz-list {
@@ -1101,7 +1023,73 @@ header h1 {
         font-size: 1.1em;
         padding: 12px 20px;
     }
+
+    /* Adjust main content to not be affected by fixed sidebar */
+    .main-content {
+        width: 100%; /* Take full width */
+        margin-left: 0; /* No left margin */
+    }
 }
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.4em;
+    }
+    .user-info {
+        flex-wrap: wrap; /* Allow user info to wrap */
+        justify-content: center;
+    }
+    #headerLogoutButton {
+        margin-top: 10px; /* Add some space if it wraps */
+    }
+    .quiz-info-box,
+    .quiz-selection-container,
+    .quiz-container,
+    .final-score-container,
+    .quiz-results-details,
+    .previous-quizzes-container {
+        padding: 20px;
+    }
+    .quiz-info-box h2,
+    .quiz-selection-container h2,
+    .quiz-container h2,
+    .final-score-container h2,
+    .quiz-results-details h2,
+    .previous-quizzes-container h2 {
+        font-size: 1.6em;
+    }
+    .question {
+        font-size: 1.1em;
+    }
+    .option {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+    .quiz-navigation button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .final-score-container p {
+        font-size: 1em;
+    }
+    .final-score-container .results-btn,
+    .final-score-container .back-to-score-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    #previousQuizzesTable th,
+    #previousQuizzesTable td {
+        padding: 8px;
+        font-size: 0.8em;
+    }
+    .view-details-btn,
+    .delete-quiz-btn {
+        padding: 5px 8px;
+        font-size: 0.75em;
+        margin-right: 5px;
+    }
+}
+
 
 .input-answer-field {
     width: 60%; /* Reduce from 100% to 60% */

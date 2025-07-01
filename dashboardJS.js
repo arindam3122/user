@@ -63,6 +63,11 @@ const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
 const ADMIN_USERS = ['Arindam Mitra', ];// Add usernames for delete button activation
 
+// Hamburger menu elements
+const hamburgerMenu = document.getElementById('hamburgerMenu');
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+
 
 let currentQuiz = null;
 let currentQuestionIndex = 0;
@@ -225,18 +230,21 @@ dashboardLink.addEventListener('click', (e) => {
     e.preventDefault();
     setActiveLink(dashboardLink);
     goToDashboard();
+    closeSidebar(); // Close sidebar on navigation
 });
 
 startQuizLink.addEventListener('click', (e) => {
     e.preventDefault();
     setActiveLink(startQuizLink);
     showQuizSelection();
+    closeSidebar(); // Close sidebar on navigation
 });
 
 previousQuizzesLink.addEventListener('click', (e) => {
     e.preventDefault();
     setActiveLink(previousQuizzesLink);
     showPreviousQuizzesSection();
+    closeSidebar(); // Close sidebar on navigation
 });
 
 function setActiveLink(activeLink) {
@@ -245,6 +253,21 @@ function setActiveLink(activeLink) {
     });
     activeLink.classList.add('active');
 }
+
+// --- Hamburger Menu Logic ---
+hamburgerMenu.addEventListener('click', () => {
+    document.body.classList.toggle('sidebar-active');
+});
+
+sidebarOverlay.addEventListener('click', () => {
+    closeSidebar();
+});
+
+function closeSidebar() {
+    document.body.classList.remove('sidebar-active');
+}
+
+
 // --- Helper Functions to Show/Hide Sections ---
 function hideAllSections() {
     quizInfoBox.style.display = 'none';
@@ -382,7 +405,7 @@ function startQuiz(quizId) {
         return;
     }
 
-    // ✅ check if already attempted
+    // ✅ check if user has already attempted this quiz
     const loggedInUser = localStorage.getItem('loggedInUser');
     const userKey = `previousQuizzes_${loggedInUser}`;
     const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];

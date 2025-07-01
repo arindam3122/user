@@ -22,8 +22,15 @@
   </ul>
 </nav>
 
+<!-- Overlay for mobile menu -->
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
+
   <div class="main-content">
     <header>
+      <!-- Hamburger menu icon -->
+      <button id="hamburgerMenu" class="hamburger-menu">
+        <i class="fas fa-bars"></i>
+      </button>
       <h1 class="heading" id="welcomeHeading">Welcome, <span><span id="usernameDisplay"></span>!</h1>
       <div class="user-info">
         </span>
@@ -128,7 +135,6 @@
 
   <script src="quizData.js"></script> 
   <script src="dashboardJS.js"></script>
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
   window.jsPDF = window.jspdf.jsPDF;
