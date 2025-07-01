@@ -1,8 +1,9 @@
 // Sample user data for validation - now includes only general users
     const users = {
       "Arindam Mitra": "Arindam",
-      "Shreaya Dey": "14062006",
+      "Shreaya Dey": "",
       "Shabnur Khatun": "",
+      "Anuska Sengupta": "Sengupta",
     };
 
     function validateLogin() {
