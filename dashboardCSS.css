@@ -652,8 +652,21 @@ header h1 {
     border-bottom: none;
 }
 
+/* Reverted: Ensure buttons wrap on small screens and adjust padding */
+@media (max-width: 768px) {
+    #previousQuizzesTable td:last-child {
+        white-space: normal; /* Allow buttons to wrap */
+        display: flex; /* Use flexbox for button layout */
+        flex-wrap: wrap; /* Allow buttons to wrap to new lines */
+        gap: 5px; /* Space between buttons */
+        justify-content: flex-start; /* Align buttons to the start */
+        /* Removed padding-left and padding-right to undo the last change */
+    }
+}
+
+/* Original rule, overridden by media query above for smaller screens */
 #previousQuizzesTable td:last-child {
-    white-space: nowrap; /* Prevent buttons from wrapping */
+    white-space: nowrap; /* Prevent buttons from wrapping on larger screens */
 }
 
 .view-details-btn, .delete-quiz-btn {
@@ -665,7 +678,7 @@ header h1 {
     cursor: pointer;
     font-size: 0.9em;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-right: 10px; /* Space between buttons */
+    margin-right: 10px; /* Re-added margin-right to undo the last change */
 }
 
 .view-details-btn:hover {
