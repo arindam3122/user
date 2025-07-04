@@ -131,7 +131,7 @@ function showTimeUpMessage() {
         timeUpMessageElement.id = 'timeUpMessage';
         timeUpMessageElement.className = 'time-up-message';
         // Append to main-content or body, depending on desired overlay behavior
-        document.querySelector('.main-content').appendChild(timeUpMessageElement); 
+        document.querySelector('.main-content').appendChild(timeUpMessageElement);
     }
 
     timeUpMessageElement.textContent = "Time's up! Moving to the next question.";
@@ -153,7 +153,7 @@ document.addEventListener('visibilitychange', () => {
     if (quizActive) {
         if (document.hidden) {
             // User switched tab or minimized window
-            clearInterval(timerInterval); // Pause timer
+            // No clearInterval here, timer continues
             tabSwitchCount++;
             if (tabSwitchCount <= MAX_TAB_SWITCHES) {
                 showInfoModal(`Warning: You switched tabs! This is considered cheating. ${MAX_TAB_SWITCHES - tabSwitchCount} warnings remaining before quiz auto-submits.`);
@@ -164,9 +164,7 @@ document.addEventListener('visibilitychange', () => {
         } else {
             // User switched back to the quiz tab
             hideInfoModal(); // Hide any cheating warning
-            if (quizActive && timeLeft > 0 && tabSwitchCount <= MAX_TAB_SWITCHES) {
-                startTimer(); // Resume timer only if quiz is still active and not yet auto-submitted
-            }
+            // No startTimer here, timer never stopped
         }
     }
 });
@@ -174,7 +172,7 @@ document.addEventListener('visibilitychange', () => {
 // Also listen for window blur/focus events for broader detection (e.g., clicking outside the browser)
 window.addEventListener('blur', () => {
     if (quizActive && !document.hidden) { // Only trigger if not already handled by visibilitychange (e.g., minimizing)
-        clearInterval(timerInterval); // Pause timer
+        // No clearInterval here, timer continues
         tabSwitchCount++;
         if (tabSwitchCount <= MAX_TAB_SWITCHES) {
             showInfoModal(`Warning: You left the quiz window! This is considered cheating. ${MAX_TAB_SWITCHES - tabSwitchCount} warnings remaining before quiz auto-submits.`);
@@ -188,9 +186,7 @@ window.addEventListener('blur', () => {
 window.addEventListener('focus', () => {
     if (quizActive && !document.hidden) { // Only trigger if not already handled by visibilitychange
         hideInfoModal(); // Hide any cheating warning
-        if (quizActive && timeLeft > 0 && tabSwitchCount <= MAX_TAB_SWITCHES) {
-            startTimer(); // Resume timer only if quiz is still active and not yet auto-submitted
-        }
+        // No startTimer here, timer never stopped
     }
 });
 
@@ -573,8 +569,8 @@ function startTimer() {
                 userAnswers[currentQuestionIndex] = "Time_Up_Auto_Answer"; // Use a unique string to mark 'time up'
                 questionTimesTaken[currentQuestionIndex] = questionTimeLimit; // Time taken is the full limit
                 showTimeUpMessage(); // Display temporary time-up message
-            } 
-            
+            }
+
             if (currentQuestionIndex < currentQuiz.questions.length - 1) {
                 currentQuestionIndex++;
                 loadQuestion();
@@ -595,10 +591,11 @@ function updateTimerDisplay() {
 }
 
 function resetTimer(timeLimit) {
-    clearInterval(timerInterval);
+    clearInterval(timerInterval); // Clear the current interval before setting a new one
     timeLeft = timeLimit;
     updateTimerDisplay(); // Initial display after reset
-    if (quizActive && tabSwitchCount <= MAX_TAB_SWITCHES) { // Only restart if quiz is active and not too many switches
+    // The timer should always start when a question is loaded if the quiz is active
+    if (quizActive) {
         startTimer();
     }
 }
@@ -959,7 +956,6 @@ function downloadQuizResponse(quiz) {
 
 
 
-
 function loadQuestion() {
     if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
         return;
@@ -1017,7 +1013,7 @@ function loadQuestion() {
     resetTimer(questionData.timeLimit);
 }
 
-function showQuizResultsDetails(result) { 
+function showQuizResultsDetails(result) {
     showQuizResultsDetailsSection();
     const resultsContainer = document.getElementById('quizResultsDetailsContainer');
     resultsContainer.innerHTML = ''; // Clear previous results
