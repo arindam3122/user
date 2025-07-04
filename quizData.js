@@ -5,7 +5,7 @@ const quizzes = [
         id: "cls-6",
         name: "Logical Reasoning (PART-1)",
         description: "Easy wordproblems",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "Which of the following is a prime number?",
@@ -70,35 +70,35 @@ const quizzes = [
                 type: "input",
                 answer: "21 and 29",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 120
             },
             {
                 question: "A rectangular plot has an area of 180m2. Its length is 5m more than its width. Find its dimentions.(Write as a,b where a=width and b=length)",
                 type: "input",
                 answer: "12,17",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 120
             },
             {
                 question: "A bag has 4 red and 6 green balls. One is drawn at random. What is the probability that it is green? (Answer in format a/b)",
                 type: "input",
                 answer: "3/5",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 120
             },
             {
                 question: "The first term of an AP is 7 and its common difference is 3. What is the 15th term?",
                 type: "input",
                 answer: "49",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 120
             },
             {
                 question: "Find the mean of the following data:- 10, 20, 30, 40 and 50",
                 type: "input",
                 answer: "30",
                 imageUrl: "",
-                timeLimit: 180
+                timeLimit: 120
             },
         ]
     },
@@ -113,14 +113,14 @@ const quizzes = [
                 type: "input",
                 answer: "",
                 imageUrl: "1.png",
-                timeLimit: 180
+                timeLimit: 30
             },
             {
                 question: "Who is represented as a postman in the given image?",
                 type: "input",
                 answer: "",
                 imageUrl: "2.png",
-                timeLimit: 180
+                timeLimit: 30
             },
         ]
     },
