@@ -111,7 +111,7 @@ const quizzes = [
             {
                 question: "Explain the above image",
                 type: "input",
-                answer: "tapetum,fibrous",
+                answer: "",
                 imageUrl: "1.png",
                 timeLimit: 180
             },
