@@ -102,4 +102,26 @@ const quizzes = [
             },
         ]
     },
+    {
+        id: "img",
+        name: "Image based QS",
+        description: "QS on images",
+        enabled: true,
+        questions: [
+            {
+                question: "Explain the above image",
+                type: "input",
+                answer: "tapetum,fibrous",
+                imageUrl: "1.png",
+                timeLimit: 180
+            },
+            {
+                question: "Who is represented as a postman in the given image?",
+                type: "input",
+                answer: "",
+                imageUrl: "2.png",
+                timeLimit: 180
+            },
+        ]
+    },
 ];
