@@ -80,6 +80,7 @@ let quizDetailsForDisplay = [];
 let timeLeft = 0;
 let timerInterval;
 let timeUpMessageTimeout; // Added for the temporary time-up message
+let initialTimeLimit = 0; // Store the initial time limit for the current question
 
 // --- New variables for time tracking per question ---
 let questionStartTime; // Stores the Date.now() when a question is loaded
@@ -557,6 +558,7 @@ function startTimer() {
     clearInterval(timerInterval); // Clear any existing timer
     const questionTimeLimit = currentQuiz.questions[currentQuestionIndex].timeLimit;
     timeLeft = questionTimeLimit;
+    initialTimeLimit = questionTimeLimit; // Store initial time limit
     updateTimerDisplay(); // Initial display
 
     timerInterval = setInterval(() => {
@@ -587,12 +589,23 @@ function updateTimerDisplay() {
         const seconds = timeLeft % 60; // Calculate remaining seconds
         // Pad with leading zero if seconds is less than 10
         timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        // Remove previous alert classes
+        timerDisplay.classList.remove('timer-warning', 'timer-critical');
+
+        // Add new alert classes based on remaining time
+        if (timeLeft <= initialTimeLimit * 0.25) { // Last 25% of the time
+            timerDisplay.classList.add('timer-critical');
+        } else if (timeLeft <= initialTimeLimit * 0.5) { // Last 50% of the time
+            timerDisplay.classList.add('timer-warning');
+        }
     }
 }
 
 function resetTimer(timeLimit) {
     clearInterval(timerInterval); // Clear the current interval before setting a new one
     timeLeft = timeLimit;
+    initialTimeLimit = timeLimit; // Store initial time limit
     updateTimerDisplay(); // Initial display after reset
     // The timer should always start when a question is loaded if the quiz is active
     if (quizActive) {

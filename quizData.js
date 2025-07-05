@@ -70,35 +70,35 @@ const quizzes = [
                 type: "input",
                 answer: "21 and 29",
                 imageUrl: "",
-                timeLimit: 120
+                timeLimit: 10
             },
             {
                 question: "A rectangular plot has an area of 180m2. Its length is 5m more than its width. Find its dimentions.(Write as a,b where a=width and b=length)",
                 type: "input",
                 answer: "12,17",
                 imageUrl: "",
-                timeLimit: 120
+                timeLimit: 30
             },
             {
                 question: "A bag has 4 red and 6 green balls. One is drawn at random. What is the probability that it is green? (Answer in format a/b)",
                 type: "input",
                 answer: "3/5",
                 imageUrl: "",
-                timeLimit: 120
+                timeLimit: 30
             },
             {
                 question: "The first term of an AP is 7 and its common difference is 3. What is the 15th term?",
                 type: "input",
                 answer: "49",
                 imageUrl: "",
-                timeLimit: 120
+                timeLimit: 30
             },
             {
                 question: "Find the mean of the following data:- 10, 20, 30, 40 and 50",
                 type: "input",
                 answer: "30",
                 imageUrl: "",
-                timeLimit: 120
+                timeLimit: 30
             },
         ]
     },

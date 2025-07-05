@@ -23,7 +23,7 @@ nav {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3); /* Dark shadow */
     width: 220px; /* Slightly wider nav */
     flex-shrink: 0; /* Prevents nav from shrinking */
     transition: width 0.3s ease, transform 0.3s ease; /* Smooth transition for width and transform */
@@ -44,7 +44,7 @@ nav .logo {
     max-width: 140px; /* Larger logo */
     height: auto;
     border-radius: 10px; /* Slightly more rounded */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Dark shadow */
 }
 
 nav ul {
@@ -78,7 +78,7 @@ nav ul li a:hover,
 nav ul li a.active {
     background-color: #34495e; /* Darker hover/active background */
     transform: translateX(5px); /* Slight slide effect on hover/active */
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Dark shadow */
 }
 
 nav ul li a.active {
@@ -101,7 +101,7 @@ header {
     background-color: white;
     padding: 25px 30px; /* Increased padding */
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Dark shadow */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -164,7 +164,7 @@ header h1 {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.5s ease, transform 0.5s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Dark shadow */
     display: none; /* Hidden by default */
 }
 
@@ -185,7 +185,7 @@ header h1 {
     background-color: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Dark shadow */
 }
 
 .quiz-info-box h2,
@@ -194,7 +194,7 @@ header h1 {
 .final-score-container h2,
 .quiz-results-details h2,
 .previous-quizzes-container h2 {
-    color: #2c3e50;
+    color: #2c3e50; /* Dark blue-gray */
     margin-top: 0;
     margin-bottom: 25px;
     font-size: 2em;
@@ -225,7 +225,7 @@ header h1 {
     background-color: #ffffff; /* Light gray for cards */
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Dark shadow */
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -235,11 +235,11 @@ header h1 {
 
 .quiz-card:hover {
     transform: translateY(-5px);
-    box-shadow: 10px 16px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 10px 16px 20px rgba(0, 0, 0, 0.15); /* Dark shadow */
 }
 
 .quiz-card h3 {
-    color: #000000;
+    color: #000000; /* Black */
     margin-top: 0;
     font-size: 1.6em;
     margin-bottom: 15px;
@@ -253,7 +253,7 @@ header h1 {
 }
 
 .start-quiz-card-btn {
-    background-color: #0199b4; /* Vibrant green */
+    background-color: #0199b4; /* Vibrant green-blue */
     color: white;
     border: none;
     padding: 12px 25px;
@@ -267,7 +267,7 @@ header h1 {
 }
 
 .start-quiz-card-btn:hover:not(:disabled) {
-    background-color: #014c77; /* Darker green on hover */
+    background-color: #014c77; /* Darker green-blue on hover */
     transform: translateY(-2px);
 }
 
@@ -284,13 +284,52 @@ header h1 {
     font-size: 1.5em;
     font-weight: 700;
     background-color: rgb(255, 255, 255);
-    color: #ff1c03; /* Red for timer */
     margin-bottom: 20px;
-    border: 1px solid rgb(0, 0, 0);
-    padding: 8px 12px;
+    padding: 8px 10px;
     display: inline-block;
-    border-radius: 8px;
 }
+
+/* Default timer display (no alert) */
+#timerDisplay {
+    font-weight: bold;
+    border-radius: 9px;
+    background-color: #ebf4f2;
+    border: 1px solid green;
+    color: #0fa514; /* Dark gray for normal time */
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out; /* Smooth transition for visual changes */
+    padding: 5px 10px;
+}
+
+/* Warning stage (e.g., last 50% of time) */
+#timerDisplay.timer-warning {
+    font-weight: bold;
+    color: #FFA500; /* Orange color */
+    animation: pulse 1s infinite alternate;
+    background-color: #FFF3E0; /* Light orange background */
+    border: 1px solid #FFA500;
+}
+
+/* Critical stage (e.g., last 25% of time) */
+#timerDisplay.timer-critical {
+    font-weight: bold;
+    color: #FF0000; /* Red color */
+    background-color: #FFEBEE; /* Light red background */
+    animation: pulse 1s infinite alternate; /* Add a pulsating animation */
+    border: 1px solid #FF0000;
+}
+
+/* Keyframes for pulsating animation */
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    }
+    to {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    }
+}
+
 
 .progress-bar-container {
     background-color: #e0e0e0;
@@ -298,7 +337,7 @@ header h1 {
     height: 15px;
     margin-bottom: 30px;
     overflow: hidden;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Dark shadow */
 }
 
 .progress-bar {
@@ -318,7 +357,7 @@ header h1 {
     height: auto;
     border-radius: 8px;
     margin-bottom: 25px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Dark shadow */
     display: block; /* Ensure it takes full width when present */
     margin-left: auto;
     margin-right: auto;
@@ -327,7 +366,7 @@ header h1 {
 .question {
     font-size: 1.6em; /* Larger question text */
     margin-bottom: 30px;
-    color: #2c3e50;
+    color: #2c3e50; /* Dark blue-gray */
     line-height: 1.5;
     font-weight: 600;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -357,14 +396,14 @@ header h1 {
 .option:hover {
     background-color: #dbe4e6;
     transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Dark shadow */
 }
 
 .option.selected {
     background-color: #3498db; /* Blue for selected */
     color: white;
     border-color: #2980b9;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Dark shadow */
     transform: scale(1.02);
 }
 
@@ -404,7 +443,7 @@ header h1 {
 }
 
 .quiz-navigation button:hover {
-    background-color: #2c3e50;
+    background-color: #2c3e50; /* Darker blue-gray */
     transform: translateY(-2px);
 }
 
@@ -427,7 +466,7 @@ header h1 {
 
 /* Final Score Container */
 .final-score-container h2 {
-    color: #2c3e50;
+    color: #2c3e50; /* Dark blue-gray */
     margin-top: 0;
     margin-bottom: 25px;
     font-size: 2.2em;
@@ -472,7 +511,7 @@ header h1 {
 .final-score-container .results-btn:hover {
     background-color: #2980b9;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Dark shadow */
 }
 
 .final-score-container .back-to-score-btn {
@@ -482,7 +521,7 @@ header h1 {
 .final-score-container .back-to-score-btn:hover {
     background-color: #616e70;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Dark shadow */
 }
 
 /* Detailed Results */
@@ -497,7 +536,7 @@ header h1 {
     flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     gap: 15px; /* Space between summary items */
     font-size: 1.1em;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Dark shadow */
 }
 
 .results-summary p {
@@ -544,14 +583,14 @@ header h1 {
     background-color: #f8f8f8;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Dark shadow */
     border-left: 5px solid; /* For status indication */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .result-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Dark shadow */
 }
 
 .result-item.correct {
@@ -573,7 +612,7 @@ header h1 {
 .question-text-result {
     font-weight: bold;
     margin-bottom: 10px;
-    color: #2c3e50;
+    color: #2c3e50; /* Dark blue-gray */
     font-size: 1.1em;
 }
 
@@ -629,7 +668,7 @@ header h1 {
     background-color: white;
     border-radius: 8px;
     overflow: hidden; /* Ensures rounded corners on table */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Dark shadow */
 }
 
 #previousQuizzesTable th,
@@ -737,7 +776,7 @@ header h1 {
     background-color: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); /* Dark shadow */
     text-align: center;
     max-width: 400px;
     width: 90%;
@@ -761,7 +800,7 @@ header h1 {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Dark shadow */
     text-align: center;
     max-width: 450px;
     width: 90%;
@@ -781,7 +820,7 @@ header h1 {
     font-size: 24px;
     padding: 10px;
     border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Dark shadow */
 }
 
 .info-ok-btn {
@@ -817,7 +856,7 @@ header h1 {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Dark shadow */
 }
 
 .time-up-message.show {
@@ -833,7 +872,7 @@ header h1 {
     background: none;
     border: none;
     font-size: 1.8em;
-    color: #2c3e50; /* Color of the icon */
+    color: #2c3e50; /* Color of the icon - Dark blue-gray */
     cursor: pointer;
     padding: 10px;
     margin-right: 15px; /* Space from heading */
@@ -972,7 +1011,7 @@ body.sidebar-active .sidebar-overlay {
         height: 100vh;
         width: 250px; /* Width of the off-canvas menu */
         transform: translateX(-100%); /* Initially hide off-screen */
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Stronger shadow when open */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Stronger dark shadow when open */
         z-index: 1001; /* Higher than overlay */
     }
 
@@ -1116,7 +1155,7 @@ body.sidebar-active .sidebar-overlay {
     border: 2px solid #3cb30e;
     border-radius: 8px;
     outline: none;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Dark shadow */
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
@@ -1184,7 +1223,7 @@ body.sidebar-active .sidebar-overlay {
     width: 80%; /* Could be more specific, e.g., 500px */
     max-width: 500px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Dark shadow */
     text-align: center;
     transform: translateY(-50px);
     transition: transform 0.3s ease;
@@ -1229,6 +1268,6 @@ body.sidebar-active .sidebar-overlay {
     margin: 15px auto; /* Center the image and provide vertical spacing */
     object-fit: contain; /* Ensures the entire image is visible within the bounds */
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Dark shadow */
     cursor: zoom-in; /* Hint for potential zoom functionality (if implemented) */
 }
