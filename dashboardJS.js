@@ -10,8 +10,8 @@ function formatTime(totalSeconds) {
     }
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    const formattedSeconds = String(seconds).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, 0);
+    const formattedSeconds = String(seconds).padStart(2, 0);
     return `${formattedMinutes} min : ${formattedSeconds} sec`;
 }
 
@@ -61,7 +61,7 @@ const summaryWrong = document.getElementById('summaryWrong');
 const summarySkipped = document.getElementById('summarySkipped');
 const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
-const ADMIN_USERS = ['Arindam Mitra', ];// Add usernames for delete button activation
+const ADMIN_USERS = ['Arindam Mitra', ]; // Add usernames for delete button activation
 
 // Hamburger menu elements
 const hamburgerMenu = document.getElementById('hamburgerMenu');
@@ -614,27 +614,31 @@ function calculateResults() {
         let isCorrect = false;
         const timeSpent = questionTimesTaken[index] !== undefined ? questionTimesTaken[index] : 0; // Get time spent
 
+        // Common properties for quizDetailsForDisplay
+        const commonDetails = {
+            question: question.question,
+            correctAnswer: question.answer,
+            timeTaken: timeSpent,
+            imageUrl: question.imageUrl || null // Add imageUrl here
+        };
+
         if (userAnswer === null) {
             skippedQuestionsTotal++;
             quizDetailsForDisplay.push({
-                question: question.question,
+                ...commonDetails,
                 userAnswer: "Skipped",
-                correctAnswer: question.answer,
                 isCorrect: false,
                 skipped: true,
-                timeUp: false,
-                timeTaken: timeSpent // Include time taken
+                timeUp: false
             });
         } else if (userAnswer === "Time_Up_Auto_Answer") {
             timeUpQuestionsTotal++;
             quizDetailsForDisplay.push({
-                question: question.question,
+                ...commonDetails,
                 userAnswer: "Time's Up",
-                correctAnswer: question.answer,
                 isCorrect: false,
                 skipped: false,
-                timeUp: true,
-                timeTaken: timeSpent // Include time taken
+                timeUp: true
             });
         } else {
             if (question.type === 'input') {
@@ -650,13 +654,11 @@ function calculateResults() {
             }
 
             quizDetailsForDisplay.push({
-                question: question.question,
+                ...commonDetails,
                 userAnswer: userAnswer,
-                correctAnswer: question.answer,
                 isCorrect,
                 skipped: false,
-                timeUp: false,
-                timeTaken: timeSpent // Include time taken
+                timeUp: false
             });
         }
     });
@@ -724,9 +726,15 @@ function displayDetailedResults() {
             resultItem.classList.add('wrong');
         }
 
+        let imageHtml = ''; // Initialize imageHtml
+        // Check if imageUrl exists and add the image tag
+        if (detail.imageUrl) {
+            imageHtml = `<img src="${detail.imageUrl}" alt="Question Image" class="question-result-image">`;
+        }
+
         resultItem.innerHTML = `
             <p class="question-text-result">${detail.question}</p>
-            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
+            ${imageHtml} <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
             <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>`; // Use formatTime helper
         resultsContainer.appendChild(resultItem);
@@ -848,6 +856,7 @@ function deleteQuizResult(quizIdToDelete, dateToDelete) {
     localStorage.setItem(userKey, JSON.stringify(updatedQuizzes));
     loadPreviousQuizzes();
 }
+
 function downloadQuizResponse(quiz) {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -862,7 +871,9 @@ function downloadQuizResponse(quiz) {
     // Header Title
     doc.setFontSize(18);
     doc.setFont("helvetica", "bold");
-    doc.text("📘 Quiz Response Report", pageWidth / 2, y, { align: "center" });
+    doc.text("📘 Quiz Response Report", pageWidth / 2, y, {
+        align: "center"
+    });
     y += 10;
 
     // User Name
@@ -895,6 +906,38 @@ function downloadQuizResponse(quiz) {
             const wrappedQuestion = doc.splitTextToSize(`Q${i + 1}: ${item.question}`, maxLineWidth);
             doc.text(wrappedQuestion, marginLeft, y);
             y += lineSpacing * wrappedQuestion.length;
+
+            // Add image if available
+            if (item.imageUrl) {
+                try {
+                    const img = new Image();
+                    img.src = item.imageUrl;
+                    // Calculate aspect ratio and fit to max width/height
+                    const imgWidth = img.naturalWidth;
+                    const imgHeight = img.naturalHeight;
+                    const aspectRatio = imgWidth / imgHeight;
+
+                    const maxWidth = maxLineWidth - 10; // Give some padding
+                    let scaledWidth = maxWidth;
+                    let scaledHeight = scaledWidth / aspectRatio;
+
+                    // If scaled height is too much for remaining page, scale down
+                    if (y + scaledHeight + 10 > doc.internal.pageSize.getHeight()) {
+                        doc.addPage();
+                        y = 20;
+                    }
+
+                    // Add the image to the PDF
+                    doc.addImage(img.src, 'JPEG', marginLeft + 5, y, scaledWidth, scaledHeight);
+                    y += scaledHeight + 5; // Add some space after the image
+                } catch (e) {
+                    console.error("Error loading or adding image to PDF:", e);
+                    doc.setTextColor(200, 0, 0);
+                    doc.text(" (Image could not be loaded)", marginLeft + 5, y);
+                    y += lineSpacing;
+                }
+            }
+
 
             // User Answer
             doc.setFont("helvetica", "normal");
@@ -1060,9 +1103,15 @@ function showQuizResultsDetails(result) {
             resultItem.classList.add('wrong');
         }
 
+        let imageHtml = ''; // Initialize imageHtml
+        // Check if imageUrl exists and add the image tag
+        if (detail.imageUrl) {
+            imageHtml = `<img src="${detail.imageUrl}" alt="Question Image" class="question-result-image">`;
+        }
+
         resultItem.innerHTML = `
             <p class="question-text-result">${detail.question}</p>
-            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
+            ${imageHtml} <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
             <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>`; // Use formatTime helper
         resultsContainer.appendChild(resultItem);
