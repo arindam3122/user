@@ -11,6 +11,7 @@ body {
 .heading{
     color: #098826;
     font-weight: 800;
+    user-select: none;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -115,9 +116,8 @@ header h1 {
     font-size: 2.2em; /* Larger heading */
     font-weight: 600;
 }
-.heading2 {
-    font-size: 63px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.heading2{
+    font-family: 'Times New Roman', Times, serif;
 }
 .user-info {
     display: flex;
@@ -209,8 +209,10 @@ header h1 {
 }
 
 #lastQuizScoreDisplay {
-    font-weight: bold;
-    color: #3498db; /* Blue for score */
+    font-weight: 700;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    color: #782be3; /* Blue for score */
 }
 
 /* Quiz Selection */
