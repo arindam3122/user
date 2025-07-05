@@ -9,9 +9,9 @@ body {
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
 .heading{
-    color: #1d8836;
-    font-weight: 700;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #098826;
+    font-weight: 800;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 /* Navigation Bar - Left Sidebar */
