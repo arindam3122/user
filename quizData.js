@@ -13,7 +13,7 @@ const quizzes = [
                 options: ["4", "6", "7", "9"], // Array of options
                 answer: "7", // Correct answer
                 imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "images/prime_number_explanation.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 30
             },
             {
@@ -21,7 +21,7 @@ const quizzes = [
                 type: "input",
                 answer: "223",
                 imageUrl: "",
-                explanationImageUrl: "images/apple_subtraction_explanation.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -29,7 +29,7 @@ const quizzes = [
                 type: "input",
                 answer: "360",
                 imageUrl: "",
-                explanationImageUrl: "images/chocolate_multiplication_explanation.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -37,7 +37,7 @@ const quizzes = [
                 type: "input",
                 answer: "40",
                 imageUrl: "",
-                explanationImageUrl: "images/mango_division_explanation.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -45,7 +45,7 @@ const quizzes = [
                 type: "input",
                 answer: "2 hours 30 min",
                 imageUrl: "",
-                explanationImageUrl: "images/movie_time_explanation.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -53,7 +53,7 @@ const quizzes = [
                 type: "input",
                 answer: "225",
                 imageUrl: "",
-                explanationImageUrl: "images/money_left_explanation.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -61,7 +61,7 @@ const quizzes = [
                 type: "input",
                 answer: "12.5",
                 imageUrl: "",
-                explanationImageUrl: "images/average_age_explanation.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 60
             },
         ]
