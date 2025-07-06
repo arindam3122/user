@@ -103,24 +103,24 @@ const quizzes = [
         ]
     },
     {
-        id: "img",
-        name: "Images",
+        id: "12",
+        name: "WORD PROBLEMS",
         description: "",
         enabled: true,
         questions: [
             {
-                question: "Name this person",
+                question: "A train 120 m long is moving at a speed of 72 km/h. Another train 150 m long is moving in the opposite direction at 54 km/h. How long will it take for the two trains to completely cross each other? (ANSWER UPTO 2 DECIMALS)",
                 type: "input",
-                answer: "",
-                imageUrl: "salman.jpeg",
-                timeLimit: 10
+                answer: "7.71",
+                imageUrl: "",
+                timeLimit: 120
             },
             {
-                question: "Name this person",
+                question: "A can complete a job in 12 days, B in 16 days. If they work together, how long will they take? (UPTO 2 DECIMAL)",
                 type: "input",
-                answer: "",
-                imageUrl: "Sara.jpg",
-                timeLimit: 10
+                answer: "6.86",
+                imageUrl: "",
+                timeLimit: 120
             },
         ]
     },
