@@ -115,6 +115,13 @@ const quizzes = [
                 imageUrl: "salman.jpeg",
                 timeLimit: 10
             },
+            {
+                question: "Name this person",
+                type: "input",
+                answer: "",
+                imageUrl: "Sara.jpg",
+                timeLimit: 10
+            },
         ]
     },
 ]
