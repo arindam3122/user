@@ -9,7 +9,7 @@ body {
       margin: 0; /* Remove default body margin */
     }
     .login-container {
-      background: white;
+      background: rgb(255, 255, 255);
       padding: 40px; /* Increased padding */
       border-radius: 12px; /* More rounded corners */
       box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Stronger shadow */
@@ -26,6 +26,7 @@ body {
       height: 180px; /* Further increased logo size */
       object-fit: contain;
       border-radius: 30px;
+      border: 2px solid rgb(0, 0, 0);
     }
     h2 {
       color: #333;
