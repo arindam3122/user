@@ -102,4 +102,19 @@ const quizzes = [
             },
         ]
     },
+    {
+        id: "img",
+        name: "Images",
+        description: "",
+        enabled: true,
+        questions: [
+            {
+                question: "Name this person",
+                type: "input",
+                answer: "",
+                imageUrl: "salman.jpeg",
+                timeLimit: 10
+            },
+        ]
+    },
 ]
