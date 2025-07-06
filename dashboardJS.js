@@ -888,7 +888,7 @@ function deleteQuizResult(quizIdToDelete, dateToDelete) {
     loadPreviousQuizzes();
 }
 
-function downloadQuizResponse(quiz) {
+async function downloadQuizResponse(quiz) { // Made function async
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const marginLeft = 15;
@@ -929,7 +929,7 @@ function downloadQuizResponse(quiz) {
 
     // Loop through all question responses
     if (quiz.details && Array.isArray(quiz.details)) {
-        quiz.details.forEach((item, i) => {
+        for (const [i, item] of quiz.details.entries()) { // Use for...of with entries for async
             // Question
             doc.setFont("helvetica", "bold");
             doc.setFontSize(12);
@@ -942,20 +942,35 @@ function downloadQuizResponse(quiz) {
             if (item.imageUrl) {
                 try {
                     const img = new Image();
-                    img.src = item.imageUrl;
-                    // Calculate aspect ratio and fit to max width/height
-                    const imgWidth = img.naturalWidth;
-                    const imgHeight = img.naturalHeight;
-                    const aspectRatio = imgWidth / imgHeight;
+                    // Use a Promise to wait for the image to load
+                    await new Promise((resolve, reject) => {
+                        img.onload = () => resolve();
+                        img.onerror = (e) => reject(e);
+                        img.src = item.imageUrl;
+                    });
 
-                    const maxWidth = maxLineWidth - 10; // Give some padding
-                    let scaledWidth = maxWidth;
-                    let scaledHeight = scaledWidth / aspectRatio;
+                    // Define a maximum image height and width for the PDF
+                    const maxImageWidth = maxLineWidth - 10; // Padding from left/right
+                    const maxImageHeight = 80; // Example: limit image height to 80 units
 
-                    // If scaled height is too much for remaining page, scale down
-                    if (y + scaledHeight + 10 > doc.internal.pageSize.getHeight()) {
+                    let scaledWidth = img.naturalWidth;
+                    let scaledHeight = img.naturalHeight;
+
+                    // Calculate scaling factor to fit within max dimensions while maintaining aspect ratio
+                    if (scaledWidth > maxImageWidth) {
+                        scaledHeight = (maxImageWidth / scaledWidth) * scaledHeight;
+                        scaledWidth = maxImageWidth;
+                    }
+
+                    if (scaledHeight > maxImageHeight) {
+                        scaledWidth = (maxImageHeight / scaledHeight) * scaledWidth;
+                        scaledHeight = maxImageHeight;
+                    }
+
+                    // Check if image will fit on current page, if not, add new page
+                    if (y + scaledHeight + 10 > doc.internal.pageSize.getHeight() - 20) { // -20 for bottom margin
                         doc.addPage();
-                        y = 20;
+                        y = 20; // Reset y for new page
                     }
 
                     // Add the image to the PDF
@@ -1011,11 +1026,11 @@ function downloadQuizResponse(quiz) {
             doc.line(marginLeft, y, pageWidth - marginLeft, y);
             y += lineSpacing;
 
-            if (y > 270) {
+            if (y > doc.internal.pageSize.getHeight() - 20) { // Check if new page is needed
                 doc.addPage();
                 y = 20;
             }
-        });
+        }
     } else {
         doc.setTextColor(200, 0, 0);
         doc.text("No answer details available.", marginLeft, y);
