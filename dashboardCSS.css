@@ -364,9 +364,10 @@ header h1 {
     border-radius: 8px;
     margin-bottom: 25px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Dark shadow */
-    display: block; /* Ensure it takes full width when present */
+    display: block;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; /* Ensure it takes full width when present */
+
 }
 
 .question {
@@ -618,7 +619,7 @@ header h1 {
 .question-text-result {
     font-weight: bold;
     margin-bottom: 10px;
-    color: #2c3e50; /* Dark blue-gray */
+    color: #000000; /* Dark blue-gray */
     font-size: 1.1em;
 }
 
@@ -1271,9 +1272,9 @@ body.sidebar-active .sidebar-overlay {
     max-height: 200px; /* Limit the maximum height to prevent large images from dominating */
     width: auto; /* Maintain aspect ratio */
     display: block; /* Ensures centering with margin auto */
-    margin: 15px auto; /* Center the image and provide vertical spacing */
+    margin: 15px 0 15px 0; /* Center the image and provide vertical spacing */
     object-fit: contain; /* Ensures the entire image is visible within the bounds */
-    border-radius: 8px;
+    border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Dark shadow */
-    cursor: zoom-in; /* Hint for potential zoom functionality (if implemented) */
+    cursor: auto; /* Hint for potential zoom functionality (if implemented) */
 }
