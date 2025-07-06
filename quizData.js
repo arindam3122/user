@@ -67,54 +67,6 @@ const quizzes = [
         ]
     },
     {
-        id: "cls-10",
-        name: "Logical Reasoning (PART-2)",
-        description: "Medium Wordproblems",
-        enabled: true,
-        questions: [
-            {
-                question: "The sum of two numbers is 50. One number is 8 more than the other. Find the numbers. (Format a and b)",
-                type: "input",
-                answer: "21 and 29",
-                imageUrl: "",
-                explanationImageUrl: "images/sum_of_numbers_explanation.png", // New: Image for explanation
-                timeLimit: 10
-            },
-            {
-                question: "A rectangular plot has an area of 180m2. Its length is 5m more than its width. Find its dimentions.(Write as a,b where a=width and b=length)",
-                type: "input",
-                answer: "12,17",
-                imageUrl: "",
-                explanationImageUrl: "images/rectangular_plot_explanation.png", // New: Image for explanation
-                timeLimit: 30
-            },
-            {
-                question: "A bag has 4 red and 6 green balls. One is drawn at random. What is the probability that it is green? (Answer in format a/b)",
-                type: "input",
-                answer: "3/5",
-                imageUrl: "",
-                explanationImageUrl: "images/probability_explanation.png", // New: Image for explanation
-                timeLimit: 30
-            },
-            {
-                question: "The first term of an AP is 7 and its common difference is 3. What is the 15th term?",
-                type: "input",
-                answer: "49",
-                imageUrl: "",
-                explanationImageUrl: "images/ap_term_explanation.png", // New: Image for explanation
-                timeLimit: 30
-            },
-            {
-                question: "Find the mean of the following data:- 10, 20, 30, 40 and 50",
-                type: "input",
-                answer: "30",
-                imageUrl: "",
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 30
-            },
-        ]
-    },
-    {
         id: "12",
         name: "WORD PROBLEMS",
         description: "",
