@@ -147,6 +147,20 @@ function showTimeUpMessage() {
     }, 3000); // Message visible for 3 seconds
 }
 
+/**
+ * Clears and hides the time-up message if it's currently displayed.
+ */
+function clearTimeUpMessage() {
+    if (timeUpMessageTimeout) {
+        clearTimeout(timeUpMessageTimeout);
+        timeUpMessageTimeout = null;
+    }
+    const timeUpMessageElement = document.getElementById('timeUpMessage');
+    if (timeUpMessageElement) {
+        timeUpMessageElement.classList.remove('show');
+    }
+}
+
 
 // --- Anti-cheating Logic: Tab Switching Detection ---
 
@@ -284,6 +298,7 @@ function goToDashboard() {
     setActiveLink(dashboardLink);
     // Clear the timer when navigating to the dashboard
     clearInterval(timerInterval);
+    clearTimeUpMessage(); // Clear and hide the time-up message
     quizActive = false; // Ensure quiz is marked as inactive when going to dashboard
     tabSwitchCount = 0; // Reset tab switch count
 }
@@ -291,6 +306,11 @@ function goToDashboard() {
 function showQuizSelection() {
     hideAllSections();
     quizSelectionContainer.style.display = 'block';
+    // Clear timer and time-up message when going to quiz selection
+    clearInterval(timerInterval);
+    clearTimeUpMessage(); // Clear and hide the time-up message
+    quizActive = false; // Ensure quiz is marked as inactive
+    tabSwitchCount = 0; // Reset tab switch count
     renderQuizList();
 }
 
@@ -313,6 +333,10 @@ function showPreviousQuizzesSection() {
     hideAllSections();
     previousQuizzesContainer.style.display = 'block';
     loadPreviousQuizzes();
+    clearInterval(timerInterval); // Add this line to stop the timer
+    clearTimeUpMessage(); // Clear and hide the time-up message
+    quizActive = false; // Add this line to mark quiz as inactive
+    tabSwitchCount = 0; // Reset tab switch count
 }
 
 
@@ -520,13 +544,7 @@ function handleSubmitButtonClick() {
     updateTimeTakenBeforeMoving(); // Ensure time for the last question is recorded
 
     clearInterval(timerInterval); // Stop the timer when quiz is submitted
-    if (timeUpMessageTimeout) { // Clear any pending time-up message timeout
-        clearTimeout(timeUpMessageTimeout);
-        const timeUpMessageElement = document.getElementById('timeUpMessage');
-        if (timeUpMessageElement) {
-            timeUpMessageElement.classList.remove('show');
-        }
-    }
+    clearTimeUpMessage(); // Clear and hide the time-up message
     quizActive = false; // Quiz is no longer active
     tabSwitchCount = 0; // Reset tab switch count
     calculateResults();
