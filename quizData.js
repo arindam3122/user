@@ -12,7 +12,8 @@ const quizzes = [
                 type: "mcq", // New type for MCQ
                 options: ["4", "6", "7", "9"], // Array of options
                 answer: "7", // Correct answer
-                imageUrl: "",
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "images/prime_number_explanation.png", // New: Image for explanation
                 timeLimit: 30
             },
             {
@@ -20,6 +21,7 @@ const quizzes = [
                 type: "input",
                 answer: "223",
                 imageUrl: "",
+                explanationImageUrl: "images/apple_subtraction_explanation.png", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -27,6 +29,7 @@ const quizzes = [
                 type: "input",
                 answer: "360",
                 imageUrl: "",
+                explanationImageUrl: "images/chocolate_multiplication_explanation.png", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -34,6 +37,7 @@ const quizzes = [
                 type: "input",
                 answer: "40",
                 imageUrl: "",
+                explanationImageUrl: "images/mango_division_explanation.png", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -41,6 +45,7 @@ const quizzes = [
                 type: "input",
                 answer: "2 hours 30 min",
                 imageUrl: "",
+                explanationImageUrl: "images/movie_time_explanation.png", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -48,6 +53,7 @@ const quizzes = [
                 type: "input",
                 answer: "225",
                 imageUrl: "",
+                explanationImageUrl: "images/money_left_explanation.png", // New: Image for explanation
                 timeLimit: 60
             },
             {
@@ -55,6 +61,7 @@ const quizzes = [
                 type: "input",
                 answer: "12.5",
                 imageUrl: "",
+                explanationImageUrl: "images/average_age_explanation.png", // New: Image for explanation
                 timeLimit: 60
             },
         ]
@@ -70,6 +77,7 @@ const quizzes = [
                 type: "input",
                 answer: "21 and 29",
                 imageUrl: "",
+                explanationImageUrl: "images/sum_of_numbers_explanation.png", // New: Image for explanation
                 timeLimit: 10
             },
             {
@@ -77,6 +85,7 @@ const quizzes = [
                 type: "input",
                 answer: "12,17",
                 imageUrl: "",
+                explanationImageUrl: "images/rectangular_plot_explanation.png", // New: Image for explanation
                 timeLimit: 30
             },
             {
@@ -84,6 +93,7 @@ const quizzes = [
                 type: "input",
                 answer: "3/5",
                 imageUrl: "",
+                explanationImageUrl: "images/probability_explanation.png", // New: Image for explanation
                 timeLimit: 30
             },
             {
@@ -91,6 +101,7 @@ const quizzes = [
                 type: "input",
                 answer: "49",
                 imageUrl: "",
+                explanationImageUrl: "images/ap_term_explanation.png", // New: Image for explanation
                 timeLimit: 30
             },
             {
@@ -98,6 +109,7 @@ const quizzes = [
                 type: "input",
                 answer: "30",
                 imageUrl: "",
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 30
             },
         ]
@@ -113,6 +125,7 @@ const quizzes = [
                 type: "input",
                 answer: "7.71",
                 imageUrl: "",
+                explanationImageUrl: "train.png", // New: Image for explanation
                 timeLimit: 120
             },
             {
@@ -120,8 +133,25 @@ const quizzes = [
                 type: "input",
                 answer: "6.86",
                 imageUrl: "",
+                explanationImageUrl: "car.png", // New: Image for explanation
                 timeLimit: 120
+            },
+            {
+                question: "A car travels 60 km at 30 km/h and then another 60 km at 60 km/h. Find its average speed for the entire journey. (NO UNITS)",
+                type: "input",
+                answer: "40",
+                imageUrl: "",
+                explanationImageUrl: "1.png", // New: Image for explanation
+                timeLimit: 120
+            },
+            {
+                question: "The product of two consecutive positive integers is 156. Find the integers. (ANSWER IN a,b)",
+                type: "input",
+                answer: "12,13",
+                imageUrl: "",
+                explanationImageUrl: "2.png", // New: Image for explanation
+                timeLimit: 180
             },
         ]
     },
-]
+];

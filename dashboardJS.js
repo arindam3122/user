@@ -650,7 +650,8 @@ function calculateResults() {
             question: question.question,
             correctAnswer: question.answer,
             timeTaken: timeSpent,
-            imageUrl: question.imageUrl || null // Add imageUrl here
+            imageUrl: question.imageUrl || null, // Add imageUrl here
+            explanationImageUrl: question.explanationImageUrl || null // New: Add explanationImageUrl
         };
 
         if (userAnswer === null) {
@@ -762,12 +763,20 @@ function displayDetailedResults() {
         if (detail.imageUrl) {
             imageHtml = `<img src="${detail.imageUrl}" alt="Question Image" class="question-result-image">`;
         }
+        // New: Add explanation image if available
+        let explanationImageHtml = '';
+        if (detail.explanationImageUrl) {
+            explanationImageHtml = `<img src="${detail.explanationImageUrl}" alt="Explanation Image" class="explanation-image">`;
+        }
+
 
         resultItem.innerHTML = `
             <p class="question-text-result">${detail.question}</p>
-            ${imageHtml} <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
+            ${imageHtml}
+            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
-            <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>`; // Use formatTime helper
+            <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>
+            ${explanationImageHtml} `;
         resultsContainer.appendChild(resultItem);
     });
 
@@ -938,7 +947,7 @@ async function downloadQuizResponse(quiz) { // Made function async
             doc.text(wrappedQuestion, marginLeft, y);
             y += lineSpacing * wrappedQuestion.length;
 
-            // Add image if available
+            // Add image if available (for the question itself)
             if (item.imageUrl) {
                 try {
                     const img = new Image();
@@ -977,9 +986,9 @@ async function downloadQuizResponse(quiz) { // Made function async
                     doc.addImage(img.src, 'JPEG', marginLeft + 5, y, scaledWidth, scaledHeight);
                     y += scaledHeight + 5; // Add some space after the image
                 } catch (e) {
-                    console.error("Error loading or adding image to PDF:", e);
+                    console.error("Error loading or adding question image to PDF:", e);
                     doc.setTextColor(200, 0, 0);
-                    doc.text(" (Image could not be loaded)", marginLeft + 5, y);
+                    doc.text(" (Question image could not be loaded)", marginLeft + 5, y);
                     y += lineSpacing;
                 }
             }
@@ -1019,6 +1028,50 @@ async function downloadQuizResponse(quiz) { // Made function async
             y += lineSpacing;
             doc.text(`${formatTime(item.timeTaken)}`, marginLeft + 10, y); // Use formatTime helper
             y += lineSpacing;
+
+            // NEW: Add Explanation Image to PDF if available
+            if (item.explanationImageUrl) {
+                try {
+                    const explanationImg = new Image();
+                    await new Promise((resolve, reject) => {
+                        explanationImg.onload = () => resolve();
+                        explanationImg.onerror = (e) => reject(e);
+                        explanationImg.src = item.explanationImageUrl;
+                    });
+
+                    const maxExplanationImageWidth = maxLineWidth - 10;
+                    const maxExplanationImageHeight = 100; // Adjust as needed
+
+                    let scaledExplanationWidth = explanationImg.naturalWidth;
+                    let scaledExplanationHeight = explanationImg.naturalHeight;
+
+                    if (scaledExplanationWidth > maxExplanationImageWidth) {
+                        scaledExplanationHeight = (maxExplanationImageWidth / scaledExplanationWidth) * scaledExplanationHeight;
+                        scaledExplanationWidth = maxExplanationImageWidth;
+                    }
+
+                    if (scaledExplanationHeight > maxExplanationImageHeight) {
+                        scaledExplanationWidth = (maxExplanationImageHeight / scaledExplanationHeight) * scaledExplanationWidth;
+                        scaledExplanationHeight = maxExplanationImageHeight;
+                    }
+
+                    if (y + scaledExplanationHeight + 10 > doc.internal.pageSize.getHeight() - 20) {
+                        doc.addPage();
+                        y = 20;
+                    }
+                    doc.setTextColor(0, 0, 0); // Reset color for label
+                    doc.setFont("helvetica", "bold");
+                    doc.text("Explanation:", marginLeft + 5, y);
+                    y += lineSpacing;
+                    doc.addImage(explanationImg.src, 'JPEG', marginLeft + 5, y, scaledExplanationWidth, scaledExplanationHeight);
+                    y += scaledExplanationHeight + 5;
+                } catch (e) {
+                    console.error("Error loading or adding explanation image to PDF:", e);
+                    doc.setTextColor(200, 0, 0);
+                    doc.text(" (Explanation image could not be loaded)", marginLeft + 5, y);
+                    y += lineSpacing;
+                }
+            }
 
 
             // Divider line
@@ -1154,12 +1207,20 @@ function showQuizResultsDetails(result) {
         if (detail.imageUrl) {
             imageHtml = `<img src="${detail.imageUrl}" alt="Question Image" class="question-result-image">`;
         }
+        // New: Add explanation image if available for historical results
+        let explanationImageHtml = '';
+        if (detail.explanationImageUrl) {
+            explanationImageHtml = `<img src="${detail.explanationImageUrl}" alt="Explanation Image" class="explanation-image">`;
+        }
+
 
         resultItem.innerHTML = `
             <p class="question-text-result">${detail.question}</p>
-            ${imageHtml} <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
+            ${imageHtml}
+            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
-            <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>`; // Use formatTime helper
+            <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>
+            ${explanationImageHtml} `;
         resultsContainer.appendChild(resultItem);
     });
 
