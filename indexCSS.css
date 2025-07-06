@@ -1,7 +1,7 @@
 body {
+      background-image: url('back.jpg');
       font-family: 'Inter', sans-serif; /* Using Inter for a modern look */
       padding: 20px;
-      background: #f0f2f5; /* Light gray background */
       display: flex;
       justify-content: center;
       align-items: center;
