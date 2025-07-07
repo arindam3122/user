@@ -360,7 +360,9 @@ function updateDashboardInfo() {
     totalQuizzesCompleted.textContent = `Total Quizzes Completed: ${totalQuizzes}`;
 
     if (totalQuizzes > 0) {
-        const lastQuiz = previousQuizzes[previousQuizzes.length - 1];
+        // Sort to get the most recent quiz
+        const sortedQuizzes = [...previousQuizzes].sort((a, b) => new Date(b.date) - new Date(a.date));
+        const lastQuiz = sortedQuizzes[0]; // Get the most recent one
         lastQuizScoreDisplay.textContent = `Your last quiz (${lastQuiz.quizName}) score: ${lastQuiz.score}/${lastQuiz.totalQuestions} (${lastQuiz.percentage}%)`;
         lastQuizScoreDisplay.style.display = 'block';
     } else {
@@ -840,7 +842,7 @@ function loadPreviousQuizzes() {
     if (!loggedInUser) return;
 
     const userKey = `previousQuizzes_${loggedInUser}`;
-    const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+    let previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
 
     const tableBody = document.getElementById('previousQuizzesTableBody');
     tableBody.innerHTML = '';
@@ -853,7 +855,42 @@ function loadPreviousQuizzes() {
         noQuizzesMessage.style.display = 'none';
     }
 
-    previousQuizzes.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // Sort the quizzes by date in descending order (most recent first)
+    previousQuizzes.sort((a, b) => {
+        // Convert the date strings to Date objects for proper comparison
+        // The format "dd/mm/yyyy hh:mm:ss AM/PM" needs to be parsed correctly.
+        // For accurate sorting, consider converting to a sortable format (like ISO string)
+        // or using a parsing library if the date format is complex.
+        // For simplicity, assuming the current format can be directly used by Date constructor if consistent.
+        // It's safer to parse it explicitly if you encounter issues.
+
+        // Example of a more robust date parsing for "dd/mm/yyyy hh:mm:ss AM/PM"
+        const parseDateString = (dateStr) => {
+            const parts = dateStr.match(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2}) (AM|PM)/);
+            if (!parts) return new Date(0); // Return a very old date if parsing fails
+
+            let year = parseInt(parts[3], 10);
+            let month = parseInt(parts[2], 10) - 1; // Month is 0-indexed
+            let day = parseInt(parts[1], 10);
+            let hours = parseInt(parts[4], 10);
+            let minutes = parseInt(parts[5], 10);
+            let seconds = parseInt(parts[6], 10);
+            const ampm = parts[7];
+
+            if (ampm === 'PM' && hours < 12) {
+                hours += 12;
+            } else if (ampm === 'AM' && hours === 12) { // Midnight (12 AM)
+                hours = 0;
+            }
+            return new Date(year, month, day, hours, minutes, seconds);
+        };
+
+        const dateA = parseDateString(a.date);
+        const dateB = parseDateString(b.date);
+
+        return dateB.getTime() - dateA.getTime(); // Descending order (b - a for most recent first)
+    });
+
 
     // Check if the current logged-in user is an admin
     const isCurrentUserAdmin = ADMIN_USERS.includes(loggedInUser); //

@@ -5,7 +5,7 @@ const quizzes = [
         id: "cls-6",
         name: "Logical Reasoning (PART-1)",
         description: "Easy wordproblems",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "Which of the following is a prime number?",
@@ -14,7 +14,7 @@ const quizzes = [
                 answer: "7", // Correct answer
                 imageUrl: "", // Existing image for the question itself
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 30
+                timeLimit: 40
             },
             {
                 question: "Rita has 348 apples. She sells 125 apples. How many apples are left with her? (ANSWER THE NUMBER ONLY)",
@@ -22,7 +22,7 @@ const quizzes = [
                 answer: "223",
                 imageUrl: "",
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 60
+                timeLimit: 40
             },
             {
                 question: "A packet has 24 chocolates. How many chocolates are there in 15 such packets? (NUMBER ONLY)",
@@ -30,7 +30,7 @@ const quizzes = [
                 answer: "360",
                 imageUrl: "",
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 60
+                timeLimit: 40
             },
             {
                 question: "There are 480 mangoes packed equally in 12 boxes. How many mangoes are there in each box? (NUMBERS ONLY)",
@@ -38,7 +38,7 @@ const quizzes = [
                 answer: "40",
                 imageUrl: "",
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 60
+                timeLimit: 40
             },
             {
                 question: "A movie starts at 3:15 PM and ends at 5:45PM. How long is the movie? (Answer in format a hours b min)",
@@ -46,7 +46,7 @@ const quizzes = [
                 answer: "2 hours 30 min",
                 imageUrl: "",
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 60
+                timeLimit: 30
             },
             {
                 question: "Ankit has ₹500. He buys a book for ₹275. How much money is left with him? (Answer without any units)",
