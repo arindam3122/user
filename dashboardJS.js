@@ -15,6 +15,15 @@ function formatTime(totalSeconds) {
     return `${formattedMinutes} min : ${formattedSeconds} sec`;
 }
 
+// Add this shuffleArray helper function somewhere in your dashboardJS.js file
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+    return array;
+}
+
 const quizInfoBox = document.getElementById('quizInfoBox');
 const quizContainer = document.getElementById('quizContainer');
 const finalScoreContainer = document.getElementById('finalScoreContainer');
@@ -436,6 +445,9 @@ function startQuiz(quizId) {
         showInfoModal('You have already attempted this quiz. Only one attempt is allowed.');
         return;
     }
+
+    // Shuffle the questions array
+    currentQuiz.questions = shuffleArray(currentQuiz.questions);
 
     // continue with the quiz as normal:
     currentQuestionIndex = 0;
