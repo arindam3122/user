@@ -5,7 +5,7 @@ const quizzes = [
         id: "cls-6",
         name: "Logical Reasoning (PART-1)",
         description: "Easy wordproblems",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "Which of the following is a prime number?",
