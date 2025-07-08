@@ -99,15 +99,16 @@ nav ul li a.active {
 }
 
 header {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     padding: 25px 30px; /* Increased padding */
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Dark shadow */
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.1); /* Dark shadow */
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px; /* Space below header */
     flex-wrap: wrap; /* Allow wrapping on small screens */
+    border: 2px solid rgb(144, 142, 142);
 }
 
 header h1 {
@@ -241,7 +242,8 @@ header h1 {
 }
 
 .quiz-card h3 {
-    color: #c000a6; /* Black */
+    color: #c605a9; /* Black */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-color: #ffffff;
     border-radius: 15px;
     margin-top: 0;
@@ -252,7 +254,7 @@ header h1 {
 }
 
 .quiz-card p {
-    color: #666;
+    color: #767676;
     font-size: 0.95em;
     margin-bottom: 25px; /* Space above button */
     flex-grow: 1; /* Allows description to take space */
