@@ -104,6 +104,14 @@ const quizzes = [
                 explanationImageUrl: "2.png", // New: Image for explanation
                 timeLimit: 180
             },
+            {
+                question: "What is the value of 5<sup>4</sup> + 3 if the total amount is in Indian Rupees (&#8377;)?",
+                type: "input",
+                answer: "28", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "",
+                timeLimit: 60
+            },
         ]
     },
 ];

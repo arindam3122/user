@@ -987,7 +987,7 @@ async function downloadQuizResponse(quiz) { // Made function async
 
     // Loop through all question responses
     if (quiz.details && Array.isArray(quiz.details)) {
-        for (const [i, item] of quiz.details.entries()) { // Use for...of with entries for async
+        for (const [i, item] = await Promise.all(quiz.details.entries()); i < quiz.details.length; i++) { // Use for...of with entries for async
             // Question
             doc.setFont("helvetica", "bold");
             doc.setFontSize(12);
@@ -1154,7 +1154,7 @@ function loadQuestion() {
 
     const questionData = currentQuiz.questions[currentQuestionIndex];
     quizTitle.textContent = currentQuiz.name;
-    questionText.textContent = `${currentQuestionIndex + 1}. ${questionData.question}`;
+    questionText.innerHTML = `${currentQuestionIndex + 1}. ${questionData.question}`; // MODIFIED THIS LINE
 
     if (questionData.imageUrl) {
         questionImage.src = questionData.imageUrl;
