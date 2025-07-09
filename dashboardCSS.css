@@ -129,7 +129,7 @@ nav ul li a.active {
 /* Main Content Area */
 .main-content {
     flex-grow: 1; /* Allows content to take remaining space */
-    padding: 30px;
+    padding: 22px 100px 20px 80px;
     margin-left: 220px; /* Offset for the fixed sidebar */
     transition: margin-left 0.3s ease;
     box-sizing: border-box; /* Include padding in element's total width and height */
@@ -268,11 +268,12 @@ header {
 /* Quiz Info Box (Dashboard Overview) */
 .quiz-info-box {
     background-color: #ffffff;
-    padding: 30px;
+    padding: 22px;
+    margin-top: 0px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 10;
     max-width: 700px; /* Constrain width */
     margin-left: auto;
     margin-right: auto;
@@ -287,11 +288,12 @@ header {
 /* Quiz Selection Container */
 .quiz-selection-container {
     background-color: #ffffff;
+    margin-top: -100px; /* Moved up by 30 pixels */
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
-    max-width: 1000px; /* Max width for quiz selection */
+    margin-bottom: 0px;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -443,12 +445,12 @@ header {
 
 /* Question Area */
 .question-area {
-    width: 90%;
-    background-color: #fcfcfc;
-    border: 1px solid #e0e0e0;
+    width: 700x;
+    background-color: #ffffff;
     border-radius: 8px;
     padding: 25px;
-    margin-bottom: 25px;
+    margin: 0 ;
+    margin-bottom: -10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
@@ -525,13 +527,13 @@ header {
 .input-answer-field {
     width: calc(100% - 40px); /* Adjust for padding */
     padding: 15px 20px;
-    border: 2px solid #cfd8dc;
+    border: 2px solid #e2e2e2;
     border-radius: 8px;
     font-size: 1.1em;
     color: #333;
-    background-color: #f0f4f7;
+    background-color: #ffffff;
     margin-top: 10px;
-    min-height: 80px; /* Minimum height for textarea */
+    min-height: 20px; /* Minimum height for textarea */
     resize: vertical; /* Allow vertical resize */
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -539,7 +541,7 @@ header {
 
 .input-answer-field:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: #078d22;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
 }
 
