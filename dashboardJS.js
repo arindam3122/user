@@ -920,12 +920,15 @@ function loadPreviousQuizzes() {
             actionsCell.appendChild(deleteButton);
         }
 
+        // --- REMOVED DOWNLOAD BUTTON ---
+        /*
         // Download button
         const downloadButton = document.createElement('button');
         downloadButton.innerHTML = '<i class="fas fa-download"></i> Download';
         downloadButton.classList.add('download-response-btn');
         downloadButton.onclick = () => downloadQuizResponse(result);
         actionsCell.appendChild(downloadButton);
+        */
     });
 }
 
@@ -946,6 +949,8 @@ function deleteQuizResult(quizIdToDelete, dateToDelete) {
     loadPreviousQuizzes();
 }
 
+// --- REMOVED downloadQuizResponse ASYNC FUNCTION ---
+/*
 async function downloadQuizResponse(quiz) { // Made function async
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -1144,7 +1149,7 @@ async function downloadQuizResponse(quiz) { // Made function async
     // Show a modal after saving
     showInfoModal(`✅ Download completed. Please check your browser's default downloads folder for "${fileName}".`);
 }
-
+*/
 
 
 function loadQuestion() {
