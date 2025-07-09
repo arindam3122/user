@@ -380,7 +380,7 @@ header {
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    max-width: 800px; /* Centered quiz container */
+    max-width: 1000px; /* Centered quiz container */
     margin: -160px auto 40px auto; /* Moved up by 30 pixels */
     display: flex;
     flex-direction: column;
