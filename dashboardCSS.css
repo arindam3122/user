@@ -800,11 +800,15 @@ header {
 /* Previous Quizzes Container and Table */
 .previous-quizzes-container {
     background-color: #ffffff;
+    margin-top: -100px;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0px;
     max-width: 1000px;
-    margin: 0 auto 40px auto;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 #noPreviousQuizzesMessage {
