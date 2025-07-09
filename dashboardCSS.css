@@ -450,6 +450,7 @@ header {
     width: 700x;
     background-color: #ffffff;
     border-radius: 8px;
+    border: 1.5px solid black;
     padding: 25px;
     margin: 0 ;
     margin-bottom: -10px;
