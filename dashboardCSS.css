@@ -381,7 +381,7 @@ header {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     max-width: 800px; /* Centered quiz container */
-    margin: 0 auto 40px auto; /* Center with bottom margin */
+    margin: -160px auto 40px auto; /* Moved up by 30 pixels */
     display: flex;
     flex-direction: column;
     align-items: center;
