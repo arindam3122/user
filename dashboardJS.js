@@ -15,7 +15,8 @@ function formatTime(totalSeconds) {
     return `${formattedMinutes} min : ${formattedSeconds} sec`;
 }
 
-// Add this shuffleArray helper function somewhere in your dashboardJS.js file
+// REMOVED: shuffleArray helper function
+/*
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -23,6 +24,7 @@ function shuffleArray(array) {
     }
     return array;
 }
+*/
 
 const quizInfoBox = document.getElementById('quizInfoBox');
 const quizContainer = document.getElementById('quizContainer');
@@ -448,8 +450,8 @@ function startQuiz(quizId) {
         return;
     }
 
-    // Shuffle the questions array
-    currentQuiz.questions = shuffleArray(currentQuiz.questions);
+    // REMOVED: Shuffle the questions array
+    // currentQuiz.questions = shuffleArray(currentQuiz.questions);
 
     // continue with the quiz as normal:
     currentQuestionIndex = 0;
@@ -1150,7 +1152,6 @@ async function downloadQuizResponse(quiz) { // Made function async
     showInfoModal(`✅ Download completed. Please check your browser's default downloads folder for "${fileName}".`);
 }
 */
-
 
 function loadQuestion() {
     if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
