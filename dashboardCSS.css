@@ -532,7 +532,7 @@ header {
     border-radius: 8px;
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.3em;
-    color: #333;
+    color: #000000;
     background-color: #ffffff;
     margin-top: 10px;
     min-height: 20px; /* Minimum height for textarea */
