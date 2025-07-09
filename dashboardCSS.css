@@ -457,10 +457,10 @@ header {
 
 #questionText {
     font-size: 1.4em;
-    color: #2c3e50;
+    color: #01080f;
     font-weight: 500;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 #questionImage {
@@ -480,7 +480,8 @@ header {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
-    width: 90%;
+    width: 100%;
+    margin-top: 30px;
     margin-bottom: 25px;
 }
 
