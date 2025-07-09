@@ -667,7 +667,7 @@ function calculateResults() {
             correctAnswer: question.answer,
             timeTaken: timeSpent,
             imageUrl: question.imageUrl || null, // Add imageUrl here
-            explanationImageUrl: question.explanationImageUrl || null // New: Add explanationImageUrl
+            explanationImageUrl: question.explanationImageUrl || null // New: Image for explanation
         };
 
         if (userAnswer === null) {
@@ -922,15 +922,13 @@ function loadPreviousQuizzes() {
             actionsCell.appendChild(deleteButton);
         }
 
-        // --- REMOVED DOWNLOAD BUTTON ---
-        /*
+        // --- ADDED DOWNLOAD BUTTON ---
         // Download button
         const downloadButton = document.createElement('button');
         downloadButton.innerHTML = '<i class="fas fa-download"></i> Download';
         downloadButton.classList.add('download-response-btn');
         downloadButton.onclick = () => downloadQuizResponse(result);
         actionsCell.appendChild(downloadButton);
-        */
     });
 }
 
@@ -951,9 +949,9 @@ function deleteQuizResult(quizIdToDelete, dateToDelete) {
     loadPreviousQuizzes();
 }
 
-// --- REMOVED downloadQuizResponse ASYNC FUNCTION ---
-/*
+// --- NEW downloadQuizResponse ASYNC FUNCTION ---
 async function downloadQuizResponse(quiz) { // Made function async
+    const { jsPDF } = window.jspdf; // Access jsPDF from the window object
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const marginLeft = 15;
@@ -994,7 +992,7 @@ async function downloadQuizResponse(quiz) { // Made function async
 
     // Loop through all question responses
     if (quiz.details && Array.isArray(quiz.details)) {
-        for (const [i, item] = await Promise.all(quiz.details.entries()); i < quiz.details.length; i++) { // Use for...of with entries for async
+        for (const [i, item] of quiz.details.entries()) { // Use for...of with entries for async
             // Question
             doc.setFont("helvetica", "bold");
             doc.setFontSize(12);
@@ -1151,7 +1149,6 @@ async function downloadQuizResponse(quiz) { // Made function async
     // Show a modal after saving
     showInfoModal(`✅ Download completed. Please check your browser's default downloads folder for "${fileName}".`);
 }
-*/
 
 function loadQuestion() {
     if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
