@@ -118,7 +118,7 @@ const quizzes = [
         id: "Class 6",
         name: "Test on Class 6 Science",
         description: "",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "What is the main function of carbohydrates in our body? (1 MARK)",
@@ -271,7 +271,7 @@ const quizzes = [
                 answer: "", // Assuming the answer is 28 Rupees
                 imageUrl: "",
                 explanationImageUrl: "8.png",
-                timeLimit: 180
+                timeLimit: 150
             },
             {
                 question: "Write a detailed note on the importance of a balanced diet. (5 MARKS)",
@@ -279,7 +279,7 @@ const quizzes = [
                 answer: "", // Assuming the answer is 28 Rupees
                 imageUrl: "",
                 explanationImageUrl: "7.png",
-                timeLimit: 180
+                timeLimit: 150
             },
         ]
     },
