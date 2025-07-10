@@ -70,7 +70,7 @@ const quizzes = [
         id: "12",
         name: "WORD PROBLEMS",
         description: "",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "A train 120 m long is moving at a speed of 72 km/h. Another train 150 m long is moving in the opposite direction at 54 km/h. How long will it take for the two trains to completely cross each other? (ANSWER UPTO 2 DECIMALS)",
@@ -118,7 +118,7 @@ const quizzes = [
         id: "Class 6",
         name: "Test on Class 6 Science",
         description: "This test has a auto submission feature. So once started please do not click on any other tab or the test will get auto submitted.",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "What is the main function of carbohydrates in our body? (1 MARK)",
