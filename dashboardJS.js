@@ -65,6 +65,7 @@ const quizCompletedMessage = document.getElementById('quizCompletedMessage');
 const quizInfoHeading = document.getElementById('quizInfoHeading');
 const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
 const totalQuizzesCompleted = document.getElementById('totalQuizzesCompleted');
+const viewRecentQuizDetailsButton = document.getElementById('viewRecentQuizDetailsButton'); // NEW: Get the new button
 
 // Add these new const declarations for the summary elements
 const summaryCorrect = document.getElementById('summaryCorrect');
@@ -367,8 +368,13 @@ function updateDashboardInfo() {
         const lastQuiz = sortedQuizzes[0]; // Get the most recent one
         lastQuizScoreDisplay.textContent = `Your last quiz (${lastQuiz.quizName}) score: ${lastQuiz.score}/${lastQuiz.totalQuestions} (${lastQuiz.percentage}%)`;
         lastQuizScoreDisplay.style.display = 'block';
+
+        // REMOVED: Lines to show and set click handler for viewRecentQuizDetailsButton
+        // viewRecentQuizDetailsButton.style.display = 'block';
+        // viewRecentQuizDetailsButton.onclick = () => showQuizResultsDetails(lastQuiz); // Pass the entire lastQuiz object
     } else {
         lastQuizScoreDisplay.style.display = 'none';
+        viewRecentQuizDetailsButton.style.display = 'none'; // Ensure button is hidden if no quizzes
     }
 
     totalQuizzesCompleted.style.display = 'block';
@@ -1287,7 +1293,7 @@ finalScoreContainer.style.display = 'none';
 quizResultsDetails.style.display = 'none';
 previousQuizzesContainer.style.display = 'none';
 quizSelectionContainer.style.display = 'none'; // Added this line for initial hide
-// quizInfoBox.style.display = 'none'; // REMOVED or COMMENTED OUT THIS LINE TO SHOW DASHBOARD ON LOAD
+// quizInfoBox.style.display = 'none'; // THIS LINE WAS REMOVED/COMMENTED OUT to ensure dashboard shows on load
 
 // Adjustments to initial load flow
 document.addEventListener('DOMContentLoaded', () => {
