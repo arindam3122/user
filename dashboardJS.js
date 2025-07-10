@@ -1287,7 +1287,7 @@ finalScoreContainer.style.display = 'none';
 quizResultsDetails.style.display = 'none';
 previousQuizzesContainer.style.display = 'none';
 quizSelectionContainer.style.display = 'none'; // Added this line for initial hide
-quizInfoBox.style.display = 'none'; // Initially hide info box, show dashboard after login check
+// quizInfoBox.style.display = 'none'; // REMOVED or COMMENTED OUT THIS LINE TO SHOW DASHBOARD ON LOAD
 
 // Adjustments to initial load flow
 document.addEventListener('DOMContentLoaded', () => {
