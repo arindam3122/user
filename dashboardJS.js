@@ -366,7 +366,8 @@ function updateDashboardInfo() {
         // Sort to get the most recent quiz
         const sortedQuizzes = [...previousQuizzes].sort((a, b) => new Date(b.date) - new Date(a.date));
         const lastQuiz = sortedQuizzes[0]; // Get the most recent one
-        lastQuizScoreDisplay.textContent = `Your last quiz (${lastQuiz.quizName}) score: ${lastQuiz.score}/${lastQuiz.totalQuestions} (${lastQuiz.percentage}%)`;
+        // MODIFIED: Explicitly show "Your Recent Quiz Name"
+        lastQuizScoreDisplay.textContent = `Your Recent Quiz: ${lastQuiz.quizName} - Score: ${lastQuiz.score}/${lastQuiz.totalQuestions} (${lastQuiz.percentage}%)`;
         lastQuizScoreDisplay.style.display = 'block';
 
         // REMOVED: Lines to show and set click handler for viewRecentQuizDetailsButton
