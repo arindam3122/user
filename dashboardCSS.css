@@ -751,17 +751,17 @@ header {
 }
 
 .question-text-result {
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: 600;
-    color: #34495e;
+    color: #644f4f;
     margin-top: 0;
     margin-bottom: 15px;
 }
 
 .result-item p {
     margin-bottom: 8px;
-    font-size: 1em;
-    color: #555;
+    font-size: 1.2em;
+    color: #000000;
 }
 
 .result-item span {
