@@ -103,7 +103,7 @@ body {
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background-color: #108a9d; /* Accent color */
+    background-color: #000000; /* Accent color */
     border-radius: 2px;
 }
 .heading5::after {
@@ -114,7 +114,7 @@ body {
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background-color: #108a9d; /* Accent color */
+    background-color: #000000; /* Accent color */
     border-radius: 2px;
 }
 
