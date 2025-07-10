@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #eceff1, #cfd8dc); /* Light gradient background */
+    background-color: white; /* Changed to white */
     color: #333;
     display: flex;
     min-height: 100vh;
@@ -12,10 +12,10 @@ body {
 
 /* Headings - Modernized */
 .heading {
-    color: #2c3e50; /* Darker, more professional heading color */
+    color: #c20eaa; /* Darker, more professional heading color */
     font-weight: 700; /* Bolder */
     font-size: 2.2em; /* Slightly larger */
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     text-align: center;
     position: relative;
     padding-bottom: 10px;
@@ -30,7 +30,7 @@ body {
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background-color: #3498db; /* Accent color */
+    background-color: #108a9d; /* Accent color */
     border-radius: 2px;
 }
 
@@ -447,15 +447,13 @@ header {
 
 /* Question Area */
 .question-area {
-    width: 700x;
-    background-color: #ffffff;
+    width: auto;
+    background-color: #f9f9f9; /* Lighter background for question area */
     border-radius: 8px;
-    border: 1.5px solid black;
+    /* border: 1px solid #ddd;  <- This line is removed */
     padding: 25px;
-    margin: 0 ;
-    margin-bottom: -10px;
+    margin-bottom: 25px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    text-align: center;
 }
 
 #questionText {
@@ -489,16 +487,26 @@ header {
     margin-top: 30px;
     margin-bottom: 25px;
 }
-
+.options-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    justify-content: space-between; /* Distributes items with space between them */
+    gap: 15px; /* Space between items */
+    width: 100%;
+    margin-bottom: 25px;
+}
 .option {
-    background-color: #f0f4f7; /* Light background for options */
-    border: 2px solid #cfd8dc;
-    border-radius: 8px;
+    flex: 1; /* Allows options to grow and shrink */
+    min-width: calc(50% - 10px); /* Attempts to make two options per row with some gap */
     padding: 15px 20px;
+    border: 1px solid #3498db;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 1em;
     cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-    font-size: 1.1em;
-    color: #4a6572;
+    transition: all 0.3s ease;
+    text-align: left;
     display: flex;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
@@ -1164,3 +1172,4 @@ header {
         box-shadow: none !important;
     }
 }
+
