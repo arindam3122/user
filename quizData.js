@@ -5,7 +5,7 @@ const quizzes = [
         id: "cls-6",
         name: "Logical Reasoning (PART-1)",
         description: "Easy wordproblems",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "Which of the following is a prime number?",
@@ -70,7 +70,7 @@ const quizzes = [
         id: "12",
         name: "WORD PROBLEMS",
         description: "",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "A train 120 m long is moving at a speed of 72 km/h. Another train 150 m long is moving in the opposite direction at 54 km/h. How long will it take for the two trains to completely cross each other? (ANSWER UPTO 2 DECIMALS)",
@@ -112,6 +112,96 @@ const quizzes = [
                 explanationImageUrl: "",
                 timeLimit: 60
             },
+        ]
+    },
+    {
+        id: "Class 6",
+        name: "Test on Class 6 Science",
+        description: "",
+        enabled: false,
+        questions: [
+            {
+                question: "What is the main function of carbohydrates in our body?",
+                type: "mcq", // New type for MCQ
+                options: ["Build muscles", "Provide energy", "Protect from disease", "Help digestion"], // Array of options
+                answer: "Provide energy", // Correct answer
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "", // New: Image for explanation
+                timeLimit: 30
+            },
+            {
+                question: "Which of the following is a fibrous root plant?",
+                type: "mcq", // New type for MCQ
+                options: ["Neem", "Mustard", "Wheat", "Mango"], // Array of options
+                answer: "Wheat", // Correct answer
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "", // New: Image for explanation
+                timeLimit: 30
+            },
+            {
+                question: "Which part of the plant is responsible for reproduction?",
+                type: "mcq", // New type for MCQ
+                options: ["Root", "Stem", "Leaf", "Flower"], // Array of options
+                answer: "Flower", // Correct answer
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "", // New: Image for explanation
+                timeLimit: 30
+            },
+            {
+                question: "Which of the following is a climber?",
+                type: "mcq", // New type for MCQ
+                options: ["Mango", "Money Plant", "Coconut", "Carrot"], // Array of options
+                answer: "Money Plant", // Correct answer
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "", // New: Image for explanation
+                timeLimit: 30
+            },
+            {
+                question: "Which group does Rose belong to?",
+                type: "mcq", // New type for MCQ
+                options: ["Tree", "Herb", "Shrub", "Grass"], // Array of options
+                answer: "Shrub", // Correct answer
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "", // New: Image for explanation
+                timeLimit: 30
+            },
+            {
+                question: "A monocot leaf shows:",
+                type: "mcq", // New type for MCQ
+                options: ["Reticulate venation", "Parallel venation", "No venation", "Circular venation"], // Array of options
+                answer: "Parallel venation", // Correct answer
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "", // New: Image for explanation
+                timeLimit: 30
+            },
+            {
+                question: "The main classification system of living organisms is called:",
+                type: "mcq", // New type for MCQ
+                options: ["Binary System", "3 Kingdom System", "5 Kingdom Classification", "Linnaeus Chain"], // Array of options
+                answer: "5 Kingdom Classification", // Correct answer
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "", // New: Image for explanation
+                timeLimit: 30
+            },
+            {
+                question: "Which of the following is a tap root plant?",
+                type: "mcq", // New type for MCQ
+                options: ["Wheat", "Rice", "Mustard", "Grass"], // Array of options
+                answer: "Mustard", // Correct answer
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "", // New: Image for explanation
+                timeLimit: 30
+            },
+            {
+                question: "Rhododendron is mostly found in:",
+                type: "mcq", // New type for MCQ
+                options: ["Deserts", "Plains", "Mountains", "Coastal Areas"], // Array of options
+                answer: "Mountains", // Correct answer
+                imageUrl: "", // Existing image for the question itself
+                explanationImageUrl: "", // New: Image for explanation
+                timeLimit: 30
+            },
+            
         ]
     },
 ];
