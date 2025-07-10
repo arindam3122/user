@@ -73,7 +73,7 @@ const summaryWrong = document.getElementById('summaryWrong');
 const summarySkipped = document.getElementById('summarySkipped');
 const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
-const ADMIN_USERS = ['Arindam Mitra', ]; // Add usernames for delete button activation
+const ADMIN_USERS = ['Arindam Mitra','Shreaya Dey', ]; // Add usernames for delete button activation
 
 // Hamburger menu elements
 const hamburgerMenu = document.getElementById('hamburgerMenu');
