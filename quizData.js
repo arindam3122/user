@@ -121,7 +121,7 @@ const quizzes = [
         enabled: false,
         questions: [
             {
-                question: "What is the main function of carbohydrates in our body?",
+                question: "What is the main function of carbohydrates in our body? (1 MARK)",
                 type: "mcq", // New type for MCQ
                 options: ["Build muscles", "Provide energy", "Protect from disease", "Help digestion"], // Array of options
                 answer: "Provide energy", // Correct answer
@@ -130,7 +130,7 @@ const quizzes = [
                 timeLimit: 30
             },
             {
-                question: "Which of the following is a fibrous root plant?",
+                question: "Which of the following is a fibrous root plant? (1 MARK)",
                 type: "mcq", // New type for MCQ
                 options: ["Neem", "Mustard", "Wheat", "Mango"], // Array of options
                 answer: "Wheat", // Correct answer
@@ -139,7 +139,7 @@ const quizzes = [
                 timeLimit: 30
             },
             {
-                question: "Which part of the plant is responsible for reproduction?",
+                question: "Which part of the plant is responsible for reproduction? (1 MARK)",
                 type: "mcq", // New type for MCQ
                 options: ["Root", "Stem", "Leaf", "Flower"], // Array of options
                 answer: "Flower", // Correct answer
@@ -148,7 +148,7 @@ const quizzes = [
                 timeLimit: 30
             },
             {
-                question: "Which of the following is a climber?",
+                question: "Which of the following is a climber? (1 MARK)",
                 type: "mcq", // New type for MCQ
                 options: ["Mango", "Money Plant", "Coconut", "Carrot"], // Array of options
                 answer: "Money Plant", // Correct answer
@@ -157,7 +157,7 @@ const quizzes = [
                 timeLimit: 30
             },
             {
-                question: "Which group does Rose belong to?",
+                question: "Which group does Rose belong to? (1 MARK)",
                 type: "mcq", // New type for MCQ
                 options: ["Tree", "Herb", "Shrub", "Grass"], // Array of options
                 answer: "Shrub", // Correct answer
@@ -166,7 +166,7 @@ const quizzes = [
                 timeLimit: 30
             },
             {
-                question: "A monocot leaf shows:",
+                question: "A monocot leaf shows: (1 MARK)",
                 type: "mcq", // New type for MCQ
                 options: ["Reticulate venation", "Parallel venation", "No venation", "Circular venation"], // Array of options
                 answer: "Parallel venation", // Correct answer
@@ -175,7 +175,7 @@ const quizzes = [
                 timeLimit: 30
             },
             {
-                question: "The main classification system of living organisms is called:",
+                question: "The main classification system of living organisms is called: (1 MARK)",
                 type: "mcq", // New type for MCQ
                 options: ["Binary System", "3 Kingdom System", "5 Kingdom Classification", "Linnaeus Chain"], // Array of options
                 answer: "5 Kingdom Classification", // Correct answer
@@ -184,7 +184,7 @@ const quizzes = [
                 timeLimit: 30
             },
             {
-                question: "Which of the following is a tap root plant?",
+                question: "Which of the following is a tap root plant? (1 MARK)",
                 type: "mcq", // New type for MCQ
                 options: ["Wheat", "Rice", "Mustard", "Grass"], // Array of options
                 answer: "Mustard", // Correct answer
@@ -193,7 +193,7 @@ const quizzes = [
                 timeLimit: 30
             },
             {
-                question: "Rhododendron is mostly found in:",
+                question: "Rhododendron is mostly found in: (1 MARK)",
                 type: "mcq", // New type for MCQ
                 options: ["Deserts", "Plains", "Mountains", "Coastal Areas"], // Array of options
                 answer: "Mountains", // Correct answer
@@ -201,7 +201,86 @@ const quizzes = [
                 explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 30
             },
-            
+            {
+                question: "Write the type of roots shown in the diagram. (Write in format a,b where a is the first and b second) (1 MARKS)",
+                type: "input",
+                answer: "Taproot,Fibrous root", // Assuming the answer is 28 Rupees
+                imageUrl: "identify.png",
+                explanationImageUrl: "",
+                timeLimit: 45
+            },
+            {
+                question: "Carbohydrates and fats are also called __________ foods. (1 MARKS)",
+                type: "input",
+                answer: "energy giving", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "1.png",
+                timeLimit: 45
+            },
+            {
+                question: "The veins in dicot leaves show __________ venation. (1 MARKS)",
+                type: "input",
+                answer: "reticulate", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "2.png",
+                timeLimit: 45
+            },
+            {
+                question: "Another name for protein is __________. (1 MARKS)",
+                type: "input",
+                answer: "body building nutrient.", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "",
+                timeLimit: 45
+            },
+            {
+                question: "What are monocot plants? Give one example. (1 MARKS)",
+                type: "input",
+                answer: "", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "3.png",
+                timeLimit: 45
+            },
+            {
+                question: "What is the importance of fiber in our diet? (1 MARKS)",
+                type: "input",
+                answer: "", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "4.png",
+                timeLimit: 45
+            },
+            {
+                question: "Define herbs, shrubs, and trees with one example of each.(3 MARKS)",
+                type: "input",
+                answer: "", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "5.png",
+                timeLimit: 60
+            },
+            {
+                question: "Difference between tap root and fibrous root with examples.(3 MARKS)",
+                type: "input",
+                answer: "", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "6.png",
+                timeLimit: 60
+            },
+            {
+                question: "Describe Rhododendron plants found in Ladakh and their uses. (5 MARKS)",
+                type: "input",
+                answer: "", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "8.png",
+                timeLimit: 180
+            },
+            {
+                question: "Write a detailed note on the importance of a balanced diet. (5 MARKS)",
+                type: "input",
+                answer: "", // Assuming the answer is 28 Rupees
+                imageUrl: "",
+                explanationImageUrl: "7.png",
+                timeLimit: 180
+            },
         ]
     },
 ];
