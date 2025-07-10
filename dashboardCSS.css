@@ -536,7 +536,7 @@ header {
     border: 2px solid #e2e2e2;
     border-radius: 8px;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 1.3em;
+    font-size: 1.2em;
     color: #000000;
     background-color: #ffffff;
     margin-top: 10px;
@@ -550,7 +550,7 @@ header {
     outline: none;
     border-color: #078d22;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 
 
