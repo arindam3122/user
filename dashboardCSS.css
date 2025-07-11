@@ -1138,7 +1138,7 @@ header {
     .option, .input-answer-field {
         padding: 12px 15px;
         font-size: 1em;
-        width: calc(70% - 30px);
+        width: calc(80% - 30px);
     }
 
     .quiz-navigation {
