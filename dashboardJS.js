@@ -1,3 +1,5 @@
+// dashboardJS.js
+
 // Add this helper function somewhere in your dashboardJS.js file, for example, near other helper functions.
 /**
  * Converts seconds into a formatted string "MM min : SS sec".
@@ -92,6 +94,7 @@ let correctAnswersTotal = 0;
 let wrongAnswersTotal = 0;
 let skippedQuestionsTotal = 0;
 let quizDetailsForDisplay = [];
+let quizStartTime; // Declare quizStartTime globally
 
 let timeLeft = 0;
 let timerInterval;
@@ -368,7 +371,12 @@ function updateDashboardInfo() {
 
     if (totalQuizzes > 0) {
         // Sort to get the most recent quiz
-        const sortedQuizzes = [...previousQuizzes].sort((a, b) => new Date(b.date) - new Date(a.date));
+        // Use endTime for sorting as it's the completion time
+        const sortedQuizzes = [...previousQuizzes].sort((a, b) => {
+            const dateA = new Date(a.endTime || a.date); // Use endTime or fallback to old 'date'
+            const dateB = new Date(b.endTime || b.date); // Use endTime or fallback to old 'date'
+            return dateB.getTime() - dateA.getTime();
+        });
         const lastQuiz = sortedQuizzes[0]; // Get the most recent one
         // MODIFIED: Explicitly show "Your Recent Quiz Name"
         lastQuizScoreDisplay.textContent = `Your Recent Quiz: ${lastQuiz.quizName} - Score: ${lastQuiz.score}/${lastQuiz.totalQuestions} (${lastQuiz.percentage}%)`;
@@ -463,6 +471,9 @@ function startQuiz(quizId) {
 
     // Shuffle the questions array when the quiz starts
     currentQuiz.questions = shuffleArray(currentQuiz.questions);
+
+    // Set quiz start time
+    quizStartTime = new Date(); // Capture the exact start time of the quiz
 
     // continue with the quiz as normal:
     currentQuestionIndex = 0;
@@ -575,7 +586,7 @@ function handleSubmitButtonClick() {
     quizActive = false; // Quiz is no longer active
     tabSwitchCount = 0; // Reset tab switch count
     calculateResults();
-    saveQuizResult();
+    saveQuizResult(); // Save the quiz result, which now includes start and end times
     showFinalScoreSection();
     quizCompletedMessage.classList.add('show'); // Show quiz completed message
     localStorage.setItem('hasShownLoginMessage', 'false'); // Reset login message flag
@@ -833,7 +844,12 @@ function saveQuizResult() {
     hours = hours ? hours : 12; // The hour '0' should be '12'
     const formattedHours = String(hours).padStart(2, '0'); // Ensure two digits for hour
 
-    const formattedDate = `${day}/${month}/${year} ${formattedHours}:${minutes}:${seconds} ${ampm}`;
+    // Ensure quizStartTime is defined before using it
+    const formattedStartTime = quizStartTime ?
+        `${String(quizStartTime.getDate()).padStart(2, '0')}/${String(quizStartTime.getMonth() + 1).padStart(2, '0')}/${quizStartTime.getFullYear()} ${String(quizStartTime.getHours() % 12 || 12).padStart(2, '0')}:${String(quizStartTime.getMinutes()).padStart(2, '0')}:${String(quizStartTime.getSeconds()).padStart(2, '0')} ${quizStartTime.getHours() >= 12 ? 'PM' : 'AM'}` :
+        'N/A'; //
+
+    const formattedEndTime = `${day}/${month}/${year} ${formattedHours}:${minutes}:${seconds} ${ampm}`; //
 
     const result = {
         quizId: currentQuiz.id,
@@ -841,7 +857,8 @@ function saveQuizResult() {
         score: correctAnswersTotal,
         totalQuestions: currentQuiz.questions.length,
         percentage: ((correctAnswersTotal / currentQuiz.questions.length) * 100).toFixed(2),
-        date: formattedDate, // Now includes date and time
+        startTime: formattedStartTime, // Store the quiz start time
+        endTime: formattedEndTime,     // Store the quiz end time
         details: quizDetailsForDisplay
     };
 
@@ -868,40 +885,12 @@ function loadPreviousQuizzes() {
         noQuizzesMessage.style.display = 'none';
     }
 
-    // Sort the quizzes by date in descending order (most recent first)
+    // Sort the quizzes by end time in descending order (most recent first)
     previousQuizzes.sort((a, b) => {
-        // Convert the date strings to Date objects for proper comparison
-        // The format "dd/mm/yyyy hh:mm:ss AM/PM" needs to be parsed correctly.
-        // For accurate sorting, consider converting to a sortable format (like ISO string)
-        // or using a parsing library if the date format is complex.
-        // For simplicity, assuming the current format can be directly used by Date constructor if consistent.
-        // It's safer to parse it explicitly if you encounter issues.
-
-        // Example of a more robust date parsing for "dd/mm/yyyy hh:mm:ss AM/PM"
-        const parseDateString = (dateStr) => {
-            const parts = dateStr.match(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2}) (AM|PM)/);
-            if (!parts) return new Date(0); // Return a very old date if parsing fails
-
-            let year = parseInt(parts[3], 10);
-            let month = parseInt(parts[2], 10) - 1; // Month is 0-indexed
-            let day = parseInt(parts[1], 10);
-            let hours = parseInt(parts[4], 10);
-            let minutes = parseInt(parts[5], 10);
-            let seconds = parseInt(parts[6], 10);
-            const ampm = parts[7];
-
-            if (ampm === 'PM' && hours < 12) {
-                hours += 12;
-            } else if (ampm === 'AM' && hours === 12) { // Midnight (12 AM)
-                hours = 0;
-            }
-            return new Date(year, month, day, hours, minutes, seconds);
-        };
-
-        const dateA = parseDateString(a.date);
-        const dateB = parseDateString(b.date);
-
-        return dateB.getTime() - dateA.getTime(); // Descending order (b - a for most recent first)
+        // Fallback to 'date' for older entries that might not have 'endTime'
+        const dateA = new Date(a.endTime || a.date);
+        const dateB = new Date(b.endTime || b.date);
+        return dateB.getTime() - dateA.getTime();
     });
 
 
@@ -913,9 +902,11 @@ function loadPreviousQuizzes() {
         row.insertCell(0).textContent = result.quizName || 'N/A';
         row.insertCell(1).textContent = `${result.score}/${result.totalQuestions}`;
         row.insertCell(2).textContent = `${parseFloat(result.percentage).toFixed(2)}%`;
-        row.insertCell(3).textContent = result.date;
+        row.insertCell(3).textContent = result.startTime || 'N/A'; // Display Start Time
+        row.insertCell(4).textContent = result.endTime || result.date || 'N/A'; // Display End Time, fallback to old 'date'
 
-        const actionsCell = row.insertCell(4);
+
+        const actionsCell = row.insertCell(5); // Adjusted index for actions cell
 
         // View button
         const viewButton = document.createElement('button');
@@ -929,7 +920,7 @@ function loadPreviousQuizzes() {
             const deleteButton = document.createElement('button');
             deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
             deleteButton.classList.add('delete-quiz-btn');
-            deleteButton.onclick = () => deleteQuizResult(result.quizId, result.date);
+            deleteButton.onclick = () => deleteQuizResult(result.quizId, result.endTime || result.date); // Use endTime or date for deletion
             actionsCell.appendChild(deleteButton);
         }
 
@@ -945,7 +936,7 @@ function loadPreviousQuizzes() {
 
 
 // --- New function to delete a quiz result ---
-function deleteQuizResult(quizIdToDelete, dateToDelete) {
+function deleteQuizResult(quizIdToDelete, timeToDelete) { // Changed dateToDelete to timeToDelete for consistency
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (!loggedInUser) return;
 
@@ -953,7 +944,7 @@ function deleteQuizResult(quizIdToDelete, dateToDelete) {
     let previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
 
     const updatedQuizzes = previousQuizzes.filter(quiz =>
-        !(quiz.quizId === quizIdToDelete && quiz.date === dateToDelete)
+        !(quiz.quizId === quizIdToDelete && (quiz.endTime === timeToDelete || quiz.date === timeToDelete)) // Check both endTime and old 'date'
     );
 
     localStorage.setItem(userKey, JSON.stringify(updatedQuizzes));
@@ -991,12 +982,14 @@ async function downloadQuizResponse(quiz) { // Made function async
     // Quiz Info Box
     doc.setDrawColor(0);
     doc.setFillColor(240, 240, 255);
-    doc.rect(marginLeft, y, maxLineWidth, 25, "F");
+    doc.rect(marginLeft, y, maxLineWidth, 35, "F"); // Increased height to accommodate new lines
 
     y += 8;
     doc.text(`Quiz Name: ${quiz.quizName}`, marginLeft + 5, y);
     y += lineSpacing;
-    doc.text(`Date Taken: ${quiz.date}`, marginLeft + 5, y);
+    doc.text(`Start Time: ${quiz.startTime || 'N/A'}`, marginLeft + 5, y); // Added Start Time to PDF
+    y += lineSpacing;
+    doc.text(`End Time: ${quiz.endTime || quiz.date || 'N/A'}`, marginLeft + 5, y); // Changed Date Taken to End Time
     y += lineSpacing;
     doc.text(`Score: ${quiz.score} / ${quiz.totalQuestions} (${quiz.percentage}%)`, marginLeft + 5, y);
     y += 15;
