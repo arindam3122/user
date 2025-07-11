@@ -15,8 +15,12 @@ function formatTime(totalSeconds) {
     return `${formattedMinutes} min : ${formattedSeconds} sec`;
 }
 
-// REMOVED: shuffleArray helper function
-/*
+// Re-introduced and modified shuffleArray helper function
+/**
+ * Shuffles an array in place (Fisher-Yates algorithm).
+ * @param {Array} array - The array to shuffle.
+ * @returns {Array} The shuffled array.
+ */
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -24,7 +28,7 @@ function shuffleArray(array) {
     }
     return array;
 }
-*/
+
 
 const quizInfoBox = document.getElementById('quizInfoBox');
 const quizContainer = document.getElementById('quizContainer');
@@ -457,8 +461,8 @@ function startQuiz(quizId) {
         return;
     }
 
-    // REMOVED: Shuffle the questions array
-    // currentQuiz.questions = shuffleArray(currentQuiz.questions);
+    // Shuffle the questions array when the quiz starts
+    currentQuiz.questions = shuffleArray(currentQuiz.questions);
 
     // continue with the quiz as normal:
     currentQuestionIndex = 0;
