@@ -12,7 +12,7 @@ body {
 
 /* Headings - Modernized */
 .heading1 {
-    color: #0e41c2; /* Darker, more professional heading color */
+    color: #ae03a5; /* Darker, more professional heading color */
     font-weight: 700; /* Bolder */
     font-size: 2.0em; /* Slightly larger */
     margin-bottom: 15px;
@@ -68,9 +68,9 @@ body {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 60px;
+    width: 100px;
     height: 4px;
-    background-color: #108a9d; /* Accent color */
+    background-color: #05b699; /* Accent color */
     border-radius: 2px;
 }
 .heading2::after {
