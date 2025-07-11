@@ -118,7 +118,7 @@ const quizzes = [
         id: "Class 6",
         name: "Test on Class 6 Science",
         description: "This test has a auto submission feature. So once started please do not click on any other tab or the test will get auto submitted.",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "What is the main function of carbohydrates in our body? (1 MARK)",
