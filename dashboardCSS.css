@@ -560,6 +560,7 @@ header {
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 5px;
+    white-space: pre-wrap;
 }
 
 #questionImage {
