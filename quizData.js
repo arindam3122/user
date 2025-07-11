@@ -105,7 +105,7 @@ const quizzes = [
                 timeLimit: 180
             },
             {
-                question: "What is the value of 5<sup>4</sup> + 3 if the total amount is in Indian Rupees (&#8377;)?",
+                question: "What is the value of 5<sup>2</sup> + 3 if the total amount is in Indian Rupees (&#8377;)?",
                 type: "input",
                 answer: "28", // Assuming the answer is 28 Rupees
                 imageUrl: "",
