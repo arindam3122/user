@@ -5,7 +5,7 @@ const quizzes = [
         id: "cls-6",
         name: "Logical Reasoning (PART-1)",
         description: "Easy wordproblems",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "Which of the following is a prime number?",
@@ -77,7 +77,7 @@ const quizzes = [
                 type: "input",
                 answer: "7.71",
                 imageUrl: "",
-                explanationImageUrl: "train.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 120
             },
             {
@@ -85,7 +85,7 @@ const quizzes = [
                 type: "input",
                 answer: "6.86",
                 imageUrl: "",
-                explanationImageUrl: "car.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 120
             },
             {
@@ -93,7 +93,7 @@ const quizzes = [
                 type: "input",
                 answer: "40",
                 imageUrl: "",
-                explanationImageUrl: "1.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 120
             },
             {
@@ -101,7 +101,7 @@ const quizzes = [
                 type: "input",
                 answer: "12,13",
                 imageUrl: "",
-                explanationImageUrl: "2.png", // New: Image for explanation
+                explanationImageUrl: "", // New: Image for explanation
                 timeLimit: 180
             },
             {
@@ -118,7 +118,7 @@ const quizzes = [
         id: "Class 6",
         name: "Test on Class 6 Science",
         description: "This test has a auto submission feature. So once started please do not click on any other tab or the test will get auto submitted.",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "What is the main function of carbohydrates in our body? (1 MARK)",
