@@ -624,7 +624,7 @@ header {
 
 /* Input Answer Field */
 .input-answer-field {
-    width: calc(100% - 40px); /* Adjust for padding */
+    width: calc(40% - 40px); /* This will apply to larger screens */
     padding: 15px 20px;
     border: 2px solid #e2e2e2;
     border-radius: 8px;
@@ -1138,6 +1138,7 @@ header {
     .option, .input-answer-field {
         padding: 12px 15px;
         font-size: 1em;
+        width: calc(60% - 30px);
     }
 
     .quiz-navigation {

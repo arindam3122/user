@@ -5,7 +5,7 @@ const quizzes = [
         id: "cls-6",
         name: "Logical Reasoning (PART-1)",
         description: "Easy wordproblems",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "Which of the following is a prime number?",
@@ -70,7 +70,7 @@ const quizzes = [
         id: "12",
         name: "WORD PROBLEMS",
         description: "",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "A train 120 m long is moving at a speed of 72 km/h. Another train 150 m long is moving in the opposite direction at 54 km/h. How long will it take for the two trains to completely cross each other? (ANSWER UPTO 2 DECIMALS)",
