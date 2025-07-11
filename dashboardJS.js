@@ -101,7 +101,7 @@ let questionTimesTaken = []; // Array to store time taken for each question in s
 // Anti-cheating variables
 let quizActive = false; // Flag to indicate if a quiz is currently active
 let tabSwitchCount = 0; // Tracks how many times the user switched tabs
-const MAX_TAB_SWITCHES = 3; // Maximum allowed tab switches before quiz auto-submits
+const MAX_TAB_SWITCHES = 1; // Maximum allowed tab switches before quiz auto-submits
 
 /**
  * Displays a custom information/alert modal.
