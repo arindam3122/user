@@ -423,7 +423,7 @@ header {
 }
 
 .start-quiz-card-btn {
-    background-color: #04a1a9; /* Accent blue */
+    background-color: #bd03ba; /* Accent blue */
     color: white;
     border: none;
     padding: 12px 25px;
@@ -441,7 +441,7 @@ header {
 }
 
 .start-quiz-card-btn:hover {
-    background-color: #038cb9;
+    background-color: #a30486;
     transform: translateY(-2px);
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
 }
