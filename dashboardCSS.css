@@ -345,10 +345,22 @@ header {
 }
 
 .quiz-completed-message {
-    background-color: #cce5ff; /* Light blue for quiz complete */
-    color: #004085; /* Dark blue text */
+    background-color: #1bbb06; /* Light blue for quiz complete */
+    color: #fbfbfb; /* Dark blue text */
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    opacity: 0; /* Start hidden */
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.quiz-completed-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 /* Quiz Info Box (Dashboard Overview) */
 .quiz-info-box {
     background-color: #ffffff;
@@ -704,7 +716,7 @@ header {
 /* Final Score Container */
 .final-score-container {
     background-color: #ffffff;
-    margin-top: -150px;
+    margin-top: -100px;
     margin-bottom: 0px;
     margin-left: auto;
     margin-right: auto;
