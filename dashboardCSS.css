@@ -90,9 +90,9 @@ body {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 60px;
+    width: 100px;
     height: 4px;
-    background-color: #108a9d; /* Accent color */
+    background-color: #101212; /* Accent color */
     border-radius: 2px;
 }
 .heading4::after {
