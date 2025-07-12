@@ -654,43 +654,45 @@ function startTimer() {
     timeLeft = questionTimeLimit;
     initialTimeLimit = questionTimeLimit; // Store initial time limit
     updateTimerDisplay(); // Initial display
+    if (quizActive) { // Only start timer if quiz is active
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            updateTimerDisplay(); // Update display every second
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                clearTimeUpMessage(); // Ensure previous message is cleared
 
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimerDisplay(); // Update display every second
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            clearTimeUpMessage(); // Ensure previous message is cleared
+                // NEW LOGIC FOR TIME UP: Capture partial input and mark status
+                if (questionStatuses[currentQuestionIndex] === 'unanswered') { // Only process if not already answered/skipped
+                    questionStatuses[currentQuestionIndex] = 'time_up'; // Mark as time up
 
-            // NEW LOGIC FOR TIME UP: Capture partial input and mark status
-            if (questionStatuses[currentQuestionIndex] === 'unanswered') { // Only process if not already answered/skipped
-                questionStatuses[currentQuestionIndex] = 'time_up'; // Mark as time up
-
-                const currentQuestionData = currentQuiz.questions[currentQuestionIndex];
-                if (currentQuestionData.type === 'input') {
-                    // Capture the current value from the textarea if it exists
-                    const inputField = optionsContainer.querySelector('.input-answer-field');
-                    if (inputField) {
-                        userAnswers[currentQuestionIndex] = inputField.value; // Store the actual input
+                    const currentQuestionData = currentQuiz.questions[currentQuestionIndex];
+                    if (currentQuestionData.type === 'input') {
+                        // Capture the current value from the textarea if it exists
+                        const inputField = optionsContainer.querySelector('.input-answer-field');
+                        if (inputField) {
+                            userAnswers[currentQuestionIndex] = inputField.value; // Store the actual input
+                        } else {
+                            userAnswers[currentQuestionIndex] = ''; // If input field not found for some reason, default to empty
+                        }
                     } else {
-                        userAnswers[currentQuestionIndex] = ''; // If input field not found for some reason, default to empty
+                        // For multiple choice, if no option was selected, userAnswers[currentQuestionIndex] is already null
                     }
-                } else {
-                    // For multiple choice, if no option was selected, userAnswers[currentQuestionIndex] is already null
+                    questionTimesTaken[currentQuestionIndex] = questionTimeLimit; // Time taken is the full limit
+                    showTimeUpMessage(); // Display temporary time-up message
                 }
-                questionTimesTaken[currentQuestionIndex] = questionTimeLimit; // Time taken is the full limit
-                showTimeUpMessage(); // Display temporary time-up message
-            }
 
-            if (currentQuestionIndex < currentQuiz.questions.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion();
-            } else {
-                handleSubmitButtonClick(); // Submit if last question
+                if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                } else {
+                    handleSubmitButtonClick(); // Submit if last question
+                }
             }
-        }
-    }, 1000);
+        }, 1000);
+    }
 }
+
 
 function updateTimerDisplay() {
     if (timerDisplay) {
@@ -1187,7 +1189,7 @@ async function downloadQuizResponse(quiz) {
                     }
 
                     if (scaledExplanationHeight > maxExplanationImageHeight) {
-                        scaledExplanationWidth = (maxExplanationImageHeight / scaledExplanationHeight) * scaledExplanationWidth;
+                        scaledExplanationWidth = (maxExplanationImageHeight / scaledExplanationHeight) * scaledExplanationHeight;
                         scaledExplanationHeight = maxExplanationImageHeight;
                     }
 
@@ -1327,7 +1329,7 @@ function showQuizResultsDetails(result) {
         return;
     }
 
-    result.details.forEach(detail => {
+    result.details.forEach((detail, index) => { // Added 'index' to the forEach arguments
         const resultItem = document.createElement('div');
         resultItem.classList.add('result-item');
         if (detail.isCorrect) {
@@ -1354,7 +1356,7 @@ function showQuizResultsDetails(result) {
 
 
         resultItem.innerHTML = `
-            <p class="question-text-result">${detail.question}</p>
+            <p class="question-text-result">${index + 1}. ${detail.question}</p>
             ${imageHtml}
             <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : (detail.autoSubmitted ? 'auto-submitted-answer' : 'user-answer')))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
