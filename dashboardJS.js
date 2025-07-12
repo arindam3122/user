@@ -476,8 +476,8 @@ function startQuiz(quizId) {
         return;
     }
 
-    // Shuffle the questions array when the quiz starts
-    currentQuiz.questions = shuffleArray(currentQuiz.questions);
+    // Shuffle the questions array when the quiz starts - REMOVED TO STOP SHUFFLING
+    // currentQuiz.questions = shuffleArray(currentQuiz.questions); 
 
     // Set quiz start time
     quizStartTime = new Date(); // Capture the exact start time of the quiz

@@ -70,7 +70,7 @@ const quizzes = [
         id: "12",
         name: "WORD PROBLEMS",
         description: "",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "A train 120 m long is moving at a speed of 72 km/h. Another train 150 m long is moving in the opposite direction at 54 km/h. How long will it take for the two trains to completely cross each other? (ANSWER UPTO 2 DECIMALS)",
@@ -115,171 +115,135 @@ const quizzes = [
         ]
     },
     {
-        id: "Class 6",
-        name: "Test on Science",
+        id: "test on A Bottle of Dew",
+        name: "Test on A Bottle of Dew (40MARKS)",
         description: "This test has a auto submission feature. So once started please do not click on any other tab or the test will get auto submitted.",
         enabled: false,
         questions: [
             {
-                question: "What is the main function of carbohydrates in our body? (1 MARK)",
-                type: "mcq", // New type for MCQ
-                options: ["Build muscles", "Provide energy", "Protect from disease", "Help digestion"], // Array of options
-                answer: "Provide energy", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
+                question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)",
+                type: "mcq", 
+                options: ["He wanted to change any object into diamond", "He wanted to change any object into gold", "He wanted to drink elixir of life", "He wanted to run away from responsibilities"], // Array of options
+                answer: "He wanted to change any object into gold", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
                 timeLimit: 30
             },
             {
-                question: "Which of the following is a fibrous root plant? (1 MARK)",
-                type: "mcq", // New type for MCQ
-                options: ["Neem", "Mustard", "Wheat", "Mango"], // Array of options
-                answer: "Wheat", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
+                question: "Why did Rama Natha neglect his inherited lands? (1 MARK)",
+                type: "mcq", 
+                options: ["He believed in a magic potion that could turn objects into gold", "He had no interest in agriculture", "He was busy travelling", "He wanted to become a sage"], 
+                answer: "He believed in a magic potion that could turn objects into gold", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
                 timeLimit: 30
             },
             {
-                question: "Which part of the plant is responsible for reproduction? (1 MARK)",
-                type: "mcq", // New type for MCQ
-                options: ["Root", "Stem", "Leaf", "Flower"], // Array of options
-                answer: "Flower", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
+                question: "What was Rama Natha’s wife, Madhumati, worried about? (1 MARK)",
+                type: "mcq", 
+                options: ["Rama Natha’s health", "Their children’s education", "Rama Natha’s reckless spending", "Their upcoming vacation plAnswer:"], 
+                answer: "Rama Natha’s reckless spending", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
                 timeLimit: 30
             },
             {
-                question: "Which of the following is a climber? (1 MARK)",
-                type: "mcq", // New type for MCQ
-                options: ["Mango", "Money Plant", "Coconut", "Carrot"], // Array of options
-                answer: "Money Plant", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
+                question: "Who did Rama Natha become a follower of in the story? (1 MARK)",
+                type: "mcq", 
+                options: ["A magician", "A sage named Mahipati", "His father’s friend", "A merchant"], 
+                answer: "A sage named Mahipati", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
                 timeLimit: 30
             },
             {
-                question: "Which group does Rose belong to? (1 MARK)",
-                type: "mcq", // New type for MCQ
-                options: ["Tree", "Herb", "Shrub", "Grass"], // Array of options
-                answer: "Shrub", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
+                question: "What did sage Mahipati instruct Rama Natha to do to obtain the magic potion? (1 MARK)",
+                type: "mcq", 
+                options: ["Plant banana plants and collect dew", "Find a hidden treasure", "Travel to the Himalayas", "Buy expénsive equipment"], 
+                answer: "Plant banana plants and collect dew", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
                 timeLimit: 30
             },
             {
-                question: "A monocot leaf shows: (1 MARK)",
-                type: "mcq", // New type for MCQ
-                options: ["Reticulate venation", "Parallel venation", "No venation", "Circular venation"], // Array of options
-                answer: "Parallel venation", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 30
-            },
-            {
-                question: "The main classification system of living organisms is called: (1 MARK)",
-                type: "mcq", // New type for MCQ
-                options: ["Binary System", "3 Kingdom System", "5 Kingdom Classification", "Linnaeus Chain"], // Array of options
-                answer: "5 Kingdom Classification", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 30
-            },
-            {
-                question: "Which of the following is a tap root plant? (1 MARK)",
-                type: "mcq", // New type for MCQ
-                options: ["Wheat", "Rice", "Mustard", "Grass"], // Array of options
-                answer: "Mustard", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 30
-            },
-            {
-                question: "Rhododendron is mostly found in: (1 MARK)",
-                type: "mcq", // New type for MCQ
-                options: ["Deserts", "Plains", "Mountains", "Coastal Areas"], // Array of options
-                answer: "Mountains", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 30
-            },
-            {
-                question: "Write the type of roots shown in the diagram. (Write in format a,b where a is the first and b second) (1 MARKS)",
+                question: "One day, a famous ______ called Mahapati came to their town. (1 MARK)",
                 type: "input",
-                answer: "Taproot,Fibrous root", // Assuming the answer is 28 Rupees
-                imageUrl: "identify.png",
-                explanationImageUrl: "",
-                timeLimit: 45
-            },
-            {
-                question: "Carbohydrates and fats are also called __________ foods. (1 MARKS)",
-                type: "input",
-                answer: "energy giving", // Assuming the answer is 28 Rupees
-                imageUrl: "",
-                explanationImageUrl: "1.png",
-                timeLimit: 45
-            },
-            {
-                question: "The veins in dicot leaves show __________ venation. (1 MARKS)",
-                type: "input",
-                answer: "reticulate", // Assuming the answer is 28 Rupees
-                imageUrl: "",
-                explanationImageUrl: "2.png",
-                timeLimit: 45
-            },
-            {
-                question: "Another name for protein is __________. (1 MARKS)",
-                type: "input",
-                answer: "body building nutrient.", // Assuming the answer is 28 Rupees
+                answer: "sage",
                 imageUrl: "",
                 explanationImageUrl: "",
-                timeLimit: 45
-            },
-            {
-                question: "What are monocot plants? Give one example. (1 MARKS)",
-                type: "input",
-                answer: "", // Assuming the answer is 28 Rupees
-                imageUrl: "",
-                explanationImageUrl: "3.png",
-                timeLimit: 45
-            },
-            {
-                question: "What is the importance of fiber in our diet? (1 MARKS)",
-                type: "input",
-                answer: "", // Assuming the answer is 28 Rupees
-                imageUrl: "",
-                explanationImageUrl: "4.png",
-                timeLimit: 45
-            },
-            {
-                question: "Define herbs, shrubs, and trees with one example of each.(3 MARKS)",
-                type: "input",
-                answer: "", // Assuming the answer is 28 Rupees
-                imageUrl: "",
-                explanationImageUrl: "5.png",
                 timeLimit: 60
             },
             {
-                question: "Difference between tap root and fibrous root with examples.(3 MARKS)",
+                question: "You can plant as many __________ plants as you want. (1 MARK)",
                 type: "input",
-                answer: "", // Assuming the answer is 28 Rupees
+                answer: "banana",
                 imageUrl: "",
-                explanationImageUrl: "6.png",
+                explanationImageUrl: "",
                 timeLimit: 60
             },
             {
-                question: "Describe Rhododendron plants found in Ladakh and their uses. (5 MARKS)",
+                question: "When you have _______ liters of dew, bring it to me. (1 MARK)",
                 type: "input",
-                answer: "", // Assuming the answer is 28 Rupees
+                answer: "five",
                 imageUrl: "",
-                explanationImageUrl: "8.png",
-                timeLimit: 150
+                explanationImageUrl: "",
+                timeLimit: 60
             },
             {
-                question: "Write a detailed note on the importance of a balanced diet. (5 MARKS)",
+                question: "A drop of the potion will change any object into __________. (1 MARK)",
                 type: "input",
-                answer: "", // Assuming the answer is 28 Rupees
+                answer: "gold",
                 imageUrl: "",
-                explanationImageUrl: "7.png",
-                timeLimit: 150
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "It was your hard work that created this wealth, not __________. (1 MARK)",
+                type: "input",
+                answer: "magic",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "Rama Natha never believed in any kind of magic potion. (1 MARK)",
+                type: "input",
+                answer: "",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "Rama Natha never believed in any kind of magic potion. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
+                type: "input",
+                answer: "FALSE",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "Madhumati was never tired of his husband’s behavior. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
+                type: "input",
+                answer: "FALSE",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "The sage Mahipati told Rama Natha to gather dew. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
+                type: "input",
+                answer: "TRUE",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "The sage Mahipati gave Rama Natha an easy recipe for the magic potion. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
+                type: "input",
+                answer: "FALSE",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
             },
         ]
     },
