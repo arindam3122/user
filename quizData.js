@@ -78,7 +78,7 @@ const quizzes = [
                 answer: "7.71",
                 imageUrl: "",
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 120
+                timeLimit: 10
             },
             {
                 question: "A can complete a job in 12 days, B in 16 days. If they work together, how long will they take? (UPTO 2 DECIMAL)",
@@ -86,7 +86,7 @@ const quizzes = [
                 answer: "6.86",
                 imageUrl: "",
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 120
+                timeLimit: 10
             },
             {
                 question: "A car travels 60 km at 30 km/h and then another 60 km at 60 km/h. Find its average speed for the entire journey. (NO UNITS)",
@@ -94,7 +94,7 @@ const quizzes = [
                 answer: "40",
                 imageUrl: "",
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 120
+                timeLimit: 10
             },
             {
                 question: "The product of two consecutive positive integers is 156. Find the integers. (ANSWER IN a,b)",
@@ -102,7 +102,7 @@ const quizzes = [
                 answer: "12,13",
                 imageUrl: "",
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 180
+                timeLimit: 10
             },
             {
                 question: "What is the value of 5<sup>2</sup> + 3 if the total amount is in Indian Rupees (&#8377;)?",
@@ -110,7 +110,7 @@ const quizzes = [
                 answer: "28", // Assuming the answer is 28 Rupees
                 imageUrl: "",
                 explanationImageUrl: "",
-                timeLimit: 60
+                timeLimit: 10
             },
         ]
     },

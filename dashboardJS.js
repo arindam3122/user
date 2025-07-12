@@ -104,6 +104,7 @@ let initialTimeLimit = 0; // Store the initial time limit for the current questi
 // --- New variables for time tracking per question ---
 let questionStartTime; // Stores the Date.now() when a question is loaded
 let questionTimesTaken = []; // Array to store time taken for each question in seconds
+let questionStatuses = []; // NEW: Array to store status of each question (answered, skipped, time_up, unanswered)
 
 // Anti-cheating variables
 let quizActive = false; // Flag to indicate if a quiz is currently active
@@ -479,6 +480,7 @@ function startQuiz(quizId) {
     currentQuestionIndex = 0;
     userAnswers = new Array(currentQuiz.questions.length).fill(null);
     questionTimesTaken = new Array(currentQuiz.questions.length).fill(0); // Initialize time taken array
+    questionStatuses = new Array(currentQuiz.questions.length).fill('unanswered'); // NEW: Initialize question statuses
     correctAnswersTotal = 0;
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
@@ -510,6 +512,7 @@ function selectOption(selectedOptionDiv, optionText) {
     // Add 'selected' class to the clicked option
     selectedOptionDiv.classList.add('selected');
     userAnswers[currentQuestionIndex] = optionText;
+    questionStatuses[currentQuestionIndex] = 'answered'; // NEW: Mark as answered
     // Time taken will be recorded when navigating away from the question
 }
 
@@ -539,6 +542,7 @@ function handleSkipButtonClick() {
     // If no answer is selected, mark as skipped.
     if (userAnswers[currentQuestionIndex] === null) {
         updateTimeTakenBeforeMoving(); // Record time for this skipped question
+        questionStatuses[currentQuestionIndex] = 'skipped'; // NEW: Mark as skipped
     } else {
         showInfoModal("You have already answered this question, cannot skip.");
         return; // Do not advance if already answered
@@ -559,13 +563,19 @@ function handleNextButtonClick() {
     const answer = userAnswers[currentQuestionIndex];
 
     if (currentQuestion.type === 'input') {
+        // For input type, if user input is empty, require an answer or skip
         if (!answer || answer.trim() === '') {
             showInfoModal("Please enter an answer or skip the question.");
             return;
         }
-    } else if (answer === null) {
+    } else if (answer === null) { // For multiple choice, check if an option was selected
         showInfoModal("Please select an option or skip the question.");
         return;
+    }
+
+    // If an answer was provided, mark it as 'answered' (even if it was partial input for text type)
+    if (questionStatuses[currentQuestionIndex] === 'unanswered') {
+        questionStatuses[currentQuestionIndex] = 'answered';
     }
 
     updateTimeTakenBeforeMoving(); // Record time for the question just left
@@ -622,9 +632,24 @@ function startTimer() {
         updateTimerDisplay(); // Update display every second
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            // If time runs out, mark the answer as 'Time_Up_Auto_Answer'
-            if (userAnswers[currentQuestionIndex] === null) {
-                userAnswers[currentQuestionIndex] = "Time_Up_Auto_Answer"; // Use a unique string to mark 'time up'
+            clearTimeUpMessage(); // Ensure previous message is cleared
+
+            // NEW LOGIC FOR TIME UP: Capture partial input and mark status
+            if (questionStatuses[currentQuestionIndex] === 'unanswered') { // Only process if not already answered/skipped
+                questionStatuses[currentQuestionIndex] = 'time_up'; // Mark as time up
+
+                const currentQuestionData = currentQuiz.questions[currentQuestionIndex];
+                if (currentQuestionData.type === 'input') {
+                    // Capture the current value from the textarea if it exists
+                    const inputField = optionsContainer.querySelector('.input-answer-field');
+                    if (inputField) {
+                        userAnswers[currentQuestionIndex] = inputField.value; // Store the actual input
+                    } else {
+                        userAnswers[currentQuestionIndex] = ''; // If input field not found for some reason, default to empty
+                    }
+                } else {
+                    // For multiple choice, if no option was selected, userAnswers[currentQuestionIndex] is already null
+                }
                 questionTimesTaken[currentQuestionIndex] = questionTimeLimit; // Time taken is the full limit
                 showTimeUpMessage(); // Display temporary time-up message
             }
@@ -675,13 +700,14 @@ function calculateResults() {
     correctAnswersTotal = 0;
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
-    let timeUpQuestionsTotal = 0;
+    let timeUpQuestionsTotal = 0; // Initialize timeUpQuestionsTotal
     quizDetailsForDisplay = [];
 
     currentQuiz.questions.forEach((question, index) => {
         const userAnswer = userAnswers[index];
+        const status = questionStatuses[index]; // Use the new status array
         let isCorrect = false;
-        const timeSpent = questionTimesTaken[index] !== undefined ? questionTimesTaken[index] : 0; // Get time spent
+        const timeSpent = questionTimesTaken[index] !== undefined ? questionTimesTaken[index] : 0;
 
         // Common properties for quizDetailsForDisplay
         const commonDetails = {
@@ -692,27 +718,45 @@ function calculateResults() {
             explanationImageUrl: question.explanationImageUrl || null // New: Image for explanation
         };
 
-        if (userAnswer === null) {
+        if (status === 'skipped') { // Changed from `userAnswer === null` to status check
             skippedQuestionsTotal++;
             quizDetailsForDisplay.push({
                 ...commonDetails,
-                userAnswer: "Skipped",
+                userAnswer: "Skipped", // Display "Skipped" for manually skipped questions
                 isCorrect: false,
                 skipped: true,
-                timeUp: false
+                timeUp: false // Explicitly false
             });
-        } else if (userAnswer === "Time_Up_Auto_Answer") {
-            timeUpQuestionsTotal++;
+        } else if (status === 'time_up') { // Handle time_up status
+            timeUpQuestionsTotal++; // Increment time-up count
+            let displayedUserAnswer = userAnswer;
+
+            if (question.type === 'input') {
+                if (userAnswer === null || userAnswer === '') {
+                    displayedUserAnswer = "Time's Up - No Input";
+                } else {
+                    // This is the case where user typed something, and time ran out
+                    displayedUserAnswer = `[Auto Collected] ${userAnswer}`;
+                }
+            } else { // For multiple choice questions
+                if (userAnswer === null) {
+                    displayedUserAnswer = "Time's Up - No Selection";
+                }
+                // If userAnswer is not null for MCQ and status is time_up, it means they selected something just before timeout, and `displayedUserAnswer` would already be the `userAnswer` (the selected option). No prefix needed for MCQs.
+            }
+
+            isCorrect = false; // Time-up answers are always considered incorrect for scoring
+
             quizDetailsForDisplay.push({
                 ...commonDetails,
-                userAnswer: "Time's Up",
-                isCorrect: false,
+                userAnswer: displayedUserAnswer, // Display stored answer or generic time-up message
+                isCorrect: isCorrect,
                 skipped: false,
                 timeUp: true
             });
-        } else {
+        } else { // 'answered' status (which covers both correct and wrong answers)
             if (question.type === 'input') {
-                isCorrect = userAnswer.trim().toLowerCase() === question.answer.trim().toLowerCase();
+                isCorrect = userAnswer && userAnswer.trim().toLowerCase() === question.answer.trim().toLowerCase();
             } else {
                 isCorrect = userAnswer === question.answer;
             }
@@ -749,7 +793,7 @@ function calculateResults() {
         correct: correctAnswersTotal,
         wrong: wrongAnswersTotal,
         skipped: skippedQuestionsTotal,
-        timeUp: timeUpQuestionsTotal,
+        timeUp: timeUpQuestionsTotal, // Capture new timeUpQuestionsTotal
         total: totalQuestions
     };
 }
@@ -796,12 +840,10 @@ function displayDetailedResults() {
             resultItem.classList.add('wrong');
         }
 
-        let imageHtml = ''; // Initialize imageHtml
-        // Check if imageUrl exists and add the image tag
+        let imageHtml = '';
         if (detail.imageUrl) {
             imageHtml = `<img src="${detail.imageUrl}" alt="Question Image" class="question-result-image">`;
         }
-        // New: Add explanation image if available
         let explanationImageHtml = '';
         if (detail.explanationImageUrl) {
             explanationImageHtml = `<img src="${detail.explanationImageUrl}" alt="Explanation Image" class="explanation-image">`;
@@ -830,26 +872,23 @@ function saveQuizResult() {
     const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
 
     const now = new Date();
-    // Format date as dd/mm/yyyy
     const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const month = String(now.getMonth() + 1).padStart(2, '0');
     const year = now.getFullYear();
 
-    // Format time as hour:min:sec AM/PM
     let hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
-    hours = hours ? hours : 12; // The hour '0' should be '12'
-    const formattedHours = String(hours).padStart(2, '0'); // Ensure two digits for hour
+    hours = hours ? hours : 12;
+    const formattedHours = String(hours).padStart(2, '0');
 
-    // Ensure quizStartTime is defined before using it
     const formattedStartTime = quizStartTime ?
         `${String(quizStartTime.getDate()).padStart(2, '0')}/${String(quizStartTime.getMonth() + 1).padStart(2, '0')}/${quizStartTime.getFullYear()} ${String(quizStartTime.getHours() % 12 || 12).padStart(2, '0')}:${String(quizStartTime.getMinutes()).padStart(2, '0')}:${String(quizStartTime.getSeconds()).padStart(2, '0')} ${quizStartTime.getHours() >= 12 ? 'PM' : 'AM'}` :
-        'N/A'; //
+        'N/A';
 
-    const formattedEndTime = `${day}/${month}/${year} ${formattedHours}:${minutes}:${seconds} ${ampm}`; //
+    const formattedEndTime = `${day}/${month}/${year} ${formattedHours}:${minutes}:${seconds} ${ampm}`;
 
     const result = {
         quizId: currentQuiz.id,
@@ -857,8 +896,8 @@ function saveQuizResult() {
         score: correctAnswersTotal,
         totalQuestions: currentQuiz.questions.length,
         percentage: ((correctAnswersTotal / currentQuiz.questions.length) * 100).toFixed(2),
-        startTime: formattedStartTime, // Store the quiz start time
-        endTime: formattedEndTime,     // Store the quiz end time
+        startTime: formattedStartTime,
+        endTime: formattedEndTime,
         details: quizDetailsForDisplay
     };
 
@@ -885,47 +924,39 @@ function loadPreviousQuizzes() {
         noQuizzesMessage.style.display = 'none';
     }
 
-    // Sort the quizzes by end time in descending order (most recent first)
     previousQuizzes.sort((a, b) => {
-        // Fallback to 'date' for older entries that might not have 'endTime'
         const dateA = new Date(a.endTime || a.date);
         const dateB = new Date(b.endTime || b.date);
         return dateB.getTime() - dateA.getTime();
     });
 
-
-    // Check if the current logged-in user is an admin
-    const isCurrentUserAdmin = ADMIN_USERS.includes(loggedInUser); //
+    const isCurrentUserAdmin = ADMIN_USERS.includes(loggedInUser);
 
     previousQuizzes.forEach((result, index) => {
         const row = tableBody.insertRow();
         row.insertCell(0).textContent = result.quizName || 'N/A';
         row.insertCell(1).textContent = `${result.score}/${result.totalQuestions}`;
         row.insertCell(2).textContent = `${parseFloat(result.percentage).toFixed(2)}%`;
-        row.insertCell(3).textContent = result.startTime || 'N/A'; // Display Start Time
-        row.insertCell(4).textContent = result.endTime || result.date || 'N/A'; // Display End Time, fallback to old 'date'
+        row.insertCell(3).textContent = result.startTime || 'N/A';
+        row.insertCell(4).textContent = result.endTime || result.date || 'N/A';
 
 
-        const actionsCell = row.insertCell(5); // Adjusted index for actions cell
+        const actionsCell = row.insertCell(5);
 
-        // View button
         const viewButton = document.createElement('button');
         viewButton.innerHTML = '<i class="fas fa-eye"></i> View Details';
         viewButton.classList.add('view-details-btn');
         viewButton.onclick = () => showQuizResultsDetails(result);
         actionsCell.appendChild(viewButton);
 
-        // Delete button - Only append if the current user is an admin
-        if (isCurrentUserAdmin) { //
+        if (isCurrentUserAdmin) {
             const deleteButton = document.createElement('button');
             deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
             deleteButton.classList.add('delete-quiz-btn');
-            deleteButton.onclick = () => deleteQuizResult(result.quizId, result.endTime || result.date); // Use endTime or date for deletion
+            deleteButton.onclick = () => deleteQuizResult(result.quizId, result.endTime || result.date);
             actionsCell.appendChild(deleteButton);
         }
 
-        // --- ADDED DOWNLOAD BUTTON ---
-        // Download button
         const downloadButton = document.createElement('button');
         downloadButton.innerHTML = '<i class="fas fa-download"></i> Download';
         downloadButton.classList.add('download-response-btn');
@@ -935,8 +966,7 @@ function loadPreviousQuizzes() {
 }
 
 
-// --- New function to delete a quiz result ---
-function deleteQuizResult(quizIdToDelete, timeToDelete) { // Changed dateToDelete to timeToDelete for consistency
+function deleteQuizResult(quizIdToDelete, timeToDelete) {
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (!loggedInUser) return;
 
@@ -944,16 +974,15 @@ function deleteQuizResult(quizIdToDelete, timeToDelete) { // Changed dateToDelet
     let previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
 
     const updatedQuizzes = previousQuizzes.filter(quiz =>
-        !(quiz.quizId === quizIdToDelete && (quiz.endTime === timeToDelete || quiz.date === timeToDelete)) // Check both endTime and old 'date'
+        !(quiz.quizId === quizIdToDelete && (quiz.endTime === timeToDelete || quiz.date === timeToDelete))
     );
 
     localStorage.setItem(userKey, JSON.stringify(updatedQuizzes));
     loadPreviousQuizzes();
 }
 
-// --- NEW downloadQuizResponse ASYNC FUNCTION ---
-async function downloadQuizResponse(quiz) { // Made function async
-    const { jsPDF } = window.jspdf; // Access jsPDF from the window object
+async function downloadQuizResponse(quiz) {
+    const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const marginLeft = 15;
@@ -961,10 +990,8 @@ async function downloadQuizResponse(quiz) { // Made function async
     const lineSpacing = 6;
     let y = 20;
 
-    // Get logged-in user's name from localStorage
     const loggedInUser = localStorage.getItem('loggedInUser') || 'Unknown User';
 
-    // Header Title
     doc.setFontSize(18);
     doc.setFont("helvetica", "bold");
     doc.text("📘 Quiz Response Report", pageWidth / 2, y, {
@@ -972,32 +999,28 @@ async function downloadQuizResponse(quiz) { // Made function async
     });
     y += 10;
 
-    // User Name
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(50, 50, 50);
     doc.text(`User: ${loggedInUser}`, marginLeft, y);
     y += 8;
 
-    // Quiz Info Box
     doc.setDrawColor(0);
     doc.setFillColor(240, 240, 255);
-    doc.rect(marginLeft, y, maxLineWidth, 35, "F"); // Increased height to accommodate new lines
+    doc.rect(marginLeft, y, maxLineWidth, 35, "F");
 
     y += 8;
     doc.text(`Quiz Name: ${quiz.quizName}`, marginLeft + 5, y);
     y += lineSpacing;
-    doc.text(`Start Time: ${quiz.startTime || 'N/A'}`, marginLeft + 5, y); // Added Start Time to PDF
+    doc.text(`Start Time: ${quiz.startTime || 'N/A'}`, marginLeft + 5, y);
     y += lineSpacing;
-    doc.text(`End Time: ${quiz.endTime || quiz.date || 'N/A'}`, marginLeft + 5, y); // Changed Date Taken to End Time
+    doc.text(`End Time: ${quiz.endTime || quiz.date || 'N/A'}`, marginLeft + 5, y);
     y += lineSpacing;
     doc.text(`Score: ${quiz.score} / ${quiz.totalQuestions} (${quiz.percentage}%)`, marginLeft + 5, y);
     y += 15;
 
-    // Loop through all question responses
     if (quiz.details && Array.isArray(quiz.details)) {
-        for (const [i, item] of quiz.details.entries()) { // Use for...of with entries for async
-            // Question
+        for (const [i, item] of quiz.details.entries()) {
             doc.setFont("helvetica", "bold");
             doc.setFontSize(12);
             doc.setTextColor(0, 0, 128);
@@ -1005,25 +1028,21 @@ async function downloadQuizResponse(quiz) { // Made function async
             doc.text(wrappedQuestion, marginLeft, y);
             y += lineSpacing * wrappedQuestion.length;
 
-            // Add image if available (for the question itself)
             if (item.imageUrl) {
                 try {
                     const img = new Image();
-                    // Use a Promise to wait for the image to load
                     await new Promise((resolve, reject) => {
                         img.onload = () => resolve();
                         img.onerror = (e) => reject(e);
                         img.src = item.imageUrl;
                     });
 
-                    // Define a maximum image height and width for the PDF
-                    const maxImageWidth = maxLineWidth - 10; // Padding from left/right
-                    const maxImageHeight = 80; // Example: limit image height to 80 units
+                    const maxImageWidth = maxLineWidth - 10;
+                    const maxImageHeight = 80;
 
                     let scaledWidth = img.naturalWidth;
                     let scaledHeight = img.naturalHeight;
 
-                    // Calculate scaling factor to fit within max dimensions while maintaining aspect ratio
                     if (scaledWidth > maxImageWidth) {
                         scaledHeight = (maxImageWidth / scaledWidth) * scaledHeight;
                         scaledWidth = maxImageWidth;
@@ -1034,15 +1053,13 @@ async function downloadQuizResponse(quiz) { // Made function async
                         scaledHeight = maxImageHeight;
                     }
 
-                    // Check if image will fit on current page, if not, add new page
-                    if (y + scaledHeight + 10 > doc.internal.pageSize.getHeight() - 20) { // -20 for bottom margin
+                    if (y + scaledHeight + 10 > doc.internal.pageSize.getHeight() - 20) {
                         doc.addPage();
-                        y = 20; // Reset y for new page
+                        y = 20;
                     }
 
-                    // Add the image to the PDF
                     doc.addImage(img.src, 'JPEG', marginLeft + 5, y, scaledWidth, scaledHeight);
-                    y += scaledHeight + 5; // Add some space after the image
+                    y += scaledHeight + 5;
                 } catch (e) {
                     console.error("Error loading or adding question image to PDF:", e);
                     doc.setTextColor(200, 0, 0);
@@ -1052,16 +1069,15 @@ async function downloadQuizResponse(quiz) { // Made function async
             }
 
 
-            // User Answer
             doc.setFont("helvetica", "normal");
             doc.setFontSize(11);
             let userAnswerColor;
-            if (item.userAnswer === item.correctAnswer) {
+            if (item.isCorrect) { // Check item.isCorrect for user answer color
                 userAnswerColor = [0, 150, 0]; // Green
-            } else if (!item.userAnswer || item.userAnswer === "" || item.skipped || item.timeUp) { // Handle skipped/timeup for color
-                userAnswerColor = [200, 100, 0]; // Orange for unanswered/skipped/time-up
+            } else if (item.skipped || item.timeUp) {
+                userAnswerColor = [200, 100, 0]; // Orange for skipped/time-up
             } else {
-                userAnswerColor = [200, 0, 0]; // Red
+                userAnswerColor = [200, 0, 0]; // Red for incorrect
             }
             doc.setTextColor(...userAnswerColor);
             doc.text("Your Answer:", marginLeft + 5, y);
@@ -1071,7 +1087,6 @@ async function downloadQuizResponse(quiz) { // Made function async
             doc.text(wrappedUserAnswer, marginLeft + 10, y);
             y += lineSpacing * wrappedUserAnswer.length;
 
-            // Correct Answer
             doc.setTextColor(0, 150, 0);
             doc.text("Correct Answer:", marginLeft + 5, y);
             y += lineSpacing;
@@ -1080,14 +1095,12 @@ async function downloadQuizResponse(quiz) { // Made function async
             doc.text(wrappedCorrectAnswer, marginLeft + 10, y);
             y += lineSpacing * wrappedCorrectAnswer.length;
 
-            // Time Taken - MODIFIED LINE HERE
-            doc.setTextColor(50, 50, 50); // Gray for time taken
+            doc.setTextColor(50, 50, 50);
             doc.text("Time Taken:", marginLeft + 5, y);
             y += lineSpacing;
-            doc.text(`${formatTime(item.timeTaken)}`, marginLeft + 10, y); // Use formatTime helper
+            doc.text(`${formatTime(item.timeTaken)}`, marginLeft + 10, y);
             y += lineSpacing;
 
-            // NEW: Add Explanation Image to PDF if available
             if (item.explanationImageUrl) {
                 try {
                     const explanationImg = new Image();
@@ -1098,7 +1111,7 @@ async function downloadQuizResponse(quiz) { // Made function async
                     });
 
                     const maxExplanationImageWidth = maxLineWidth - 10;
-                    const maxExplanationImageHeight = 100; // Adjust as needed
+                    const maxExplanationImageHeight = 100;
 
                     let scaledExplanationWidth = explanationImg.naturalWidth;
                     let scaledExplanationHeight = explanationImg.naturalHeight;
@@ -1117,7 +1130,7 @@ async function downloadQuizResponse(quiz) { // Made function async
                         doc.addPage();
                         y = 20;
                     }
-                    doc.setTextColor(0, 0, 0); // Reset color for label
+                    doc.setTextColor(0, 0, 0);
                     doc.setFont("helvetica", "bold");
                     doc.text("Explanation:", marginLeft + 5, y);
                     y += lineSpacing;
@@ -1132,12 +1145,11 @@ async function downloadQuizResponse(quiz) { // Made function async
             }
 
 
-            // Divider line
             doc.setDrawColor(180);
             doc.line(marginLeft, y, pageWidth - marginLeft, y);
             y += lineSpacing;
 
-            if (y > doc.internal.pageSize.getHeight() - 20) { // Check if new page is needed
+            if (y > doc.internal.pageSize.getHeight() - 20) {
                 doc.addPage();
                 y = 20;
             }
@@ -1150,7 +1162,6 @@ async function downloadQuizResponse(quiz) { // Made function async
     const fileName = `${quiz.quizName.replace(/\s+/g, '_')}_Response.pdf`;
     doc.save(fileName);
 
-    // Show a modal after saving
     showInfoModal(`✅ Download completed. Please check your browser's default downloads folder for "${fileName}".`);
 }
 
@@ -1161,30 +1172,28 @@ function loadQuestion() {
 
     const questionData = currentQuiz.questions[currentQuestionIndex];
     quizTitle.textContent = currentQuiz.name;
-    questionText.innerHTML = `${currentQuestionIndex + 1}. ${questionData.question}`; // MODIFIED THIS LINE
+    questionText.innerHTML = `${currentQuestionIndex + 1}. ${questionData.question}`;
 
     if (questionData.imageUrl) {
         questionImage.src = questionData.imageUrl;
         questionImage.style.display = 'block';
     } else {
         questionImage.style.display = 'none';
-        questionImage.src = ''; // Clear the src if no image
+        questionImage.src = '';
     }
 
     optionsContainer.innerHTML = '';
 
     if (questionData.type === 'input') {
-        const inputField = document.createElement('textarea'); // Changed from 'input' to 'textarea'
-        // inputField.type = 'text'; // Remove this line, as textarea doesn't have a type attribute
+        const inputField = document.createElement('textarea');
         inputField.classList.add('input-answer-field');
         inputField.placeholder = 'Type your answer here...';
         inputField.value = userAnswers[currentQuestionIndex] || '';
-        inputField.rows = 1; // Set an initial number of rows for visibility
-        inputField.spellcheck = true; // Enable spellcheck for longer text
+        inputField.rows = 1;
+        inputField.spellcheck = true;
 
         inputField.addEventListener('input', () => {
             userAnswers[currentQuestionIndex] = inputField.value;
-            // Optional: Auto-adjust height based on content
             inputField.style.height = 'auto';
             inputField.style.height = (inputField.scrollHeight) + 'px';
         });
@@ -1207,16 +1216,15 @@ function loadQuestion() {
 
     updateProgressBar();
     updateNavigationButtons();
-    questionStartTime = new Date().getTime(); // Set start time for the current question
+    questionStartTime = new Date().getTime();
     resetTimer(questionData.timeLimit);
 }
 
 function showQuizResultsDetails(result) {
     showQuizResultsDetailsSection();
     const resultsContainer = document.getElementById('quizResultsDetailsContainer');
-    resultsContainer.innerHTML = ''; // Clear previous results
+    resultsContainer.innerHTML = '';
 
-    // Update the summary section for historical results
     if (result && result.details) {
         const correctCount = result.details.filter(d => d.isCorrect).length;
         const wrongCount = result.details.filter(d => !d.isCorrect && !d.skipped && !d.timeUp).length;
@@ -1230,7 +1238,6 @@ function showQuizResultsDetails(result) {
         summaryTimeUp.textContent = timeUpCount;
         summaryTotalQuestions.textContent = totalCount;
     } else {
-        // Fallback or clear if no details are present
         summaryCorrect.textContent = 0;
         summaryWrong.textContent = 0;
         summarySkipped.textContent = 0;
@@ -1252,18 +1259,16 @@ function showQuizResultsDetails(result) {
             resultItem.classList.add('correct');
         } else if (detail.skipped) {
             resultItem.classList.add('skipped');
-        } else if (detail.timeUp) { // New condition for time up
-            resultItem.classList.add('time-up'); // Add a specific class for styling
+        } else if (detail.timeUp) {
+            resultItem.classList.add('time-up');
         } else {
             resultItem.classList.add('wrong');
         }
 
-        let imageHtml = ''; // Initialize imageHtml
-        // Check if imageUrl exists and add the image tag
+        let imageHtml = '';
         if (detail.imageUrl) {
             imageHtml = `<img src="${detail.imageUrl}" alt="Question Image" class="question-result-image">`;
         }
-        // New: Add explanation image if available for historical results
         let explanationImageHtml = '';
         if (detail.explanationImageUrl) {
             explanationImageHtml = `<img src="${detail.explanationImageUrl}" alt="Explanation Image" class="explanation-image">`;
@@ -1284,17 +1289,8 @@ function showQuizResultsDetails(result) {
 }
 
 
-// Initial setup: Hide specific quiz sections on load
-// Ensure quizSelectionContainer is hidden here as well
 quizContainer.style.display = 'none';
 finalScoreContainer.style.display = 'none';
 quizResultsDetails.style.display = 'none';
 previousQuizzesContainer.style.display = 'none';
-quizSelectionContainer.style.display = 'none'; // Added this line for initial hide
-// quizInfoBox.style.display = 'none'; // THIS LINE WAS REMOVED/COMMENTED OUT to ensure dashboard shows on load
-
-// Adjustments to initial load flow
-document.addEventListener('DOMContentLoaded', () => {
-    // This block already handles initial redirection/display, but ensure goToDashboard is called last
-    // The previous DOMContentLoaded listener handles auth, then calls goToDashboard
-});
+quizSelectionContainer.style.display = 'none';
