@@ -286,36 +286,110 @@ const quizzes = [
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What did the sage tell Rama Natha and his wife? (2 MARKS)",
                 type: "input",
-                answer: "",
-                imageUrl: "1.png",
-                explanationImageUrl: "", 
-                timeLimit: 60
-            },
-            {
-                question: "",
-                type: "input",
-                answer: "",
+                answer: "The sage told Rama Natha that no potion could turn things into gold. Rama Natha and his wife worked very hard in their fields. Madhumati also worked hard to sell bananas in the market. Thus they worked hard which earned them a lot of money.",
                 imageUrl: "",
                 explanationImageUrl: "", 
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What did the sage say about the magic potion? ( 2 MARKS)",
                 type: "input",
-                answer: "",
+                answer: "The sage told Rama Natha that he should collect dew and store it in a bottle. When he had five litres of dew he should come to him. The sage would chant some magic words. Then the magic potion would convert the thing into gold.",
                 imageUrl: "",
                 explanationImageUrl: "", 
                 timeLimit: 60
             },
             {
-                question: "",
+                question: "What troubled Rama Natha’s wife about her husband? ( 2 MARKS)",
                 type: "input",
-                answer: "",
+                answer: "Madhumati, Rama Natha’s wife, suffered much because of her husband’s funny idea. Her husband spent a lot of money on this idea. She felt that if her husband went on spending money, they would be left with no money.",
                 imageUrl: "",
                 explanationImageUrl: "", 
                 timeLimit: 60
+            },
+            {
+                question: "What had made Rama Natha surprised?",
+                type: "mcq", 
+                options: ["not getting gold", "nothing happening", "not seeing the effect of magic on the vessel", "All of the above"], // Array of options
+                answer: "All of the above", 
+                imageUrl: "1.png", 
+                explanationImageUrl: "", 
+                timeLimit: 180
+            },
+            {
+                question: "Who was behind the story of teaching Rama Natha the truth of life?",
+                type: "mcq", 
+                options: ["The sage", "Madhumati", "Rama Natha’s father", "All of the above"], // Array of options
+                answer: "The sage", 
+                imageUrl: "2.png", 
+                explanationImageUrl: "", 
+                timeLimit: 180
+            },
+            {
+                question: "The moral of the story is",
+                type: "mcq", 
+                options: ["only hard work could earn you good money", "hard work makes you more responsible and mature", "hard work helps you earn resources to fulfill your dreams", "All of the above"], // Array of options
+                answer: "All of the above", 
+                imageUrl: "2.png", 
+                explanationImageUrl: "", 
+                timeLimit: 25
+            },
+            {
+                question: "",
+                type: "mcq", 
+                options: ["", "", "", ""], // Array of options
+                answer: "", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
+                timeLimit: 25
+            },
+            
+            {
+                question: "",
+                type: "mcq", 
+                options: ["", "", "", ""], // Array of options
+                answer: "", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
+                timeLimit: 25
+            },
+            {
+                question: "",
+                type: "mcq", 
+                options: ["", "", "", ""], // Array of options
+                answer: "", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
+                timeLimit: 25
+            },
+            {
+                question: "",
+                type: "mcq", 
+                options: ["", "", "", ""], // Array of options
+                answer: "", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
+                timeLimit: 25
+            },
+            {
+                question: "",
+                type: "mcq", 
+                options: ["", "", "", ""], // Array of options
+                answer: "", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
+                timeLimit: 25
+            },
+            {
+                question: "",
+                type: "mcq", 
+                options: ["", "", "", ""], // Array of options
+                answer: "", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
+                timeLimit: 25
             },
         ]
     },
