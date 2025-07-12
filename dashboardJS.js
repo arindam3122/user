@@ -104,12 +104,13 @@ let initialTimeLimit = 0; // Store the initial time limit for the current questi
 // --- New variables for time tracking per question ---
 let questionStartTime; // Stores the Date.now() when a question is loaded
 let questionTimesTaken = []; // Array to store time taken for each question in seconds
-let questionStatuses = []; // NEW: Array to store status of each question (answered, skipped, time_up, unanswered)
+let questionStatuses = []; // NEW: Array to store status of each question (answered, skipped, time_up, unanswered, auto_submitted)
 
 // Anti-cheating variables
 let quizActive = false; // Flag to indicate if a quiz is currently active
 let tabSwitchCount = 0; // Tracks how many times the user switched tabs
 const MAX_TAB_SWITCHES = 1; // Maximum allowed tab switches before quiz auto-submits
+let autoSubmitTriggered = false; // NEW: Flag to indicate if auto-submission was triggered by anti-cheat
 
 /**
  * Displays a custom information/alert modal.
@@ -194,6 +195,7 @@ document.addEventListener('visibilitychange', () => {
                 showInfoModal(`Warning: You switched tabs! This is considered cheating. ${MAX_TAB_SWITCHES - tabSwitchCount} warnings remaining before quiz auto-submits.`);
             } else {
                 showInfoModal("Too many tab switches detected! Your quiz will now be submitted automatically.");
+                autoSubmitTriggered = true; // Set flag before submitting
                 handleSubmitButtonClick(); // Auto-submit quiz
             }
         } else {
@@ -213,6 +215,7 @@ window.addEventListener('blur', () => {
             showInfoModal(`Warning: You left the quiz window! This is considered cheating. ${MAX_TAB_SWITCHES - tabSwitchCount} warnings remaining before quiz auto-submits.`);
         } else {
             showInfoModal("Too many unauthorized window changes detected! Your quiz will now be submitted automatically.");
+            autoSubmitTriggered = true; // Set flag before submitting
             handleSubmitButtonClick(); // Auto-submit quiz
         }
     }
@@ -321,6 +324,7 @@ function goToDashboard() {
     clearTimeUpMessage(); // Clear and hide the time-up message
     quizActive = false; // Ensure quiz is marked as inactive when going to dashboard
     tabSwitchCount = 0; // Reset tab switch count
+    autoSubmitTriggered = false; // Reset auto-submit flag
 }
 
 function showQuizSelection() {
@@ -331,6 +335,7 @@ function showQuizSelection() {
     clearTimeUpMessage(); // Clear and hide the time-up message
     quizActive = false; // Ensure quiz is marked as inactive
     tabSwitchCount = 0; // Reset tab switch count
+    autoSubmitTriggered = false; // Reset auto-submit flag
     renderQuizList();
 }
 
@@ -357,6 +362,7 @@ function showPreviousQuizzesSection() {
     clearTimeUpMessage(); // Clear and hide the time-up message
     quizActive = false; // Add this line to mark quiz as inactive
     tabSwitchCount = 0; // Reset tab switch count
+    autoSubmitTriggered = false; // Reset auto-submit flag
 }
 
 
@@ -487,6 +493,7 @@ function startQuiz(quizId) {
     quizDetailsForDisplay = [];
     tabSwitchCount = 0;
     quizActive = true;
+    autoSubmitTriggered = false; // Ensure it's false at quiz start
 
     showQuizSection();
     loadQuestion();
@@ -589,12 +596,33 @@ function handleNextButtonClick() {
 }
 
 function handleSubmitButtonClick() {
+    // If auto-submit was triggered due to anti-cheat, update unanswered questions
+    if (autoSubmitTriggered) {
+        for (let i = 0; i < currentQuiz.questions.length; i++) {
+            // Only update questions that were genuinely unanswered (not already skipped or time_up)
+            if (questionStatuses[i] === 'unanswered' || questionStatuses[i] === 'null') {
+                questionStatuses[i] = 'auto_submitted';
+                // If a question is auto_submitted, and no answer was provided, ensure userAnswers is null or empty string
+                if (userAnswers[i] === null) {
+                    const questionType = currentQuiz.questions[i].type;
+                    if (questionType === 'input') {
+                        userAnswers[i] = "Auto-Submitted - No Input"; // Set a specific message for input type
+                    } else {
+                        userAnswers[i] = "Auto-Submitted - No Selection"; // Set a specific message for MCQs
+                    }
+                }
+            }
+        }
+    }
+
     updateTimeTakenBeforeMoving(); // Ensure time for the last question is recorded
 
     clearInterval(timerInterval); // Stop the timer when quiz is submitted
     clearTimeUpMessage(); // Clear and hide the time-up message
     quizActive = false; // Quiz is no longer active
     tabSwitchCount = 0; // Reset tab switch count
+    autoSubmitTriggered = false; // Reset auto-submit flag after submission
+
     calculateResults();
     saveQuizResult(); // Save the quiz result, which now includes start and end times
     showFinalScoreSection();
@@ -701,6 +729,7 @@ function calculateResults() {
     wrongAnswersTotal = 0;
     skippedQuestionsTotal = 0;
     let timeUpQuestionsTotal = 0; // Initialize timeUpQuestionsTotal
+    let autoSubmittedQuestionsTotal = 0; // NEW: Initialize autoSubmittedQuestionsTotal
     quizDetailsForDisplay = [];
 
     currentQuiz.questions.forEach((question, index) => {
@@ -718,16 +747,17 @@ function calculateResults() {
             explanationImageUrl: question.explanationImageUrl || null // New: Image for explanation
         };
 
-        if (status === 'skipped') { // Changed from `userAnswer === null` to status check
+        if (status === 'skipped') {
             skippedQuestionsTotal++;
             quizDetailsForDisplay.push({
                 ...commonDetails,
                 userAnswer: "Skipped", // Display "Skipped" for manually skipped questions
                 isCorrect: false,
                 skipped: true,
-                timeUp: false // Explicitly false
+                timeUp: false,
+                autoSubmitted: false // Explicitly false
             });
-        } else if (status === 'time_up') { // Handle time_up status
+        } else if (status === 'time_up') {
             timeUpQuestionsTotal++; // Increment time-up count
             let displayedUserAnswer = userAnswer;
 
@@ -752,9 +782,27 @@ function calculateResults() {
                 userAnswer: displayedUserAnswer, // Display stored answer or generic time-up message
                 isCorrect: isCorrect,
                 skipped: false,
-                timeUp: true
+                timeUp: true,
+                autoSubmitted: false // Explicitly false
             });
-        } else { // 'answered' status (which covers both correct and wrong answers)
+        } else if (status === 'auto_submitted') { // NEW: Handle 'auto_submitted' status
+            autoSubmittedQuestionsTotal++;
+            wrongAnswersTotal++; // Auto-submitted questions are considered wrong for scoring
+            let displayedUserAnswer = userAnswer;
+
+            if (userAnswer === null || userAnswer === '') {
+                 displayedUserAnswer = "Auto-Submitted - No Input"; // More specific for inputs
+            }
+
+            quizDetailsForDisplay.push({
+                ...commonDetails,
+                userAnswer: displayedUserAnswer, // Will be "Auto-Submitted - No Input/Selection" or partial input
+                isCorrect: false,
+                skipped: false,
+                timeUp: false,
+                autoSubmitted: true
+            });
+        } else { // 'answered' status (which covers both correct and wrong answers explicitly provided by user)
             if (question.type === 'input') {
                 isCorrect = userAnswer && userAnswer.trim().toLowerCase() === question.answer.trim().toLowerCase();
             } else {
@@ -772,7 +820,8 @@ function calculateResults() {
                 userAnswer: userAnswer,
                 isCorrect,
                 skipped: false,
-                timeUp: false
+                timeUp: false,
+                autoSubmitted: false // Explicitly false
             });
         }
     });
@@ -793,7 +842,8 @@ function calculateResults() {
         correct: correctAnswersTotal,
         wrong: wrongAnswersTotal,
         skipped: skippedQuestionsTotal,
-        timeUp: timeUpQuestionsTotal, // Capture new timeUpQuestionsTotal
+        timeUp: timeUpQuestionsTotal,
+        autoSubmitted: autoSubmittedQuestionsTotal, // NEW: Include in summary data
         total: totalQuestions
     };
 }
@@ -808,7 +858,12 @@ function displayDetailedResults() {
         summaryCorrect.textContent = this.quizSummaryData.correct;
         summaryWrong.textContent = this.quizSummaryData.wrong;
         summarySkipped.textContent = this.quizSummaryData.skipped;
-        summaryTimeUp.textContent = this.quizSummaryData.timeUp; // Set the new time-up count
+        summaryTimeUp.textContent = this.quizSummaryData.timeUp;
+        // Check if summaryAutoSubmitted element exists before trying to set its textContent
+        const summaryAutoSubmittedElement = document.getElementById('summaryAutoSubmitted'); // Assuming such an element exists in HTML
+        if (summaryAutoSubmittedElement) {
+             summaryAutoSubmittedElement.textContent = this.quizSummaryData.autoSubmitted; // NEW: Set auto-submitted count
+        }
         summaryTotalQuestions.textContent = this.quizSummaryData.total;
     } else {
         // Fallback if summary data isn't set (shouldn't happen with current flow)
@@ -817,6 +872,10 @@ function displayDetailedResults() {
         summarySkipped.textContent = skippedQuestionsTotal;
         // For time-up, you'd need to re-calculate or pass it here if not stored
         summaryTimeUp.textContent = quizDetailsForDisplay.filter(d => d.timeUp).length;
+        const summaryAutoSubmittedElement = document.getElementById('summaryAutoSubmitted');
+        if (summaryAutoSubmittedElement) {
+            summaryAutoSubmittedElement.textContent = quizDetailsForDisplay.filter(d => d.autoSubmitted).length; // NEW: Fallback for auto-submitted
+        }
         summaryTotalQuestions.textContent = currentQuiz.questions.length;
     }
 
@@ -836,7 +895,10 @@ function displayDetailedResults() {
             resultItem.classList.add('skipped');
         } else if (detail.timeUp) {
             resultItem.classList.add('time-up');
-        } else {
+        } else if (detail.autoSubmitted) { // NEW: Add class for auto-submitted
+            resultItem.classList.add('auto-submitted');
+        }
+        else {
             resultItem.classList.add('wrong');
         }
 
@@ -853,7 +915,7 @@ function displayDetailedResults() {
         resultItem.innerHTML = `
             <p class="question-text-result">${detail.question}</p>
             ${imageHtml}
-            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
+            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : (detail.autoSubmitted ? 'auto-submitted-answer' : 'user-answer')))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
             <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>
             ${explanationImageHtml} `;
@@ -1076,7 +1138,10 @@ async function downloadQuizResponse(quiz) {
                 userAnswerColor = [0, 150, 0]; // Green
             } else if (item.skipped || item.timeUp) {
                 userAnswerColor = [200, 100, 0]; // Orange for skipped/time-up
-            } else {
+            } else if (item.autoSubmitted) { // NEW: Color for auto-submitted
+                userAnswerColor = [150, 0, 150]; // Purple for auto-submitted
+            }
+            else {
                 userAnswerColor = [200, 0, 0]; // Red for incorrect
             }
             doc.setTextColor(...userAnswerColor);
@@ -1227,21 +1292,31 @@ function showQuizResultsDetails(result) {
 
     if (result && result.details) {
         const correctCount = result.details.filter(d => d.isCorrect).length;
-        const wrongCount = result.details.filter(d => !d.isCorrect && !d.skipped && !d.timeUp).length;
+        const wrongCount = result.details.filter(d => !d.isCorrect && !d.skipped && !d.timeUp && !d.autoSubmitted).length; // Exclude autoSubmitted from wrong here
         const skippedCount = result.details.filter(d => d.skipped).length;
         const timeUpCount = result.details.filter(d => d.timeUp).length;
+        const autoSubmittedCount = result.details.filter(d => d.autoSubmitted).length; // NEW: Count auto-submitted
         const totalCount = result.details.length;
 
         summaryCorrect.textContent = correctCount;
         summaryWrong.textContent = wrongCount;
         summarySkipped.textContent = skippedCount;
         summaryTimeUp.textContent = timeUpCount;
+        // Check if summaryAutoSubmitted element exists before trying to set its textContent
+        const summaryAutoSubmittedElement = document.getElementById('summaryAutoSubmitted');
+        if (summaryAutoSubmittedElement) {
+            summaryAutoSubmittedElement.textContent = autoSubmittedCount; // NEW: Set auto-submitted count
+        }
         summaryTotalQuestions.textContent = totalCount;
     } else {
         summaryCorrect.textContent = 0;
         summaryWrong.textContent = 0;
         summarySkipped.textContent = 0;
         summaryTimeUp.textContent = 0;
+        const summaryAutoSubmittedElement = document.getElementById('summaryAutoSubmitted');
+        if (summaryAutoSubmittedElement) {
+            summaryAutoSubmittedElement.textContent = 0; // NEW: Fallback for auto-submitted
+        }
         summaryTotalQuestions.textContent = 0;
     }
 
@@ -1261,7 +1336,10 @@ function showQuizResultsDetails(result) {
             resultItem.classList.add('skipped');
         } else if (detail.timeUp) {
             resultItem.classList.add('time-up');
-        } else {
+        } else if (detail.autoSubmitted) { // NEW: Add class for auto-submitted
+            resultItem.classList.add('auto-submitted');
+        }
+        else {
             resultItem.classList.add('wrong');
         }
 
@@ -1278,7 +1356,7 @@ function showQuizResultsDetails(result) {
         resultItem.innerHTML = `
             <p class="question-text-result">${detail.question}</p>
             ${imageHtml}
-            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : 'user-answer'))}">${detail.userAnswer}</span></p>
+            <p>Your Answer: <span class="${detail.isCorrect ? 'correct-answer' : (detail.skipped ? 'user-answer' : (detail.timeUp ? 'time-up-answer' : (detail.autoSubmitted ? 'auto-submitted-answer' : 'user-answer')))}">${detail.userAnswer}</span></p>
             <p>Correct Answer: <span class="correct-answer">${detail.correctAnswer}</span></p>
             <p>Time Taken: <span>${formatTime(detail.timeTaken)}</span></p>
             ${explanationImageHtml} `;
