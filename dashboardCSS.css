@@ -564,7 +564,7 @@ header {
 }
 
 #questionImage {
-    max-width: auto; /* Ensure images fit well */
+    max-width: 80%; /* Ensure images fit well */
     height: auto;
     border-radius: 8px;
     margin-top: 15px;

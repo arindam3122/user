@@ -118,7 +118,7 @@ const quizzes = [
         id: "test on A Bottle of Dew",
         name: "Test on A Bottle of Dew (40MARKS)",
         description: "This test has a auto submission feature. So once started please do not click on any other tab or the test will get auto submitted.",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)",
@@ -127,7 +127,7 @@ const quizzes = [
                 answer: "He wanted to change any object into gold", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 30
+                timeLimit: 25
             },
             {
                 question: "Why did Rama Natha neglect his inherited lands? (1 MARK)",
@@ -136,7 +136,7 @@ const quizzes = [
                 answer: "He believed in a magic potion that could turn objects into gold", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 30
+                timeLimit: 25
             },
             {
                 question: "What was Rama Natha’s wife, Madhumati, worried about? (1 MARK)",
@@ -145,7 +145,7 @@ const quizzes = [
                 answer: "Rama Natha’s reckless spending", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 30
+                timeLimit: 25
             },
             {
                 question: "Who did Rama Natha become a follower of in the story? (1 MARK)",
@@ -154,7 +154,7 @@ const quizzes = [
                 answer: "A sage named Mahipati", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 30
+                timeLimit: 25
             },
             {
                 question: "What did sage Mahipati instruct Rama Natha to do to obtain the magic potion? (1 MARK)",
@@ -163,7 +163,7 @@ const quizzes = [
                 answer: "Plant banana plants and collect dew", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 30
+                timeLimit: 25
             },
             {
                 question: "One day, a famous ______ called Mahapati came to their town. (1 MARK)",
@@ -171,7 +171,7 @@ const quizzes = [
                 answer: "sage",
                 imageUrl: "",
                 explanationImageUrl: "",
-                timeLimit: 60
+                timeLimit: 20
             },
             {
                 question: "You can plant as many __________ plants as you want. (1 MARK)",
@@ -179,7 +179,7 @@ const quizzes = [
                 answer: "banana",
                 imageUrl: "",
                 explanationImageUrl: "",
-                timeLimit: 60
+                timeLimit: 20
             },
             {
                 question: "When you have _______ liters of dew, bring it to me. (1 MARK)",
@@ -187,7 +187,7 @@ const quizzes = [
                 answer: "five",
                 imageUrl: "",
                 explanationImageUrl: "",
-                timeLimit: 60
+                timeLimit: 20
             },
             {
                 question: "A drop of the potion will change any object into __________. (1 MARK)",
@@ -195,7 +195,7 @@ const quizzes = [
                 answer: "gold",
                 imageUrl: "",
                 explanationImageUrl: "", 
-                timeLimit: 60
+                timeLimit: 20
             },
             {
                 question: "It was your hard work that created this wealth, not __________. (1 MARK)",
@@ -203,15 +203,7 @@ const quizzes = [
                 answer: "magic",
                 imageUrl: "",
                 explanationImageUrl: "", 
-                timeLimit: 60
-            },
-            {
-                question: "Rama Natha never believed in any kind of magic potion. (1 MARK)",
-                type: "input",
-                answer: "",
-                imageUrl: "",
-                explanationImageUrl: "", 
-                timeLimit: 60
+                timeLimit: 20
             },
             {
                 question: "Rama Natha never believed in any kind of magic potion. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
@@ -241,6 +233,86 @@ const quizzes = [
                 question: "The sage Mahipati gave Rama Natha an easy recipe for the magic potion. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
                 type: "input",
                 answer: "FALSE",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "How did the sage help Rama Natha? (1 MARK)",
+                type: "input",
+                answer: "The sage helped Rama Natha by informing him that there existed such a magic potion. He could make such a potion.",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "Do you think Rama Natha will be able to collect the dew? Give a reason. (1 MARK)",
+                type: "input",
+                answer: "",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "Why was Rama Natha angry? (2 MARKS)",
+                type: "input",
+                answer: "Rama Natha was angry because nothing happened to the copper vessel. He thought that the copper vessel would change to gold after sprinkling the magic potion.",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "How did Rama Natha and Madhumati create wealth? (2 MARKS)",
+                type: "input",
+                answer: "Rama Natha and Madhumati created wealth by planting and caring for banana plants. Madhumati sold the bananas in the market, and over time, their hard work and dedication led to significant earnings.",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "How did Rama Natha collect five liters of dew? (2 MARKS)",
+                type: "input",
+                answer: "Rama Natha started growing bananas on his land. During winter the banana leaves had dew on them. Then Rama Natha collected dew. He grew these bananas every year to call the dew.",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "What happened when Rama Natha was given the potion by the sage? Why did the sage call for his wife? (2 MARKS)",
+                type: "input",
+                answer: "When Rama Natha did what the sage told him to do, nothing happened. The sage asked Madhumati to open the box. It had stacks of gold inside.",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "",
+                type: "input",
+                answer: "",
+                imageUrl: "1.png",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "",
+                type: "input",
+                answer: "",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "",
+                type: "input",
+                answer: "",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+            {
+                question: "",
+                type: "input",
+                answer: "",
                 imageUrl: "",
                 explanationImageUrl: "", 
                 timeLimit: 60
