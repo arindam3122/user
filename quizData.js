@@ -118,7 +118,7 @@ const quizzes = [
         id: "test on A Bottle of Dew",
         name: "Test on A Bottle of Dew (40MARKS)",
         description: "This test has a auto submission feature. So once started please do not click on any other tab or the test will get auto submitted.",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)",
