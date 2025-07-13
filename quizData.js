@@ -78,25 +78,236 @@ const quizzes = [
         id: "test on the raven and the fox",
         name: "The Raven and the Fox Test (40MARKS)",
         description: "",
-        enabled: false,
+        enabled: true,
         questions: [
+            
             {
-                question: "Where did Mr. Raven sit?",
+                question: "Where did Mr. Raven sit? (1 MARK)",
                 type: "mcq", 
-                options: ["", "", "", ""], 
-                answer: "", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
-                timeLimit: 40
+                options: ["on a branch", "near the tree", "on a wall", "on a table"], 
+                answer: "on a branch",  
+                timeLimit: 15
             },
             {
-                question: "",
-                type: "input",
-                answer: "",
-                imageUrl: "",
-                explanationImageUrl: "", 
-                timeLimit: 40
+                question: "What was in Raven’s mouth? (1 MARK)",
+                type: "mcq", 
+                options: ["a piece of cake", "a biscuit", "bread", "a morsel"], 
+                answer: "a morsel", 
+                timeLimit: 15
             },
+            {
+                question: "What for did the fox look at the Raven? (1 MARK)",
+                type: "mcq", 
+                options: ["for leaves", "for food", "to pay respect", "none of these"], 
+                answer: "for food",  
+                timeLimit: 15
+            },
+            {
+                question: "How did the Raven’s beak look? (1 MARK)",
+                type: "mcq", 
+                options: ["black beak", "big", "small", "none of these"], 
+                answer: "black beak", 
+                timeLimit: 15
+            },
+            {
+                question: "The purpose behind respectably addressing the Raven was : (1 MARK)",
+                type: "mcq", 
+                options: ["to flatter him", "to snatch the morsel", "to show that he was his friend", "to show love and respect"], 
+                answer: "to snatch the morsel", 
+                timeLimit: 15
+            },
+            {
+                question: "What was the Raven holding in his beak? (1 MARK)",
+                type: "mcq", 
+                options: ["A shiny stone", "A morsel of food", "A twig", "A piece of paper"], 
+                answer: "A morsel of food", 
+                timeLimit: 15
+            },
+            {
+                question: "How did the Fox describe the Raven to flatter him? (1 MARK)",
+                type: "mcq", 
+                options: ["By commenting on his large wings", "By admiring his feathers and suggesting he should sing", "By praising his sharp beak", "By noting his impressive size"], 
+                answer: "By admiring his feathers and suggesting he should sing", 
+                timeLimit: 15
+            },
+            {
+                question: "What was the Raven’s reaction to the Fox’s flattery? (1 MARK)",
+                type: "mcq", 
+                options: ["He ignored the Fox and ate the morsel", "He became proud and tried to sing", "He immediately dropped the morsel", "He scolded the Fox for lying"], 
+                answer: "He became proud and tried to sing", 
+                timeLimit: 15
+            },
+            {
+                question: "What happened as a result of the Raven trying to sing? (1 MARK)",
+                type: "mcq", 
+                options: ["The Fox ran away with the morsel", "The Raven’s singing attracted other birds", "The morsel fell from the Raven’s beak and was taken by the Fox", "The Raven successfully sang and kept the morsel"], 
+                answer: "The morsel fell from the Raven’s beak and was taken by the Fox", 
+                timeLimit: 15
+            },
+            {
+                question: "What lesson does the Fox impart to the Raven at the end of the poem? (1 MARK)",
+                type: "mcq", 
+                options: ["To always be careful when eating", "To ignore flattering words and avoid pride", "To trust others completely", "To practice singing regularly"], 
+                answer: "To ignore flattering words and avoid pride", 
+                timeLimit: 15
+            },
+            {
+                question: "Why did the Raven not recognize the Fox’s flattery as a trick? (1 MARK)",
+                type: "mcq", 
+                options: ["He was too hungry to notice", "He did not know who the Fox was", "He was blinded by pride and forgot his own limitations", "He was too focused on the morsel"], 
+                answer: "He was blinded by pride and forgot his own limitations", 
+                timeLimit: 15
+            },
+            {
+                question: "What kind of bird is the Raven described as in the poem? (1 MARK)",
+                type: "mcq", 
+                options: ["Cheerful and melodic", "Proud and foolish", "Wise and cautious", "Sad and weak"], 
+                answer: "Proud and foolish", 
+                timeLimit: 15
+            },
+            {
+                question: "How does the Fox feel after the Raven loses the morsel? (1 MARK)",
+                type: "mcq", 
+                options: ["Sympathetic and regretful", "Amused and triumphant", "Angry and vengeful", "Sad and disappointed"], 
+                answer: "Amused and triumphant", 
+                timeLimit: 15
+            },
+            {
+                question: "What literary device is used when the Fox praises the Raven’s singing ability? (1 MARK)",
+                type: "mcq", 
+                options: ["Hyperbole", "Metaphor", "Simile", "Irony"], 
+                answer: "Irony", 
+                timeLimit: 15
+            },
+            {
+                question: "What does the Fox’s reaction to the Raven’s mistake suggest about his character? (1 MARK)",
+                type: "mcq", 
+                options: ["He is naive", "He is patient", "He is cunning and opportunistic", "He is generous"],
+                answer: "He is cunning and opportunistic", 
+                timeLimit: 15
+            },
+            {
+                question: "The Raven was perched on a ________ and held a morsel in his beak. (1 MARK)",
+                type: "input",
+                answer: "limb",
+                timeLimit: 20
+            },
+            {
+                question: "The Fox admired the Raven’s ________ and suggested he should sing. (1 MARK)",
+                type: "input",
+                answer: "feathers",
+                timeLimit: 20
+            },
+            {
+                question: "The Raven, in his ________ , forgot that his voice was just a croak. (1 MARK)",
+                type: "input",
+                answer: "foolish pride",
+                timeLimit: 20
+            },
+            {
+                question: "When the Raven tried to ________ , the morsel fell from his beak. (1 MARK)",
+                type: "input",
+                answer: "sing",
+                timeLimit: 20
+            },
+            {
+                question: "The Fox laughed and said, “Ignore sweet words that make you ________ .” (1 MARK)",
+                type: "input",
+                answer: "glow",
+                timeLimit: 20
+            },
+            {
+                question: "The lesson the Fox imparts is that ________ is rather unwise. (1 MARK)",
+                type: "input",
+                answer: "pride",
+                timeLimit: 20
+            },
+            {
+                question: "The Fox was ________ when the Raven lost the morsel he had wanted. (1 MARK)",
+                type: "input",
+                answer: "amused",
+                timeLimit: 20
+            },
+            {
+                question: "The Raven’s mistake was caused by his ________ , which made him forget his owr limitations. (1 MARK)",
+                type: "input",
+                answer: "pride",
+                timeLimit: 20
+            },
+            {
+                question: "The Fox’s praise was a form of ________ meant to trick the Raven. (1 MARK)",
+                type: "input",
+                answer: "flattery",
+                timeLimit: 20
+            },
+            {
+                question: "After losing the morsel, the Raven realized that he should not have been so easily ________ by the Fox’s words. (1 MARK)",
+                type: "input",
+                answer: "deceived",
+                timeLimit: 20
+            },
+            {
+                question: "The poem suggests that being ________ can lead to unintended consequences. (1 MARK)",
+                type: "input",
+                answer: "proud",
+                timeLimit: 20
+            },
+            {
+                question: "The Fox’s comment about the Raven’s singing was meant to ________ the Raven into dropping the morsel. (1 MARK)",
+                type: "input",
+                answer: "flatter",
+                timeLimit: 20
+            },
+            {
+                question: "The Raven was aware of his own poor singing ability and did not try to sing. [TRUE/FALSE] <STRONG>CAPITAL ONLY</STRONG> (1 MARK)",
+                type: "input",
+                answer: "FALSE",
+                timeLimit: 20
+            },
+            {
+                question: "The moral of the poem is that one should be careful of flattery and avoid being overly proud. [TRUE/FALSE] <STRONG>CAPITAL ONLY</STRONG> (1 MARK)",
+                type: "input",
+                answer: "TRUE",
+                timeLimit: 20
+            },
+            {
+                question: "The poem concludes with the Raven feeling victorious and satisfied. [TRUE/FALSE] <STRONG>CAPITAL ONLY</STRONG> (1 MARK)",
+                type: "input",
+                answer: "FALSE",
+                timeLimit: 20
+            },
+            {
+                question: "What is the lesson that we get from the poem? (2 MARKS)",
+                type: "input",
+                answer: "The poem strongly gives out a moral teaching. It is that pride has always fallen. It causes mental pain. Pride is always a great force. This is shown in the poem.",
+                timeLimit: 60
+            },
+            {
+                question: "What did the Fox suggest? (2 MARKS)",
+                type: "input",
+                answer: "One must not get flattered by sweet words, and fall into false pride which is unwise to do so.",
+                timeLimit: 60
+            },
+            {
+                question: "What teachings did the Fox convey? (2 MARKS)",
+                type: "input",
+                answer: "We must not get flattered but must judge ourselves according to our capability.",
+                timeLimit: 60
+            },
+            {
+                question: "What happened when the Raven sang? (2 MARKS)",
+                type: "input",
+                answer: "When the Raven opened his mouth to sing a song the morsel fell from his mouth. This was the Fox’s clever craftiness that snatched his food.",
+                timeLimit: 60
+            },
+            {
+                question: "The story teaches us a great truth about life. It is that (2 MARKS)",
+                type: "input",
+                answer: "pride leads one to a loss",
+                imageUrl: "3.png", 
+                timeLimit: 60
+            },
+
         ]
     },
     {
