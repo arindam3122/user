@@ -312,10 +312,11 @@ const quizzes = [
                 timeLimit: 20
             },
             {
-                question: "", /// Do not use
+                question: "How did the miser get the lump of gold?", /// Do not use
                 type: "input",
-                answer: "",
-                timeLimit: 20
+                answer: "By selling all he had",
+                imageUrl: "1.png",
+                timeLimit: 75
             },
             
         ]
