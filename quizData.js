@@ -118,7 +118,7 @@ const quizzes = [
         id: "test on A Bottle of Dew",
         name: "Test on A Bottle of Dew (40MARKS)",
         description: "This test has a auto submission feature. So once started please do not click on any other tab or the test will get auto submitted.",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)",
@@ -310,7 +310,7 @@ const quizzes = [
                 timeLimit: 60
             },
             {
-                question: "What had made Rama Natha surprised?",
+                question: "What had made Rama Natha surprised? (1 MARK)",
                 type: "mcq", 
                 options: ["not getting gold", "nothing happening", "not seeing the effect of magic on the vessel", "All of the above"], // Array of options
                 answer: "All of the above", 
@@ -319,7 +319,7 @@ const quizzes = [
                 timeLimit: 180
             },
             {
-                question: "Who was behind the story of teaching Rama Natha the truth of life?",
+                question: "Who was behind the story of teaching Rama Natha the truth of life? (1 MARK)",
                 type: "mcq", 
                 options: ["The sage", "Madhumati", "Rama Natha’s father", "All of the above"], // Array of options
                 answer: "The sage", 
@@ -328,7 +328,7 @@ const quizzes = [
                 timeLimit: 180
             },
             {
-                question: "The moral of the story is",
+                question: "The moral of the story is (1 MARK)",
                 type: "mcq", 
                 options: ["only hard work could earn you good money", "hard work makes you more responsible and mature", "hard work helps you earn resources to fulfill your dreams", "All of the above"], // Array of options
                 answer: "All of the above", 
@@ -337,56 +337,56 @@ const quizzes = [
                 timeLimit: 25
             },
             {
-                question: "",
+                question: "What was Rama searching for? (1 MARK)",
                 type: "mcq", 
-                options: ["", "", "", ""], // Array of options
-                answer: "", 
+                options: ["Gold coins", "Banana crop", "Magic potion", "Morning dew"], // Array of options
+                answer: "Magic potion", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
                 timeLimit: 25
             },
             
             {
-                question: "",
+                question: "What does Madhumati bring with her in the end? (1 MARK)",
                 type: "mcq", 
-                options: ["", "", "", ""], // Array of options
-                answer: "", 
+                options: ["Lunch for Mahipati", "The box of gold coins", "Bottle of morning dew", "Money"], // Array of options
+                answer: "The box of gold coins", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
                 timeLimit: 25
             },
             {
-                question: "",
+                question: "Who was Rama Natha? (1 MARK)",
                 type: "mcq", 
-                options: ["", "", "", ""], // Array of options
-                answer: "", 
+                options: ["Son of a lawyer", "Son of rich landlord", "Son of a worker", "Son of a poor landlord"], // Array of options
+                answer: "Son of a rich landlord", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
                 timeLimit: 25
             },
             {
-                question: "",
+                question: "What was Madhumati worried about? (1 MARK)",
                 type: "mcq", 
-                options: ["", "", "", ""], // Array of options
-                answer: "", 
+                options: ["Work of plantation", "Rama’s health", "They would soon be penniless", "Magic potion"], // Array of options
+                answer: "They would soon be penniless", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
                 timeLimit: 25
             },
             {
-                question: "",
+                question: "Why didn’t Rama give up after being cheated by the fraud sages? (1 MARK)",
                 type: "mcq", 
-                options: ["", "", "", ""], // Array of options
-                answer: "", 
+                options: ["He wasn’t able to work", "He was determined to find it", "He doesn’t want to work", "He needed money"], // Array of options
+                answer: "He was determined to find it", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
                 timeLimit: 25
             },
             {
-                question: "",
+                question: "What was the reason behind Rama’s wealth? (1 MARK)",
                 type: "mcq", 
-                options: ["", "", "", ""], // Array of options
-                answer: "", 
+                options: ["Gold coins", "Collected morning dew", "Hard work and willpower", "Inheritance"], // Array of options
+                answer: "Hard work and willpower", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
                 timeLimit: 25
