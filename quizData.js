@@ -221,41 +221,31 @@ const quizzes = [
             {
                 question: "How did Rama Natha collect five liters of dew? (2 MARKS)",
                 type: "input",
-                answer: "Rama Natha started growing bananas on his land. During winter the banana leaves had dew on them. Then Rama Natha collected dew. He grew these bananas every year to call the dew.",
-                imageUrl: "",
-                explanationImageUrl: "", 
+                answer: "Rama Natha started growing bananas on his land. During winter the banana leaves had dew on them. Then Rama Natha collected dew. He grew these bananas every year to call the dew.", 
                 timeLimit: 60
             },
             {
                 question: "What happened when Rama Natha was given the potion by the sage? Why did the sage call for his wife? (2 MARKS)",
                 type: "input",
                 answer: "When Rama Natha did what the sage told him to do, nothing happened. The sage asked Madhumati to open the box. It had stacks of gold inside.",
-                imageUrl: "",
-                explanationImageUrl: "", 
                 timeLimit: 60
             },
             {
                 question: "What did the sage tell Rama Natha and his wife? (2 MARKS)",
                 type: "input",
                 answer: "The sage told Rama Natha that no potion could turn things into gold. Rama Natha and his wife worked very hard in their fields. Madhumati also worked hard to sell bananas in the market. Thus they worked hard which earned them a lot of money.",
-                imageUrl: "",
-                explanationImageUrl: "", 
                 timeLimit: 60
             },
             {
                 question: "What did the sage say about the magic potion? ( 2 MARKS)",
                 type: "input",
                 answer: "The sage told Rama Natha that he should collect dew and store it in a bottle. When he had five litres of dew he should come to him. The sage would chant some magic words. Then the magic potion would convert the thing into gold.",
-                imageUrl: "",
-                explanationImageUrl: "", 
                 timeLimit: 60
             },
             {
                 question: "What troubled Rama Natha’s wife about her husband? ( 2 MARKS)",
                 type: "input",
-                answer: "Madhumati, Rama Natha’s wife, suffered much because of her husband’s funny idea. Her husband spent a lot of money on this idea. She felt that if her husband went on spending money, they would be left with no money.",
-                imageUrl: "",
-                explanationImageUrl: "", 
+                answer: "Madhumati, Rama Natha’s wife, suffered much because of her husband’s funny idea. Her husband spent a lot of money on this idea. She felt that if her husband went on spending money, they would be left with no money.", 
                 timeLimit: 60
             },
             {
@@ -264,7 +254,6 @@ const quizzes = [
                 options: ["not getting gold", "nothing happening", "not seeing the effect of magic on the vessel", "All of the above"], // Array of options
                 answer: "All of the above", 
                 imageUrl: "1.png", 
-                explanationImageUrl: "", 
                 timeLimit: 70
             },
             {
@@ -273,7 +262,6 @@ const quizzes = [
                 options: ["The sage", "Madhumati", "Rama Natha’s father", "All of the above"], // Array of options
                 answer: "The sage", 
                 imageUrl: "2.png", 
-                explanationImageUrl: "", 
                 timeLimit: 70
             },
             {
@@ -281,8 +269,7 @@ const quizzes = [
                 type: "mcq", 
                 options: ["only hard work could earn you good money", "hard work makes you more responsible and mature", "hard work helps you earn resources to fulfill your dreams", "All of the above"], // Array of options
                 answer: "All of the above", 
-                imageUrl: "2.png", 
-                explanationImageUrl: "", 
+                imageUrl: "2.png",  
                 timeLimit: 70
             },
             {
@@ -290,8 +277,6 @@ const quizzes = [
                 type: "mcq", 
                 options: ["Gold coins", "Banana crop", "Magic potion", "Morning dew"], // Array of options
                 answer: "Magic potion", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
                 timeLimit: 15
             },
             
@@ -300,8 +285,6 @@ const quizzes = [
                 type: "mcq", 
                 options: ["Lunch for Mahipati", "The box of gold coins", "Bottle of morning dew", "Money"], // Array of options
                 answer: "The box of gold coins", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
                 timeLimit: 15
             },
             {
@@ -309,26 +292,20 @@ const quizzes = [
                 type: "mcq", 
                 options: ["Son of a lawyer", "Son of rich landlord", "Son of a worker", "Son of a poor landlord"], // Array of options
                 answer: "Son of a rich landlord", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
                 timeLimit: 15
             },
             {
                 question: "What was Madhumati worried about? (1 MARK)",
                 type: "mcq", 
                 options: ["Work of plantation", "Rama’s health", "They would soon be penniless", "Magic potion"], // Array of options
-                answer: "They would soon be penniless", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
+                answer: "They would soon be penniless",  
                 timeLimit: 15
             },
             {
                 question: "Why didn’t Rama give up after being cheated by the fraud sages? (1 MARK)",
                 type: "mcq", 
                 options: ["He wasn’t able to work", "He was determined to find it", "He doesn’t want to work", "He needed money"], // Array of options
-                answer: "He was determined to find it", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
+                answer: "He was determined to find it",  
                 timeLimit: 15
             },
             {
@@ -336,8 +313,6 @@ const quizzes = [
                 type: "mcq", 
                 options: ["Gold coins", "Collected morning dew", "Hard work and willpower", "Inheritance"], // Array of options
                 answer: "Hard work and willpower", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
                 timeLimit: 15
             },
         ]
