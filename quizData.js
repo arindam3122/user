@@ -75,6 +75,31 @@ const quizzes = [
         ]
     },
     {
+        id: "test on the raven and the fox",
+        name: "The Raven and the Fox Test (40MARKS)",
+        description: "",
+        enabled: false,
+        questions: [
+            {
+                question: "Where did Mr. Raven sit?",
+                type: "mcq", 
+                options: ["", "", "", ""], 
+                answer: "", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
+                timeLimit: 40
+            },
+            {
+                question: "",
+                type: "input",
+                answer: "",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 40
+            },
+        ]
+    },
+    {
         id: "",
         name: "",
         description: "",
@@ -84,15 +109,15 @@ const quizzes = [
                 question: "",
                 type: "mcq", 
                 options: ["", "", "", ""], 
-                answer: "7", 
+                answer: "", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
                 timeLimit: 40
             },
             {
-                question: "Rita has 348 apples. She sells 125 apples. How many apples are left with her? (ANSWER THE NUMBER ONLY)",
+                question: "",
                 type: "input",
-                answer: "223",
+                answer: "",
                 imageUrl: "",
                 explanationImageUrl: "", 
                 timeLimit: 40
@@ -103,7 +128,7 @@ const quizzes = [
         id: "test on A Bottle of Dew",
         name: "Test on A Bottle of Dew (40MARKS)",
         description: "Before Starting the test please turn on desktop mode on and then zoom in for giving the test. auto-submission feature is enabled.",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)",
