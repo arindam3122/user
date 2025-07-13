@@ -211,7 +211,7 @@ const quizzes = [
             {
                 question: "The Fox asks the Raven to __________. (1 MARK)",
                 type: "input",
-                answer: "sign",
+                answer: "sing",
                 timeLimit: 15
             },
             {
