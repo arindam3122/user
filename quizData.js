@@ -1,31 +1,7 @@
 // quizData.js
 
 const quizzes = [
-    {
-        id: "cls-6",
-        name: "Logical Reasoning (PART-1)",
-        description: "Easy wordproblems",
-        enabled: false,
-        questions: [
-            {
-                question: "Which of the following is a prime number?",
-                type: "mcq", // New type for MCQ
-                options: ["4", "6", "7", "9"], // Array of options
-                answer: "7", // Correct answer
-                imageUrl: "", // Existing image for the question itself
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 40
-            },
-            {
-                question: "Rita has 348 apples. She sells 125 apples. How many apples are left with her? (ANSWER THE NUMBER ONLY)",
-                type: "input",
-                answer: "223",
-                imageUrl: "",
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 40
-            },
-        ]
-    },
+    
     {
         id: "12",
         name: "WORD PROBLEMS",
@@ -33,13 +9,18 @@ const quizzes = [
         enabled: false,
         questions: [
             {
-                question: "A train 120 m long is moving at a speed of 72 km/h. Another train 150 m long is moving in the opposite direction at 54 km/h. How long will it take for the two trains to completely cross each other? (ANSWER UPTO 2 DECIMALS)",
-                type: "input",
-                answer: "7.71",
-                imageUrl: "",
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 60
+               question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", // A Bottle of Dew
+               type: "mcq",
+               options: [
+                           "He wanted to change any object into diamond",
+                           "He wanted to change any object into gold",
+                           "He wanted to drink elixir of life",
+                           "He wanted to run away from responsibilities"
+                        ],
+                answer: "He wanted to change any object into gold",
+                timeLimit: 15
             },
+
             {
                 question: "A can complete a job in 12 days, B in 16 days. If they work together, how long will they take? (UPTO 2 DECIMAL)",
                 type: "input",
