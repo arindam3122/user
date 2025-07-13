@@ -78,7 +78,7 @@ const quizzes = [
         id: "test on the raven and the fox",
         name: "The Raven and the Fox Test (40MARKS)",
         description: "",
-        enabled: true,
+        enabled: false,
         questions: [
             
             {
