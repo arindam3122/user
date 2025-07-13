@@ -87,7 +87,7 @@ const quizzes = [
                 answer: "He wanted to change any object into gold", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             {
                 question: "Why did Rama Natha neglect his inherited lands? (1 MARK)",
@@ -96,7 +96,7 @@ const quizzes = [
                 answer: "He believed in a magic potion that could turn objects into gold", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             {
                 question: "What was Rama Natha’s wife, Madhumati, worried about? (1 MARK)",
@@ -105,7 +105,7 @@ const quizzes = [
                 answer: "Rama Natha’s reckless spending", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             {
                 question: "Who did Rama Natha become a follower of in the story? (1 MARK)",
@@ -114,7 +114,7 @@ const quizzes = [
                 answer: "A sage named Mahipati", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             {
                 question: "What did sage Mahipati instruct Rama Natha to do to obtain the magic potion? (1 MARK)",
@@ -123,7 +123,7 @@ const quizzes = [
                 answer: "Plant banana plants and collect dew", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             {
                 question: "One day, a famous ______ called Mahapati came to their town. (1 MARK)",
@@ -171,7 +171,7 @@ const quizzes = [
                 answer: "FALSE",
                 imageUrl: "",
                 explanationImageUrl: "", 
-                timeLimit: 60
+                timeLimit: 20
             },
             {
                 question: "Madhumati was never tired of his husband’s behavior. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
@@ -179,7 +179,7 @@ const quizzes = [
                 answer: "FALSE",
                 imageUrl: "",
                 explanationImageUrl: "", 
-                timeLimit: 60
+                timeLimit: 20
             },
             {
                 question: "The sage Mahipati told Rama Natha to gather dew. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
@@ -187,7 +187,7 @@ const quizzes = [
                 answer: "TRUE",
                 imageUrl: "",
                 explanationImageUrl: "", 
-                timeLimit: 60
+                timeLimit: 20
             },
             {
                 question: "The sage Mahipati gave Rama Natha an easy recipe for the magic potion. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
@@ -195,7 +195,7 @@ const quizzes = [
                 answer: "FALSE",
                 imageUrl: "",
                 explanationImageUrl: "", 
-                timeLimit: 60
+                timeLimit: 20
             },
             {
                 question: "How did the sage help Rama Natha? (1 MARK)",
@@ -203,7 +203,7 @@ const quizzes = [
                 answer: "The sage helped Rama Natha by informing him that there existed such a magic potion. He could make such a potion.",
                 imageUrl: "",
                 explanationImageUrl: "", 
-                timeLimit: 60
+                timeLimit: 45
             },
             {
                 question: "Do you think Rama Natha will be able to collect the dew? Give a reason. (1 MARK)",
@@ -211,7 +211,7 @@ const quizzes = [
                 answer: "",
                 imageUrl: "",
                 explanationImageUrl: "", 
-                timeLimit: 60
+                timeLimit: 45
             },
             {
                 question: "Why was Rama Natha angry? (2 MARKS)",
@@ -276,7 +276,7 @@ const quizzes = [
                 answer: "All of the above", 
                 imageUrl: "1.png", 
                 explanationImageUrl: "", 
-                timeLimit: 180
+                timeLimit: 70
             },
             {
                 question: "Who was behind the story of teaching Rama Natha the truth of life? (1 MARK)",
@@ -285,7 +285,7 @@ const quizzes = [
                 answer: "The sage", 
                 imageUrl: "2.png", 
                 explanationImageUrl: "", 
-                timeLimit: 180
+                timeLimit: 70
             },
             {
                 question: "The moral of the story is (1 MARK)",
@@ -294,7 +294,7 @@ const quizzes = [
                 answer: "All of the above", 
                 imageUrl: "2.png", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 70
             },
             {
                 question: "What was Rama searching for? (1 MARK)",
@@ -303,7 +303,7 @@ const quizzes = [
                 answer: "Magic potion", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             
             {
@@ -313,7 +313,7 @@ const quizzes = [
                 answer: "The box of gold coins", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             {
                 question: "Who was Rama Natha? (1 MARK)",
@@ -322,7 +322,7 @@ const quizzes = [
                 answer: "Son of a rich landlord", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             {
                 question: "What was Madhumati worried about? (1 MARK)",
@@ -331,7 +331,7 @@ const quizzes = [
                 answer: "They would soon be penniless", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             {
                 question: "Why didn’t Rama give up after being cheated by the fraud sages? (1 MARK)",
@@ -340,7 +340,7 @@ const quizzes = [
                 answer: "He was determined to find it", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
             {
                 question: "What was the reason behind Rama’s wealth? (1 MARK)",
@@ -349,7 +349,7 @@ const quizzes = [
                 answer: "Hard work and willpower", 
                 imageUrl: "", 
                 explanationImageUrl: "", 
-                timeLimit: 25
+                timeLimit: 15
             },
         ]
     },
