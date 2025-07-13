@@ -297,7 +297,7 @@ const quizzes = [
                 type: "input",
                 answer: "By selling all he had",
                 imageUrl: "1.png",
-                timeLimit: 75
+                timeLimit: 120
             },
             
         ]
