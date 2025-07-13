@@ -75,6 +75,31 @@ const quizzes = [
         ]
     },
     {
+        id: "",
+        name: "",
+        description: "",
+        enabled: false,
+        questions: [
+            {
+                question: "",
+                type: "mcq", 
+                options: ["", "", "", ""], 
+                answer: "7", 
+                imageUrl: "", 
+                explanationImageUrl: "", 
+                timeLimit: 40
+            },
+            {
+                question: "Rita has 348 apples. She sells 125 apples. How many apples are left with her? (ANSWER THE NUMBER ONLY)",
+                type: "input",
+                answer: "223",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 40
+            },
+        ]
+    },
+    {
         id: "test on A Bottle of Dew",
         name: "Test on A Bottle of Dew (40MARKS)",
         description: "Before Starting the test please turn on desktop mode on and then zoom in for giving the test. auto-submission feature is enabled.",
@@ -84,9 +109,7 @@ const quizzes = [
                 question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)",
                 type: "mcq", 
                 options: ["He wanted to change any object into diamond", "He wanted to change any object into gold", "He wanted to drink elixir of life", "He wanted to run away from responsibilities"], // Array of options
-                answer: "He wanted to change any object into gold", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
+                answer: "He wanted to change any object into gold",  
                 timeLimit: 15
             },
             {
@@ -94,8 +117,6 @@ const quizzes = [
                 type: "mcq", 
                 options: ["He believed in a magic potion that could turn objects into gold", "He had no interest in agriculture", "He was busy travelling", "He wanted to become a sage"], 
                 answer: "He believed in a magic potion that could turn objects into gold", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
                 timeLimit: 15
             },
             {
@@ -103,17 +124,13 @@ const quizzes = [
                 type: "mcq", 
                 options: ["Rama Natha’s health", "Their children’s education", "Rama Natha’s reckless spending", "Their upcoming vacation plAnswer:"], 
                 answer: "Rama Natha’s reckless spending", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
                 timeLimit: 15
             },
             {
                 question: "Who did Rama Natha become a follower of in the story? (1 MARK)",
                 type: "mcq", 
                 options: ["A magician", "A sage named Mahipati", "His father’s friend", "A merchant"], 
-                answer: "A sage named Mahipati", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
+                answer: "A sage named Mahipati",  
                 timeLimit: 15
             },
             {
@@ -121,112 +138,84 @@ const quizzes = [
                 type: "mcq", 
                 options: ["Plant banana plants and collect dew", "Find a hidden treasure", "Travel to the Himalayas", "Buy expénsive equipment"], 
                 answer: "Plant banana plants and collect dew", 
-                imageUrl: "", 
-                explanationImageUrl: "", 
                 timeLimit: 15
             },
             {
                 question: "One day, a famous ______ called Mahapati came to their town. (1 MARK)",
                 type: "input",
                 answer: "sage",
-                imageUrl: "",
-                explanationImageUrl: "",
                 timeLimit: 20
             },
             {
                 question: "You can plant as many __________ plants as you want. (1 MARK)",
                 type: "input",
                 answer: "banana",
-                imageUrl: "",
-                explanationImageUrl: "",
                 timeLimit: 20
             },
             {
                 question: "When you have _______ liters of dew, bring it to me. (1 MARK)",
                 type: "input",
                 answer: "five",
-                imageUrl: "",
-                explanationImageUrl: "",
                 timeLimit: 20
             },
             {
                 question: "A drop of the potion will change any object into __________. (1 MARK)",
                 type: "input",
                 answer: "gold",
-                imageUrl: "",
-                explanationImageUrl: "", 
                 timeLimit: 20
             },
             {
                 question: "It was your hard work that created this wealth, not __________. (1 MARK)",
                 type: "input",
-                answer: "magic",
-                imageUrl: "",
-                explanationImageUrl: "", 
+                answer: "magic", 
                 timeLimit: 20
             },
             {
                 question: "Rama Natha never believed in any kind of magic potion. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
                 type: "input",
-                answer: "FALSE",
-                imageUrl: "",
-                explanationImageUrl: "", 
+                answer: "FALSE", 
                 timeLimit: 20
             },
             {
                 question: "Madhumati was never tired of his husband’s behavior. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
                 type: "input",
                 answer: "FALSE",
-                imageUrl: "",
-                explanationImageUrl: "", 
                 timeLimit: 20
             },
             {
                 question: "The sage Mahipati told Rama Natha to gather dew. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
                 type: "input",
                 answer: "TRUE",
-                imageUrl: "",
-                explanationImageUrl: "", 
                 timeLimit: 20
             },
             {
                 question: "The sage Mahipati gave Rama Natha an easy recipe for the magic potion. [TRUE/FALSE] answer in full <strong>CAPITAL</strong> (1 MARK)",
                 type: "input",
                 answer: "FALSE",
-                imageUrl: "",
-                explanationImageUrl: "", 
                 timeLimit: 20
             },
             {
                 question: "How did the sage help Rama Natha? (1 MARK)",
                 type: "input",
-                answer: "The sage helped Rama Natha by informing him that there existed such a magic potion. He could make such a potion.",
-                imageUrl: "",
-                explanationImageUrl: "", 
+                answer: "The sage helped Rama Natha by informing him that there existed such a magic potion. He could make such a potion.", 
                 timeLimit: 45
             },
             {
                 question: "Do you think Rama Natha will be able to collect the dew? Give a reason. (1 MARK)",
                 type: "input",
-                answer: "",
-                imageUrl: "",
-                explanationImageUrl: "", 
+                answer: "", 
                 timeLimit: 45
             },
             {
                 question: "Why was Rama Natha angry? (2 MARKS)",
                 type: "input",
-                answer: "Rama Natha was angry because nothing happened to the copper vessel. He thought that the copper vessel would change to gold after sprinkling the magic potion.",
-                imageUrl: "",
-                explanationImageUrl: "", 
+                answer: "Rama Natha was angry because nothing happened to the copper vessel. He thought that the copper vessel would change to gold after sprinkling the magic potion.", 
                 timeLimit: 60
             },
             {
                 question: "How did Rama Natha and Madhumati create wealth? (2 MARKS)",
                 type: "input",
-                answer: "Rama Natha and Madhumati created wealth by planting and caring for banana plants. Madhumati sold the bananas in the market, and over time, their hard work and dedication led to significant earnings.",
-                imageUrl: "",
-                explanationImageUrl: "", 
+                answer: "Rama Natha and Madhumati created wealth by planting and caring for banana plants. Madhumati sold the bananas in the market, and over time, their hard work and dedication led to significant earnings.", 
                 timeLimit: 60
             },
             {
