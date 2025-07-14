@@ -32,6 +32,108 @@ const quizzes = [
         ]
     },
     {
+        id: "unseen",
+        name: "Unseen",
+        description: "Contains unseen passages with questions",
+        enabled: true,
+        questions: [
+            {
+                question: "The giraffe is the __________ of all living land animals.",
+                type: "input",
+                answer: "tallest",
+                imageUrl: "4.png",
+                timeLimit: 300
+            },
+            {
+                question: "A male giraffe can grow up to __________ feet tall.",
+                type: "input",
+                answer: "18",
+                imageUrl: "4.png",
+                timeLimit: 300
+            },
+            {
+                question: "Giraffes primarily eat __________ leaves.",
+                type: "input",
+                answer: "acacia",
+                imageUrl: "4.png",
+                timeLimit: 300
+            },
+            {
+               question: "What is the favourite food of giraffes?", // A Bottle of Dew
+               type: "mcq",
+               options: [
+                           "Grass",
+                           "Fruits",
+                           "Acacia leaves",
+                           "Flowers"
+                        ],
+                imageUrl: "4.png",
+                answer: "Acacia leaves",
+                timeLimit: 300
+            },
+            {
+               question: "How much time do giraffes spend eating in spring?", // A Bottle of Dew
+               type: "mcq",
+               options: [
+                           "15 percent",
+                           "50 percent",
+                           "80 percent",
+                           "100 percent"
+                        ],
+                imageUrl: "4.png",
+                answer: "80 percent",
+                timeLimit: 300
+            },
+            {
+               question: "", // A Bottle of Dew
+               type: "mcq",
+               options: [
+                           "",
+                           "",
+                           "",
+                           ""
+                        ],
+                imageUrl: "5.png",
+                answer: "",
+                timeLimit: 300
+            },
+            {
+               question: "", // A Bottle of Dew
+               type: "mcq",
+               options: [
+                           "",
+                           "",
+                           "",
+                           ""
+                        ],
+                imageUrl: "5.png",
+                answer: "",
+                timeLimit: 300
+            },
+            {
+               question: "", // A Bottle of Dew
+               type: "mcq",
+               options: [
+                           "",
+                           "",
+                           "",
+                           ""
+                        ],
+                imageUrl: "5.png",
+                answer: "",
+                timeLimit: 300
+            },
+
+            {
+                question: "",
+                type: "input",
+                answer: "",
+                imageUrl: "",
+                timeLimit: 300
+            },
+        ]
+    },
+    {
         id: "Test",
         name: " English Test",
         description: "Test on A Bottle of Dew, The Raven and the Fox & Rama to the Rescue",
