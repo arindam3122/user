@@ -568,7 +568,7 @@ header {
     height: auto;
     border-radius: 8px;
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border: 1.5px solid black;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
     display: block; /* Center image */

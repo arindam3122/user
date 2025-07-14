@@ -1239,17 +1239,25 @@ function loadQuestion() {
 
     const questionData = currentQuiz.questions[currentQuestionIndex];
     quizTitle.textContent = currentQuiz.name;
-    questionText.innerHTML = `${currentQuestionIndex + 1}. ${questionData.question}`;
 
+    // Clear previous image and text content to prevent flicker or old content
+    questionImage.src = '';
+    questionImage.style.display = 'none';
+    questionText.innerHTML = '';
+    optionsContainer.innerHTML = '';
+
+    // First, display the image if it exists
     if (questionData.imageUrl) {
         questionImage.src = questionData.imageUrl;
         questionImage.style.display = 'block';
     } else {
         questionImage.style.display = 'none';
-        questionImage.src = '';
+        questionImage.src = ''; // Ensure src is cleared if no image
     }
 
-    optionsContainer.innerHTML = '';
+    // Then, display the question text below the image
+    questionText.innerHTML = `${currentQuestionIndex + 1}. ${questionData.question}`;
+
 
     if (questionData.type === 'input') {
         const inputField = document.createElement('textarea');
