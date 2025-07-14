@@ -6,7 +6,7 @@ const quizzes = [
         id: "12",
         name: "WORD PROBLEMS",
         description: "",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", // A Bottle of Dew
@@ -27,30 +27,6 @@ const quizzes = [
                 answer: "6.86",
                 imageUrl: "",
                 explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 60
-            },
-            {
-                question: "A car travels 60 km at 30 km/h and then another 60 km at 60 km/h. Find its average speed for the entire journey. (NO UNITS)",
-                type: "input",
-                answer: "40",
-                imageUrl: "",
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 60
-            },
-            {
-                question: "The product of two consecutive positive integers is 156. Find the integers. (ANSWER IN a,b)",
-                type: "input",
-                answer: "12,13",
-                imageUrl: "",
-                explanationImageUrl: "", // New: Image for explanation
-                timeLimit: 60
-            },
-            {
-                question: "What is the value of 5<sup>2</sup> + 3 if the total amount is in Indian Rupees (&#8377;)?",
-                type: "input",
-                answer: "28", // Assuming the answer is 28 Rupees
-                imageUrl: "",
-                explanationImageUrl: "",
                 timeLimit: 60
             },
         ]
