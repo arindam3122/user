@@ -85,42 +85,42 @@ const quizzes = [
                 timeLimit: 300
             },
             {
-               question: "", // A Bottle of Dew
+               question: "The narrator describes the pigeon as a ‘revolting bird’ because", // A Bottle of Dew
                type: "mcq",
                options: [
-                           "",
-                           "",
-                           "",
-                           ""
+                           "He could not fly",
+                           "He had to be carried everywhere",
+                           "He had wrinkled skin covered with yellow feathers",
+                           "He was fat"
                         ],
                 imageUrl: "5.png",
-                answer: "",
+                answer: "He had wrinkled skin covered with yellow feathers",
                 timeLimit: 300
             },
             {
-               question: "", // A Bottle of Dew
+               question: "Quasimodo got his name because", 
                type: "mcq",
                options: [
-                           "",
-                           "",
-                           "",
-                           ""
+                           "He was fat and ugly",
+                           "He was attractive",
+                           "He could not fly",
+                           "He loves behaving like human beings"
                         ],
                 imageUrl: "5.png",
-                answer: "",
+                answer: "He was fat and ugly",
                 timeLimit: 300
             },
             {
-               question: "", // A Bottle of Dew
+               question: "The phrase ‘risking an accident to your clothes’ means", 
                type: "mcq",
                options: [
-                           "",
-                           "",
-                           "",
-                           ""
+                           "The bird pecked at their clothes",
+                           "There was a chance of the bird soiling their clothes",
+                           "The bird risked a fall",
+                           "The bird did not like their clothes"
                         ],
                 imageUrl: "5.png",
-                answer: "",
+                answer: "There was a chance of the bird soiling their clothes",
                 timeLimit: 300
             },
 
