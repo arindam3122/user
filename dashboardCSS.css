@@ -581,7 +581,7 @@ header {
 /* Options Container */
 .options-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr 1fr; /* This creates two equal columns */
     gap: 15px;
     width: 100%;
     margin-top: 30px;
@@ -639,7 +639,7 @@ header {
 
 /* Input Answer Field */
 .input-answer-field {
-    width: calc(40% - 40px); /* This will apply to larger screens */
+    width: calc(60% - 40px); /* This will apply to larger screens */
     padding: 15px 20px;
     border: 2px solid #e2e2e2;
     border-radius: 8px;
