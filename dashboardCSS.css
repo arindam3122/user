@@ -406,7 +406,7 @@ header {
 
 /* Quiz Card - Significantly improved */
 .quiz-card {
-    background-color: #f8f8f8; /* Slightly off-white background */
+    background-color: #ffffff; /* Slightly off-white background */
     border-radius: 10px;
     padding: 25px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -603,7 +603,7 @@ header {
     border-radius: 8px;
     background-color: #ffffff;
     color: #000000;
-    font-size: 1em;
+    font-size: 1.1em;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
@@ -628,7 +628,7 @@ header {
 }
 
 .option .option-label {
-    font-weight: bold;
+    font-weight: 700;
     margin-right: 10px;
     color: #7f8c8d; /* Default label color */
 }
