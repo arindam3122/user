@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgb(243, 243, 243); /* Changed to white */
+    background-color: rgb(247, 247, 247); /* Changed to white */
     color: #333;
     display: flex;
     min-height: 100vh;
