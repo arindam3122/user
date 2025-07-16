@@ -56,7 +56,7 @@ function validateLogin() {
         setTimeout(() => { // Set a timeout to hide the message after 3 seconds
             errorDiv.classList.remove('show');
             errorDiv.textContent = ""; // Clear text after fading out
-        }, 3000);
+        }, 5000);
     }
 }
 
