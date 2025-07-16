@@ -118,7 +118,7 @@ body {
     border-radius: 2px;
 }
 .auto-submitted-answer {
-    color: red;
+    color: rgb(158, 1, 158);
 }
 
 /* Navigation Bar - Left Sidebar */
