@@ -42,21 +42,21 @@ const quizzes = [
                 type: "input",
                 answer: "tallest",
                 imageUrl: "4.png",
-                timeLimit: 300
+                timeLimit: 180
             },
             {
                 question: "A male giraffe can grow up to __________ feet tall.",
                 type: "input",
                 answer: "18",
                 imageUrl: "4.png",
-                timeLimit: 300
+                timeLimit: 180
             },
             {
                 question: "Giraffes primarily eat __________ leaves.",
                 type: "input",
                 answer: "acacia",
                 imageUrl: "4.png",
-                timeLimit: 300
+                timeLimit: 180
             },
             {
                question: "What is the favourite food of giraffes?", // A Bottle of Dew
@@ -69,7 +69,7 @@ const quizzes = [
                         ],
                 imageUrl: "4.png",
                 answer: "Acacia leaves",
-                timeLimit: 300
+                timeLimit: 180
             },
             {
                question: "How much time do giraffes spend eating in spring?", // A Bottle of Dew
@@ -82,7 +82,7 @@ const quizzes = [
                         ],
                 imageUrl: "4.png",
                 answer: "80 percent",
-                timeLimit: 300
+                timeLimit: 180
             },
             {
                question: "The narrator describes the pigeon as a ‘revolting bird’ because", // A Bottle of Dew
@@ -95,7 +95,7 @@ const quizzes = [
                         ],
                 imageUrl: "5.png",
                 answer: "He had wrinkled skin covered with yellow feathers",
-                timeLimit: 300
+                timeLimit: 180
             },
             {
                question: "Quasimodo got his name because", 
@@ -108,7 +108,7 @@ const quizzes = [
                         ],
                 imageUrl: "5.png",
                 answer: "He was fat and ugly",
-                timeLimit: 300
+                timeLimit: 180
             },
             {
                question: "The phrase ‘risking an accident to your clothes’ means", 
@@ -121,7 +121,7 @@ const quizzes = [
                         ],
                 imageUrl: "5.png",
                 answer: "There was a chance of the bird soiling their clothes",
-                timeLimit: 300
+                timeLimit: 180
             },
 
             {
