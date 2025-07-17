@@ -9,7 +9,7 @@ const quizzes = [
         enabled: false,
         questions: [
             {
-               question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", // A Bottle of Dew
+               question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", 
                type: "mcq",
                options: [
                            "He wanted to change any object into diamond",
@@ -26,7 +26,7 @@ const quizzes = [
                 type: "input",
                 answer: "6.86",
                 imageUrl: "",
-                explanationImageUrl: "", // New: Image for explanation
+                explanationImageUrl: "", 
                 timeLimit: 60
             },
         ]
@@ -140,7 +140,7 @@ const quizzes = [
         enabled: true,
         questions: [
             {
-                question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", // A bottle of dew
+                question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", 
                 type: "mcq", 
                 options: ["He wanted to change any object into diamond", "He wanted to change any object into gold", "He wanted to drink elixir of life", "He wanted to run away from responsibilities"],
                 answer: "He wanted to change any object into gold",  
@@ -175,7 +175,7 @@ const quizzes = [
                 timeLimit: 60
             },
             {
-                question: "The purpose behind respectably addressing the Raven was : (1 MARK)", //the raven and the fox
+                question: "The purpose behind respectably addressing the Raven was : (1 MARK)", 
                 type: "mcq", 
                 options: ["to flatter him", "to snatch the morsel", "to show that he was his friend", "to show love and respect"],
                 answer: "to snatch the morsel",  
@@ -210,7 +210,7 @@ const quizzes = [
                 timeLimit: 60
             },
             {
-                question: "Who was Rama in the village? (1 MARK)", // rama to the rescue
+                question: "Who was Rama in the village? (1 MARK)", 
                 type: "mcq", 
                 options: ["A thief", "A kotwal", "A farmer", "A merchant"],
                 answer: "A kotwal",  
@@ -245,7 +245,7 @@ const quizzes = [
                 timeLimit: 60
             },
             {
-                question: "One day, a famous ______ called Mahapati came to their town. (1 MARK)", // A BOTTLE OF DEW
+                question: "One day, a famous ______ called Mahapati came to their town. (1 MARK)", 
                 type: "input",
                 answer: "sage",
                 timeLimit: 60
@@ -275,7 +275,7 @@ const quizzes = [
                 timeLimit: 60
             },
             {
-                question: "Mr Raven had __________ in his beak. (1 MARK)", /// THE RAVEN AND THE FOX
+                question: "Mr Raven had __________ in his beak. (1 MARK)", 
                 type: "input",
                 answer: "a piece of food",
                 timeLimit: 60
