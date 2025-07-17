@@ -30,7 +30,7 @@ function validateLogin() {
 
     if (user && user.password === password) {
         if (!user.enabled) {
-            errorDiv.textContent = "Your account is disabled. Please contact admin.";
+            errorDiv.textContent = "Your account is disabled. Please contact Admin.";
             errorDiv.classList.add('show');
             setTimeout(() => {
                 errorDiv.classList.remove('show');
@@ -56,6 +56,6 @@ function validateLogin() {
         setTimeout(() => { // Set a timeout to hide the message after 3 seconds
             errorDiv.classList.remove('show');
             errorDiv.textContent = ""; // Clear text after fading out
-        }, 5000);
+        }, 3000);
     }
 }
