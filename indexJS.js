@@ -59,16 +59,3 @@ function validateLogin() {
         }, 5000);
     }
 }
-
-function togglePasswordVisibility() {
-    const passwordField = document.getElementById('password');
-    const toggleButton = document.querySelector('.toggle-password');
-
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        toggleButton.classList.add('active'); // Change icon to eye
-    } else {
-        passwordField.type = 'password';
-        toggleButton.classList.remove('active'); // Change icon back to eye-slash
-    }
-}
