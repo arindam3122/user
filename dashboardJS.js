@@ -66,7 +66,6 @@ const headerLogoutButton = document.getElementById('headerLogoutButton');
 
 const welcomeHeading = document.getElementById('welcomeHeading');
 const usernameDisplay = document.getElementById('usernameDisplay');
-const loginSuccessMessage = document.getElementById('loginSuccessMessage');
 const quizCompletedMessage = document.getElementById('quizCompletedMessage');
 const quizInfoHeading = document.getElementById('quizInfoHeading');
 const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
@@ -238,14 +237,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         usernameDisplay.textContent = loggedInUser;
         welcomeHeading.textContent = `Welcome, ${loggedInUser}!`;
 
-        const hasShownLoginMessage = localStorage.getItem('hasShownLoginMessage');
-        if (hasShownLoginMessage === 'false') {
-            loginSuccessMessage.classList.add('show');
-            localStorage.setItem('hasShownLoginMessage', 'true');
-            setTimeout(() => {
-                loginSuccessMessage.classList.remove('show');
-            }, 3000);
-        }
         goToDashboard();
     }
 });
@@ -309,8 +300,7 @@ function hideAllSections() {
     finalScoreContainer.style.display = 'none';
     quizResultsDetails.style.display = 'none';
     previousQuizzesContainer.style.display = 'none';
-    quizSelectionContainer.style.display = 'none';
-    loginSuccessMessage.classList.remove('show'); // Ensure login message is hidden when navigating
+    quizSelectionContainer.style.display = 'none'; // Ensure login message is hidden when navigating
     quizCompletedMessage.classList.remove('show');
 }
 

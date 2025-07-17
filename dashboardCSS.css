@@ -368,7 +368,7 @@ header {
 .quiz-info-box {
     background-color: #ffffff;
     padding: 22px;
-    margin-top: -100px;
+    margin-top: 0px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -387,7 +387,7 @@ header {
 /* Quiz Selection Container */
 .quiz-selection-container {
     background-color: #ffffff;
-    margin-top: -100px; /* Moved up by 30 pixels */
+    margin-top: 0px; /* Moved up by 30 pixels */
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -480,7 +480,7 @@ header {
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     max-width: 1000px; /* Centered quiz container */
-    margin: -160px auto 40px auto; /* Moved up by 30 pixels */
+    margin: -70px auto 40px auto; /* Moved up by 30 pixels */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -719,7 +719,7 @@ header {
 /* Final Score Container */
 .final-score-container {
     background-color: #ffffff;
-    margin-top: -100px;
+    margin-top: 0px;
     margin-bottom: 0px;
     margin-left: auto;
     margin-right: auto;
@@ -924,7 +924,7 @@ header {
 /* Previous Quizzes Container and Table */
 .previous-quizzes-container {
     background-color: #ffffff;
-    margin-top: -100px;
+    margin-top: 0px;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
