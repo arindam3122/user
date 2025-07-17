@@ -6,7 +6,7 @@ const quizzes = [
         id: "12",
         name: "WORD PROBLEMS",
         description: "",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", // A Bottle of Dew
@@ -35,7 +35,7 @@ const quizzes = [
         id: "unseen",
         name: "Unseen",
         description: "Contains unseen passages with questions",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "The giraffe is the __________ of all living land animals.",
