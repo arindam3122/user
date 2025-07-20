@@ -49,7 +49,7 @@ function validateLogin() {
             successDiv.textContent = "";
             // Redirect all users to dashboard after a short delay
             window.location.href = "dashboard.html";
-        }, 1500); // Show success message for 1.5 seconds before redirect
+        }, 1000); // Show success message for 1.5 seconds before redirect
     } else {
         errorDiv.textContent = "Invalid username or password.";
         errorDiv.classList.add('show'); // Show the error message
