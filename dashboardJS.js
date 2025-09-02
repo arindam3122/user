@@ -422,9 +422,9 @@ function renderQuizList() {
         const alreadyAttempted = previousQuizzes.find(q => q.quizId === quiz.id);
 
         if (!quiz.enabled) {
-            startButton.disabled = true;
-            startButton.classList.add('disabled-button');
-            startButton.textContent = 'Quiz Disabled';
+    startButton.disabled = true;
+    startButton.classList.add('disabled-button');
+    startButton.innerHTML = '<i class="fas fa-lock"></i> Quiz Disabled';
         } else if (alreadyAttempted) {
             startButton.disabled = true;
             startButton.classList.add('disabled-button');
