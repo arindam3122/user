@@ -428,7 +428,7 @@ function renderQuizList() {
         } else if (alreadyAttempted) {
             startButton.disabled = true;
             startButton.classList.add('disabled-button');
-            startButton.textContent = 'Already Attempted';
+            startButton.innerHTML = ' <i class="fas fa-check"></i>Already Attempted!';
         } else {
             startButton.innerHTML = 'Start Quiz <i class="fas fa-arrow-right"></i>';
             startButton.addEventListener('click', (e) => {

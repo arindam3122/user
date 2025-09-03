@@ -6,7 +6,7 @@ const quizzes = [
         id: "12",
         name: "WORD PROBLEMS",
         description: "",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", 
