@@ -424,7 +424,7 @@ function renderQuizList() {
         if (!quiz.enabled) {
     startButton.disabled = true;
     startButton.classList.add('disabled-button');
-    startButton.innerHTML = '<i class="fas fa-lock"></i> Quiz Disabled';
+    startButton.innerHTML = '<i class="fas fa-lock"></i> Quiz Locked';
         } else if (alreadyAttempted) {
             startButton.disabled = true;
             startButton.classList.add('disabled-button');
