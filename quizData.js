@@ -32,10 +32,30 @@ const quizzes = [
         ]
     },
     {
+        id: "demo",
+        name: "Trial run",
+        description: "",
+        enabled: true,
+        questions: [
+            {
+               question: "What is the capital of india", 
+               type: "mcq",
+               options: [
+                           "China",
+                           "Nepal",
+                           "New Delhi",
+                           "None"
+                        ],
+                answer: "New Delhi",
+                timeLimit: 15
+            },
+        ]
+    },
+    {
         id: "Test",
         name: " English Test",
         description: "",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", 

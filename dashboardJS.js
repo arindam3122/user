@@ -70,7 +70,9 @@ const quizCompletedMessage = document.getElementById('quizCompletedMessage');
 const quizInfoHeading = document.getElementById('quizInfoHeading');
 const lastQuizScoreDisplay = document.getElementById('lastQuizScoreDisplay');
 const totalQuizzesCompleted = document.getElementById('totalQuizzesCompleted');
-const viewRecentQuizDetailsButton = document.getElementById('viewRecentQuizDetailsButton'); // NEW: Get the new button
+const viewRecentQuizDetailsButton = document.getElementById('viewRecentQuizDetailsButton');
+const performanceTrendsLink = document.getElementById('performanceTrendsLink');
+const performanceTrendsContainer = document.getElementById('performanceTrendsContainer');
 
 // Add these new const declarations for the summary elements
 const summaryCorrect = document.getElementById('summaryCorrect');
@@ -291,6 +293,81 @@ sidebarOverlay.addEventListener('click', () => {
 function closeSidebar() {
     document.body.classList.remove('sidebar-active');
 }
+function renderPerformanceCharts() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) return;
+
+    const userKey = `previousQuizzes_${loggedInUser}`;
+    const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+
+    const chartsContainer = document.getElementById('performanceTrendsContainer');
+    const noDataMsg = document.getElementById('noPerformanceDataMessage');
+
+    if (previousQuizzes.length === 0) {
+        noDataMsg.style.display = 'block';
+        return;
+    } else {
+        noDataMsg.style.display = 'none';
+    }
+
+    // ✅ Sort by endTime for chronological trend
+    previousQuizzes.sort((a, b) => new Date(a.endTime) - new Date(b.endTime));
+
+    const labels = previousQuizzes.map(q => q.quizName);
+    const percentages = previousQuizzes.map(q => parseFloat(q.percentage));
+    const scores = previousQuizzes.map(q => q.score);
+    const totals = previousQuizzes.map(q => q.totalQuestions);
+
+    // Destroy old charts if they exist (avoid overlay)
+    if (window.scoreTrendChartInstance) window.scoreTrendChartInstance.destroy();
+    if (window.scoreBarChartInstance) window.scoreBarChartInstance.destroy();
+
+    const ctx1 = document.getElementById('scoreTrendChart');
+    const ctx2 = document.getElementById('scoreBarChart');
+
+    if (!ctx1 || !ctx2) {
+        console.error("❌ Chart canvas not found in HTML!");
+        return;
+    }
+
+    window.scoreTrendChartInstance = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Percentage Score (%)',
+                data: percentages,
+                borderColor: 'blue',
+                backgroundColor: 'rgba(0,0,255,0.2)',
+                tension: 0.3,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true, max: 100 } }
+        }
+    });
+
+    window.scoreBarChartInstance = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [
+                { label: 'Score', data: scores, backgroundColor: 'green' },
+                { label: 'Total Questions', data: totals, backgroundColor: 'gray' }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+}
+
+
+
+
 
 
 // --- Helper Functions to Show/Hide Sections ---
@@ -300,8 +377,20 @@ function hideAllSections() {
     finalScoreContainer.style.display = 'none';
     quizResultsDetails.style.display = 'none';
     previousQuizzesContainer.style.display = 'none';
-    quizSelectionContainer.style.display = 'none'; // Ensure login message is hidden when navigating
+    quizSelectionContainer.style.display = 'none';
+    performanceTrendsContainer.style.display = 'none'; // NEW
     quizCompletedMessage.classList.remove('show');
+}
+performanceTrendsLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    setActiveLink(performanceTrendsLink);
+    showPerformanceTrendsSection();
+    closeSidebar();
+});
+function showPerformanceTrendsSection() {
+    hideAllSections();
+    performanceTrendsContainer.style.display = 'block';
+    renderPerformanceCharts();
 }
 
 function goToDashboard() {
@@ -348,12 +437,14 @@ function showPreviousQuizzesSection() {
     hideAllSections();
     previousQuizzesContainer.style.display = 'block';
     loadPreviousQuizzes();
+    renderPerformanceCharts();
     clearInterval(timerInterval); // Add this line to stop the timer
     clearTimeUpMessage(); // Clear and hide the time-up message
     quizActive = false; // Add this line to mark quiz as inactive
     tabSwitchCount = 0; // Reset tab switch count
     autoSubmitTriggered = false; // Reset auto-submit flag
 }
+
 
 
 // --- Dashboard Info Update ---
@@ -1033,7 +1124,13 @@ function deleteQuizResult(quizIdToDelete, timeToDelete) {
 
     localStorage.setItem(userKey, JSON.stringify(updatedQuizzes));
     loadPreviousQuizzes();
+
+    // ✅ Refresh Performance Trends if the tab is open
+    if (document.getElementById('performanceTrendsContainer').style.display === 'block') {
+        renderPerformanceCharts();
+    }
 }
+
 
 async function downloadQuizResponse(quiz) {
     const { jsPDF } = window.jspdf;

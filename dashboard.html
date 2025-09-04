@@ -18,6 +18,7 @@
     <li><a href="#" id="dashboardLink" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
     <li><a href="#" id="startQuizLink"><i class="fas fa-arrow-right"></i> Start Quiz</a></li>
     <li><a href="#" id="previousQuizzesLink"><i class="fas fa-history"></i> Previous Quizzes</a></li>
+    <li><a href="#" id="performanceTrendsLink"><i class="fas fa-chart-line"></i> Performance Trends</a></li>
     <li><a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
   </ul>
 </nav>
@@ -116,6 +117,14 @@
             </tbody>
         </table>
     </div>
+    <div class="performance-trends-container" id="performanceTrendsContainer">
+  <h2>Performance Trends</h2>
+  <p id="noPerformanceDataMessage" style="display:none; text-align:center; font-style:italic; color:#777;">
+    No performance data available.
+  </p>
+  <canvas id="scoreTrendChart"></canvas>
+  <canvas id="scoreBarChart" style="margin-top:30px;"></canvas>
+</div>
 
   </div>
 
@@ -131,6 +140,7 @@
   <script src="quizData.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="dashboardJS.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJFonKIRehOXlIfgJRVCzOVw4GciFVgo8xnwP1RF8zSlbPWGnGzPOJbS9bGS7UYJnY0tHOESNkSpi9zQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
