@@ -34,7 +34,7 @@ const quizzes = [
     {
         id: "Test",
         name: " English Test",
-        description: "Test on A Bottle of Dew, The Raven and the Fox & Rama to the Rescue",
+        description: "",
         enabled: false,
         questions: [
             {
