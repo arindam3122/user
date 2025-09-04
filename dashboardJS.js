@@ -1136,125 +1136,211 @@ async function downloadQuizResponse(quiz) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
-    const marginLeft = 15;
-    const maxLineWidth = pageWidth - 2 * marginLeft;
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    // Margins
+    const topMargin = 30;
+    const bottomMargin = 30;
+    const leftMargin = 20;
+    const rightMargin = 20;
+    const maxLineWidth = pageWidth - leftMargin - rightMargin;
     const lineSpacing = 6;
-    let y = 20;
+    let y = topMargin;
 
     const loggedInUser = localStorage.getItem('loggedInUser') || 'Unknown User';
 
+    // ✅ Text sanitizer to remove/replace unsupported characters
+    function sanitizeText(text) {
+        if (!text) return "";
+        return text
+            .replace(/[•·]/g, "-")   // bullets → dash
+            .replace(/[“”]/g, '"')   // curly quotes → straight quotes
+            .replace(/[‘’]/g, "'")   // curly apostrophes → straight apostrophe
+            .replace(/[–—]/g, "-")   // dashes → hyphen
+            .replace(/[ØÜÊ]/g, "")   // remove weird Ø=ÜÊ chars
+            .replace(/[^\x00-\x7F]/g, ""); // strip unsupported Unicode (safe fallback)
+    }
+
+    // Helper: add new page if near bottom
+    function checkPageBreak(extraHeight = 0) {
+        if (y + extraHeight > pageHeight - bottomMargin) {
+            doc.addPage();
+            y = topMargin;
+        }
+    }
+
+    // ===== Title =====
     doc.setFontSize(18);
     doc.setFont("helvetica", "bold");
-    doc.text("📘 Quiz Response Report", pageWidth / 2, y, {
-        align: "center"
-    });
-    y += 10;
+    doc.text("📘 Quiz Response Report", pageWidth / 2, y, { align: "center" });
+    y += 14;
 
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(50, 50, 50);
-    doc.text(`User: ${loggedInUser}`, marginLeft, y);
-    y += 8;
+    doc.text(`User: ${sanitizeText(loggedInUser)}`, leftMargin, y);
+    y += 10;
 
+    // ===== Chart 1: Overall Performance =====
+    const userKey = `previousQuizzes_${loggedInUser}`;
+    const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+
+    if (previousQuizzes.length > 0) {
+        previousQuizzes.sort((a, b) => new Date(a.endTime) - new Date(b.endTime));
+
+        const chartCanvas1 = document.createElement("canvas");
+        chartCanvas1.width = 600;
+        chartCanvas1.height = 300;
+        const ctx1 = chartCanvas1.getContext("2d");
+
+        new Chart(ctx1, {
+            type: "line",
+            data: {
+                labels: previousQuizzes.map((q, i) => `${i + 1}. ${sanitizeText(q.quizName)}`),
+                datasets: [{
+                    label: "Percentage Score (%)",
+                    data: previousQuizzes.map(q => parseFloat(q.percentage)),
+                    borderColor: "blue",
+                    backgroundColor: "rgba(0,0,255,0.1)",
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: { legend: { display: true } },
+                scales: { 
+                    x: { ticks: { maxRotation: 60, minRotation: 45 } },
+                    y: { beginAtZero: true, max: 100 }
+                }
+            }
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+        const chartImg1 = chartCanvas1.toDataURL("image/png", 1.0);
+
+        checkPageBreak(105);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.setTextColor(0, 0, 180);
+        doc.text("📊 Overall Performance Across Quizzes", pageWidth / 2, y, { align: "center" });
+        y += 12;
+
+        doc.addImage(chartImg1, "PNG", leftMargin, y, maxLineWidth, 80);
+        y += 95;
+    }
+
+    // ===== Chart 2: Per-Question Performance =====
+    if (quiz.details && quiz.details.length > 0) {
+        const chartCanvas2 = document.createElement("canvas");
+        chartCanvas2.width = 600;
+        chartCanvas2.height = 300;
+        const ctx2 = chartCanvas2.getContext("2d");
+
+        new Chart(ctx2, {
+            type: "line",
+            data: {
+                labels: quiz.details.map((_, i) => `Q${i + 1}`),
+                datasets: [{
+                    label: "Correctness (1 = Correct, 0 = Wrong)",
+                    data: quiz.details.map(d => d.isCorrect ? 1 : 0),
+                    borderColor: "green",
+                    backgroundColor: "rgba(0,255,0,0.1)",
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: { legend: { display: true } },
+                scales: { y: { beginAtZero: true, max: 1, ticks: { stepSize: 1 } } }
+            }
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+        const chartImg2 = chartCanvas2.toDataURL("image/png", 1.0);
+
+        checkPageBreak(105);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.setTextColor(0, 150, 0);
+        doc.text("📝 Per-Question Performance (This Quiz)", pageWidth / 2, y, { align: "center" });
+        y += 12;
+
+        doc.addImage(chartImg2, "PNG", leftMargin, y, maxLineWidth, 80);
+        y += 95;
+    }
+
+    // ===== Quiz Summary Box =====
+    checkPageBreak(50);
     doc.setDrawColor(0);
     doc.setFillColor(240, 240, 255);
-    doc.rect(marginLeft, y, maxLineWidth, 35, "F");
+    doc.rect(leftMargin, y, maxLineWidth, 35, "F");
 
-    y += 8;
-    doc.text(`Quiz Name: ${quiz.quizName}`, marginLeft + 5, y);
+    y += 12;
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Quiz Name: ${sanitizeText(quiz.quizName)}`, leftMargin + 5, y);
     y += lineSpacing;
-    doc.text(`Start Time: ${quiz.startTime || 'N/A'}`, marginLeft + 5, y);
+    doc.text(`Start Time: ${sanitizeText(quiz.startTime || 'N/A')}`, leftMargin + 5, y);
     y += lineSpacing;
-    doc.text(`End Time: ${quiz.endTime || quiz.date || 'N/A'}`, marginLeft + 5, y);
+    doc.text(`End Time: ${sanitizeText(quiz.endTime || quiz.date || 'N/A')}`, leftMargin + 5, y);
     y += lineSpacing;
-    doc.text(`Score: ${quiz.score} / ${quiz.totalQuestions} (${quiz.percentage}%)`, marginLeft + 5, y);
+    doc.text(`Score: ${quiz.score} / ${quiz.totalQuestions} (${quiz.percentage}%)`, leftMargin + 5, y);
     y += 15;
 
+    // ===== Detailed Responses =====
     if (quiz.details && Array.isArray(quiz.details)) {
         for (const [i, item] of quiz.details.entries()) {
+            checkPageBreak(60);
+
             doc.setFont("helvetica", "bold");
             doc.setFontSize(12);
             doc.setTextColor(0, 0, 128);
-            const wrappedQuestion = doc.splitTextToSize(`Q${i + 1}: ${item.question}`, maxLineWidth);
-            doc.text(wrappedQuestion, marginLeft, y);
+            const wrappedQuestion = doc.splitTextToSize(`Q${i + 1}: ${sanitizeText(item.question)}`, maxLineWidth);
+            doc.text(wrappedQuestion, leftMargin, y);
             y += lineSpacing * wrappedQuestion.length;
 
-            if (item.imageUrl) {
-                try {
-                    const img = new Image();
-                    await new Promise((resolve, reject) => {
-                        img.onload = () => resolve();
-                        img.onerror = (e) => reject(e);
-                        img.src = item.imageUrl;
-                    });
-
-                    const maxImageWidth = maxLineWidth - 10;
-                    const maxImageHeight = 80;
-
-                    let scaledWidth = img.naturalWidth;
-                    let scaledHeight = img.naturalHeight;
-
-                    if (scaledWidth > maxImageWidth) {
-                        scaledHeight = (maxImageWidth / scaledWidth) * scaledHeight;
-                        scaledWidth = maxImageWidth;
-                    }
-
-                    if (scaledHeight > maxImageHeight) {
-                        scaledWidth = (maxImageHeight / scaledHeight) * scaledWidth;
-                        scaledHeight = maxImageHeight;
-                    }
-
-                    if (y + scaledHeight + 10 > doc.internal.pageSize.getHeight() - 20) {
-                        doc.addPage();
-                        y = 20;
-                    }
-
-                    doc.addImage(img.src, 'JPEG', marginLeft + 5, y, scaledWidth, scaledHeight);
-                    y += scaledHeight + 5;
-                } catch (e) {
-                    console.error("Error loading or adding question image to PDF:", e);
-                    doc.setTextColor(200, 0, 0);
-                    doc.text(" (Question image could not be loaded)", marginLeft + 5, y);
-                    y += lineSpacing;
-                }
-            }
-
-
+            // --- User Answer ---
             doc.setFont("helvetica", "normal");
             doc.setFontSize(11);
+
             let userAnswerColor;
-            if (item.isCorrect) { // Check item.isCorrect for user answer color
-                userAnswerColor = [0, 150, 0]; // Green
-            } else if (item.skipped || item.timeUp) {
-                userAnswerColor = [200, 100, 0]; // Orange for skipped/time-up
-            } else if (item.autoSubmitted) { // NEW: Color for auto-submitted
-                userAnswerColor = [150, 0, 150]; // Purple for auto-submitted
-            }
-            else {
-                userAnswerColor = [200, 0, 0]; // Red for incorrect
-            }
+            if (item.isCorrect) userAnswerColor = [0, 150, 0];
+            else if (item.skipped || item.timeUp) userAnswerColor = [200, 100, 0];
+            else if (item.autoSubmitted) userAnswerColor = [150, 0, 150];
+            else userAnswerColor = [200, 0, 0];
+
             doc.setTextColor(...userAnswerColor);
-            doc.text("Your Answer:", marginLeft + 5, y);
+            doc.text("Your Answer:", leftMargin + 5, y);
             y += lineSpacing;
 
-            const wrappedUserAnswer = doc.splitTextToSize(item.userAnswer || "Skipped", maxLineWidth - 5);
-            doc.text(wrappedUserAnswer, marginLeft + 10, y);
-            y += lineSpacing * wrappedUserAnswer.length;
+            const wrappedUserAnswer = doc.splitTextToSize(sanitizeText(item.userAnswer || "Skipped"), maxLineWidth - 5);
+            wrappedUserAnswer.forEach(line => {
+                checkPageBreak(lineSpacing);
+                doc.text(line, leftMargin + 10, y);
+                y += lineSpacing;
+            });
 
+            // --- Correct Answer ---
             doc.setTextColor(0, 150, 0);
-            doc.text("Correct Answer:", marginLeft + 5, y);
+            doc.text("Correct Answer:", leftMargin + 5, y);
             y += lineSpacing;
 
-            const wrappedCorrectAnswer = doc.splitTextToSize(item.correctAnswer || "N/A", maxLineWidth - 5);
-            doc.text(wrappedCorrectAnswer, marginLeft + 10, y);
-            y += lineSpacing * wrappedCorrectAnswer.length;
+            const wrappedCorrectAnswer = doc.splitTextToSize(sanitizeText(item.correctAnswer || "N/A"), maxLineWidth - 5);
+            wrappedCorrectAnswer.forEach(line => {
+                checkPageBreak(lineSpacing);
+                doc.text(line, leftMargin + 10, y);
+                y += lineSpacing;
+            });
 
+            // --- Time Taken ---
             doc.setTextColor(50, 50, 50);
-            doc.text("Time Taken:", marginLeft + 5, y);
+            doc.text("Time Taken:", leftMargin + 5, y);
             y += lineSpacing;
-            doc.text(`${formatTime(item.timeTaken)}`, marginLeft + 10, y);
+            doc.text(sanitizeText(`${formatTime(item.timeTaken)}`), leftMargin + 10, y);
             y += lineSpacing;
 
+            // --- Explanation Image ---
             if (item.explanationImageUrl) {
                 try {
                     const explanationImg = new Image();
@@ -1264,60 +1350,60 @@ async function downloadQuizResponse(quiz) {
                         explanationImg.src = item.explanationImageUrl;
                     });
 
-                    const maxExplanationImageWidth = maxLineWidth - 10;
-                    const maxExplanationImageHeight = 100;
+                    const maxImgWidth = maxLineWidth - 10;
+                    const maxImgHeight = 100;
+                    let scaledWidth = explanationImg.naturalWidth;
+                    let scaledHeight = explanationImg.naturalHeight;
 
-                    let scaledExplanationWidth = explanationImg.naturalWidth;
-                    let scaledExplanationHeight = explanationImg.naturalHeight;
-
-                    if (scaledExplanationWidth > maxExplanationImageWidth) {
-                        scaledExplanationHeight = (maxExplanationImageWidth / scaledExplanationWidth) * scaledExplanationHeight;
-                        scaledExplanationWidth = maxExplanationImageWidth;
+                    if (scaledWidth > maxImgWidth) {
+                        scaledHeight = (maxImgWidth / scaledWidth) * scaledHeight;
+                        scaledWidth = maxImgWidth;
+                    }
+                    if (scaledHeight > maxImgHeight) {
+                        scaledWidth = (maxImgHeight / scaledHeight) * scaledWidth;
+                        scaledHeight = maxImgHeight;
                     }
 
-                    if (scaledExplanationHeight > maxExplanationImageHeight) {
-                        scaledExplanationWidth = (maxExplanationImageHeight / scaledExplanationHeight) * scaledExplanationHeight;
-                        scaledExplanationHeight = maxExplanationImageHeight;
-                    }
-
-                    if (y + scaledExplanationHeight + 10 > doc.internal.pageSize.getHeight() - 20) {
-                        doc.addPage();
-                        y = 20;
-                    }
+                    checkPageBreak(scaledHeight + 20);
                     doc.setTextColor(0, 0, 0);
                     doc.setFont("helvetica", "bold");
-                    doc.text("Explanation:", marginLeft + 5, y);
+                    doc.text("Explanation:", leftMargin + 5, y);
                     y += lineSpacing;
-                    doc.addImage(explanationImg.src, 'JPEG', marginLeft + 5, y, scaledExplanationWidth, scaledExplanationHeight);
-                    y += scaledExplanationHeight + 5;
+                    doc.addImage(explanationImg.src, 'JPEG', leftMargin + 5, y, scaledWidth, scaledHeight);
+                    y += scaledHeight + 5;
                 } catch (e) {
-                    console.error("Error loading or adding explanation image to PDF:", e);
                     doc.setTextColor(200, 0, 0);
-                    doc.text(" (Explanation image could not be loaded)", marginLeft + 5, y);
+                    doc.text(" (Explanation image could not be loaded)", leftMargin + 5, y);
                     y += lineSpacing;
                 }
             }
 
-
+            // Divider line
+            checkPageBreak(lineSpacing);
             doc.setDrawColor(180);
-            doc.line(marginLeft, y, pageWidth - marginLeft, y);
+            doc.line(leftMargin, y, pageWidth - rightMargin, y);
             y += lineSpacing;
-
-            if (y > doc.internal.pageSize.getHeight() - 20) {
-                doc.addPage();
-                y = 20;
-            }
         }
     } else {
+        checkPageBreak(lineSpacing * 2);
         doc.setTextColor(200, 0, 0);
-        doc.text("No answer details available.", marginLeft, y);
+        doc.text("No answer details available.", leftMargin, y);
     }
 
-    const fileName = `${quiz.quizName.replace(/\s+/g, '_')}_Response.pdf`;
+    // ===== Save PDF =====
+    const fileName = `${sanitizeText(quiz.quizName).replace(/\s+/g, '_')}_Response.pdf`;
     doc.save(fileName);
 
     showInfoModal(`✅ Download completed. Please check your browser's default downloads folder for "${fileName}".`);
 }
+
+
+
+
+
+
+
+
 
 function loadQuestion() {
     if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
