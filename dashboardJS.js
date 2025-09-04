@@ -80,7 +80,7 @@ const summaryWrong = document.getElementById('summaryWrong');
 const summarySkipped = document.getElementById('summarySkipped');
 const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
-const ADMIN_USERS = ['Arindam Mitra', ]; // Add usernames for delete button activation
+const ADMIN_USERS = ['Arindam Mitra', 'Prerana Ghosh' ]; // Add usernames for delete button activation
 
 // Hamburger menu elements
 const hamburgerMenu = document.getElementById('hamburgerMenu');
@@ -110,7 +110,7 @@ let questionStatuses = []; // NEW: Array to store status of each question (answe
 // Anti-cheating variables
 let quizActive = false; // Flag to indicate if a quiz is currently active
 let tabSwitchCount = 0; // Tracks how many times the user switched tabs
-const MAX_TAB_SWITCHES = 2; // Maximum allowed tab switches before quiz auto-submits
+const MAX_TAB_SWITCHES = 10; // Maximum allowed tab switches before quiz auto-submits
 let autoSubmitTriggered = false; // NEW: Flag to indicate if auto-submission was triggered by anti-cheat
 
 /**
