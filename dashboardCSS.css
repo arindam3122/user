@@ -857,6 +857,9 @@ header {
 .result-item.skipped {
     border-left: 5px solid #f39c12; /* Orange indicator */
 }
+.result-item.skipped .user-answer {
+    color: #f39c12;
+}
 
 .result-item.time-up {
     border-left: 5px solid #8e44ad; /* Purple indicator for time up */
