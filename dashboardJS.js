@@ -319,35 +319,33 @@ function renderPerformanceCharts() {
     const totals = previousQuizzes.map(q => q.totalQuestions);
 
     // Destroy old charts if they exist (avoid overlay)
-    if (window.scoreTrendChartInstance) window.scoreTrendChartInstance.destroy();
-    if (window.scoreBarChartInstance) window.scoreBarChartInstance.destroy();
+if (window.scoreTrendChartInstance) window.scoreTrendChartInstance.destroy();
 
-    const ctx1 = document.getElementById('scoreTrendChart');
-    const ctx2 = document.getElementById('scoreBarChart');
+const ctx1 = document.getElementById('scoreTrendChart');
+if (!ctx1) {
+    console.error("❌ Line Chart canvas not found in HTML!");
+    return;
+}
 
-    if (!ctx1 || !ctx2) {
-        console.error("❌ Chart canvas not found in HTML!");
-        return;
+window.scoreTrendChartInstance = new Chart(ctx1, {
+    type: 'line',
+    data: {
+        labels,
+        datasets: [{
+            label: 'Percentage Score (%)',
+            data: percentages,
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0,0,255,0.2)',
+            tension: 0.3,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true, max: 100 } }
     }
+});
 
-    window.scoreTrendChartInstance = new Chart(ctx1, {
-        type: 'line',
-        data: {
-            labels,
-            datasets: [{
-                label: 'Percentage Score (%)',
-                data: percentages,
-                borderColor: 'blue',
-                backgroundColor: 'rgba(0,0,255,0.2)',
-                tension: 0.3,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: { y: { beginAtZero: true, max: 100 } }
-        }
-    });
 
     window.scoreBarChartInstance = new Chart(ctx2, {
         type: 'bar',
