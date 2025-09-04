@@ -6,7 +6,7 @@ const quizzes = [
         id: "12",
         name: "WORD PROBLEMS",
         description: "",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", 
@@ -32,17 +32,69 @@ const quizzes = [
         ]
     },
     {
+        id: "GK",
+        name: "GK Questions",
+        description: "",
+        enabled: true,
+        questions: [
+            {
+               question: "Who is known as the Missile Man of India?", 
+               type: "mcq",
+               options: [
+                           "Homi J. Bhabha",
+                           "Vikram Sarabhai",
+                           "C.V. Raman",
+                           "Dr. A.P.J. Abdul Kalam"
+                        ],
+                answer: "Dr. A.P.J. Abdul Kalam",
+                timeLimit: 45
+            },
+            {
+               question: "Which is the largest state of India (by area)?", 
+               type: "mcq",
+               options: [
+                           "Uttar Pradesh",
+                           "Madhya Pradesh",
+                           "Maharashtra",
+                           "Rajasthan"
+                        ],
+                answer: "Rajasthan",
+                timeLimit: 45
+            },
+            {
+               question: "Who invented the telephone?", 
+               type: "mcq",
+               options: [
+                           "Thomas Edison",
+                           "Alexander Graham Bell",
+                           "James Watt",
+                           "Michael Faraday"
+                        ],
+                answer: "Alexander Graham Bell",
+                timeLimit: 45
+            },
+        ]
+    },
+    {
         id: "General Math",
-        name: "General Math (5QS)",
+        name: "General Math (2QS)",
         description: "Math questions based on Algebra, Percentage, Time & work, Geometry and Probability",
         enabled: true,
         questions: [
             {
-                question: "The Sum of two numbers is 60. One number is 8 more than the other. Find the numbers. (WRITE IN FORMAT a/b where a is small and b is big)",
+                question: "A train travels 480 km at a constant speed. If the speed was 8 km/hr less, it would have taken 3 hours longer. Find the original speed. (WRITE WITHOUT UNITS)",
                 type: "input",
-                answer: "26/34",
+                answer: "40",
                 imageUrl: "",
                 explanationImageUrl: "1.png", 
+                timeLimit: 60
+            },
+            {
+                question: "A father's age is three times his son's age. If after 10 years, the father's age will be twice his son's age, what are their present ages?(WRITE IN FORMAT a,b WHERE a is the small number and b is the big number)",
+                type: "input",
+                answer: "10,30",
+                imageUrl: "",
+                explanationImageUrl: "2.png", 
                 timeLimit: 60
             },
         ]
