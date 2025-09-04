@@ -1149,16 +1149,16 @@ async function downloadQuizResponse(quiz) {
 
     const loggedInUser = localStorage.getItem('loggedInUser') || 'Unknown User';
 
-    // ✅ Text sanitizer to remove/replace unsupported characters
+    // ✅ Text sanitizer
     function sanitizeText(text) {
         if (!text) return "";
         return text
-            .replace(/[•·]/g, "-")   // bullets → dash
-            .replace(/[“”]/g, '"')   // curly quotes → straight quotes
-            .replace(/[‘’]/g, "'")   // curly apostrophes → straight apostrophe
-            .replace(/[–—]/g, "-")   // dashes → hyphen
-            .replace(/[ØÜÊ]/g, "")   // remove weird Ø=ÜÊ chars
-            .replace(/[^\x00-\x7F]/g, ""); // strip unsupported Unicode (safe fallback)
+            .replace(/[•·]/g, "-")
+            .replace(/[“”]/g, '"')
+            .replace(/[‘’]/g, "'")
+            .replace(/[–—]/g, "-")
+            .replace(/[ØÜÊ]/g, "")
+            .replace(/[^\x00-\x7F]/g, ""); // strip unsupported Unicode
     }
 
     // Helper: add new page if near bottom
@@ -1181,16 +1181,17 @@ async function downloadQuizResponse(quiz) {
     doc.text(`User: ${sanitizeText(loggedInUser)}`, leftMargin, y);
     y += 10;
 
-    // ===== Chart 1: Overall Performance =====
+    // ===== Charts Side by Side =====
     const userKey = `previousQuizzes_${loggedInUser}`;
     const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
 
-    if (previousQuizzes.length > 0) {
+    if (previousQuizzes.length > 0 && quiz.details && quiz.details.length > 0) {
         previousQuizzes.sort((a, b) => new Date(a.endTime) - new Date(b.endTime));
 
+        // Chart 1: Overall Trend
         const chartCanvas1 = document.createElement("canvas");
-        chartCanvas1.width = 600;
-        chartCanvas1.height = 300;
+        chartCanvas1.width = 400;
+        chartCanvas1.height = 200;
         const ctx1 = chartCanvas1.getContext("2d");
 
         new Chart(ctx1, {
@@ -1208,33 +1209,15 @@ async function downloadQuizResponse(quiz) {
             },
             options: {
                 responsive: false,
-                plugins: { legend: { display: true } },
-                scales: { 
-                    x: { ticks: { maxRotation: 60, minRotation: 45 } },
-                    y: { beginAtZero: true, max: 100 }
-                }
+                plugins: { legend: { display: false } },
+                scales: { x: { ticks: { maxRotation: 45 } }, y: { beginAtZero: true, max: 100 } }
             }
         });
 
-        await new Promise(resolve => setTimeout(resolve, 500));
-        const chartImg1 = chartCanvas1.toDataURL("image/png", 1.0);
-
-        checkPageBreak(105);
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(14);
-        doc.setTextColor(0, 0, 180);
-        doc.text("📊 Overall Performance Across Quizzes", pageWidth / 2, y, { align: "center" });
-        y += 12;
-
-        doc.addImage(chartImg1, "PNG", leftMargin, y, maxLineWidth, 80);
-        y += 95;
-    }
-
-    // ===== Chart 2: Per-Question Performance =====
-    if (quiz.details && quiz.details.length > 0) {
+        // Chart 2: Per-Question Performance
         const chartCanvas2 = document.createElement("canvas");
-        chartCanvas2.width = 600;
-        chartCanvas2.height = 300;
+        chartCanvas2.width = 400;
+        chartCanvas2.height = 200;
         const ctx2 = chartCanvas2.getContext("2d");
 
         new Chart(ctx2, {
@@ -1242,7 +1225,7 @@ async function downloadQuizResponse(quiz) {
             data: {
                 labels: quiz.details.map((_, i) => `Q${i + 1}`),
                 datasets: [{
-                    label: "Correctness (1 = Correct, 0 = Wrong)",
+                    label: "Correctness",
                     data: quiz.details.map(d => d.isCorrect ? 1 : 0),
                     borderColor: "green",
                     backgroundColor: "rgba(0,255,0,0.1)",
@@ -1252,23 +1235,32 @@ async function downloadQuizResponse(quiz) {
             },
             options: {
                 responsive: false,
-                plugins: { legend: { display: true } },
+                plugins: { legend: { display: false } },
                 scales: { y: { beginAtZero: true, max: 1, ticks: { stepSize: 1 } } }
             }
         });
 
         await new Promise(resolve => setTimeout(resolve, 500));
+        const chartImg1 = chartCanvas1.toDataURL("image/png", 1.0);
         const chartImg2 = chartCanvas2.toDataURL("image/png", 1.0);
 
-        checkPageBreak(105);
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(14);
-        doc.setTextColor(0, 150, 0);
-        doc.text("📝 Per-Question Performance (This Quiz)", pageWidth / 2, y, { align: "center" });
-        y += 12;
+        checkPageBreak(120);
 
-        doc.addImage(chartImg2, "PNG", leftMargin, y, maxLineWidth, 80);
-        y += 95;
+        // Titles above each chart
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 180);
+        doc.text("📊 Overall Trend", leftMargin + ((pageWidth - leftMargin - rightMargin) / 4), y, { align: "center" });
+
+        doc.setTextColor(0, 150, 0);
+        doc.text("📝 Per-Question Performance", pageWidth / 2 + ((pageWidth - leftMargin - rightMargin) / 4), y, { align: "center" });
+
+        y += 6; // move down before adding charts
+
+        // Place charts side by side
+        doc.addImage(chartImg1, "PNG", leftMargin, y, (pageWidth - leftMargin - rightMargin) / 2 - 5, 60);
+        doc.addImage(chartImg2, "PNG", pageWidth / 2 + 5, y, (pageWidth - leftMargin - rightMargin) / 2 - 5, 60);
+        y += 70;
     }
 
     // ===== Quiz Summary Box =====
@@ -1396,9 +1388,6 @@ async function downloadQuizResponse(quiz) {
 
     showInfoModal(`✅ Download completed. Please check your browser's default downloads folder for "${fileName}".`);
 }
-
-
-
 
 
 

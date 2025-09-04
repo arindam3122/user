@@ -103,7 +103,7 @@ const quizzes = [
         id: "Test",
         name: "",
         description: "",
-        enabled: false,
+        enabled: true,
         questions: [
             {
                 question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", 
