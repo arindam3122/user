@@ -32,22 +32,18 @@ const quizzes = [
         ]
     },
     {
-        id: "demo",
-        name: "Trial run",
-        description: "",
+        id: "General Math",
+        name: "General Math (5QS)",
+        description: "Math questions based on Algebra, Percentage, Time & work, Geometry and Probability",
         enabled: true,
         questions: [
             {
-               question: "What is the capital of india", 
-               type: "mcq",
-               options: [
-                           "China",
-                           "Nepal",
-                           "New Delhi",
-                           "None"
-                        ],
-                answer: "New Delhi",
-                timeLimit: 15
+                question: "The Sum of two numbers is 60. One number is 8 more than the other. Find the numbers. (WRITE IN FORMAT a/b where a is small and b is big)",
+                type: "input",
+                answer: "26/34",
+                imageUrl: "",
+                explanationImageUrl: "1.png", 
+                timeLimit: 60
             },
         ]
     },
