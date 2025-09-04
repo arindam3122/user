@@ -53,9 +53,9 @@ const quizzes = [
     },
     {
         id: "Test",
-        name: " English Test",
+        name: "",
         description: "",
-        enabled: true,
+        enabled: false,
         questions: [
             {
                 question: "Why did Rama Natha want to know about the Magic Potion? (1 MARK)", 
