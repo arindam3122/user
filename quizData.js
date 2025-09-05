@@ -99,4 +99,20 @@ const quizzes = [
             },
         ]
     },
+    {
+        id: "Basic math",
+        name: "Basic math",
+        description: "",
+        enabled: true,
+        questions: [
+            {
+                question: "What is 2+2?",
+                type: "input",
+                answer: "4",
+                imageUrl: "",
+                explanationImageUrl: "", 
+                timeLimit: 60
+            },
+        ]
+    },
 ];
