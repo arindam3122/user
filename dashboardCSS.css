@@ -1280,3 +1280,90 @@ header {
         box-shadow: none !important;
     }
 }
+/* Container header */
+.archive-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.archive-header i {
+  color: #007bff;
+  font-size: 1.6rem;
+}
+
+/* Card */
+.archive-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow-x: auto;
+}
+
+/* Table */
+.archive-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.archive-table th,
+.archive-table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.archive-table th {
+  background: #f5f7fa;
+  font-weight: bold;
+  color: #333;
+}
+
+.archive-table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.archive-table tr:hover {
+  background: #f1f8ff;
+}
+
+/* No data message */
+.no-data-message {
+  text-align: center;
+  color: #777;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+/* Buttons */
+.view-details-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background 0.2s;
+}
+
+.view-details-btn:hover {
+  background: #0056b3;
+}
+
+.delete-quiz-btn {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.delete-quiz-btn:hover {
+  background: #a4161a;
+}

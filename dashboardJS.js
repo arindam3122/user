@@ -58,6 +58,8 @@ const totalQuizzesCompleted = document.getElementById('totalQuizzesCompleted');
 const viewRecentQuizDetailsButton = document.getElementById('viewRecentQuizDetailsButton');
 const performanceTrendsLink = document.getElementById('performanceTrendsLink');
 const performanceTrendsContainer = document.getElementById('performanceTrendsContainer');
+const archivedQuizzesLink = document.getElementById('archivedQuizzesLink');
+const archivedQuizzesContainer = document.getElementById('archivedQuizzesContainer');
 
 // Add these new const declarations for the summary elements
 const summaryCorrect = document.getElementById('summaryCorrect');
@@ -65,7 +67,7 @@ const summaryWrong = document.getElementById('summaryWrong');
 const summarySkipped = document.getElementById('summarySkipped');
 const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
-const ADMIN_USERS = ['Arindam Mitra', 'Prerana Ghosh' ]; // Add usernames for delete button activation
+const ADMIN_USERS = ['Arindam Mitra', ]; // Add usernames for delete button activation
 
 // Hamburger menu elements
 const hamburgerMenu = document.getElementById('hamburgerMenu');
@@ -153,6 +155,124 @@ function showTimeUpMessage() {
         timeUpMessageElement.classList.remove('show');
     }, 3000); // Message visible for 3 seconds
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) {
+        window.location.href = "index.html";
+    } else {
+        usernameDisplay.textContent = loggedInUser;
+        welcomeHeading.textContent = `Welcome, ${loggedInUser}!`;
+
+        // Show Archived Quizzes tab only for admins
+        if (!ADMIN_USERS.includes(loggedInUser)) {
+            if (archivedQuizzesLink) archivedQuizzesLink.style.display = "none";
+        }
+
+        goToDashboard();
+    }
+});
+archivedQuizzesLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    setActiveLink(archivedQuizzesLink);
+    showArchivedQuizzesSection();
+    closeSidebar();
+});
+function showArchivedQuizzesSection() {
+    hideAllSections();
+    archivedQuizzesContainer.style.display = 'block';
+    loadArchivedQuizzes();
+}
+
+function loadArchivedQuizzes() {
+    const allQuizzes = JSON.parse(localStorage.getItem("allQuizzesArchive")) || [];
+    const tableBody = document.getElementById('archivedQuizzesTableBody');
+    const noDataMsg = document.getElementById('noArchivedQuizzesMessage');
+
+    tableBody.innerHTML = "";
+
+    if (allQuizzes.length === 0) {
+        noDataMsg.style.display = 'block';
+        return;
+    } else {
+        noDataMsg.style.display = 'none';
+    }
+
+    allQuizzes.forEach((quiz, index) => {
+        const row = tableBody.insertRow();
+        row.insertCell(0).textContent = quiz.name || "N/A";
+        row.insertCell(1).textContent = quiz.questions ? quiz.questions.length : 0;
+
+        const actionsCell = row.insertCell(2);
+
+        // View details button
+        const viewBtn = document.createElement("button");
+        viewBtn.innerHTML = '<i class="fas fa-eye"></i> View Details';
+        viewBtn.classList.add("view-details-btn");
+        viewBtn.onclick = () => showArchivedQuizDetails(quiz);
+        actionsCell.appendChild(viewBtn);
+
+        // Delete button
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
+        deleteBtn.classList.add("delete-quiz-btn");
+        deleteBtn.onclick = () => deleteArchivedQuiz(quiz.id);
+        actionsCell.appendChild(deleteBtn);
+    });
+}
+
+function showArchivedQuizDetails(quiz) {
+    // Hide all sections, including the archived quizzes table
+    hideAllSections(); 
+    archivedQuizzesContainer.style.display = 'none'; // force hide the table
+    quizResultsDetails.style.display = 'block';      // show only details
+
+    const resultsContainer = document.getElementById('quizResultsDetailsContainer');
+    resultsContainer.innerHTML = ''; // Clear old content
+
+    if (!quiz.questions || quiz.questions.length === 0) {
+        resultsContainer.innerHTML = '<p style="text-align:center;color:#777;">No questions available in this quiz.</p>';
+        document.getElementById('quizResultsBackButton').onclick = showArchivedQuizzesSection;
+        return;
+    }
+
+    quiz.questions.forEach((q, i) => {
+        const resultItem = document.createElement('div');
+        resultItem.classList.add('result-item');
+
+        let imageHtml = q.imageUrl ? `<img src="${q.imageUrl}" class="question-result-image">` : '';
+        let explanationImageHtml = q.explanationImageUrl ? `<img src="${q.explanationImageUrl}" class="explanation-image">` : '';
+
+        resultItem.innerHTML = `
+            <p class="question-text-result">${i + 1}. ${q.question}</p>
+            ${imageHtml}
+            <p><b>Answer:</b> <span class="correct-answer">${q.answer}</span></p>
+            ${explanationImageHtml}
+        `;
+        resultsContainer.appendChild(resultItem);
+    });
+
+    // Back button should bring you back to the archived quiz list
+    document.getElementById('quizResultsBackButton').onclick = () => {
+        quizResultsDetails.style.display = 'none'; 
+        showArchivedQuizzesSection(); // show the table again
+    };
+}
+function deleteArchivedQuiz(quizId) {
+    let allQuizzes = JSON.parse(localStorage.getItem("allQuizzesArchive")) || [];
+    allQuizzes = allQuizzes.filter(q => q.id !== quizId);
+    localStorage.setItem("allQuizzesArchive", JSON.stringify(allQuizzes));
+    loadArchivedQuizzes();
+}
+function archiveAllQuizzes() {
+    const existingArchive = JSON.parse(localStorage.getItem("allQuizzesArchive")) || [];
+    const newOnes = quizzes.filter(q => !existingArchive.find(a => a.id === q.id));
+    const updatedArchive = [...existingArchive, ...newOnes];
+    localStorage.setItem("allQuizzesArchive", JSON.stringify(updatedArchive));
+}
+
+// Call this once after quizzes are defined
+archiveAllQuizzes();
+
 
 /**
  * Clears and hides the time-up message if it's currently displayed.
@@ -349,10 +469,6 @@ window.scoreTrendChartInstance = new Chart(ctx1, {
 }
 
 
-
-
-
-
 // --- Helper Functions to Show/Hide Sections ---
 function hideAllSections() {
     quizInfoBox.style.display = 'none';
@@ -361,9 +477,11 @@ function hideAllSections() {
     quizResultsDetails.style.display = 'none';
     previousQuizzesContainer.style.display = 'none';
     quizSelectionContainer.style.display = 'none';
-    performanceTrendsContainer.style.display = 'none'; // NEW
+    performanceTrendsContainer.style.display = 'none';
+    archivedQuizzesContainer.style.display = 'none'; // ✅ hide archive list too
     quizCompletedMessage.classList.remove('show');
 }
+
 performanceTrendsLink.addEventListener('click', (e) => {
     e.preventDefault();
     setActiveLink(performanceTrendsLink);
