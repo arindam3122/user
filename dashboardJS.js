@@ -1661,84 +1661,97 @@ function showQuizResultsDetails(result) {
     document.getElementById('quizResultsBackButton').onclick = showPreviousQuizzesSection;
 }
 document.getElementById('addQuestionBtn').addEventListener('click', () => {
-    const qIndex = document.querySelectorAll('.question-block').length;
+    const questionsContainer = document.getElementById('questionsContainer');
+    const questionCount = questionsContainer.querySelectorAll('.question-block').length + 1;
+
     const qBlock = document.createElement('div');
     qBlock.classList.add('question-block');
-    qBlock.style.border = "1px solid #ccc";
-    qBlock.style.padding = "10px";
-    qBlock.style.margin = "10px 0";
 
-qBlock.innerHTML = `
-  <div class="question-header">
-    <span class="question-title">📝 New Question</span>
-    <div>
-      <button type="button" class="toggleQuestionBtn">▼</button>
-      <button type="button" class="removeQuestionBtn">❌</button>
-    </div>
-  </div>
+    qBlock.innerHTML = `
+      <div class="question-header">
+        <span class="question-title">Q${questionCount}: 📝 New Question</span>
+        <div>
+          <button type="button" class="toggleQuestionBtn">▼</button>
+          <button type="button" class="removeQuestionBtn">❌</button>
+        </div>
+      </div>
 
-  <div class="question-body">
-    <label>Question:</label>
-    <textarea class="questionText"></textarea><br><br>
+      <div class="question-body">
+        <label>Question:</label>
+        <textarea class="questionText"></textarea><br><br>
 
-    <label>Type:</label>
-    <select class="questionType">
-      <option value="input">Input</option>
-      <option value="mcq">MCQ</option>
-    </select><br><br>
+        <label>Type:</label>
+        <select class="questionType">
+          <option value="input">Input</option>
+          <option value="mcq">MCQ</option>
+        </select><br><br>
 
-    <div class="mcqOptions" style="display:none;">
-      <label>Options:</label><br>
-      <input type="text" class="optionField" placeholder="Option 1"><br>
-      <input type="text" class="optionField" placeholder="Option 2"><br>
-      <input type="text" class="optionField" placeholder="Option 3"><br>
-      <input type="text" class="optionField" placeholder="Option 4"><br><br>
-    </div>
+        <div class="mcqOptions" style="display:none;">
+          <label>Options:</label><br>
+          <input type="text" class="optionField" placeholder="Option 1"><br>
+          <input type="text" class="optionField" placeholder="Option 2"><br>
+          <input type="text" class="optionField" placeholder="Option 3"><br>
+          <input type="text" class="optionField" placeholder="Option 4"><br><br>
+        </div>
 
-    <label>Answer:</label>
-    <input type="text" class="questionAnswer"><br><br>
+        <label>Answer:</label>
+        <input type="text" class="questionAnswer"><br><br>
 
-    <label>Time Limit (sec):</label>
-    <input type="number" class="questionTime" value="30"><br><br>
+        <label>Time Limit (sec):</label>
+        <input type="number" class="questionTime" value="30"><br><br>
 
-    <label>Question Image URL:</label>
-    <input type="text" class="questionImage"><br><br>
+        <label>Question Image URL:</label>
+        <input type="text" class="questionImage"><br><br>
 
-    <label>Explanation Image URL:</label>
-    <input type="text" class="explanationImage"><br><br>
-  </div>
-`;
-// Toggle MCQ inputs
-qBlock.querySelector('.questionType').addEventListener('change', (e) => {
-    qBlock.querySelector('.mcqOptions').style.display = e.target.value === 'mcq' ? 'block' : 'none';
-});
+        <label>Explanation Image URL:</label>
+        <input type="text" class="explanationImage"><br><br>
+      </div>
+    `;
 
-// Collapse/Expand body
-const toggleBtn = qBlock.querySelector('.toggleQuestionBtn');
-const body = qBlock.querySelector('.question-body');
-toggleBtn.addEventListener('click', () => {
-    body.style.display = body.style.display === 'none' ? 'block' : 'none';
-    toggleBtn.textContent = body.style.display === 'none' ? '▶' : '▼';
-});
-
-// Remove button handler
-qBlock.querySelector('.removeQuestionBtn').addEventListener('click', () => {
-    qBlock.remove();
-});
-
-
-
-    // Toggle MCQ inputs
+    // Toggle MCQ fields
     qBlock.querySelector('.questionType').addEventListener('change', (e) => {
         qBlock.querySelector('.mcqOptions').style.display = e.target.value === 'mcq' ? 'block' : 'none';
     });
+
+    // Collapse/Expand
+    const toggleBtn = qBlock.querySelector('.toggleQuestionBtn');
+    const body = qBlock.querySelector('.question-body');
+    toggleBtn.addEventListener('click', () => {
+        body.style.display = body.style.display === 'none' ? 'block' : 'none';
+        toggleBtn.textContent = body.style.display === 'none' ? '▶' : '▼';
+    });
+
+    // Remove + reindex all questions
     qBlock.querySelector('.removeQuestionBtn').addEventListener('click', () => {
-    qBlock.remove();
+        qBlock.remove();
+        reindexQuestions();
+    });
+
+    // Auto-update header title live
+    const titleSpan = qBlock.querySelector('.question-title');
+    const questionField = qBlock.querySelector('.questionText');
+    questionField.addEventListener('input', () => {
+        const text = questionField.value.trim();
+        const questionNumber = [...document.querySelectorAll('.question-block')].indexOf(qBlock) + 1;
+        titleSpan.textContent = text 
+            ? `Q${questionNumber}: 📝 ${text.substring(0, 40)}${text.length > 40 ? '...' : ''}` 
+            : `Q${questionNumber}: 📝 New Question`;
+    });
+
+    questionsContainer.appendChild(qBlock);
 });
+function reindexQuestions() {
+    const blocks = document.querySelectorAll('.question-block');
+    blocks.forEach((block, i) => {
+        const titleSpan = block.querySelector('.question-title');
+        const text = block.querySelector('.questionText').value.trim();
+        titleSpan.textContent = text 
+            ? `Q${i+1}: 📝 ${text.substring(0, 40)}${text.length > 40 ? '...' : ''}` 
+            : `Q${i+1}: 📝 New Question`;
+    });
+}
 
 
-    document.getElementById('questionsContainer').appendChild(qBlock);
-});
 document.getElementById('downloadQuizBtn').addEventListener('click', () => {
     const quiz = {
         id: document.getElementById('quizId').value.trim(),
