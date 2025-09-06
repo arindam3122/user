@@ -1525,3 +1525,50 @@ header {
 .removeQuestionBtn:hover {
   background: #c0392b !important;
 }
+.question-block {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.question-header {
+  background: #eaeaea;
+  padding: 8px 12px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.question-header .question-title {
+  color: #333;
+}
+
+.question-header button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.toggleQuestionBtn {
+  font-weight: bold;
+  color: #555;
+}
+
+.removeQuestionBtn {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+.removeQuestionBtn:hover {
+  color: #e74c3c;
+}
+
+.question-body {
+  padding: 12px;
+}
