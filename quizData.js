@@ -32,50 +32,6 @@ const quizzes = [
         ]
     },
     {
-        id: "GK",
-        name: "GK Questions",
-        description: "",
-        enabled: true,
-        questions: [
-            {
-               question: "Who is known as the Missile Man of India?", 
-               type: "mcq",
-               options: [
-                           "Homi J. Bhabha",
-                           "Vikram Sarabhai",
-                           "C.V. Raman",
-                           "Dr. A.P.J. Abdul Kalam"
-                        ],
-                answer: "Dr. A.P.J. Abdul Kalam",
-                timeLimit: 45
-            },
-            {
-               question: "Which is the largest state of India (by area)?", 
-               type: "mcq",
-               options: [
-                           "Uttar Pradesh",
-                           "Madhya Pradesh",
-                           "Maharashtra",
-                           "Rajasthan"
-                        ],
-                answer: "Rajasthan",
-                timeLimit: 45
-            },
-            {
-               question: "Who invented the telephone?", 
-               type: "mcq",
-               options: [
-                           "Thomas Edison",
-                           "Alexander Graham Bell",
-                           "James Watt",
-                           "Michael Faraday"
-                        ],
-                answer: "Alexander Graham Bell",
-                timeLimit: 45
-            },
-        ]
-    },
-    {
         id: "General Math",
         name: "General Math (2QS)",
         description: "Math questions based on Algebra, Percentage, Time & work, Geometry and Probability",
@@ -115,5 +71,31 @@ const quizzes = [
             },
         ]
     },
+    {
+        id: "Gk",
+        name: "General Knowledge",
+        description: "Test on General Knowledge",
+        enabled: false,
+        questions: [
+            {
+                "question": "What is the capital of France?",
+                "type": "input",
+                "options": [],
+                "answer": "Paris",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "In which year did India gain independence?",
+                "type": "input",
+                "options": [],
+                "answer": "1947",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            }
+        ]
+    }
     
 ];
