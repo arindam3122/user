@@ -238,8 +238,128 @@ function loadArchivedQuizzes() {
         deleteBtn.classList.add("delete-quiz-btn");
         deleteBtn.onclick = () => deleteArchivedQuiz(quiz.id);
         actionsCell.appendChild(deleteBtn);
+
+        // ✅ NEW: Download button (Admins only)
+        if (ADMIN_USERS.includes(localStorage.getItem('loggedInUser'))) {
+            const downloadBtn = document.createElement("button");
+            downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download';
+            downloadBtn.classList.add("download-quiz-btn");
+            downloadBtn.onclick = () => downloadArchivedQuiz(quiz);
+            actionsCell.appendChild(downloadBtn);
+        }
     });
 }
+
+
+// ✅ NEW FUNCTION: Download archived quiz as PDF
+async function downloadArchivedQuiz(quiz) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 15;
+    const maxLineWidth = pageWidth - margin * 2;
+    let y = 20;
+
+    // Title
+    doc.setFontSize(16);
+    doc.setFont("helvetica", "bold");
+    doc.text(`📘 Quiz: ${quiz.name}`, pageWidth / 2, y, { align: "center" });
+    y += 12;
+
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Total Questions: ${quiz.questions.length}`, margin, y);
+    y += 10;
+
+    // Questions
+    for (let i = 0; i < quiz.questions.length; i++) {
+        const q = quiz.questions[i];
+
+        // Auto page break
+        if (y > pageHeight - 30) {
+            doc.addPage();
+            y = 20;
+        }
+
+        // Question text (wrapped)
+        doc.setFont("helvetica", "bold");
+        const wrappedQ = doc.splitTextToSize(`${i + 1}. ${q.question}`, maxLineWidth);
+        doc.text(wrappedQ, margin, y);
+        y += wrappedQ.length * 7;
+
+        // Question image
+        if (q.imageUrl) {
+            try {
+                const img = new Image();
+                img.src = q.imageUrl;
+                await new Promise(resolve => { img.onload = resolve; });
+                const imgWidth = 80;
+                const imgHeight = (img.height / img.width) * imgWidth;
+                if (y + imgHeight > pageHeight - 20) { doc.addPage(); y = 20; }
+                doc.addImage(img, "JPEG", margin, y, imgWidth, imgHeight);
+                y += imgHeight + 5;
+            } catch (e) {
+                doc.text("(Image failed to load)", margin, y);
+                y += 8;
+            }
+        }
+
+        // Options (if MCQ)
+        doc.setFont("helvetica", "normal");
+        if (q.type === "mcq" && q.options) {
+            q.options.forEach((opt, idx) => {
+                const wrappedOpt = doc.splitTextToSize(`${String.fromCharCode(65 + idx)}. ${opt}`, maxLineWidth - 10);
+                doc.text(wrappedOpt, margin + 5, y);
+                y += wrappedOpt.length * 6;
+            });
+        }
+
+        // Answer
+        doc.setTextColor(0, 150, 0);
+        const wrappedAns = doc.splitTextToSize(`Answer: ${q.answer}`, maxLineWidth);
+        doc.text(wrappedAns, margin, y);
+        y += wrappedAns.length * 7;
+
+        // Time limit
+        if (q.timeLimit) {
+            doc.setTextColor(50, 50, 50);
+            doc.text(`Time Limit: ${q.timeLimit} sec`, margin, y);
+            y += 7;
+        }
+
+        // Explanation image
+        if (q.explanationImageUrl) {
+            try {
+                const expImg = new Image();
+                expImg.src = q.explanationImageUrl;
+                await new Promise(resolve => { expImg.onload = resolve; });
+                const imgWidth = 80;
+                const imgHeight = (expImg.height / expImg.width) * imgWidth;
+                if (y + imgHeight > pageHeight - 20) { doc.addPage(); y = 20; }
+                doc.addImage(expImg, "JPEG", margin, y, imgWidth, imgHeight);
+                y += imgHeight + 5;
+            } catch (e) {
+                doc.text("(Explanation image failed to load)", margin, y);
+                y += 7;
+            }
+        }
+
+        // Divider
+        doc.setDrawColor(180);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 8;
+
+        doc.setTextColor(0, 0, 0);
+    }
+
+    // Save PDF
+    const fileName = `${quiz.name.replace(/\s+/g, "_")}_Archived.pdf`;
+    doc.save(fileName);
+
+    showInfoModal(`✅ PDF generated for "${quiz.name}".`);
+}
+
 
 function showArchivedQuizDetails(quiz) {
     // Hide all sections, including the archived quizzes table
@@ -1511,7 +1631,6 @@ async function downloadQuizResponse(quiz) {
 
     showInfoModal(`✅ Download completed. Please check your browser's default downloads folder for "${fileName}".`);
 }
-
 
 
 

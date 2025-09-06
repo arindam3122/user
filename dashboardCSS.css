@@ -1572,3 +1572,26 @@ header {
 .question-body {
   padding: 12px;
 }
+/* Download Quiz Button */
+/* Download Quiz Button */
+.download-quiz-btn {
+    background-color: #6f42c1;   /* Purple */
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    margin: 4px 6px;             /* Adds gap between buttons */
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.download-quiz-btn:hover {
+    background-color: #563d7c;   /* Darker purple on hover */
+    transform: translateY(-2px);
+}
+
+.download-quiz-btn i {
+    margin-right: 5px;           /* Adds small gap before text */
+}
