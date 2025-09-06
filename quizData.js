@@ -71,31 +71,5 @@ const quizzes = [
             },
         ]
     },
-    {
-        id: "Gk",
-        name: "General Knowledge",
-        description: "Test on General Knowledge",
-        enabled: false,
-        questions: [
-            {
-                "question": "What is the capital of France?",
-                "type": "input",
-                "options": [],
-                "answer": "Paris",
-                "timeLimit": 60,
-                "imageUrl": "",
-                "explanationImageUrl": ""
-            },
-            {
-                "question": "In which year did India gain independence?",
-                "type": "input",
-                "options": [],
-                "answer": "1947",
-                "timeLimit": 60,
-                "imageUrl": "",
-                "explanationImageUrl": ""
-            }
-        ]
-    }
     
 ];
