@@ -1668,41 +1668,48 @@ document.getElementById('addQuestionBtn').addEventListener('click', () => {
     qBlock.style.padding = "10px";
     qBlock.style.margin = "10px 0";
 
-    qBlock.innerHTML = `
-      <label>Question:</label>
-      <textarea class="questionText"></textarea><br><br>
+qBlock.innerHTML = `
+  <label>Question:</label>
+  <textarea class="questionText"></textarea><br><br>
 
-      <label>Type:</label>
-      <select class="questionType">
-        <option value="input">Input</option>
-        <option value="mcq">MCQ</option>
-      </select><br><br>
+  <label>Type:</label>
+  <select class="questionType">
+    <option value="input">Input</option>
+    <option value="mcq">MCQ</option>
+  </select><br><br>
 
-      <div class="mcqOptions" style="display:none;">
-        <label>Options:</label><br>
-        <input type="text" class="optionField" placeholder="Option 1"><br>
-        <input type="text" class="optionField" placeholder="Option 2"><br>
-        <input type="text" class="optionField" placeholder="Option 3"><br>
-        <input type="text" class="optionField" placeholder="Option 4"><br><br>
-      </div>
+  <div class="mcqOptions" style="display:none;">
+    <label>Options:</label><br>
+    <input type="text" class="optionField" placeholder="Option 1"><br>
+    <input type="text" class="optionField" placeholder="Option 2"><br>
+    <input type="text" class="optionField" placeholder="Option 3"><br>
+    <input type="text" class="optionField" placeholder="Option 4"><br><br>
+  </div>
 
-      <label>Answer:</label>
-      <input type="text" class="questionAnswer"><br><br>
+  <label>Answer:</label>
+  <input type="text" class="questionAnswer"><br><br>
 
-      <label>Time Limit (sec):</label>
-      <input type="number" class="questionTime" value="30"><br><br>
+  <label>Time Limit (sec):</label>
+  <input type="number" class="questionTime" value="30"><br><br>
 
-      <label>Question Image URL:</label>
-      <input type="text" class="questionImage"><br><br>
+  <label>Question Image URL:</label>
+  <input type="text" class="questionImage"><br><br>
 
-      <label>Explanation Image URL:</label>
-      <input type="text" class="explanationImage"><br><br>
-    `;
+  <label>Explanation Image URL:</label>
+  <input type="text" class="explanationImage"><br><br>
+
+  <button type="button" class="removeQuestionBtn">❌ Remove Question</button>
+`;
+
 
     // Toggle MCQ inputs
     qBlock.querySelector('.questionType').addEventListener('change', (e) => {
         qBlock.querySelector('.mcqOptions').style.display = e.target.value === 'mcq' ? 'block' : 'none';
     });
+    qBlock.querySelector('.removeQuestionBtn').addEventListener('click', () => {
+    qBlock.remove();
+});
+
 
     document.getElementById('questionsContainer').appendChild(qBlock);
 });

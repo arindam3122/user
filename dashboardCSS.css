@@ -1516,3 +1516,12 @@ header {
   resize: vertical;
   min-height: 60px;
 }
+.removeQuestionBtn {
+  background: #e74c3c !important;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.removeQuestionBtn:hover {
+  background: #c0392b !important;
+}
