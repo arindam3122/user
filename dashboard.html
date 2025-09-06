@@ -17,6 +17,7 @@
   <ul>
     <li><a href="#" id="dashboardLink" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
     <li><a href="#" id="startQuizLink"><i class="fas fa-arrow-right"></i> Start Quiz</a></li>
+    <li><a href="#" id="createQuizLink"><i class="fas fa-plus-circle"></i> Create Quiz</a></li>
     <li><a href="#" id="previousQuizzesLink"><i class="fas fa-history"></i> Previous Quizzes</a></li>
     <li><a href="#" id="archivedQuizzesLink"><i class="fas fa-archive"></i>Archived Quizzes</a></li>
     <li><a href="#" id="performanceTrendsLink"><i class="fas fa-chart-line"></i> Performance Trends</a></li>
@@ -148,6 +149,28 @@
     </p>
   </div>
 </div>
+<div id="createQuizContainer" style="display:none; padding:20px;">
+  <h2>Create New Quiz</h2>
+
+  <label>Quiz ID:</label>
+  <input type="text" id="quizId" placeholder="Unique ID"><br><br>
+
+  <label>Quiz Name:</label>
+  <input type="text" id="quizName" placeholder="Quiz Name"><br><br>
+
+  <label>Description:</label>
+  <textarea id="quizDescription" placeholder="Description"></textarea><br><br>
+
+  <label>Enabled:</label>
+  <input type="checkbox" id="quizEnabled" checked><br><br>
+
+  <h3>Questions</h3>
+  <div id="questionsContainer"></div>
+  <button id="addQuestionBtn">+ Add Question</button><br><br>
+
+  <button id="downloadQuizBtn">💾 Download Quiz JSON</button>
+</div>
+
 
   </div>
 

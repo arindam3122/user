@@ -16,7 +16,8 @@ function formatTime(totalSeconds) {
     const formattedSeconds = String(seconds).padStart(2, 0);
     return `${formattedMinutes} min : ${formattedSeconds} sec`;
 }
-
+const createQuizLink = document.getElementById('createQuizLink');
+const createQuizContainer = document.getElementById('createQuizContainer');
 const quizInfoBox = document.getElementById('quizInfoBox');
 const quizContainer = document.getElementById('quizContainer');
 const finalScoreContainer = document.getElementById('finalScoreContainer');
@@ -119,6 +120,21 @@ function showInfoModal(message) {
         hideInfoModal();
     };
 }
+createQuizLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    setActiveLink(createQuizLink);
+    showCreateQuizSection();
+    closeSidebar();
+});
+
+function showCreateQuizSection() {
+    hideAllSections();
+    if (!ADMIN_USERS.includes(localStorage.getItem('loggedInUser'))) {
+        showInfoModal("Only admins can create quizzes.");
+        return;
+    }
+    createQuizContainer.style.display = 'block';
+}
 
 /**
  * Hides the custom information/alert modal.
@@ -167,6 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!ADMIN_USERS.includes(loggedInUser)) {
             if (archivedQuizzesLink) archivedQuizzesLink.style.display = "none";
         }
+
+        if (!ADMIN_USERS.includes(loggedInUser)) {
+    if (archivedQuizzesLink) archivedQuizzesLink.style.display = "none";
+    if (createQuizLink) createQuizLink.style.display = "none"; // hide Create Quiz tab
+}
 
         goToDashboard();
     }
@@ -474,6 +495,7 @@ function hideAllSections() {
     quizInfoBox.style.display = 'none';
     quizContainer.style.display = 'none';
     finalScoreContainer.style.display = 'none';
+    createQuizContainer.style.display = 'none';
     quizResultsDetails.style.display = 'none';
     previousQuizzesContainer.style.display = 'none';
     quizSelectionContainer.style.display = 'none';
@@ -1638,6 +1660,84 @@ function showQuizResultsDetails(result) {
 
     document.getElementById('quizResultsBackButton').onclick = showPreviousQuizzesSection;
 }
+document.getElementById('addQuestionBtn').addEventListener('click', () => {
+    const qIndex = document.querySelectorAll('.question-block').length;
+    const qBlock = document.createElement('div');
+    qBlock.classList.add('question-block');
+    qBlock.style.border = "1px solid #ccc";
+    qBlock.style.padding = "10px";
+    qBlock.style.margin = "10px 0";
+
+    qBlock.innerHTML = `
+      <label>Question:</label>
+      <textarea class="questionText"></textarea><br><br>
+
+      <label>Type:</label>
+      <select class="questionType">
+        <option value="input">Input</option>
+        <option value="mcq">MCQ</option>
+      </select><br><br>
+
+      <div class="mcqOptions" style="display:none;">
+        <label>Options:</label><br>
+        <input type="text" class="optionField" placeholder="Option 1"><br>
+        <input type="text" class="optionField" placeholder="Option 2"><br>
+        <input type="text" class="optionField" placeholder="Option 3"><br>
+        <input type="text" class="optionField" placeholder="Option 4"><br><br>
+      </div>
+
+      <label>Answer:</label>
+      <input type="text" class="questionAnswer"><br><br>
+
+      <label>Time Limit (sec):</label>
+      <input type="number" class="questionTime" value="30"><br><br>
+
+      <label>Question Image URL:</label>
+      <input type="text" class="questionImage"><br><br>
+
+      <label>Explanation Image URL:</label>
+      <input type="text" class="explanationImage"><br><br>
+    `;
+
+    // Toggle MCQ inputs
+    qBlock.querySelector('.questionType').addEventListener('change', (e) => {
+        qBlock.querySelector('.mcqOptions').style.display = e.target.value === 'mcq' ? 'block' : 'none';
+    });
+
+    document.getElementById('questionsContainer').appendChild(qBlock);
+});
+document.getElementById('downloadQuizBtn').addEventListener('click', () => {
+    const quiz = {
+        id: document.getElementById('quizId').value.trim(),
+        name: document.getElementById('quizName').value.trim(),
+        description: document.getElementById('quizDescription').value.trim(),
+        enabled: document.getElementById('quizEnabled').checked,
+        questions: []
+    };
+
+    document.querySelectorAll('.question-block').forEach(q => {
+        const type = q.querySelector('.questionType').value;
+        const options = type === 'mcq' ? Array.from(q.querySelectorAll('.optionField')).map(o => o.value.trim()) : [];
+        
+        quiz.questions.push({
+            question: q.querySelector('.questionText').value.trim(),
+            type,
+            options,
+            answer: q.querySelector('.questionAnswer').value.trim(),
+            timeLimit: parseInt(q.querySelector('.questionTime').value) || 30,
+            imageUrl: q.querySelector('.questionImage').value.trim(),
+            explanationImageUrl: q.querySelector('.explanationImage').value.trim()
+        });
+    });
+
+    const blob = new Blob([JSON.stringify([quiz], null, 4)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${quiz.name.replace(/\s+/g, '_')}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+});
 
 
 quizContainer.style.display = 'none';

@@ -115,4 +115,35 @@ const quizzes = [
             },
         ]
     },
+    {
+        id: "English test",
+        name: "English",
+        description: "A test on bottle of dew",
+        enabled: true,
+        questions: [
+            {
+                "question": "What is the Capital Of India",
+                "type": "input",
+                "options": [],
+                "answer": "New Delhi",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the Capital Of India",
+                "type": "mcq",
+                "options": [
+                    "New Delhi",
+                    "China",
+                    "Bejing",
+                    "None"
+                ],
+                "answer": "New Delhi",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            }
+        ]
+    }
 ];
