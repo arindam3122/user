@@ -255,114 +255,124 @@ function loadArchivedQuizzes() {
 }
 
 
-// ✅ NEW FUNCTION: Download archived quiz as PDF
+// ✅ FIXED FUNCTION: Download archived quiz as PDF (better margins, safe text wrapping, smaller readable images)
 async function downloadArchivedQuiz(quiz) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
-    const margin = 15;
+
+    const margin = 20;
     const maxLineWidth = pageWidth - margin * 2;
-    let y = 20;
+    const maxImgWidth = (pageWidth - margin * 2) * 0.65; // about 65% of text width
+    const maxImgHeight = 80; // smaller height for readability
+    const lineSpacing = 8;
+    let y = margin;
+
+    function checkPageBreak(extraHeight = 0) {
+        if (y + extraHeight > pageHeight - margin) {
+            doc.addPage();
+            y = margin;
+        }
+    }
+
+    async function addImage(imgUrl) {
+        try {
+            const img = new Image();
+            img.src = imgUrl;
+            await new Promise(resolve => { img.onload = resolve; });
+
+            let imgWidth = img.width;
+            let imgHeight = img.height;
+
+            if (imgWidth > maxImgWidth) {
+                imgHeight *= maxImgWidth / imgWidth;
+                imgWidth = maxImgWidth;
+            }
+            if (imgHeight > maxImgHeight) {
+                imgWidth *= maxImgHeight / imgHeight;
+                imgHeight = maxImgHeight;
+            }
+
+            checkPageBreak(imgHeight + 10);
+            doc.addImage(img, "JPEG", margin, y, imgWidth, imgHeight);
+            y += imgHeight + 5;
+        } catch {
+            doc.text("(Image failed to load)", margin, y);
+            y += lineSpacing;
+        }
+    }
 
     // Title
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
     doc.text(`📘 Quiz: ${quiz.name}`, pageWidth / 2, y, { align: "center" });
-    y += 12;
+    y += lineSpacing * 2;
 
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
     doc.text(`Total Questions: ${quiz.questions.length}`, margin, y);
-    y += 10;
+    y += lineSpacing * 1.5;
 
     // Questions
     for (let i = 0; i < quiz.questions.length; i++) {
         const q = quiz.questions[i];
+        checkPageBreak(lineSpacing * 4);
 
-        // Auto page break
-        if (y > pageHeight - 30) {
-            doc.addPage();
-            y = 20;
-        }
-
-        // Question text (wrapped)
+        // Question text
         doc.setFont("helvetica", "bold");
         const wrappedQ = doc.splitTextToSize(`${i + 1}. ${q.question}`, maxLineWidth);
-        doc.text(wrappedQ, margin, y);
-        y += wrappedQ.length * 7;
+        wrappedQ.forEach(line => {
+            checkPageBreak(lineSpacing);
+            doc.text(line, margin, y);
+            y += lineSpacing;
+        });
 
-        // Question image
-        if (q.imageUrl) {
-            try {
-                const img = new Image();
-                img.src = q.imageUrl;
-                await new Promise(resolve => { img.onload = resolve; });
-                const imgWidth = 80;
-                const imgHeight = (img.height / img.width) * imgWidth;
-                if (y + imgHeight > pageHeight - 20) { doc.addPage(); y = 20; }
-                doc.addImage(img, "JPEG", margin, y, imgWidth, imgHeight);
-                y += imgHeight + 5;
-            } catch (e) {
-                doc.text("(Image failed to load)", margin, y);
-                y += 8;
-            }
-        }
+        if (q.imageUrl) await addImage(q.imageUrl);
 
-        // Options (if MCQ)
         doc.setFont("helvetica", "normal");
         if (q.type === "mcq" && q.options) {
             q.options.forEach((opt, idx) => {
                 const wrappedOpt = doc.splitTextToSize(`${String.fromCharCode(65 + idx)}. ${opt}`, maxLineWidth - 10);
-                doc.text(wrappedOpt, margin + 5, y);
-                y += wrappedOpt.length * 6;
+                wrappedOpt.forEach(line => {
+                    checkPageBreak(lineSpacing);
+                    doc.text(line, margin + 5, y);
+                    y += lineSpacing;
+                });
             });
         }
 
-        // Answer
         doc.setTextColor(0, 150, 0);
         const wrappedAns = doc.splitTextToSize(`Answer: ${q.answer}`, maxLineWidth);
-        doc.text(wrappedAns, margin, y);
-        y += wrappedAns.length * 7;
+        wrappedAns.forEach(line => {
+            checkPageBreak(lineSpacing);
+            doc.text(line, margin, y);
+            y += lineSpacing;
+        });
+        doc.setTextColor(0, 0, 0);
 
-        // Time limit
         if (q.timeLimit) {
-            doc.setTextColor(50, 50, 50);
+            checkPageBreak(lineSpacing);
             doc.text(`Time Limit: ${q.timeLimit} sec`, margin, y);
-            y += 7;
+            y += lineSpacing;
         }
 
-        // Explanation image
-        if (q.explanationImageUrl) {
-            try {
-                const expImg = new Image();
-                expImg.src = q.explanationImageUrl;
-                await new Promise(resolve => { expImg.onload = resolve; });
-                const imgWidth = 80;
-                const imgHeight = (expImg.height / expImg.width) * imgWidth;
-                if (y + imgHeight > pageHeight - 20) { doc.addPage(); y = 20; }
-                doc.addImage(expImg, "JPEG", margin, y, imgWidth, imgHeight);
-                y += imgHeight + 5;
-            } catch (e) {
-                doc.text("(Explanation image failed to load)", margin, y);
-                y += 7;
-            }
-        }
+        if (q.explanationImageUrl) await addImage(q.explanationImageUrl);
 
-        // Divider
+        checkPageBreak(lineSpacing);
         doc.setDrawColor(180);
         doc.line(margin, y, pageWidth - margin, y);
-        y += 8;
-
-        doc.setTextColor(0, 0, 0);
+        y += lineSpacing;
     }
 
-    // Save PDF
     const fileName = `${quiz.name.replace(/\s+/g, "_")}_Archived.pdf`;
     doc.save(fileName);
 
     showInfoModal(`✅ PDF generated for "${quiz.name}".`);
 }
+
+
+
 
 
 function showArchivedQuizDetails(quiz) {
