@@ -1,7 +1,6 @@
 const users = [
     { id: "Arindam", name: "Arindam Mitra", password: "Arindammitra166", enabled: true },
     { id: "Shabnur", name: "Shabnur Khatun", password: "Shabnur Khatun", enabled: true },
-    { id: "pre", name: "Prerana Ghosh", password: "Prerana", enabled: false },
     { id: "roni", name: "Roni Mitra", password: "Roni", enabled: true },
     { id: "sourav", name: "Sourav Gangopadhyay (admin)", password: "Sourav Gangopadhyay", enabled: true },
     { id: "kapuida", name: "Kapuida", password: "Kapuida", enabled: true },
