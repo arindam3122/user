@@ -960,6 +960,76 @@ function handleSubmitButtonClick() {
         quizCompletedMessage.classList.remove('show');
     }, 3000);
 }
+// ✅ Handle quiz download (clean JSON, no extra inverted quotes)
+const downloadQuizBtn = document.getElementById("downloadQuizBtn");
+
+if (downloadQuizBtn) {
+  downloadQuizBtn.addEventListener("click", () => {
+    const quizId = document.getElementById("quizId").value.trim();
+    const quizName = document.getElementById("quizName").value.trim();
+    const quizDescription = document.getElementById("quizDescription").value.trim();
+    const quizEnabled = document.getElementById("quizEnabled").checked;
+
+    if (!quizId || !quizName) {
+      showInfoModal("⚠️ Quiz ID and Name are required!");
+      return;
+    }
+
+    // Example: normally you'd also loop through #questionsContainer here
+    const newQuiz = {
+      id: quizId,
+      name: quizName,
+      description: quizDescription,
+      enabled: quizEnabled,
+      questions: [
+        {
+          question: "Sample Q",
+          type: "input",
+          options: [],
+          answer: "Sample Answer",
+          timeLimit: 30,
+          imageUrl: "",
+          explanationImageUrl: ""
+        }
+      ]
+    };
+
+    // ✅ Build JavaScript file content (unquoted keys)
+    const jsContent = 
+`const quizzes = [
+  {
+    id: "${newQuiz.id}",
+    name: "${newQuiz.name}",
+    description: "${newQuiz.description}",
+    enabled: ${newQuiz.enabled},
+    questions: [
+      {
+        question: "${newQuiz.questions[0].question}",
+        type: "${newQuiz.questions[0].type}",
+        options: [],
+        answer: "${newQuiz.questions[0].answer}",
+        timeLimit: ${newQuiz.questions[0].timeLimit},
+        imageUrl: "${newQuiz.questions[0].imageUrl}",
+        explanationImageUrl: "${newQuiz.questions[0].explanationImageUrl}"
+      }
+    ]
+  }
+];`;
+
+    // Save as .js file
+    const blob = new Blob([jsContent], { type: "application/javascript" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${quizName.replace(/\s+/g, "_")}.js`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+
+
+
 
 function updateProgressBar() {
     const progress = ((currentQuestionIndex + 1) / currentQuiz.questions.length) * 100;
