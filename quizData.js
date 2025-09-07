@@ -4,7 +4,7 @@ const quizzes = [
         "id": "class 6",
         "name": "Test on english",
         "description": "English test",
-        "enabled": true,
+        "enabled": false,
         "questions": [
             {
                 "question": "What is the capital of india",
