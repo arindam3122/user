@@ -16,6 +16,9 @@ function formatTime(totalSeconds) {
     const formattedSeconds = String(seconds).padStart(2, 0);
     return `${formattedMinutes} min : ${formattedSeconds} sec`;
 }
+const previewQuizBtn = document.getElementById('previewQuizBtn');
+const quizPreviewContainer = document.getElementById('quizPreviewContainer');
+const quizPreviewContent = document.getElementById('quizPreviewContent');
 const createQuizLink = document.getElementById('createQuizLink');
 const createQuizContainer = document.getElementById('createQuizContainer');
 const quizInfoBox = document.getElementById('quizInfoBox');
@@ -120,6 +123,79 @@ function showInfoModal(message) {
         hideInfoModal();
     };
 }
+const mergeAllQuizzesBtn = document.getElementById('mergeAllQuizzesBtn');
+
+mergeAllQuizzesBtn.addEventListener('click', () => {
+    const archived = JSON.parse(localStorage.getItem("allQuizzesArchive")) || [];
+    const active = (typeof quizzes !== "undefined") ? quizzes : [];
+
+    // Collect current quiz from form
+    const quizId = document.getElementById('quizId').value.trim();
+    const quizName = document.getElementById('quizName').value.trim();
+    const quizDescription = document.getElementById('quizDescription').value.trim();
+    const enabled = document.getElementById('quizEnabled').checked;
+
+    let currentFormQuiz = null;
+
+    if (quizId && quizName) {
+        const questionDivs = document.querySelectorAll('#questionsContainer .question-block');
+        const questions = [];
+
+        questionDivs.forEach(div => {
+            const qText = div.querySelector('.question-input')?.value.trim() || "";
+            const qAnswer = div.querySelector('.answer-input')?.value.trim() || "";
+            const optionsText = div.querySelector('.options-input')?.value.trim() || "";
+            const options = optionsText ? optionsText.split(",").map(opt => opt.trim()) : [];
+
+            // only add non-empty questions
+            if (qText) {
+                questions.push({
+                    question: qText,
+                    answer: qAnswer,
+                    options,
+                    type: options.length > 0 ? "mcq" : "input",
+                    timeLimit: 15
+                });
+            }
+        });
+
+        currentFormQuiz = {
+            id: quizId,
+            name: quizName,
+            description: quizDescription,
+            enabled,
+            questions
+        };
+    }
+
+    // Merge active, archived, and form quiz
+    let merged = [...active, ...archived];
+    if (currentFormQuiz) merged.push(currentFormQuiz);
+
+    if (merged.length === 0) {
+        showInfoModal("❌ No quizzes found! Please fill in Quiz ID and Quiz Name in the form.");
+        return;
+    }
+
+    // Pretty-print
+    let jsonStr = JSON.stringify(merged, null, 2);
+    jsonStr = jsonStr.replace(/"([a-zA-Z_][a-zA-Z0-9_]*)":/g, '$1:');
+
+    const jsContent = `// quizData.js\nconst quizzes = ${jsonStr};\n\nexport default quizzes;`;
+
+    const blob = new Blob([jsContent], { type: "application/javascript" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "quizData.js";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    showInfoModal(`✅ ${merged.length} quizzes merged (including current form quiz if valid) and downloaded as quizData.js!`);
+});
+
+
 createQuizLink.addEventListener('click', (e) => {
     e.preventDefault();
     setActiveLink(createQuizLink);

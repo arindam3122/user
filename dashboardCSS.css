@@ -1595,3 +1595,23 @@ header {
 .download-quiz-btn i {
     margin-right: 5px;           /* Adds small gap before text */
 }
+#mergeAllQuizzesBtn {
+  background-color: #9b59b6;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#mergeAllQuizzesBtn:hover {
+  background-color: #8e44ad;
+  transform: translateY(-2px);
+}
