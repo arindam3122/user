@@ -1517,14 +1517,15 @@ header {
   min-height: 60px;
 }
 .removeQuestionBtn {
-  background: #e74c3c !important;
+  background: #550a04 !important;
   margin-top: 10px;
   display: inline-block;
 }
 
 .removeQuestionBtn:hover {
-  background: #c0392b !important;
+  background: #941002 !important;
 }
+
 .question-block {
   background: #f9f9f9;
   border: 1px solid #ddd;
@@ -1559,16 +1560,6 @@ header {
   font-weight: bold;
   color: #555;
 }
-
-.removeQuestionBtn {
-  color: #8e1306;
-  font-weight: bold;
-}
-
-.removeQuestionBtn:hover {
-  color: #e74c3c;
-}
-
 .question-body {
   padding: 12px;
 }
