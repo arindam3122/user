@@ -4,6 +4,7 @@ const users = [
     { id: "roni", name: "Roni Mitra", password: "Roni", enabled: true },
     { id: "sourav", name: "Sourav Gangopadhyay (admin)", password: "Sourav Gangopadhyay", enabled: true },
     { id: "kapuida", name: "Kapuida", password: "Kapuida", enabled: true },
+    { id: "Shreaya", name: "Shreaya Dey", password: "sis", enabled: true },
 ];
 
 function validateLogin() {
