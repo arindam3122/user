@@ -1,37 +1,6 @@
 // mergedQuizData.js
 const quizzes = [
     {
-        "id": "class 6",
-        "name": "Test on english",
-        "description": "English test",
-        "enabled": false,
-        "questions": [
-            {
-                "question": "What is the capital of india",
-                "type": "input",
-                "options": [],
-                "answer": "New delhi",
-                "timeLimit": 30,
-                "imageUrl": "",
-                "explanationImageUrl": ""
-            },
-            {
-                "question": "What is the capital of india?",
-                "type": "mcq",
-                "options": [
-                    "New delhi",
-                    "france",
-                    "italy",
-                    "none"
-                ],
-                "answer": "New delhi",
-                "timeLimit": 30,
-                "imageUrl": "",
-                "explanationImageUrl": ""
-            }
-        ]
-    },
-    {
         "id": "simple quiz",
         "name": "Trial Quiz",
         "description": "This quiz contains just a demo of how the site works. Feel free to explore the tabs after attempting this module.",
