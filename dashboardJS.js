@@ -868,17 +868,6 @@ function updateTimeTakenBeforeMoving() {
     }
 }
 
-/*
-// Removed as previous button is removed
-function handlePrevButtonClick() {
-    if (currentQuestionIndex > 0) {
-        updateTimeTakenBeforeMoving(); // Record time for the question just left
-        currentQuestionIndex--;
-        loadQuestion();
-    }
-}
-*/
-
 function handleSkipButtonClick() {
     // If the user has selected an answer, they cannot skip.
     // If no answer is selected, mark as skipped.
