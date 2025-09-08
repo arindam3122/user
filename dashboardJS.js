@@ -16,9 +16,6 @@ function formatTime(totalSeconds) {
     const formattedSeconds = String(seconds).padStart(2, 0);
     return `${formattedMinutes} min : ${formattedSeconds} sec`;
 }
-const previewQuizBtn = document.getElementById('previewQuizBtn');
-const quizPreviewContainer = document.getElementById('quizPreviewContainer');
-const quizPreviewContent = document.getElementById('quizPreviewContent');
 const createQuizLink = document.getElementById('createQuizLink');
 const createQuizContainer = document.getElementById('createQuizContainer');
 const quizInfoBox = document.getElementById('quizInfoBox');
