@@ -58,6 +58,336 @@ const quizzes = [
         ]
     },
     {
+        "id": "Internet & Web Technology",
+        "name": "Internet & Web Technology",
+        "description": "",
+        "enabled": false,
+        "questions": [
+            {
+                "question": "What is the main function of a web browser?",
+                "type": "mcq",
+                "options": [
+                    "Send emails",
+                    "Access web pages",
+                    "Store files",
+                    "Connect to Wi-Fi"
+                ],
+                "answer": "Access web pages",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is not a web browser?",
+                "type": "mcq",
+                "options": [
+                    "Google Chrome",
+                    "Microsoft Edge",
+                    "Mozilla Firefox",
+                    "Microsoft Office"
+                ],
+                "answer": "Microsoft Office",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the HTTP protocol stand for?",
+                "type": "mcq",
+                "options": [
+                    "HyperText Transfer Protocol",
+                    "HyperTerminal Transfer Protocol",
+                    "HyperText Terminal Protocol",
+                    "Hyper Transfer Protocol"
+                ],
+                "answer": "HyperText Transfer Protocol",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the URL “www.example.com” represent?",
+                "type": "mcq",
+                "options": [
+                    "The protocol",
+                    "The domain name",
+                    "The file location",
+                    "The IP address"
+                ],
+                "answer": "The domain name",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which search engine is the most popular globally?",
+                "type": "mcq",
+                "options": [
+                    "Bing",
+                    "Yahoo",
+                    "Google",
+                    "DuckDuckGo"
+                ],
+                "answer": "Google",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a keyword in search engines?",
+                "type": "mcq",
+                "options": [
+                    "A special code for websites",
+                    "A word used to define a specific page",
+                    "A search term used by users to find information",
+                    "A browser plugin for faster browsing"
+                ],
+                "answer": "A search term used by users to find information",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is SEO in the context of web search?",
+                "type": "mcq",
+                "options": [
+                    "Search Engine Optimization",
+                    "Simple Entry Options",
+                    "Secure Encryption Online",
+                    "Search Evaluation Operation"
+                ],
+                "answer": "Search Engine Optimization",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is NOT a search engine?",
+                "type": "mcq",
+                "options": [
+                    "Google",
+                    "Bing",
+                    "Amazon",
+                    "Yahoo"
+                ],
+                "answer": "Amazon",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does “Organic Search Results” refer to?",
+                "type": "mcq",
+                "options": [
+                    "Paid search results",
+                    "Results that are based on an algorithm",
+                    "Results influenced by user location",
+                    "Social media-based results"
+                ],
+                "answer": "Results that are based on an algorithm",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a widely used email service?",
+                "type": "mcq",
+                "options": [
+                    "Gmail",
+                    "Skype",
+                    "Facebook Messenger",
+                    "WhatsApp"
+                ],
+                "answer": "Gmail",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the primary purpose of cloud storage?",
+                "type": "mcq",
+                "options": [
+                    "Store software",
+                    "Store files online for remote access",
+                    "Send emails",
+                    "Generate random passwords"
+                ],
+                "answer": "Store files online for remote access",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the maximum file size that can be attached to a Gmail email?",
+                "type": "mcq",
+                "options": [
+                    "10 MB",
+                    "25 MB",
+                    "50 MB",
+                    "100 MB"
+                ],
+                "answer": "25 MB",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is not a cloud storage service?",
+                "type": "mcq",
+                "options": [
+                    "Google Drive",
+                    "Dropbox",
+                    "OneDrive",
+                    "Microsoft Excel"
+                ],
+                "answer": "Microsoft Excel",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What social media platform is primarily for professional networking?",
+                "type": "mcq",
+                "options": [
+                    "Instagram",
+                    "LinkedIn",
+                    "Snapchat",
+                    "Twitter"
+                ],
+                "answer": "LinkedIn",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following features allows people to interact with content on Facebook?",
+                "type": "mcq",
+                "options": [
+                    "Tags",
+                    "Likes",
+                    "Shares",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a cloud storage service from Google?",
+                "type": "mcq",
+                "options": [
+                    "iCloud",
+                    "Google Drive",
+                    "OneDrive",
+                    "Amazon Cloud"
+                ],
+                "answer": "Google Drive",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the primary function of social media platforms?",
+                "type": "mcq",
+                "options": [
+                    "File storage",
+                    "User interaction and content sharing",
+                    "Secure communication",
+                    "Software downloads"
+                ],
+                "answer": "User interaction and content sharing",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an example of a digital communication tool?",
+                "type": "mcq",
+                "options": [
+                    "Zoom",
+                    "Dropbox",
+                    "Google Docs",
+                    "VLC Player"
+                ],
+                "answer": "Zoom",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the acronym “DM” stand for in social media?",
+                "type": "mcq",
+                "options": [
+                    "Digital Media",
+                    "Direct Message",
+                    "Download Manager",
+                    "Data Management"
+                ],
+                "answer": "Direct Message",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is phishing in cybersecurity?",
+                "type": "mcq",
+                "options": [
+                    "Unauthorized access to data",
+                    "A method of stealing sensitive information by impersonating legitimate sources",
+                    "Encrypting data for security",
+                    "Filtering spam emails"
+                ],
+                "answer": "A method of stealing sensitive information by impersonating legitimate sources",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the purpose of using a strong password?",
+                "type": "mcq",
+                "options": [
+                    "To make passwords easier to remember",
+                    "To prevent unauthorized access to accounts",
+                    "To store sensitive data",
+                    "To manage multiple accounts"
+                ],
+                "answer": "To prevent unauthorized access to accounts",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an example of two-factor authentication (2FA)?",
+                "type": "mcq",
+                "options": [
+                    "A password and a CAPTCHA",
+                    "A password and a fingerprint scan",
+                    "A password and a phone call",
+                    "A password and a username"
+                ],
+                "answer": "A password and a fingerprint scan",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which type of malware is designed to replicate itself and spread to other systems?",
+                "type": "mcq",
+                "options": [
+                    "Virus",
+                    "Trojan",
+                    "Worm",
+                    "Spyware"
+                ],
+                "answer": "Worm",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            }
+        ]
+    },
+    {
         "id": "11",
         "name": "Microsoft Office & Productivity Tools MS Word",
         "description": "",
