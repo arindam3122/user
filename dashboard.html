@@ -149,27 +149,48 @@
     </p>
   </div>
 </div>
-<div id="createQuizContainer" style="display:none; padding:20px;">
-  <h2>Create New Quiz</h2>
+<div id="createQuizContainer" style="display:none;">
+  <div class="create-quiz-card">
+    <h2 class="heading2"><i class="fas fa-plus-circle"></i> Create New Quiz</h2>
 
-  <label>Quiz ID:</label>
-  <input type="text" id="quizId" placeholder="Unique ID"><br><br>
+    <form id="createQuizForm" class="quiz-form">
+      <div class="form-group">
+        <label for="quizId">Quiz ID</label>
+        <input type="text" id="quizId" placeholder="Unique ID">
+      </div>
 
-  <label>Quiz Name:</label>
-  <input type="text" id="quizName" placeholder="Quiz Name"><br><br>
+      <div class="form-group">
+        <label for="quizName">Quiz Name</label>
+        <input type="text" id="quizName" placeholder="Enter quiz name">
+      </div>
 
-  <label>Description:</label>
-  <textarea id="quizDescription" placeholder="Description"></textarea><br><br>
+      <div class="form-group">
+        <label for="quizDescription">Description</label>
+        <textarea id="quizDescription" placeholder="Write a short description"></textarea>
+      </div>
 
-  <label>Enabled:</label>
-  <input type="checkbox" id="quizEnabled" checked><br><br>
+      <div class="form-group checkbox-group">
+        <label for="quizEnabled">
+          <input type="checkbox" id="quizEnabled" checked>
+          Enabled
+        </label>
+      </div>
 
-  <h3>Questions</h3>
-  <div id="questionsContainer"></div>
-  <button id="addQuestionBtn">+ Add Question</button><br><br>
+      <h3 class="heading3">Questions</h3>
+      <div id="questionsContainer" class="questions-container"></div>
+      <button type="button" id="addQuestionBtn" class="action-button add-btn">
+        <i class="fas fa-plus"></i> Add Question
+      </button>
 
-  <button id="downloadQuizBtn">💾 Download Quiz JSON file</button>
+      <div class="form-actions">
+        <button type="button" id="downloadQuizBtn" class="action-button save-btn">
+          <i class="fas fa-download"></i> Download Quiz JSON
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
+
 </div>
 
 
