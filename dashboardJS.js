@@ -599,14 +599,24 @@ function showArchivedQuizDetails(quiz) {
         const resultItem = document.createElement('div');
         resultItem.classList.add('result-item');
 
-        let imageHtml = q.imageUrl ? `<img src="${q.imageUrl}" class="question-result-image">` : '';
-        let explanationImageHtml = q.explanationImageUrl ? `<img src="${q.explanationImageUrl}" class="explanation-image">` : '';
+        let questionImageHtml = q.imageUrl ? `<img src="${q.imageUrl}" class="question-result-image">` : '';
+
+        // Toggle button for explanation image
+        let explanationButtonHtml = '';
+        if (q.explanationImageUrl) {
+            explanationButtonHtml = `
+                <button class="explanation-btn" onclick="toggleExplanationImage(this)">
+                    <i class="fas fa-image"></i> View Explanation Image
+                </button>
+                <img src="${q.explanationImageUrl}" class="explanation-image" style="display:none; margin-top:8px;">
+            `;
+        }
 
         resultItem.innerHTML = `
             <p class="question-text-result">${i + 1}. ${q.question}</p>
-            ${imageHtml}
+            ${questionImageHtml}
             <p><b>Answer:</b> <span class="correct-answer">${q.answer}</span></p>
-            ${explanationImageHtml}
+            ${explanationButtonHtml}
         `;
         resultsContainer.appendChild(resultItem);
     });
@@ -617,6 +627,7 @@ function showArchivedQuizDetails(quiz) {
         showArchivedQuizzesSection();
     };
 }
+
 
 function deleteArchivedQuiz(quizId) {
     let allQuizzes = JSON.parse(localStorage.getItem("allQuizzesArchive")) || [];
