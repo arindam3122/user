@@ -136,6 +136,130 @@ function showCreateQuizSection() {
     }
     createQuizContainer.style.display = 'block';
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) {
+        window.location.href = "index.html";
+    } else {
+        usernameDisplay.textContent = loggedInUser;
+        welcomeHeading.textContent = `Welcome, ${loggedInUser}!`;
+
+        // Show/hide nav depending on role
+        if (ADMIN_USERS.includes(loggedInUser)) {
+            // Replace Start Quiz nav label
+            startQuizLink.innerHTML = '<i class="fas fa-list"></i> All Quizzes';
+            startQuizLink.onclick = (e) => {
+                e.preventDefault();
+                setActiveLink(startQuizLink);
+                showAllQuizzesSection();
+                closeSidebar();
+            };
+        } else {
+            // Normal user - keep Start Quiz
+            startQuizLink.onclick = (e) => {
+                e.preventDefault();
+                setActiveLink(startQuizLink);
+                showQuizSelection();
+                closeSidebar();
+            };
+        }
+
+        // Hide create quiz tab for non-admins
+        if (!ADMIN_USERS.includes(loggedInUser)) {
+            if (createQuizLink) createQuizLink.style.display = "none";
+            if (archivedQuizzesLink) archivedQuizzesLink.style.display = "none";
+        }
+
+        goToDashboard();
+    }
+});
+function showAllQuizzesSection() {
+    hideAllSections();
+    document.getElementById('allQuizzesContainer').style.display = 'block';
+    renderAllQuizzes();
+}
+
+function renderAllQuizzes() {
+    const container = document.getElementById('allQuizzesList');
+    container.innerHTML = '';
+
+    quizzes.forEach((quiz) => {
+        const quizCard = document.createElement('div');
+        quizCard.classList.add('quiz-card');
+
+        quizCard.innerHTML = `
+            <h3>${quiz.name}</h3>
+            <p>${quiz.description}</p>
+            <button class="view-details-btn">View Details</button>
+        `;
+
+        quizCard.querySelector('.view-details-btn').onclick = () => {
+            showQuizDetailsForAdmin(quiz);
+        };
+
+        container.appendChild(quizCard);
+    });
+}
+
+function showQuizDetailsForAdmin(quiz) {
+    hideAllSections();
+
+    // Hide the All Quizzes list
+    document.getElementById('allQuizzesContainer').style.display = 'none';
+
+    // Show only the quiz details section
+    quizResultsDetails.style.display = 'block';
+
+    // Change heading for admin
+    const heading = quizResultsDetails.querySelector('h2.heading5');
+    heading.textContent = `Quiz Details: ${quiz.name}`;
+
+    // Hide summary box explicitly
+    document.querySelector('.results-summary-box').style.display = 'none';
+
+    const resultsContainer = document.getElementById('quizResultsDetailsContainer');
+    resultsContainer.innerHTML = '';
+
+    quiz.questions.forEach((q, i) => {
+        const div = document.createElement('div');
+        div.classList.add('question-card');
+
+        // Options HTML with correct option highlighted
+        let optionsHtml = '';
+        if (q.options && q.options.length > 0) {
+            optionsHtml = '<ul class="options-list">' + 
+                q.options.map(opt => {
+                    const isCorrect = (opt === q.answer);
+                    return `<li class="${isCorrect ? 'correct-option' : ''}">${opt}</li>`;
+                }).join('') + 
+            '</ul>';
+        }
+
+        div.innerHTML = `
+            <p class="question-text-result"><b>${i + 1}. ${q.question}</b></p>
+            ${q.imageUrl ? `<img src="${q.imageUrl}" class="question-result-image">` : ''}
+            ${optionsHtml}
+            <p><b>Answer:</b> <span class="correct-answer">${q.answer}</span></p>
+            <p class="time-limit">⏱ ${q.timeLimit ? q.timeLimit + ' sec' : 'N/A'}</p>
+        `;
+
+        resultsContainer.appendChild(div);
+    });
+
+    // Back button returns to the All Quizzes list
+    document.getElementById('quizResultsBackButton').onclick = () => {
+        quizResultsDetails.style.display = 'none';
+        showAllQuizzesSection();
+
+        // Restore original heading when going back
+        heading.textContent = 'Detailed Quiz Results';
+        document.querySelector('.results-summary-box').style.display = 'block';
+    };
+}
+
+
+
+
 
 /**
  * Hides the custom information/alert modal.
@@ -631,9 +755,11 @@ function hideAllSections() {
     previousQuizzesContainer.style.display = 'none';
     quizSelectionContainer.style.display = 'none';
     performanceTrendsContainer.style.display = 'none';
-    archivedQuizzesContainer.style.display = 'none'; // ✅ hide archive list too
+    archivedQuizzesContainer.style.display = 'none';
+    document.getElementById('allQuizzesContainer').style.display = 'none'; // ✅ Added
     quizCompletedMessage.classList.remove('show');
 }
+
 
 performanceTrendsLink.addEventListener('click', (e) => {
     e.preventDefault();
