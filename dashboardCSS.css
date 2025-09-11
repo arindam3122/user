@@ -1774,4 +1774,8 @@ header {
     color: #c62828;            /* red text */
     border: 1px solid #ffcdd2;
 }
+/* ===== View Details Button Icon Spacing ===== */
+.view-details-btn i {
+    margin-right: 6px;
+}
 

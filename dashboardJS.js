@@ -205,7 +205,9 @@ function renderAllQuizzes() {
                 ${quiz.enabled ? '🟢 Active' : '🔴 Inactive'}
               </span>
             </p>
-            <button class="view-details-btn">View Details</button>
+            <button class="view-details-btn">
+                <i class="fas fa-eye"></i> View Details
+            </button>
         `;
 
         quizCard.querySelector('.view-details-btn').onclick = () => {
