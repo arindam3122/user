@@ -188,7 +188,7 @@ function renderAllQuizzes() {
     let filteredQuizzes = quizzes.filter((quiz) => {
         if (filterValue === 'active') return quiz.enabled === true;
         if (filterValue === 'inactive') return quiz.enabled === false;
-        return true; // "all" -> return everything
+        return true; // "all"
     });
 
     // Render cards
@@ -199,7 +199,12 @@ function renderAllQuizzes() {
         quizCard.innerHTML = `
             <h3>${quiz.name}</h3>
             <p>${quiz.description || ''}</p>
-            <p><b>Status:</b> ${quiz.enabled ? 'Active' : 'Inactive'}</p>
+            <p>
+              <b>Status:</b> 
+              <span class="status-badge ${quiz.enabled ? 'active' : 'inactive'}">
+                ${quiz.enabled ? '🟢 Active' : '🔴 Inactive'}
+              </span>
+            </p>
             <button class="view-details-btn">View Details</button>
         `;
 
@@ -215,6 +220,7 @@ function renderAllQuizzes() {
         container.innerHTML = `<p style="color:#777; font-style:italic;">No quizzes found.</p>`;
     }
 }
+
 
 
 

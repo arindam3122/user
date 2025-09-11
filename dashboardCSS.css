@@ -1755,4 +1755,23 @@ header {
     border: 1px solid #ccc;
     font-size: 0.95em;
 }
+/* ===== Quiz Status Badges ===== */
+.status-badge {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.status-badge.active {
+    background-color: #e8f5e9; /* soft green bg */
+    color: #2e7d32;           /* green text */
+    border: 1px solid #c8e6c9;
+}
+
+.status-badge.inactive {
+    background-color: #ffebee; /* soft red bg */
+    color: #c62828;            /* red text */
+    border: 1px solid #ffcdd2;
+}
 
