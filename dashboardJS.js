@@ -182,13 +182,24 @@ function showAllQuizzesSection() {
 function renderAllQuizzes() {
     const container = document.getElementById('allQuizzesList');
     const filterValue = document.getElementById('quizStatusFilter').value;
+
+    // ✅ Update heading dynamically
+    const heading = document.querySelector('#allQuizzesContainer h2.heading2');
+    if (filterValue === 'active') {
+        heading.textContent = "Active Quizzes";
+    } else if (filterValue === 'inactive') {
+        heading.textContent = "Inactive Quizzes";
+    } else {
+        heading.textContent = "All Quizzes";
+    }
+
     container.innerHTML = '';
 
-    // Filter quizzes based on dropdown
+    // Filter quizzes
     let filteredQuizzes = quizzes.filter((quiz) => {
         if (filterValue === 'active') return quiz.enabled === true;
         if (filterValue === 'inactive') return quiz.enabled === false;
-        return true; // "all"
+        return true;
     });
 
     // Render cards
@@ -217,11 +228,11 @@ function renderAllQuizzes() {
         container.appendChild(quizCard);
     });
 
-    // Handle case when no quizzes match filter
     if (filteredQuizzes.length === 0) {
         container.innerHTML = `<p style="color:#777; font-style:italic;">No quizzes found.</p>`;
     }
 }
+
 
 
 
