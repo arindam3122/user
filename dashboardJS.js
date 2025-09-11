@@ -271,12 +271,24 @@ function showQuizDetailsForAdmin(quiz) {
             '</ul>';
         }
 
+        // Toggle button + image (if available)
+        let explanationButtonHtml = '';
+        if (q.explanationImageUrl) {
+            explanationButtonHtml = `
+                <button class="explanation-btn" onclick="toggleExplanationImage(this)">
+                    <i class="fas fa-image"></i> View Explanation Image
+                </button>
+                <img src="${q.explanationImageUrl}" class="explanation-image" style="display:none; margin-top:8px;">
+            `;
+        }
+
         div.innerHTML = `
             <p class="question-text-result"><b>${i + 1}. ${q.question}</b></p>
             ${q.imageUrl ? `<img src="${q.imageUrl}" class="question-result-image">` : ''}
             ${optionsHtml}
             <p><b>Answer:</b> <span class="correct-answer">${q.answer}</span></p>
             <p class="time-limit">⏱ ${q.timeLimit ? q.timeLimit + ' sec' : 'N/A'}</p>
+            ${explanationButtonHtml}
         `;
 
         resultsContainer.appendChild(div);
@@ -292,6 +304,17 @@ function showQuizDetailsForAdmin(quiz) {
         document.querySelector('.results-summary-box').style.display = 'block';
     };
 }
+function toggleExplanationImage(button) {
+    const img = button.nextElementSibling;
+    if (img.style.display === 'none') {
+        img.style.display = 'block';
+        button.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Explanation Image';
+    } else {
+        img.style.display = 'none';
+        button.innerHTML = '<i class="fas fa-image"></i> View Explanation Image';
+    }
+}
+
 
 
 
