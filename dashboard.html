@@ -43,6 +43,35 @@
   <div class="quiz-info-box" id="quizInfoBox">
     <h2 class="heading1" id="quizInfoHeading">Dashboard Overview</h2>
     <p id="welcomeHeading" class="welcome-heading" style="font-size: 30px; margin-top: 10px; color: rgb(17, 123, 6); font-weight: 700;"></p>
+    <!-- Admin greeting + quick stats (only visible to admins) -->
+<div id="adminGreeting" class="admin-greeting" style="display:none; margin-top:15px; padding:15px; background:#f3f6ff; border-left:4px solid #3b82f6; border-radius:8px;">
+  <h3 style="margin:0; font-size:20px; color:#1e40af;">
+    👋 Hello Admin!
+  </h3>
+  <p style="margin:6px 0 12px; font-size:14px; color:#374151;">
+    Here’s a quick overview of your quiz platform:
+  </p>
+
+  <div class="admin-stats" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:10px;">
+    <div class="stat-card" style="background:#fff; border:1px solid #ddd; padding:12px; border-radius:6px; text-align:center;">
+      <h4 style="margin:0; font-size:16px; color:#111;">Total Quizzes</h4>
+      <p id="adminTotalQuizzes" style="font-size:18px; font-weight:bold; color:#2563eb;">0</p>
+    </div>
+    <div class="stat-card" style="background:#fff; border:1px solid #ddd; padding:12px; border-radius:6px; text-align:center;">
+      <h4 style="margin:0; font-size:16px; color:#111;">Active</h4>
+      <p id="adminActiveQuizzes" style="font-size:18px; font-weight:bold; color:#16a34a;">0</p>
+    </div>
+    <div class="stat-card" style="background:#fff; border:1px solid #ddd; padding:12px; border-radius:6px; text-align:center;">
+      <h4 style="margin:0; font-size:16px; color:#111;">Inactive</h4>
+      <p id="adminInactiveQuizzes" style="font-size:18px; font-weight:bold; color:#dc2626;">0</p>
+    </div>
+    <div class="stat-card" style="background:#fff; border:1px solid #ddd; padding:12px; border-radius:6px; text-align:center;">
+      <h4 style="margin:0; font-size:16px; color:#111;">Archived</h4>
+      <p id="adminArchivedQuizzes" style="font-size:18px; font-weight:bold; color:#7c3aed;">0</p>
+    </div>
+  </div>
+</div>
+
       <p id="lastQuizScoreDisplay" style="display:none;"></p>
       <p id="totalQuizzesCompleted" style="display:none;"></p>
       <button id="viewRecentQuizDetailsButton" class="action-button view-results-btn" style="display:none;">

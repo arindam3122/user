@@ -235,6 +235,19 @@ function renderAllQuizzes() {
 
 
 
+function updateAdminStats() {
+    const totalQuizzes = quizzes.length;
+    const activeQuizzes = quizzes.filter(q => q.enabled).length;
+    const inactiveQuizzes = quizzes.filter(q => !q.enabled).length;
+
+    const archived = JSON.parse(localStorage.getItem("allQuizzesArchive")) || [];
+    const archivedQuizzes = archived.length;
+
+    document.getElementById('adminTotalQuizzes').textContent = totalQuizzes;
+    document.getElementById('adminActiveQuizzes').textContent = activeQuizzes;
+    document.getElementById('adminInactiveQuizzes').textContent = inactiveQuizzes;
+    document.getElementById('adminArchivedQuizzes').textContent = archivedQuizzes;
+}
 
 
 function showQuizDetailsForAdmin(quiz) {
@@ -357,36 +370,29 @@ function showTimeUpMessage() {
 }
 document.addEventListener('DOMContentLoaded', () => {
     const loggedInUser = localStorage.getItem('loggedInUser');
-    if (!loggedInUser) {
-        window.location.href = "index.html";
-    } else {
-        usernameDisplay.textContent = loggedInUser;
-        welcomeHeading.textContent = `Welcome, ${loggedInUser}!`;
-
-        if (ADMIN_USERS.includes(loggedInUser)) {
-            startQuizLink.innerHTML = '<i class="fas fa-list"></i> All Quizzes';
-            startQuizLink.onclick = (e) => {
-                e.preventDefault();
-                setActiveLink(startQuizLink);
-                showAllQuizzesSection();
-                closeSidebar();
-            };
-        } else {
-            startQuizLink.onclick = (e) => {
-                e.preventDefault();
-                setActiveLink(startQuizLink);
-                showQuizSelection();
-                closeSidebar();
-            };
-        }
-
-        if (!ADMIN_USERS.includes(loggedInUser)) {
-            if (createQuizLink) createQuizLink.style.display = "none";
-            if (archivedQuizzesLink) archivedQuizzesLink.style.display = "none";
-        }
-
-        goToDashboard();
+    if (ADMIN_USERS.includes(loggedInUser)) {
+    if (adminGreeting) {
+        adminGreeting.style.display = "block";
+        updateAdminStats(); // populate stats
     }
+
+    startQuizLink.innerHTML = '<i class="fas fa-list"></i> All Quizzes';
+    startQuizLink.onclick = (e) => {
+        e.preventDefault();
+        setActiveLink(startQuizLink);
+        showAllQuizzesSection();
+        closeSidebar();
+    };
+} else {
+    if (adminGreeting) adminGreeting.style.display = "none";
+    startQuizLink.onclick = (e) => {
+        e.preventDefault();
+        setActiveLink(startQuizLink);
+        showQuizSelection();
+        closeSidebar();
+    };
+}
+
 
     // ✅ Add filter listener here
     const filter = document.getElementById('quizStatusFilter');
