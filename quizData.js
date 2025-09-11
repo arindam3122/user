@@ -59,7 +59,7 @@ const quizzes = [
     },
     {
         "id": "Internet & Web Technology",
-        "name": "Internet & Web Technology",
+        "name": "Internet & Web Technology (MCQ)",
         "description": "",
         "enabled": false,
         "questions": [
@@ -381,6 +381,299 @@ const quizzes = [
                     "Spyware"
                 ],
                 "answer": "Worm",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },{
+                "question": "Which of the following is the safest way to protect your personal information online?",
+                "type": "mcq",
+                "options": [
+                    "Using public Wi-Fi for banking",
+                    "Disabling antivirus software",
+                    "Using strong and unique passwords",
+                    "Downloading software from untrusted sources"
+                ],
+                "answer": "Using strong and unique passwords",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is encryption used for?",
+                "type": "mcq",
+                "options": [
+                    "To send emails quickly",
+                    "To make files unreadable without a decryption key",
+                    "To store information in the cloud",
+                    "To increase download speeds"
+                ],
+                "answer": "To make files unreadable without a decryption key",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a VPN (Virtual Private Network) primarily used for?",
+                "type": "mcq",
+                "options": [
+                    "To boost the speed of the internet",
+                    "To hide the user's IP address and encrypt their connection",
+                    "To enhance social media usage",
+                    "To store data securely"
+                ],
+                "answer": "To hide the user's IP address and encrypt their connection",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an example of safe internet practice?",
+                "type": "mcq",
+                "options": [
+                    "Clicking on any pop-up advertisement",
+                    "Using the same password for multiple accounts",
+                    "Regularly updating software and apps",
+                    "Disabling your antivirus software"
+                ],
+                "answer": "Regularly updating software and apps",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a sign that an email might be a phishing attempt?",
+                "type": "mcq",
+                "options": [
+                    "A personal greeting with the sender’s name",
+                    "A request for personal information or financial details",
+                    "A professional tone and correct spelling",
+                    "A secure link with a “https://”"
+                ],
+                "answer": "A request for personal information or financial details",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following can be used to protect your computer from viruses and other\nmalware?",
+                "type": "mcq",
+                "options": [
+                    "Antivirus software",
+                    "Firewall",
+                    "Regularly updating the operating system",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does HTTPS stand for?",
+                "type": "mcq",
+                "options": [
+                    "HyperText Transfer Protocol",
+                    "HyperText Transfer Protocol Secure",
+                    "HyperLink Transfer Protocol Secure",
+                    "None of the above"
+                ],
+                "answer": "HyperText Transfer Protocol Secure",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an online file-sharing service?",
+                "type": "mcq",
+                "options": [
+                    "Microsoft Excel",
+                    "Google Docs",
+                    "Adobe Reader",
+                    "iTunes"
+                ],
+                "answer": "Google Docs",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is an IP address?",
+                "type": "mcq",
+                "options": [
+                    "A type of web browser",
+                    "A unique identifier for a device on a network",
+                    "A search engine",
+                    "A cloud storage service"
+                ],
+                "answer": "A unique identifier for a device on a network",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the main function of a router in a home network?",
+                "type": "mcq",
+                "options": [
+                    "Store data",
+                    "Control internet speed",
+                    "Connect multiple devices to the internet",
+                    "Provide power to devices"
+                ],
+                "answer": "Connect multiple devices to the internet",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is true about cookies on websites?",
+                "type": "mcq",
+                "options": [
+                    "They are harmful to your device",
+                    "They store data about user behavior for personalized experiences",
+                    "They are a type of virus",
+                    "They are only used for advertising purposes"
+                ],
+                "answer": "They store data about user behavior for personalized experiences",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the term \"phishing\" refer to in cybersecurity?",
+                "type": "mcq",
+                "options": [
+                    "A type of malware",
+                    "Fraudulent attempts to obtain sensitive information",
+                    "A virus that infects computers",
+                    "Encrypting emails for security"
+                ],
+                "answer": "Fraudulent attempts to obtain sensitive information",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a common feature of social media platforms?",
+                "type": "mcq",
+                "options": [
+                    "File sharing",
+                    "Voice commands",
+                    "User interaction through likes, comments, and shares",
+                    "File storage"
+                ],
+                "answer": "User interaction through likes, comments, and shares",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which protocol is used to send emails?",
+                "type": "mcq",
+                "options": [
+                    "FTP",
+                    "SMTP",
+                    "HTTP",
+                    "DNS"
+                ],
+                "answer": "SMTP",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is an example of a strong password?",
+                "type": "mcq",
+                "options": [
+                    "Password123",
+                    "qwerty",
+                    "123456",
+                    "z6&Z2!jP9"
+                ],
+                "answer": "z6&Z2!jP9",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a valid domain extension for a website?",
+                "type": "mcq",
+                "options": [
+                    ".exe",
+                    ".com",
+                    ".txt",
+                    ".html"
+                ],
+                "answer": ".com",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the purpose of the \"incognito mode\" in browsers?",
+                "type": "mcq",
+                "options": [
+                    "Save passwords",
+                    "Hide your browsing history",
+                    "Increase browsing speed",
+                    "Automatically clear cookies"
+                ],
+                "answer": "Hide your browsing history",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the acronym “Wi-Fi” stand for?",
+                "type": "mcq",
+                "options": [
+                    "Wireless Fidelity",
+                    "Wireless Federation",
+                    "Web Internet Fidelity",
+                    "World Internet Frequency"
+                ],
+                "answer": "Wireless Fidelity",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a method of backing up data?",
+                "type": "mcq",
+                "options": [
+                    "Cloud storage",
+                    "Encryption",
+                    "Password protection",
+                    "Firewall"
+                ],
+                "answer": "Cloud storage",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a common way hackers gain unauthorized access to accounts?",
+                "type": "mcq",
+                "options": [
+                    "Using strong passwords",
+                    "Phishing attacks",
+                    "Using two-factor authentication",
+                    "Antivirus protection"
+                ],
+                "answer": "Phishing attacks",
+                "timeLimit": 30,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which social media platform is known for its \"tweets\"?",
+                "type": "mcq",
+                "options": [
+                    "Facebook",
+                    "Instagram",
+                    "Twitter",
+                    "LinkedIn"
+                ],
+                "answer": "Twitter",
                 "timeLimit": 30,
                 "imageUrl": "",
                 "explanationImageUrl": ""
