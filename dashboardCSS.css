@@ -1737,4 +1737,22 @@ header {
     color: #4caf50;   /* light green */
     font-weight: 600;
 }
+.quiz-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.quiz-filter-bar label {
+    font-weight: 500;
+    color: #333;
+}
+
+#quizStatusFilter {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.95em;
+}
 

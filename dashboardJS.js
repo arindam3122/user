@@ -181,15 +181,25 @@ function showAllQuizzesSection() {
 
 function renderAllQuizzes() {
     const container = document.getElementById('allQuizzesList');
+    const filterValue = document.getElementById('quizStatusFilter').value;
     container.innerHTML = '';
 
-    quizzes.forEach((quiz) => {
+    // Filter quizzes based on dropdown
+    let filteredQuizzes = quizzes.filter((quiz) => {
+        if (filterValue === 'active') return quiz.enabled === true;
+        if (filterValue === 'inactive') return quiz.enabled === false;
+        return true; // "all" -> return everything
+    });
+
+    // Render cards
+    filteredQuizzes.forEach((quiz) => {
         const quizCard = document.createElement('div');
         quizCard.classList.add('quiz-card');
 
         quizCard.innerHTML = `
             <h3>${quiz.name}</h3>
-            <p>${quiz.description}</p>
+            <p>${quiz.description || ''}</p>
+            <p><b>Status:</b> ${quiz.enabled ? 'Active' : 'Inactive'}</p>
             <button class="view-details-btn">View Details</button>
         `;
 
@@ -199,7 +209,14 @@ function renderAllQuizzes() {
 
         container.appendChild(quizCard);
     });
+
+    // Handle case when no quizzes match filter
+    if (filteredQuizzes.length === 0) {
+        container.innerHTML = `<p style="color:#777; font-style:italic;">No quizzes found.</p>`;
+    }
 }
+
+
 
 function showQuizDetailsForAdmin(quiz) {
     hideAllSections();
@@ -304,19 +321,40 @@ document.addEventListener('DOMContentLoaded', () => {
         usernameDisplay.textContent = loggedInUser;
         welcomeHeading.textContent = `Welcome, ${loggedInUser}!`;
 
-        // Show Archived Quizzes tab only for admins
-        if (!ADMIN_USERS.includes(loggedInUser)) {
-            if (archivedQuizzesLink) archivedQuizzesLink.style.display = "none";
+        if (ADMIN_USERS.includes(loggedInUser)) {
+            startQuizLink.innerHTML = '<i class="fas fa-list"></i> All Quizzes';
+            startQuizLink.onclick = (e) => {
+                e.preventDefault();
+                setActiveLink(startQuizLink);
+                showAllQuizzesSection();
+                closeSidebar();
+            };
+        } else {
+            startQuizLink.onclick = (e) => {
+                e.preventDefault();
+                setActiveLink(startQuizLink);
+                showQuizSelection();
+                closeSidebar();
+            };
         }
 
         if (!ADMIN_USERS.includes(loggedInUser)) {
-    if (archivedQuizzesLink) archivedQuizzesLink.style.display = "none";
-    if (createQuizLink) createQuizLink.style.display = "none"; // hide Create Quiz tab
-}
+            if (createQuizLink) createQuizLink.style.display = "none";
+            if (archivedQuizzesLink) archivedQuizzesLink.style.display = "none";
+        }
 
         goToDashboard();
     }
+
+    // ✅ Add filter listener here
+    const filter = document.getElementById('quizStatusFilter');
+    if (filter) {
+        filter.addEventListener('change', () => {
+            renderAllQuizzes();
+        });
+    }
 });
+
 archivedQuizzesLink.addEventListener('click', (e) => {
     e.preventDefault();
     setActiveLink(archivedQuizzesLink);
