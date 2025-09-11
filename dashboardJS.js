@@ -930,6 +930,7 @@ function showPreviousQuizzesSection() {
 
 
 // --- Dashboard Info Update ---
+// --- Dashboard Info Update ---
 function updateDashboardInfo() {
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (!loggedInUser) return;
@@ -937,31 +938,36 @@ function updateDashboardInfo() {
     const userKey = `previousQuizzes_${loggedInUser}`;
     const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
     const totalQuizzes = previousQuizzes.length;
-    totalQuizzesCompleted.textContent = `Total Quizzes Completed: ${totalQuizzes}`;
+
+    // ✅ Show "Total Quizzes Completed" only for normal users
+    if (ADMIN_USERS.includes(loggedInUser)) {
+        totalQuizzesCompleted.style.display = 'none';
+    } else {
+        totalQuizzesCompleted.textContent = `Total Quizzes Completed: ${totalQuizzes}`;
+        totalQuizzesCompleted.style.display = 'block';
+    }
 
     if (totalQuizzes > 0) {
         // Sort to get the most recent quiz
-        // Use endTime for sorting as it's the completion time
         const sortedQuizzes = [...previousQuizzes].sort((a, b) => {
-            const dateA = new Date(a.endTime || a.date); // Use endTime or fallback to old 'date'
-            const dateB = new Date(b.endTime || b.date); // Use endTime or fallback to old 'date'
+            const dateA = new Date(a.endTime || a.date);
+            const dateB = new Date(b.endTime || b.date);
             return dateB.getTime() - dateA.getTime();
         });
-        const lastQuiz = sortedQuizzes[0]; // Get the most recent one
-        // MODIFIED: Explicitly show "Your Recent Quiz Name"
+        const lastQuiz = sortedQuizzes[0];
+
+        // Show recent quiz name + score
         lastQuizScoreDisplay.textContent = `Your Recent Quiz: ${lastQuiz.quizName} - Score: ${lastQuiz.score}/${lastQuiz.totalQuestions} (${lastQuiz.percentage}%)`;
         lastQuizScoreDisplay.style.display = 'block';
 
-        // REMOVED: Lines to show and set click handler for viewRecentQuizDetailsButton
-        // viewRecentQuizDetailsButton.style.display = 'block';
-        // viewRecentQuizDetailsButton.onclick = () => showQuizResultsDetails(lastQuiz); // Pass the entire lastQuiz object
+        // Hide the "view recent quiz details" button (kept as before)
+        viewRecentQuizDetailsButton.style.display = 'none';
     } else {
         lastQuizScoreDisplay.style.display = 'none';
-        viewRecentQuizDetailsButton.style.display = 'none'; // Ensure button is hidden if no quizzes
+        viewRecentQuizDetailsButton.style.display = 'none';
     }
-
-    totalQuizzesCompleted.style.display = 'block';
 }
+
 
 
 // --- Quiz Selection ---
