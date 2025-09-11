@@ -545,12 +545,16 @@ async function downloadArchivedQuiz(quiz) {
 function showArchivedQuizDetails(quiz) {
     // Hide all sections, including the archived quizzes table
     hideAllSections(); 
-    archivedQuizzesContainer.style.display = 'none'; // force hide the table
-    quizResultsDetails.style.display = 'block';      // show only details
+    archivedQuizzesContainer.style.display = 'none';
+    quizResultsDetails.style.display = 'block';
+
+    // ✅ Update heading with quiz name
+    const heading = quizResultsDetails.querySelector('h2.heading5');
+    heading.textContent = `Archived Quiz: ${quiz.name}`;
 
     const resultsContainer = document.getElementById('quizResultsDetailsContainer');
-    resultsContainer.innerHTML = ''; // Clear old content
-
+    resultsContainer.innerHTML = '';
+    
     if (!quiz.questions || quiz.questions.length === 0) {
         resultsContainer.innerHTML = '<p style="text-align:center;color:#777;">No questions available in this quiz.</p>';
         document.getElementById('quizResultsBackButton').onclick = showArchivedQuizzesSection;
@@ -573,12 +577,13 @@ function showArchivedQuizDetails(quiz) {
         resultsContainer.appendChild(resultItem);
     });
 
-    // Back button should bring you back to the archived quiz list
+    // Back button
     document.getElementById('quizResultsBackButton').onclick = () => {
         quizResultsDetails.style.display = 'none'; 
-        showArchivedQuizzesSection(); // show the table again
+        showArchivedQuizzesSection();
     };
 }
+
 function deleteArchivedQuiz(quizId) {
     let allQuizzes = JSON.parse(localStorage.getItem("allQuizzesArchive")) || [];
     allQuizzes = allQuizzes.filter(q => q.id !== quizId);
