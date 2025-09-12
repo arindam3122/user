@@ -135,6 +135,12 @@
     <div class="previous-quizzes-container" id="previousQuizzesContainer">
         <h2>My Previous Quizzes</h2>
         <p id="noPreviousQuizzesMessage" style="display:none; text-align: center; font-style: italic; color: #777;">No previous quiz data found.</p>
+        <div id="deleteConfirmBox" class="confirm-box" style="display:none;">
+  <p id="deleteConfirmText">Are you sure you want to delete this response?</p>
+  <button id="confirmYesBtn" class="confirm-btn yes-btn">Yes</button>
+  <button id="confirmNoBtn" class="confirm-btn no-btn">No</button>
+</div>
+
         <table id="previousQuizzesTable">
             <thead>
                 <tr>
@@ -147,6 +153,10 @@
             <tbody id="previousQuizzesTableBody">
             </tbody>
         </table>
+        <div id="deleteSuccessMessage" class="info-message" style="display:none; background:#d4edda; color:#155724; margin:10px auto; text-align:center; max-width:500px; border-radius:8px; padding:10px; font-weight:bold;">
+    ✅ Response deleted successfully!
+</div>
+
     </div>
     <div class="performance-trends-container" id="performanceTrendsContainer">
   <h2>Performance Trends</h2>

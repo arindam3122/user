@@ -1659,14 +1659,32 @@ function loadPreviousQuizzes() {
         viewButton.onclick = () => showQuizResultsDetails(result);
         actionsCell.appendChild(viewButton);
 
-        // ✅ Delete button (with confirmation)
+        // ✅ Delete button (with inline confirm box instead of popup)
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
         deleteButton.classList.add('delete-quiz-btn');
         deleteButton.onclick = () => {
-            if (confirm(`Are you sure you want to delete your response for "${result.quizName}"?`)) {
+            const confirmBox = document.getElementById('deleteConfirmBox');
+            const confirmText = document.getElementById('deleteConfirmText');
+            const yesBtn = document.getElementById('confirmYesBtn');
+            const noBtn = document.getElementById('confirmNoBtn');
+
+            // Update text with quiz name
+            confirmText.textContent = `Are you sure you want to delete your response for "${result.quizName}"?`;
+
+            // Show confirm box
+            confirmBox.style.display = 'block';
+
+            // Handle Yes
+            yesBtn.onclick = () => {
                 deleteQuizResult(result.quizId, result.endTime || result.date);
-            }
+                confirmBox.style.display = 'none';
+            };
+
+            // Handle No
+            noBtn.onclick = () => {
+                confirmBox.style.display = 'none';
+            };
         };
         actionsCell.appendChild(deleteButton);
 
@@ -1678,6 +1696,7 @@ function loadPreviousQuizzes() {
         actionsCell.appendChild(downloadButton);
     });
 }
+
 
 
 
@@ -1695,11 +1714,22 @@ function deleteQuizResult(quizIdToDelete, timeToDelete) {
     localStorage.setItem(userKey, JSON.stringify(updatedQuizzes));
     loadPreviousQuizzes();
 
-    // ✅ Refresh Performance Trends if the tab is open
+    // ✅ Show success message
+    const msg = document.getElementById('deleteSuccessMessage');
+    if (msg) {
+        msg.style.display = 'block';
+        msg.classList.add('show');
+        setTimeout(() => {
+            msg.classList.remove('show');
+            msg.style.display = 'none';
+        }, 3000); // auto-hide after 3 seconds
+    }
+
     if (document.getElementById('performanceTrendsContainer').style.display === 'block') {
         renderPerformanceCharts();
     }
 }
+
 
 
 async function downloadQuizResponse(quiz) {
