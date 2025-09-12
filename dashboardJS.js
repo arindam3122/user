@@ -144,9 +144,14 @@ document.addEventListener('DOMContentLoaded', () => {
         usernameDisplay.textContent = loggedInUser;
         welcomeHeading.textContent = `Welcome, ${loggedInUser}!`;
 
-        // Show/hide nav depending on role
         if (ADMIN_USERS.includes(loggedInUser)) {
-            // Replace Start Quiz nav label
+            // === Admin users ===
+            if (adminGreeting) {
+                adminGreeting.style.display = "block";
+                updateAdminStats(); // populate stats
+            }
+
+            // Replace Start Quiz with All Quizzes for admins
             startQuizLink.innerHTML = '<i class="fas fa-list"></i> All Quizzes';
             startQuizLink.onclick = (e) => {
                 e.preventDefault();
@@ -154,25 +159,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 showAllQuizzesSection();
                 closeSidebar();
             };
+
+            // Hide only Previous Quizzes + Performance Trends for admins
+            if (previousQuizzesLink) previousQuizzesLink.style.display = "none";
+            if (performanceTrendsLink) performanceTrendsLink.style.display = "none";
+
+            // Keep Create Quiz + Archived Quizzes visible for admins
+
         } else {
-            // Normal user - keep Start Quiz
+            // === Normal users ===
+            if (adminGreeting) adminGreeting.style.display = "none";
+
+            // Keep Start Quiz as "Start Quiz"
             startQuizLink.onclick = (e) => {
                 e.preventDefault();
                 setActiveLink(startQuizLink);
                 showQuizSelection();
                 closeSidebar();
             };
-        }
 
-        // Hide create quiz tab for non-admins
-        if (!ADMIN_USERS.includes(loggedInUser)) {
+            // Hide Create Quiz + Archived Quizzes for normal users
             if (createQuizLink) createQuizLink.style.display = "none";
             if (archivedQuizzesLink) archivedQuizzesLink.style.display = "none";
+
+            // Keep Previous Quizzes + Performance Trends visible for normal users
         }
 
         goToDashboard();
     }
+
+    // ✅ Add filter listener here
+    const filter = document.getElementById('quizStatusFilter');
+    if (filter) {
+        filter.addEventListener('change', () => {
+            renderAllQuizzes();
+        });
+    }
 });
+
+
 function showAllQuizzesSection() {
     hideAllSections();
     document.getElementById('allQuizzesContainer').style.display = 'block';
