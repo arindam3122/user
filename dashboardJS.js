@@ -1628,52 +1628,49 @@ function loadPreviousQuizzes() {
     if (!loggedInUser) return;
 
     const userKey = `previousQuizzes_${loggedInUser}`;
-    let previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+    const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
 
     const tableBody = document.getElementById('previousQuizzesTableBody');
-    tableBody.innerHTML = '';
-    const noQuizzesMessage = document.getElementById('noPreviousQuizzesMessage');
+    const noDataMsg = document.getElementById('noPreviousQuizzesMessage');
+
+    tableBody.innerHTML = "";
 
     if (previousQuizzes.length === 0) {
-        noQuizzesMessage.style.display = 'block';
+        noDataMsg.style.display = 'block';
         return;
     } else {
-        noQuizzesMessage.style.display = 'none';
+        noDataMsg.style.display = 'none';
     }
 
-    previousQuizzes.sort((a, b) => {
-        const dateA = new Date(a.endTime || a.date);
-        const dateB = new Date(b.endTime || b.date);
-        return dateB.getTime() - dateA.getTime();
-    });
-
-    const isCurrentUserAdmin = ADMIN_USERS.includes(loggedInUser);
-
-    previousQuizzes.forEach((result, index) => {
+    previousQuizzes.forEach((result) => {
         const row = tableBody.insertRow();
-        row.insertCell(0).textContent = result.quizName || 'N/A';
-        row.insertCell(1).textContent = `${result.score}/${result.totalQuestions}`;
-        row.insertCell(2).textContent = `${parseFloat(result.percentage).toFixed(2)}%`;
-        row.insertCell(3).textContent = result.startTime || 'N/A';
-        row.insertCell(4).textContent = result.endTime || result.date || 'N/A';
-
+        row.insertCell(0).textContent = result.quizName || "N/A";
+        row.insertCell(1).textContent = result.score || "0";
+        row.insertCell(2).textContent = result.percentage ? `${result.percentage}%` : "0%";
+        row.insertCell(3).textContent = result.startTime ? new Date(result.startTime).toLocaleString() : "N/A";
+        row.insertCell(4).textContent = result.endTime ? new Date(result.endTime).toLocaleString() : "N/A";
 
         const actionsCell = row.insertCell(5);
 
+        // View button
         const viewButton = document.createElement('button');
         viewButton.innerHTML = '<i class="fas fa-eye"></i> View Details';
         viewButton.classList.add('view-details-btn');
         viewButton.onclick = () => showQuizResultsDetails(result);
         actionsCell.appendChild(viewButton);
 
-        if (isCurrentUserAdmin) {
-            const deleteButton = document.createElement('button');
-            deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
-            deleteButton.classList.add('delete-quiz-btn');
-            deleteButton.onclick = () => deleteQuizResult(result.quizId, result.endTime || result.date);
-            actionsCell.appendChild(deleteButton);
-        }
+        // ✅ Delete button (with confirmation)
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
+        deleteButton.classList.add('delete-quiz-btn');
+        deleteButton.onclick = () => {
+            if (confirm(`Are you sure you want to delete your response for "${result.quizName}"?`)) {
+                deleteQuizResult(result.quizId, result.endTime || result.date);
+            }
+        };
+        actionsCell.appendChild(deleteButton);
 
+        // Download button
         const downloadButton = document.createElement('button');
         downloadButton.innerHTML = '<i class="fas fa-download"></i> Download';
         downloadButton.classList.add('download-response-btn');
@@ -1681,6 +1678,7 @@ function loadPreviousQuizzes() {
         actionsCell.appendChild(downloadButton);
     });
 }
+
 
 
 function deleteQuizResult(quizIdToDelete, timeToDelete) {
