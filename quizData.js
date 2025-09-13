@@ -32,6 +32,714 @@ const quizzes = [
         ]
     },
     {
+        "id": "Computer Networks & Security",
+        "name": "Computer Networks & Security",
+        "description": "",
+        "enabled": false,
+        "questions": [
+            {
+                "question": "Which layer of the OSI model is responsible for end-to-end communication and error handling?",
+                "type": "mcq",
+                "options": [
+                    "Physical",
+                    "Data Link",
+                    "Network",
+                    "Transport"
+                ],
+                "answer": "Transport",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is not a layer of the OSI model?",
+                "type": "mcq",
+                "options": [
+                    "Application",
+                    "Transport",
+                    "Session",
+                    "Internet"
+                ],
+                "answer": "Internet",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does TCP stand for?",
+                "type": "mcq",
+                "options": [
+                    "Transmission Control Protocol",
+                    "Transport Control Protocol",
+                    "Telecommunication Control Protocol",
+                    "Total Communication Protocol"
+                ],
+                "answer": "Transmission Control Protocol",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which layer of the OSI model defines the rules for data transmission between two devices on the same network?",
+                "type": "mcq",
+                "options": [
+                    "Network",
+                    "Data Link",
+                    "Transport",
+                    "Physical"
+                ],
+                "answer": "Data Link",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is the main difference between IPv4 and IPv6?",
+                "type": "mcq",
+                "options": [
+                    "IPv4 has a 32-bit address, while IPv6 has a 128-bit address",
+                    "IPv6 has a 32-bit address, while IPv4 has a 128-bit address",
+                    "IPv4 supports encryption, while IPv6 does not",
+                    "IPv6 is used for local area networks only"
+                ],
+                "answer": "IPv4 has a 32-bit address, while IPv6 has a 128-bit address",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a type of network with a large geographical area, typically spanning countries or continents?",
+                "type": "mcq",
+                "options": [
+                    "LAN",
+                    "MAN",
+                    "WAN",
+                    "PAN"
+                ],
+                "answer": "WAN",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which device operates at the Data Link layer and filters traffic based on MAC addresses?",
+                "type": "mcq",
+                "options": [
+                    "Router",
+                    "Hub",
+                    "Switch",
+                    "Firewall"
+                ],
+                "answer": "Switch",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which type of network is used to connect devices in a limited geographic area, like a building or campus?",
+                "type": "mcq",
+                "options": [
+                    "WAN",
+                    "MAN",
+                    "LAN",
+                    "PAN"
+                ],
+                "answer": "LAN",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does a router do in a network?",
+                "type": "mcq",
+                "options": [
+                    "It amplifies the signal in the network",
+                    "It connects different networks and directs data between them",
+                    "It filters data based on IP addresses",
+                    "It stores data temporarily for faster access"
+                ],
+                "answer": "It connects different networks and directs data between them",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which protocol is used to securely transfer data over a network by encrypting it?",
+                "type": "mcq",
+                "options": [
+                    "FTP",
+                    "HTTPS",
+                    "HTTP",
+                    "SMTP"
+                ],
+                "answer": "HTTPS",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which protocol operates at the Network layer and is responsible for addressing and routing data packets?",
+                "type": "mcq",
+                "options": [
+                    "TCP",
+                    "UDP",
+                    "IP",
+                    "HTTP"
+                ],
+                "answer": "IP",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is the main function of a firewall?",
+                "type": "mcq",
+                "options": [
+                    "To boost network speed",
+                    "To monitor network traffic and block malicious requests",
+                    "To store large amounts of data",
+                    "To manage network traffic"
+                ],
+                "answer": "To monitor network traffic and block malicious requests",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which layer of the OSI model is responsible for providing communication between different applications?",
+                "type": "mcq",
+                "options": [
+                    "Application",
+                    "Transport",
+                    "Session",
+                    "Network"
+                ],
+                "answer": "Application",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is not a type of network topology?",
+                "type": "mcq",
+                "options": [
+                    "Star",
+                    "Bus",
+                    "Ring",
+                    "Platform"
+                ],
+                "answer": "Platform",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the primary function of the Transport layer in the OSI model?",
+                "type": "mcq",
+                "options": [
+                    "Error detection and correction",
+                    "Data compression",
+                    "End-to-end communication",
+                    "Routing of data packets"
+                ],
+                "answer": "End-to-end communication",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an example of a type of cyber threat?",
+                "type": "mcq",
+                "options": [
+                    "Phishing",
+                    "Backdoor",
+                    "Malware",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is the main advantage of IPv6 over IPv4?",
+                "type": "mcq",
+                "options": [
+                    "Improved security features",
+                    "Longer address space",
+                    "Better error detection",
+                    "Simpler network management"
+                ],
+                "answer": "Longer address space",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a common form of encryption algorithm?",
+                "type": "mcq",
+                "options": [
+                    "DES",
+                    "AES",
+                    "RSA",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an example of a man-in-the-middle attack?",
+                "type": "mcq",
+                "options": [
+                    "Phishing",
+                    "Eavesdropping on a communication between two parties",
+                    "Distributed Denial of Service",
+                    "SQL Injection"
+                ],
+                "answer": "Eavesdropping on a communication between two parties",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the purpose of a MAC address in networking?",
+                "type": "mcq",
+                "options": [
+                    "To identify a device on the network at the Data Link layer",
+                    "To provide an IP address for routing",
+                    "To connect different networks",
+                    "To secure communication over the network"
+                ],
+                "answer": "To identify a device on the network at the Data Link layer",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following protocols is used for sending email messages?",
+                "type": "mcq",
+                "options": [
+                    "SMTP",
+                    "FTP",
+                    "SNMP",
+                    "POP3"
+                ],
+                "answer": "SMTP",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is true about a Switch?",
+                "type": "mcq",
+                "options": [
+                    "Operates at Layer 1 of the OSI model",
+                    "Operates at Layer 2 and uses MAC addresses to forward data",
+                    "Operates at Layer 3 and forwards data using IP addresses",
+                    "None of the above"
+                ],
+                "answer": "Operates at Layer 2 and uses MAC addresses to forward data",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following best describes a VPN (Virtual Private Network)?",
+                "type": "mcq",
+                "options": [
+                    "A device that connects multiple local networks",
+                    "A secure connection over a public network",
+                    "A wireless communication protocol",
+                    "A technology used for email encryption"
+                ],
+                "answer": "A secure connection over a public network",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which type of attack involves overwhelming a server with traffic to make it unavailable to users?",
+                "type": "mcq",
+                "options": [
+                    "Phishing",
+                    "Denial of Service (DoS)",
+                    "Man-in-the-middle attack",
+                    "SQL Injection"
+                ],
+                "answer": "Denial of Service (DoS)",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a subnet mask used for in IPv4 networking?",
+                "type": "mcq",
+                "options": [
+                    "To uniquely identify devices on the network",
+                    "To define the network and host portions of an IP address",
+                    "To securely encrypt data",
+                    "To manage the flow of data on the network"
+                ],
+                "answer": "To define the network and host portions of an IP address",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is true about a router?",
+                "type": "mcq",
+                "options": [
+                    "It connects devices within the same local network",
+                    "It operates at the Data Link layer",
+                    "It routes data between different networks",
+                    "It performs encryption and decryption tasks"
+                ],
+                "answer": "It routes data between different networks",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the purpose of the SSL/TLS protocol?",
+                "type": "mcq",
+                "options": [
+                    "To secure communication over the internet",
+                    "To manage IP address assignment",
+                    "To send email securely",
+                    "To transmit files over the network"
+                ],
+                "answer": "To secure communication over the internet",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is NOT a type of encryption?",
+                "type": "mcq",
+                "options": [
+                    "Symmetric encryption",
+                    "Asymmetric encryption",
+                    "Hashing",
+                    "Firewall encryption"
+                ],
+                "answer": "Firewall encryption",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the purpose of NAT (Network Address Translation)?",
+                "type": "mcq",
+                "options": [
+                    "To hide internal IP addresses from external networks",
+                    "To forward traffic based on MAC addresses",
+                    "To secure communications between devices",
+                    "To allocate IP addresses dynamically"
+                ],
+                "answer": "To hide internal IP addresses from external networks",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is NOT a characteristic of IPv6?",
+                "type": "mcq",
+                "options": [
+                    "It has a larger address space than IPv4",
+                    "It uses 128-bit addresses",
+                    "It requires NAT for address translation",
+                    "It is not backward compatible with IPv4"
+                ],
+                "answer": "It requires NAT for address translation",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which type of attack uses social engineering to trick users into revealing sensitive information?",
+                "type": "mcq",
+                "options": [
+                    "Phishing",
+                    "Trojan Horse",
+                    "SQL Injection",
+                    "Denial of Service"
+                ],
+                "answer": "Phishing",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which protocol is responsible for the conversion of a domain name to an IP address?",
+                "type": "mcq",
+                "options": [
+                    "DNS",
+                    "HTTP",
+                    "DHCP",
+                    "FTP"
+                ],
+                "answer": "DNS",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the key characteristic of a denial of service (DoS) attack?",
+                "type": "mcq",
+                "options": [
+                    "Intercepting data from a secure communication",
+                    "Exploiting software vulnerabilities",
+                    "Overloading a server or network to make it unavailable",
+                    "Stealing login credentials"
+                ],
+                "answer": "Overloading a server or network to make it unavailable",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an example of network security software?",
+                "type": "mcq",
+                "options": [
+                    "Antivirus software",
+                    "Network intrusion detection system (IDS)",
+                    "Firewall software",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following describes an IP address?",
+                "type": "mcq",
+                "options": [
+                    "A unique identifier for a device on a network",
+                    "A physical address used in communication",
+                    "A protocol for securing network traffic",
+                    "A routing mechanism for data packets"
+                ],
+                "answer": "A unique identifier for a device on a network",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is used to ensure that data sent over the network is not tampered with during transmission?",
+                "type": "mcq",
+                "options": [
+                    "Encryption",
+                    "Authentication",
+                    "Integrity checks",
+                    "Compression"
+                ],
+                "answer": "Integrity checks",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a method used to prevent unauthorized access to a network?",
+                "type": "mcq",
+                "options": [
+                    "User authentication",
+                    "Data compression",
+                    "Routing protocols",
+                    "MAC address filtering"
+                ],
+                "answer": "User authentication",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following protocols ensures that an email message is transferred securely?",
+                "type": "mcq",
+                "options": [
+                    "IMAP",
+                    "SMTP",
+                    "POP3",
+                    "SMTPS"
+                ],
+                "answer": "SMTPS",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an example of a physical network security measure?",
+                "type": "mcq",
+                "options": [
+                    "Firewall",
+                    "Access control list (ACL)",
+                    "Surveillance cameras",
+                    "Intrusion detection system (IDS)"
+                ],
+                "answer": "Surveillance cameras",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is used to prevent unauthorized access to a network by blocking certain types of traffic?",
+                "type": "mcq",
+                "options": [
+                    "VPN",
+                    "Firewall",
+                    "Switch",
+                    "Router"
+                ],
+                "answer": "Firewall",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is NOT an example of a network attack?",
+                "type": "mcq",
+                "options": [
+                    "Denial of Service (DoS)",
+                    "Phishing",
+                    "Encryption",
+                    "SQL Injection"
+                ],
+                "answer": "Encryption",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What type of encryption uses a single key for both encryption and decryption?",
+                "type": "mcq",
+                "options": [
+                    "Symmetric encryption",
+                    "Asymmetric encryption",
+                    "Hashing",
+                    "Digital signatures"
+                ],
+                "answer": "Symmetric encryption",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which layer of the OSI model is responsible for establishing, managing, and terminating sessions between applications?",
+                "type": "mcq",
+                "options": [
+                    "Session layer",
+                    "Transport layer",
+                    "Network layer",
+                    "Data Link layer"
+                ],
+                "answer": "Session layer",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following protocols is used to dynamically assign IP addresses to devices on a network?",
+                "type": "mcq",
+                "options": [
+                    "DNS",
+                    "HTTP",
+                    "DHCP",
+                    "FTP"
+                ],
+                "answer": "DHCP",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is NOT a characteristic of a good password?",
+                "type": "mcq",
+                "options": [
+                    "It includes a mix of upper and lowercase letters",
+                    "It is at least 8 characters long",
+                    "It contains personal information",
+                    "It uses special characters"
+                ],
+                "answer": "It contains personal information",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a type of attack where the attacker tries to impersonate a legitimate user?",
+                "type": "mcq",
+                "options": [
+                    "Spoofing",
+                    "Man-in-the-middle",
+                    "Phishing",
+                    "Brute force"
+                ],
+                "answer": "Spoofing",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following encryption methods is used to protect data during transmission over the internet?",
+                "type": "mcq",
+                "options": [
+                    "SSL/TLS",
+                    "DES",
+                    "AES",
+                    "RSA"
+                ],
+                "answer": "SSL/TLS",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a public key used for in asymmetric encryption?",
+                "type": "mcq",
+                "options": [
+                    "To encrypt data",
+                    "To decrypt data",
+                    "To hash data",
+                    "To generate the symmetric key"
+                ],
+                "answer": "To encrypt data",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a key responsibility of the Network layer?",
+                "type": "mcq",
+                "options": [
+                    "Ensuring data integrity",
+                    "Addressing and routing data packets",
+                    "Providing error recovery",
+                    "Encrypting data for security"
+                ],
+                "answer": "Addressing and routing data packets",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following can be used to limit unauthorized access to a network?",
+                "type": "mcq",
+                "options": [
+                    "MAC filtering",
+                    "Firewalls",
+                    "Virtual Private Networks (VPNs)",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            }
+        ]
+    },
+    {
         "id": "math",
         "name": "Simple Math Module",
         "description": "A simple math module consisting math problems.",
@@ -73,7 +781,7 @@ const quizzes = [
                     "Connect to Wi-Fi"
                 ],
                 "answer": "Access web pages",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -87,7 +795,7 @@ const quizzes = [
                     "Microsoft Office"
                 ],
                 "answer": "Microsoft Office",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -101,7 +809,7 @@ const quizzes = [
                     "Hyper Transfer Protocol"
                 ],
                 "answer": "HyperText Transfer Protocol",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -115,7 +823,7 @@ const quizzes = [
                     "The IP address"
                 ],
                 "answer": "The domain name",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -129,7 +837,7 @@ const quizzes = [
                     "DuckDuckGo"
                 ],
                 "answer": "Google",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -143,7 +851,7 @@ const quizzes = [
                     "A browser plugin for faster browsing"
                 ],
                 "answer": "A search term used by users to find information",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -157,7 +865,7 @@ const quizzes = [
                     "Search Evaluation Operation"
                 ],
                 "answer": "Search Engine Optimization",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -171,7 +879,7 @@ const quizzes = [
                     "Yahoo"
                 ],
                 "answer": "Amazon",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -185,7 +893,7 @@ const quizzes = [
                     "Social media-based results"
                 ],
                 "answer": "Results that are based on an algorithm",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -199,7 +907,7 @@ const quizzes = [
                     "WhatsApp"
                 ],
                 "answer": "Gmail",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -213,7 +921,7 @@ const quizzes = [
                     "Generate random passwords"
                 ],
                 "answer": "Store files online for remote access",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -227,7 +935,7 @@ const quizzes = [
                     "100 MB"
                 ],
                 "answer": "25 MB",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -241,7 +949,7 @@ const quizzes = [
                     "Microsoft Excel"
                 ],
                 "answer": "Microsoft Excel",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -255,7 +963,7 @@ const quizzes = [
                     "Twitter"
                 ],
                 "answer": "LinkedIn",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -269,7 +977,7 @@ const quizzes = [
                     "All of the above"
                 ],
                 "answer": "All of the above",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -283,7 +991,7 @@ const quizzes = [
                     "Amazon Cloud"
                 ],
                 "answer": "Google Drive",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -297,7 +1005,7 @@ const quizzes = [
                     "Software downloads"
                 ],
                 "answer": "User interaction and content sharing",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -311,7 +1019,7 @@ const quizzes = [
                     "VLC Player"
                 ],
                 "answer": "Zoom",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -325,7 +1033,7 @@ const quizzes = [
                     "Data Management"
                 ],
                 "answer": "Direct Message",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -339,7 +1047,7 @@ const quizzes = [
                     "Filtering spam emails"
                 ],
                 "answer": "A method of stealing sensitive information by impersonating legitimate sources",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -353,7 +1061,7 @@ const quizzes = [
                     "To manage multiple accounts"
                 ],
                 "answer": "To prevent unauthorized access to accounts",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -367,7 +1075,7 @@ const quizzes = [
                     "A password and a username"
                 ],
                 "answer": "A password and a fingerprint scan",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -381,7 +1089,7 @@ const quizzes = [
                     "Spyware"
                 ],
                 "answer": "Worm",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },{
@@ -394,7 +1102,7 @@ const quizzes = [
                     "Downloading software from untrusted sources"
                 ],
                 "answer": "Using strong and unique passwords",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -408,7 +1116,7 @@ const quizzes = [
                     "To increase download speeds"
                 ],
                 "answer": "To make files unreadable without a decryption key",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -422,7 +1130,7 @@ const quizzes = [
                     "To store data securely"
                 ],
                 "answer": "To hide the user's IP address and encrypt their connection",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -436,7 +1144,7 @@ const quizzes = [
                     "Disabling your antivirus software"
                 ],
                 "answer": "Regularly updating software and apps",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -450,7 +1158,7 @@ const quizzes = [
                     "A secure link with a “https://”"
                 ],
                 "answer": "A request for personal information or financial details",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -464,7 +1172,7 @@ const quizzes = [
                     "All of the above"
                 ],
                 "answer": "All of the above",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -478,7 +1186,7 @@ const quizzes = [
                     "None of the above"
                 ],
                 "answer": "HyperText Transfer Protocol Secure",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -492,7 +1200,7 @@ const quizzes = [
                     "iTunes"
                 ],
                 "answer": "Google Docs",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -506,7 +1214,7 @@ const quizzes = [
                     "A cloud storage service"
                 ],
                 "answer": "A unique identifier for a device on a network",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -520,7 +1228,7 @@ const quizzes = [
                     "Provide power to devices"
                 ],
                 "answer": "Connect multiple devices to the internet",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -534,7 +1242,7 @@ const quizzes = [
                     "They are only used for advertising purposes"
                 ],
                 "answer": "They store data about user behavior for personalized experiences",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -548,7 +1256,7 @@ const quizzes = [
                     "Encrypting emails for security"
                 ],
                 "answer": "Fraudulent attempts to obtain sensitive information",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -562,7 +1270,7 @@ const quizzes = [
                     "File storage"
                 ],
                 "answer": "User interaction through likes, comments, and shares",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -576,7 +1284,7 @@ const quizzes = [
                     "DNS"
                 ],
                 "answer": "SMTP",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -590,7 +1298,7 @@ const quizzes = [
                     "z6&Z2!jP9"
                 ],
                 "answer": "z6&Z2!jP9",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -604,7 +1312,7 @@ const quizzes = [
                     ".html"
                 ],
                 "answer": ".com",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -618,7 +1326,7 @@ const quizzes = [
                     "Automatically clear cookies"
                 ],
                 "answer": "Hide your browsing history",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -632,7 +1340,7 @@ const quizzes = [
                     "World Internet Frequency"
                 ],
                 "answer": "Wireless Fidelity",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -646,7 +1354,7 @@ const quizzes = [
                     "Firewall"
                 ],
                 "answer": "Cloud storage",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -660,7 +1368,7 @@ const quizzes = [
                     "Antivirus protection"
                 ],
                 "answer": "Phishing attacks",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             },
@@ -674,7 +1382,7 @@ const quizzes = [
                     "LinkedIn"
                 ],
                 "answer": "Twitter",
-                "timeLimit": 30,
+                "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
             }

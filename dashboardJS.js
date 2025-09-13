@@ -2014,11 +2014,6 @@ function downloadQuizAsPDF(quiz) {
     })();
 }
 
-
-
-
-
-
 function deleteQuizResult(quizIdToDelete, timeToDelete) {
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (!loggedInUser) return;
