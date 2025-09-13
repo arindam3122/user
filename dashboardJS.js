@@ -274,6 +274,167 @@ function updateAdminStats() {
     document.getElementById('adminArchivedQuizzes').textContent = archivedQuizzes;
 }
 
+// --- Show Quiz Details in a Modal/Section ---
+function showQuizDetails(quiz) {
+    const resultsContainer = document.getElementById('quizResultsDetailsContainer');
+    const detailsSection = document.getElementById('quizResultsDetails');
+    const heading = detailsSection.querySelector('h2.heading5');
+
+    resultsContainer.innerHTML = '';
+    heading.textContent = `Quiz Details: ${quiz.quizName}`;
+
+    if (!quiz.questionDetails || quiz.questionDetails.length === 0) {
+        resultsContainer.innerHTML = '<p style="text-align:center; color:#777;">No detailed question data available.</p>';
+    } else {
+        quiz.questionDetails.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.classList.add('result-item');
+            if (q.isCorrect) div.classList.add('correct'); else div.classList.add('wrong');
+
+            div.innerHTML = `
+                <p><strong>${i + 1}. ${q.question}</strong></p>
+                <p><b>Your Answer:</b> ${q.userAnswer ?? "N/A"}</p>
+                <p><b>Correct Answer:</b> <span class="correct-answer">${q.correctAnswer}</span></p>
+                <p><b>Time Taken:</b> ${q.timeTaken ?? 0} sec</p>
+                <hr>
+            `;
+            resultsContainer.appendChild(div);
+        });
+    }
+
+    hideAllSections();
+    detailsSection.style.display = 'block';
+    document.getElementById('quizResultsBackButton').onclick = () => {
+        detailsSection.style.display = 'none';
+        showPreviousQuizzesSection();
+    };
+}
+
+// --- Download Quiz Result as PDF (with better formatting) ---
+function downloadQuizAsPDF(quiz) {
+    (async () => {
+        try {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const margin = 15;
+            const maxLineWidth = pageWidth - margin * 2;
+            let y = margin;
+
+            function checkPageBreak(extraHeight = 10) {
+                if (y + extraHeight > pageHeight - margin) {
+                    doc.addPage();
+                    y = margin;
+                }
+            }
+
+            async function addImage(imgUrl, customHeight = null) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.src = imgUrl;
+                    img.onload = () => {
+                        let imgWidth = img.width;
+                        let imgHeight = img.height;
+                        const scale = Math.min(maxLineWidth / imgWidth, (customHeight ?? 80) / imgHeight);
+                        imgWidth *= scale;
+                        imgHeight *= scale;
+
+                        checkPageBreak(imgHeight + 5);
+                        doc.addImage(img, "PNG", margin, y, imgWidth, imgHeight);
+                        y += imgHeight + 10;
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        doc.text("(Image failed to load)", margin, y);
+                        y += 8;
+                        resolve();
+                    };
+                });
+            }
+
+            // --- Title ---
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(18);
+            doc.text(`Quiz Report: ${quiz.quizName}`, pageWidth / 2, y, { align: "center" });
+            y += 6;
+            doc.setDrawColor(180);
+            doc.line(margin, y, pageWidth - margin, y);
+            y += 10;
+
+            // --- Performance Chart ---
+            const chartImg = await getTrendChartImage();
+            if (chartImg) await addImage(chartImg, 70);
+
+            // --- Quiz Meta Data ---
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(12);
+            const meta = [
+                `Score: ${quiz.score}/${quiz.totalQuestions} (${quiz.percentage}%)`,
+                `Start Time: ${formatDateTime(quiz.startTime)}`,
+                `End Time: ${formatDateTime(quiz.endTime)}`
+            ];
+
+            meta.forEach(line => {
+                const wrapped = doc.splitTextToSize(line, maxLineWidth);
+                wrapped.forEach(wl => {
+                    checkPageBreak(8);
+                    doc.text(wl, margin, y);
+                    y += 6;
+                });
+            });
+
+            y += 6;
+
+            // --- Question Details ---
+            if (quiz.questionDetails && quiz.questionDetails.length > 0) {
+                for (let i = 0; i < quiz.questionDetails.length; i++) {
+                    const q = quiz.questionDetails[i];
+                    doc.setFont("helvetica", "bold");
+                    doc.setFontSize(13);
+                    const wrappedQ = doc.splitTextToSize(`${i + 1}. ${q.question}`, maxLineWidth);
+                    wrappedQ.forEach(line => {
+                        checkPageBreak(8);
+                        doc.text(line, margin, y);
+                        y += 6;
+                    });
+
+                    if (q.imageUrl) {
+                        const dataUrl = await toDataURL(q.imageUrl);
+                        await addImage(dataUrl);
+                    }
+
+                    doc.setFont("helvetica", "normal");
+                    doc.setFontSize(11);
+                    const userAnswer = `Your Answer: ${q.userAnswer ?? "N/A"}`;
+                    doc.text(doc.splitTextToSize(userAnswer, maxLineWidth - 5), margin + 3, y);
+                    y += 6;
+
+                    doc.setTextColor(0, 150, 0);
+                    const correctAns = `Correct Answer: ${q.correctAnswer}`;
+                    doc.text(doc.splitTextToSize(correctAns, maxLineWidth - 5), margin + 3, y);
+                    y += 6;
+                    doc.setTextColor(0, 0, 0);
+
+                    const timeTaken = `Time Taken: ${q.timeTaken ?? 0} sec`;
+                    doc.text(doc.splitTextToSize(timeTaken, maxLineWidth - 5), margin + 3, y);
+                    y += 8;
+
+                    doc.setDrawColor(200);
+                    doc.line(margin, y, pageWidth - margin, y);
+                    y += 8;
+
+                    checkPageBreak(12);
+                }
+            }
+
+            doc.save(`${quiz.quizName.replace(/\\s+/g, "_")}_Result.pdf`);
+        } catch (err) {
+            console.error("Error generating PDF:", err);
+            alert("Failed to generate PDF. Please check console for details.");
+        }
+    })();
+}
 
 function showQuizDetailsForAdmin(quiz) {
     hideAllSections();
@@ -657,6 +818,24 @@ function showArchivedQuizDetails(quiz) {
         quizResultsDetails.style.display = 'none'; 
         showArchivedQuizzesSection();
     };
+}
+async function getTrendChartImage() {
+    return new Promise(resolve => {
+        if (window.scoreTrendChartInstance) {
+            window.scoreTrendChartInstance.update('none');
+            requestAnimationFrame(() => {
+                try {
+                    const img = window.scoreTrendChartInstance.toBase64Image('image/png', 1.0);
+                    resolve(img);
+                } catch (e) {
+                    console.error("Chart image capture failed:", e);
+                    resolve(null);
+                }
+            });
+        } else {
+            resolve(null);
+        }
+    });
 }
 
 
@@ -1580,48 +1759,46 @@ function displayDetailedResults() {
     document.getElementById('quizResultsBackButton').onclick = showFinalScoreSection;
 }
 
-// --- Local Storage for Previous Quizzes ---
 function saveQuizResult() {
     const loggedInUser = localStorage.getItem('loggedInUser');
-    if (!loggedInUser) return;
+    if (!loggedInUser || !currentQuiz) return;
 
     const userKey = `previousQuizzes_${loggedInUser}`;
     const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
 
-    const now = new Date();
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const year = now.getFullYear();
-
-    let hours = now.getHours();
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    const formattedHours = String(hours).padStart(2, '0');
-
-    const formattedStartTime = quizStartTime ?
-        `${String(quizStartTime.getDate()).padStart(2, '0')}/${String(quizStartTime.getMonth() + 1).padStart(2, '0')}/${quizStartTime.getFullYear()} ${String(quizStartTime.getHours() % 12 || 12).padStart(2, '0')}:${String(quizStartTime.getMinutes()).padStart(2, '0')}:${String(quizStartTime.getSeconds()).padStart(2, '0')} ${quizStartTime.getHours() >= 12 ? 'PM' : 'AM'}` :
-        'N/A';
-
-    const formattedEndTime = `${day}/${month}/${year} ${formattedHours}:${minutes}:${seconds} ${ampm}`;
-
-    const result = {
+    const quizResult = {
         quizId: currentQuiz.id,
         quizName: currentQuiz.name,
         score: correctAnswersTotal,
         totalQuestions: currentQuiz.questions.length,
         percentage: ((correctAnswersTotal / currentQuiz.questions.length) * 100).toFixed(2),
-        startTime: formattedStartTime,
-        endTime: formattedEndTime,
-        details: quizDetailsForDisplay
+        startTime: quizStartTime ? quizStartTime.toISOString() : null,
+        endTime: new Date().toISOString(),
+        answers: userAnswers,
+        questionDetails: quizDetailsForDisplay
     };
 
-    previousQuizzes.push(result);
+    previousQuizzes.push(quizResult);
     localStorage.setItem(userKey, JSON.stringify(previousQuizzes));
 }
+// --- Utility to Format Dates for Display ---
+function formatDateTime(dateString) {
+    if (!dateString) return "N/A";
+    const d = new Date(dateString);
+    if (isNaN(d.getTime())) return "Invalid Date";
 
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+
+    let hours = d.getHours();
+    const minutes = String(d.getMinutes()).padStart(2, '0');
+    const seconds = String(d.getSeconds()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+
+    return `${day}/${month}/${year}, ${hours}:${minutes}:${seconds} ${ampm}`;
+}
 
 function loadPreviousQuizzes() {
     const loggedInUser = localStorage.getItem('loggedInUser');
@@ -1632,8 +1809,7 @@ function loadPreviousQuizzes() {
 
     const tableBody = document.getElementById('previousQuizzesTableBody');
     const noDataMsg = document.getElementById('noPreviousQuizzesMessage');
-
-    tableBody.innerHTML = "";
+    tableBody.innerHTML = '';
 
     if (previousQuizzes.length === 0) {
         noDataMsg.style.display = 'block';
@@ -1642,60 +1818,203 @@ function loadPreviousQuizzes() {
         noDataMsg.style.display = 'none';
     }
 
-    previousQuizzes.forEach((result) => {
+    previousQuizzes.forEach(quiz => {
         const row = tableBody.insertRow();
-        row.insertCell(0).textContent = result.quizName || "N/A";
-        row.insertCell(1).textContent = result.score || "0";
-        row.insertCell(2).textContent = result.percentage ? `${result.percentage}%` : "0%";
-        row.insertCell(3).textContent = result.startTime ? new Date(result.startTime).toLocaleString() : "N/A";
-        row.insertCell(4).textContent = result.endTime ? new Date(result.endTime).toLocaleString() : "N/A";
+        row.insertCell(0).textContent = quiz.quizName || "Unnamed Quiz";
+        row.insertCell(1).textContent = quiz.score ?? 0;
+        row.insertCell(2).textContent = quiz.percentage ? `${quiz.percentage}%` : "0.00%";
+        row.insertCell(3).textContent = formatDateTime(quiz.startTime);
+        row.insertCell(4).textContent = formatDateTime(quiz.endTime);
 
         const actionsCell = row.insertCell(5);
 
-        // View button
-        const viewButton = document.createElement('button');
-        viewButton.innerHTML = '<i class="fas fa-eye"></i> View Details';
-        viewButton.classList.add('view-details-btn');
-        viewButton.onclick = () => showQuizResultsDetails(result);
-        actionsCell.appendChild(viewButton);
+        const viewBtn = document.createElement("button");
+        viewBtn.innerHTML = '<i class="fas fa-eye"></i> View Details';
+        viewBtn.classList.add("view-details-btn");
+        viewBtn.onclick = () => showQuizDetails(quiz);
+        actionsCell.appendChild(viewBtn);
 
-        // ✅ Delete button (with inline confirm box instead of popup)
-        const deleteButton = document.createElement('button');
-        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
-        deleteButton.classList.add('delete-quiz-btn');
-        deleteButton.onclick = () => {
-            const confirmBox = document.getElementById('deleteConfirmBox');
-            const confirmText = document.getElementById('deleteConfirmText');
-            const yesBtn = document.getElementById('confirmYesBtn');
-            const noBtn = document.getElementById('confirmNoBtn');
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
+        deleteBtn.classList.add("delete-btn");
+        deleteBtn.onclick = () => confirmDeleteQuiz(quiz.quizId);
+        actionsCell.appendChild(deleteBtn);
 
-            // Update text with quiz name
-            confirmText.textContent = `Are you sure you want to delete your response for "${result.quizName}"?`;
-
-            // Show confirm box
-            confirmBox.style.display = 'block';
-
-            // Handle Yes
-            yesBtn.onclick = () => {
-                deleteQuizResult(result.quizId, result.endTime || result.date);
-                confirmBox.style.display = 'none';
-            };
-
-            // Handle No
-            noBtn.onclick = () => {
-                confirmBox.style.display = 'none';
-            };
-        };
-        actionsCell.appendChild(deleteButton);
-
-        // Download button
-        const downloadButton = document.createElement('button');
-        downloadButton.innerHTML = '<i class="fas fa-download"></i> Download';
-        downloadButton.classList.add('download-response-btn');
-        downloadButton.onclick = () => downloadQuizResponse(result);
-        actionsCell.appendChild(downloadButton);
+        const downloadBtn = document.createElement("button");
+        downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download';
+        downloadBtn.classList.add("download-btn");
+        downloadBtn.onclick = () => downloadQuizAsPDF(quiz);
+        actionsCell.appendChild(downloadBtn);
     });
 }
+
+
+// --- Confirm and Delete Previous Quiz Result ---
+function confirmDeleteQuiz(quizId) {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    const userKey = `previousQuizzes_${loggedInUser}`;
+    let previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
+
+    // Show confirmation box
+    const confirmBox = document.getElementById('deleteConfirmBox');
+    const confirmYesBtn = document.getElementById('confirmYesBtn');
+    const confirmNoBtn = document.getElementById('confirmNoBtn');
+    const successMsg = document.getElementById('deleteSuccessMessage');
+
+    confirmBox.style.display = 'block';
+
+    confirmYesBtn.onclick = () => {
+        // Remove the selected quiz
+        previousQuizzes = previousQuizzes.filter(q => q.quizId !== quizId);
+        localStorage.setItem(userKey, JSON.stringify(previousQuizzes));
+        confirmBox.style.display = 'none';
+
+        // Show success message briefly
+        successMsg.style.display = 'block';
+        setTimeout(() => successMsg.style.display = 'none', 2000);
+
+        // Refresh table
+        loadPreviousQuizzes();
+    };
+
+    confirmNoBtn.onclick = () => {
+        confirmBox.style.display = 'none';
+    };
+}
+
+// --- Download Quiz Result as PDF ---
+function downloadQuizAsPDF(quiz) {
+    (async () => {
+        try {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const margin = 15;
+            const maxLineWidth = pageWidth - margin * 2;
+            let y = margin;
+
+            function checkPageBreak(extraHeight = 10) {
+                if (y + extraHeight > pageHeight - margin) {
+                    doc.addPage();
+                    y = margin;
+                }
+            }
+
+            async function toDataURL(url) {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(blob);
+                });
+            }
+
+            async function addImage(imgUrl, customHeight = null) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.src = imgUrl;
+                    img.onload = () => {
+                        let imgWidth = img.width;
+                        let imgHeight = img.height;
+                        const scale = Math.min(maxLineWidth / imgWidth, (customHeight ?? 80) / imgHeight);
+                        imgWidth *= scale;
+                        imgHeight *= scale;
+
+                        checkPageBreak(imgHeight + 5);
+                        doc.addImage(img, "PNG", margin, y, imgWidth, imgHeight);
+                        y += imgHeight + 10;
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        doc.text("(Image failed to load)", margin, y);
+                        y += 8;
+                        resolve();
+                    };
+                });
+            }
+
+            // --- Title ---
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(18);
+            doc.text(`Quiz Report: ${quiz.quizName}`, pageWidth / 2, y, { align: "center" });
+            y += 6;
+            doc.setDrawColor(180);
+            doc.line(margin, y, pageWidth - margin, y);
+            y += 10;
+
+            // --- Quiz Meta Data ---
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(12);
+            const meta = [
+                `Score: ${quiz.score}/${quiz.totalQuestions} (${quiz.percentage}%)`,
+                `Start Time: ${formatDateTime(quiz.startTime)}`,
+                `End Time: ${formatDateTime(quiz.endTime)}`
+            ];
+
+            meta.forEach(line => {
+                const wrapped = doc.splitTextToSize(line, maxLineWidth);
+                wrapped.forEach(wl => {
+                    checkPageBreak(8);
+                    doc.text(wl, margin, y);
+                    y += 6;
+                });
+            });
+
+            y += 6;
+
+            // --- Question Details ---
+            if (quiz.questionDetails && quiz.questionDetails.length > 0) {
+                for (let i = 0; i < quiz.questionDetails.length; i++) {
+                    const q = quiz.questionDetails[i];
+                    doc.setFont("helvetica", "bold");
+                    doc.setFontSize(13);
+                    const wrappedQ = doc.splitTextToSize(`${i + 1}. ${q.question}`, maxLineWidth);
+                    wrappedQ.forEach(line => {
+                        checkPageBreak(8);
+                        doc.text(line, margin, y);
+                        y += 6;
+                    });
+
+                    if (q.imageUrl) {
+                        const dataUrl = await toDataURL(q.imageUrl);
+                        await addImage(dataUrl);
+                    }
+
+                    doc.setFont("helvetica", "normal");
+                    doc.setFontSize(11);
+                    const userAnswer = `Your Answer: ${q.userAnswer ?? "N/A"}`;
+                    doc.text(doc.splitTextToSize(userAnswer, maxLineWidth - 5), margin + 3, y);
+                    y += 6;
+
+                    doc.setTextColor(0, 150, 0);
+                    const correctAns = `Correct Answer: ${q.correctAnswer}`;
+                    doc.text(doc.splitTextToSize(correctAns, maxLineWidth - 5), margin + 3, y);
+                    y += 6;
+                    doc.setTextColor(0, 0, 0);
+
+                    const timeTaken = `Time Taken: ${q.timeTaken ?? 0} sec`;
+                    doc.text(doc.splitTextToSize(timeTaken, maxLineWidth - 5), margin + 3, y);
+                    y += 8;
+
+                    doc.setDrawColor(200);
+                    doc.line(margin, y, pageWidth - margin, y);
+                    y += 8;
+
+                    checkPageBreak(12);
+                }
+            }
+
+            doc.save(`${quiz.quizName.replace(/\\s+/g, "_")}_Result.pdf`);
+        } catch (err) {
+            console.error("Error generating PDF:", err);
+            alert("Failed to generate PDF. Please check console for details.");
+        }
+    })();
+}
+
+
 
 
 

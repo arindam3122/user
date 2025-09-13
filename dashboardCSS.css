@@ -1853,3 +1853,59 @@ header {
 .no-btn:hover {
   background: #495057;
 }
+/* Style for View Details, Delete, and Download buttons */
+.view-details-btn, .delete-btn, .download-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.view-details-btn {
+    background: #3b82f6;
+    color: white;
+}
+
+.view-details-btn:hover {
+    background: #2563eb;
+    transform: scale(1.05);
+}
+
+.delete-btn {
+    background: #dc2626;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #b91c1c;
+    transform: scale(1.05);
+}
+
+.download-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.download-btn:hover {
+    background: #15803d;
+    transform: scale(1.05);
+}
+
+/* Styling for correct answers inside view details */
+.result-item.correct .correct-answer {
+    color: green;
+    font-weight: bold;
+}
+.result-item.wrong .correct-answer {
+    color: green;
+    font-weight: bold;
+}
+.view-details-btn, .delete-btn, .download-btn {
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin: 4px;
+}
