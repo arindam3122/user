@@ -32,6 +32,714 @@ const quizzes = [
         ]
     },
     {
+        "id": "Database Management System (DBMS)",
+        "name": "Database Management System (DBMS)",
+        "description": "",
+        "enabled": false,
+        "questions": [
+            {
+                "question": "What is DBMS?",
+                "type": "mcq",
+                "options": [
+                    "A tool for analyzing data",
+                    "A collection of data organized in a systematic way",
+                    "A system for managing hardware resources",
+                    "A collection of software to manipulate databases"
+                ],
+                "answer": "A collection of software to manipulate databases",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is the main purpose of DBMS?",
+                "type": "mcq",
+                "options": [
+                    "To store data permanently",
+                    "To manage hardware resources",
+                    "To provide a mechanism for data retrieval and storage",
+                    "To perform arithmetic operations"
+                ],
+                "answer": "To provide a mechanism for data retrieval and storage",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is not a type of DBMS?",
+                "type": "mcq",
+                "options": [
+                    "Hierarchical DBMS",
+                    "Relational DBMS",
+                    "Object-oriented DBMS",
+                    "Text-based DBMS"
+                ],
+                "answer": "Text-based DBMS",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What are the main objectives of a DBMS?",
+                "type": "mcq",
+                "options": [
+                    "Data integrity, data security, and data redundancy",
+                    "Data manipulation and data analysis",
+                    "Data consistency, data retrieval, and data storage",
+                    "Data input and data output"
+                ],
+                "answer": "Data consistency, data retrieval, and data storage",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is part of a DBMS architecture?",
+                "type": "mcq",
+                "options": [
+                    "User Interface",
+                    "Query Processor",
+                    "Data Storage Management",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The three levels of DBMS architecture are:",
+                "type": "mcq",
+                "options": [
+                    "External, Conceptual, Internal",
+                    "Physical, Logical, Conceptual",
+                    "Logical, Physical, Conceptual",
+                    "Internal, Conceptual, Logical"
+                ],
+                "answer": "External, Conceptual, Internal",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The Data Dictionary in DBMS is used to store:",
+                "type": "mcq",
+                "options": [
+                    "Data in a tabular format",
+                    "Metadata about the database",
+                    "Application programs",
+                    "Backup data"
+                ],
+                "answer": "Metadata about the database",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which DBMS component is responsible for handling queries?",
+                "type": "mcq",
+                "options": [
+                    "Query Processor",
+                    "Transaction Manager",
+                    "Database Engine",
+                    "Storage Manager"
+                ],
+                "answer": "Query Processor",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a feature of RDBMS?",
+                "type": "mcq",
+                "options": [
+                    "Uses tables for storing data",
+                    "Supports SQL for querying",
+                    "Allows multiple users to access data",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "In a relational database, what is a relation?",
+                "type": "mcq",
+                "options": [
+                    "A table with rows and columns",
+                    "A database with multiple tables",
+                    "A set of related files",
+                    "None of the above"
+                ],
+                "answer": "A table with rows and columns",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a primary key constraint in RDBMS?",
+                "type": "mcq",
+                "options": [
+                    "It uniquely identifies each record in a table.",
+                    "It allows duplicate values.",
+                    "It can be null.",
+                    "It refers to another table’s primary key."
+                ],
+                "answer": "It uniquely identifies each record in a table.",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does SQL stand for?",
+                "type": "mcq",
+                "options": [
+                    "Structured Query Logic",
+                    "Structured Query Language",
+                    "Simple Query Language",
+                    "Sequential Query Language"
+                ],
+                "answer": "Structured Query Language",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which SQL statement is used to retrieve data from a database?",
+                "type": "mcq",
+                "options": [
+                    "SELECT",
+                    "INSERT",
+                    "UPDATE",
+                    "DELETE"
+                ],
+                "answer": "SELECT",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What SQL command is used to remove a table from a database?",
+                "type": "mcq",
+                "options": [
+                    "DELETE",
+                    "DROP",
+                    "REMOVE",
+                    "TRUNCATE"
+                ],
+                "answer": "DROP",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which SQL keyword is used to filter records in a SELECT query?",
+                "type": "mcq",
+                "options": [
+                    "FILTER",
+                    "WHERE",
+                    "HAVING",
+                    "ORDER BY"
+                ],
+                "answer": "WHERE",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which SQL statement is used to insert new records into a table?",
+                "type": "mcq",
+                "options": [
+                    "INSERT INTO",
+                    "ADD RECORD",
+                    "UPDATE",
+                    "CREATE"
+                ],
+                "answer": "INSERT INTO",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the default sorting order in SQL’s ORDER BY clause?",
+                "type": "mcq",
+                "options": [
+                    "Ascending",
+                    "Descending",
+                    "Random",
+                    "No order"
+                ],
+                "answer": "Ascending",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following SQL clauses is used to sort the result set?",
+                "type": "mcq",
+                "options": [
+                    "GROUP BY",
+                    "HAVING",
+                    "ORDER BY",
+                    "LIMIT"
+                ],
+                "answer": "ORDER BY",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which SQL function is used to find the total number of records in a table?",
+                "type": "mcq",
+                "options": [
+                    "COUNT",
+                    "SUM",
+                    "AVG",
+                    "MAX"
+                ],
+                "answer": "COUNT",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the primary goal of database normalization?",
+                "type": "mcq",
+                "options": [
+                    "To reduce data redundancy",
+                    "To speed up query processing",
+                    "To speed up query processing",
+                    "To protect data from unauthorized access"
+                ],
+                "answer": "To reduce data redundancy",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which normal form is considered the highest level of normalization?",
+                "type": "mcq",
+                "options": [
+                    "First Normal Form (1NF)",
+                    "Second Normal Form (2NF)",
+                    "Third Normal Form (3NF)",
+                    "Boyce-Codd Normal Form (BCNF)"
+                ],
+                "answer": "Boyce-Codd Normal Form (BCNF)",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a characteristic of 1NF (First Normal Form)?",
+                "type": "mcq",
+                "options": [
+                    "No repeating groups of data",
+                    "No partial dependency",
+                    "No transitive dependency",
+                    "All attributes depend on the primary key"
+                ],
+                "answer": "No repeating groups of data",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "In 2NF (Second Normal Form), a relation must be:",
+                "type": "mcq",
+                "options": [
+                    "In 1NF and have no partial dependencies",
+                    "In 1NF and have no transitive dependencies",
+                    "In BCNF",
+                    "In 3NF"
+                ],
+                "answer": "In 1NF and have no partial dependencies",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is true about 3NF (Third Normal Form)?",
+                "type": "mcq",
+                "options": [
+                    "There should be no transitive dependency",
+                    "There should be no partial dependency",
+                    "Every non-key attribute should be fully dependent on the primary key",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following methods is commonly used to ensure database security?",
+                "type": "mcq",
+                "options": [
+                    "Encryption",
+                    "Authentication",
+                    "Authorization",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is used to ensure that a DBMS is protected from unauthorized access?",
+                "type": "mcq",
+                "options": [
+                    "Encryption",
+                    "Passwords",
+                    "Access control lists",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a database backup?",
+                "type": "mcq",
+                "options": [
+                    "A copy of the database stored in another location",
+                    "A tool for repairing the database",
+                    "A method of encryption",
+                    "A software to check data integrity"
+                ],
+                "answer": "A copy of the database stored in another location",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a technique used for database backup?",
+                "type": "mcq",
+                "options": [
+                    "Full backup",
+                    "Incremental backup",
+                    "Differential backup",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which type of backup copies only the data that has changed since the last full backup?",
+                "type": "mcq",
+                "options": [
+                    "Full backup",
+                    "Incremental backup",
+                    "Differential backup",
+                    "Online backup"
+                ],
+                "answer": "Incremental backup",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which backup method stores only changes made since the last backup, regardless of\nwhether it was a full or incremental backup?",
+                "type": "mcq",
+                "options": [
+                    "Differential backup",
+                    "Incremental backup",
+                    "Full backup",
+                    "Snapshot backup"
+                ],
+                "answer": "Differential backup",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is data integrity in DBMS?",
+                "type": "mcq",
+                "options": [
+                    "Consistency of data in the database",
+                    "The process of deleting unnecessary data",
+                    "Maintaining multiple copies of data",
+                    "Encrypting data"
+                ],
+                "answer": "Consistency of data in the database",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a type of data anomaly?",
+                "type": "mcq",
+                "options": [
+                    "Insertion anomaly",
+                    "Deletion anomaly",
+                    "Update anomaly",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following ensures that a transaction is completed successfully or fully rolled back in case of failure?",
+                "type": "mcq",
+                "options": [
+                    "Transaction Control",
+                    "Atomicity",
+                    "Consistency",
+                    "Isolation"
+                ],
+                "answer": "Atomicity",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following statements is true about a DBMS?",
+                "type": "mcq",
+                "options": [
+                    "A DBMS does not support concurrency control",
+                    "A DBMS allows multiple users to work on the same data simultaneously",
+                    "A DBMS uses text files for storage",
+                    "A DBMS does not support backup"
+                ],
+                "answer": "A DBMS allows multiple users to work on the same data simultaneously",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a transaction in DBMS?",
+                "type": "mcq",
+                "options": [
+                    "A single update operation",
+                    "A sequence of operations performed as a unit",
+                    "A backup operation",
+                    "A data entry process"
+                ],
+                "answer": "A sequence of operations performed as a unit",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is not a feature of RDBMS?",
+                "type": "mcq",
+                "options": [
+                    "Data is stored in tables",
+                    "Data is accessed using SQL",
+                    "Data is unstructured",
+                    "It supports relationships between tables"
+                ],
+                "answer": "Data is unstructured",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the purpose of indexing in DBMS?",
+                "type": "mcq",
+                "options": [
+                    "To make database data more secure",
+                    "To improve query performance",
+                    "To compress database data",
+                    "To ensure data integrity"
+                ],
+                "answer": "To improve query performance",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is true about ACID properties in DBMS?",
+                "type": "mcq",
+                "options": [
+                    "They ensure the database performs reliably and consistently",
+                    "They only apply to backup operations",
+                    "They are not important in multi-user databases",
+                    "They ensure only data retrieval"
+                ],
+                "answer": "They ensure the database performs reliably and consistently",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following can be a valid data type in DBMS?",
+                "type": "mcq",
+                "options": [
+                    "Integer",
+                    "String",
+                    "Date",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a type of relationship in an RDBMS?",
+                "type": "mcq",
+                "options": [
+                    "One-to-one",
+                    "One-to-many",
+                    "Many-to-many",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is not a SQL aggregate function?",
+                "type": "mcq",
+                "options": [
+                    "COUNT",
+                    "SUM",
+                    "AVG",
+                    "DELETE"
+                ],
+                "answer": "DELETE",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following best describes a primary key?",
+                "type": "mcq",
+                "options": [
+                    "A key used to access a database record",
+                    "A unique identifier for records in a table",
+                    "A key that allows for duplicate values",
+                    "A foreign key in another table"
+                ],
+                "answer": "A unique identifier for records in a table",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a foreign key in DBMS?",
+                "type": "mcq",
+                "options": [
+                    "A key that links a table to a primary key in another table",
+                    "A key used for encryption",
+                    "A key that uniquely identifies a record",
+                    "A key that encrypts the database"
+                ],
+                "answer": "A key that links a table to a primary key in another table",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the SQL command ALTER do?",
+                "type": "mcq",
+                "options": [
+                    "Deletes records from a table",
+                    "Changes the structure of an existing table",
+                    "Creates a new table",
+                    "Retrieves data from a table"
+                ],
+                "answer": "Changes the structure of an existing table",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the main function of a Transaction Manager in DBMS?",
+                "type": "mcq",
+                "options": [
+                    "To execute queries",
+                    "To ensure the database is consistent during transactions",
+                    "To backup the data",
+                    "To monitor user access"
+                ],
+                "answer": "To ensure the database is consistent during transactions",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is true about the concept of concurrency control in DBMS?",
+                "type": "mcq",
+                "options": [
+                    "It ensures that multiple transactions can execute simultaneously without conflicting",
+                    "It prevents multiple users from accessing the same database",
+                    "It speeds up the database retrieval process",
+                    "It does not support transaction isolation"
+                ],
+                "answer": "It ensures that multiple transactions can execute simultaneously without conflicting",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a method of concurrency control?",
+                "type": "mcq",
+                "options": [
+                    "Locking mechanisms",
+                    "Multiversion concurrency control",
+                    "Timestamp ordering",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the term \"data redundancy\" refer to in a database?",
+                "type": "mcq",
+                "options": [
+                    "Duplicate data entries",
+                    "Multiple tables with the same data",
+                    "Inconsistent data across tables",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which type of database management system stores data in a tree-like structure?",
+                "type": "mcq",
+                "options": [
+                    "Hierarchical DBMS",
+                    "Relational DBMS",
+                    "Object-oriented DBMS",
+                    "Network DBMS"
+                ],
+                "answer": "Hierarchical DBMS",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "In the context of DBMS, what is a view?",
+                "type": "mcq",
+                "options": [
+                    "A physical backup of data",
+                    "A virtual table based on the result of a query",
+                    "A table stored in the database",
+                    "A graphical representation of data"
+                ],
+                "answer": "A virtual table based on the result of a query",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            }
+        ]
+    },
+    {
         "id": "Computer Networks & Security",
         "name": "Computer Networks & Security",
         "description": "",
