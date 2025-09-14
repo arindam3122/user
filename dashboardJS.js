@@ -310,131 +310,8 @@ function showQuizDetails(quiz) {
     };
 }
 
-// --- Download Quiz Result as PDF (with better formatting) ---
-function downloadQuizAsPDF(quiz) {
-    (async () => {
-        try {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const pageHeight = doc.internal.pageSize.getHeight();
-            const margin = 15;
-            const maxLineWidth = pageWidth - margin * 2;
-            let y = margin;
 
-            function checkPageBreak(extraHeight = 10) {
-                if (y + extraHeight > pageHeight - margin) {
-                    doc.addPage();
-                    y = margin;
-                }
-            }
 
-            async function addImage(imgUrl, customHeight = null) {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.src = imgUrl;
-                    img.onload = () => {
-                        let imgWidth = img.width;
-                        let imgHeight = img.height;
-                        const scale = Math.min(maxLineWidth / imgWidth, (customHeight ?? 80) / imgHeight);
-                        imgWidth *= scale;
-                        imgHeight *= scale;
-
-                        checkPageBreak(imgHeight + 5);
-                        doc.addImage(img, "PNG", margin, y, imgWidth, imgHeight);
-                        y += imgHeight + 10;
-                        resolve();
-                    };
-                    img.onerror = () => {
-                        doc.text("(Image failed to load)", margin, y);
-                        y += 8;
-                        resolve();
-                    };
-                });
-            }
-
-            // --- Title ---
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(18);
-            doc.text(`Quiz Report: ${quiz.quizName}`, pageWidth / 2, y, { align: "center" });
-            y += 6;
-            doc.setDrawColor(180);
-            doc.line(margin, y, pageWidth - margin, y);
-            y += 10;
-
-            // --- Performance Chart ---
-            const chartImg = await getTrendChartImage();
-            if (chartImg) await addImage(chartImg, 70);
-
-            // --- Quiz Meta Data ---
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(12);
-            const meta = [
-                `Score: ${quiz.score}/${quiz.totalQuestions} (${quiz.percentage}%)`,
-                `Start Time: ${formatDateTime(quiz.startTime)}`,
-                `End Time: ${formatDateTime(quiz.endTime)}`
-            ];
-
-            meta.forEach(line => {
-                const wrapped = doc.splitTextToSize(line, maxLineWidth);
-                wrapped.forEach(wl => {
-                    checkPageBreak(8);
-                    doc.text(wl, margin, y);
-                    y += 6;
-                });
-            });
-
-            y += 6;
-
-            // --- Question Details ---
-            if (quiz.questionDetails && quiz.questionDetails.length > 0) {
-                for (let i = 0; i < quiz.questionDetails.length; i++) {
-                    const q = quiz.questionDetails[i];
-                    doc.setFont("helvetica", "bold");
-                    doc.setFontSize(13);
-                    const wrappedQ = doc.splitTextToSize(`${i + 1}. ${q.question}`, maxLineWidth);
-                    wrappedQ.forEach(line => {
-                        checkPageBreak(8);
-                        doc.text(line, margin, y);
-                        y += 6;
-                    });
-
-                    if (q.imageUrl) {
-                        const dataUrl = await toDataURL(q.imageUrl);
-                        await addImage(dataUrl);
-                    }
-
-                    doc.setFont("helvetica", "normal");
-                    doc.setFontSize(11);
-                    const userAnswer = `Your Answer: ${q.userAnswer ?? "N/A"}`;
-                    doc.text(doc.splitTextToSize(userAnswer, maxLineWidth - 5), margin + 3, y);
-                    y += 6;
-
-                    doc.setTextColor(0, 150, 0);
-                    const correctAns = `Correct Answer: ${q.correctAnswer}`;
-                    doc.text(doc.splitTextToSize(correctAns, maxLineWidth - 5), margin + 3, y);
-                    y += 6;
-                    doc.setTextColor(0, 0, 0);
-
-                    const timeTaken = `Time Taken: ${q.timeTaken ?? 0} sec`;
-                    doc.text(doc.splitTextToSize(timeTaken, maxLineWidth - 5), margin + 3, y);
-                    y += 8;
-
-                    doc.setDrawColor(200);
-                    doc.line(margin, y, pageWidth - margin, y);
-                    y += 8;
-
-                    checkPageBreak(12);
-                }
-            }
-
-            doc.save(`${quiz.quizName.replace(/\\s+/g, "_")}_Result.pdf`);
-        } catch (err) {
-            console.error("Error generating PDF:", err);
-            alert("Failed to generate PDF. Please check console for details.");
-        }
-    })();
-}
 
 function showQuizDetailsForAdmin(quiz) {
     hideAllSections();
@@ -1882,137 +1759,241 @@ function confirmDeleteQuiz(quizId) {
     };
 }
 
-// --- Download Quiz Result as PDF ---
+// --- Download Quiz Result as PDF (Final with Auto-Submission, Time Up & Gray Auto-Submitted) ---
 function downloadQuizAsPDF(quiz) {
-    (async () => {
-        try {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const pageHeight = doc.internal.pageSize.getHeight();
-            const margin = 15;
-            const maxLineWidth = pageWidth - margin * 2;
-            let y = margin;
+  (async () => {
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const margin = 20;
+      const maxLineWidth = pageWidth - margin * 2;
+      let y = margin;
 
-            function checkPageBreak(extraHeight = 10) {
-                if (y + extraHeight > pageHeight - margin) {
-                    doc.addPage();
-                    y = margin;
-                }
-            }
-
-            async function toDataURL(url) {
-                const response = await fetch(url);
-                const blob = await response.blob();
-                return new Promise((resolve) => {
-                    const reader = new FileReader();
-                    reader.onloadend = () => resolve(reader.result);
-                    reader.readAsDataURL(blob);
-                });
-            }
-
-            async function addImage(imgUrl, customHeight = null) {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.src = imgUrl;
-                    img.onload = () => {
-                        let imgWidth = img.width;
-                        let imgHeight = img.height;
-                        const scale = Math.min(maxLineWidth / imgWidth, (customHeight ?? 80) / imgHeight);
-                        imgWidth *= scale;
-                        imgHeight *= scale;
-
-                        checkPageBreak(imgHeight + 5);
-                        doc.addImage(img, "PNG", margin, y, imgWidth, imgHeight);
-                        y += imgHeight + 10;
-                        resolve();
-                    };
-                    img.onerror = () => {
-                        doc.text("(Image failed to load)", margin, y);
-                        y += 8;
-                        resolve();
-                    };
-                });
-            }
-
-            // --- Title ---
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(18);
-            doc.text(`Quiz Report: ${quiz.quizName}`, pageWidth / 2, y, { align: "center" });
-            y += 6;
-            doc.setDrawColor(180);
-            doc.line(margin, y, pageWidth - margin, y);
-            y += 10;
-
-            // --- Quiz Meta Data ---
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(12);
-            const meta = [
-                `Score: ${quiz.score}/${quiz.totalQuestions} (${quiz.percentage}%)`,
-                `Start Time: ${formatDateTime(quiz.startTime)}`,
-                `End Time: ${formatDateTime(quiz.endTime)}`
-            ];
-
-            meta.forEach(line => {
-                const wrapped = doc.splitTextToSize(line, maxLineWidth);
-                wrapped.forEach(wl => {
-                    checkPageBreak(8);
-                    doc.text(wl, margin, y);
-                    y += 6;
-                });
-            });
-
-            y += 6;
-
-            // --- Question Details ---
-            if (quiz.questionDetails && quiz.questionDetails.length > 0) {
-                for (let i = 0; i < quiz.questionDetails.length; i++) {
-                    const q = quiz.questionDetails[i];
-                    doc.setFont("helvetica", "bold");
-                    doc.setFontSize(13);
-                    const wrappedQ = doc.splitTextToSize(`${i + 1}. ${q.question}`, maxLineWidth);
-                    wrappedQ.forEach(line => {
-                        checkPageBreak(8);
-                        doc.text(line, margin, y);
-                        y += 6;
-                    });
-
-                    if (q.imageUrl) {
-                        const dataUrl = await toDataURL(q.imageUrl);
-                        await addImage(dataUrl);
-                    }
-
-                    doc.setFont("helvetica", "normal");
-                    doc.setFontSize(11);
-                    const userAnswer = `Your Answer: ${q.userAnswer ?? "N/A"}`;
-                    doc.text(doc.splitTextToSize(userAnswer, maxLineWidth - 5), margin + 3, y);
-                    y += 6;
-
-                    doc.setTextColor(0, 150, 0);
-                    const correctAns = `Correct Answer: ${q.correctAnswer}`;
-                    doc.text(doc.splitTextToSize(correctAns, maxLineWidth - 5), margin + 3, y);
-                    y += 6;
-                    doc.setTextColor(0, 0, 0);
-
-                    const timeTaken = `Time Taken: ${q.timeTaken ?? 0} sec`;
-                    doc.text(doc.splitTextToSize(timeTaken, maxLineWidth - 5), margin + 3, y);
-                    y += 8;
-
-                    doc.setDrawColor(200);
-                    doc.line(margin, y, pageWidth - margin, y);
-                    y += 8;
-
-                    checkPageBreak(12);
-                }
-            }
-
-            doc.save(`${quiz.quizName.replace(/\\s+/g, "_")}_Result.pdf`);
-        } catch (err) {
-            console.error("Error generating PDF:", err);
-            alert("Failed to generate PDF. Please check console for details.");
+      function checkPageBreak(extraHeight = 10) {
+        if (y + extraHeight > pageHeight - margin) {
+          doc.addPage();
+          y = margin;
         }
-    })();
+      }
+
+      async function addImage(imgUrl, maxHeight = 80) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = imgUrl;
+          img.onload = () => {
+            let imgWidth = img.width;
+            let imgHeight = img.height;
+            const scale = Math.min(maxLineWidth / imgWidth, maxHeight / imgHeight);
+            imgWidth *= scale;
+            imgHeight *= scale;
+
+            checkPageBreak(imgHeight + 5);
+            doc.addImage(img, "PNG", margin, y, imgWidth, imgHeight);
+            y += imgHeight + 10;
+            resolve();
+          };
+          img.onerror = () => {
+            doc.setTextColor(200, 0, 0);
+            doc.text("(Image failed to load)", margin, y);
+            doc.setTextColor(0, 0, 0);
+            y += 8;
+            resolve();
+          };
+        });
+      }
+
+      // ===== TITLE =====
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Quiz Report: ${quiz.quizName}`, pageWidth / 2, y, { align: "center" });
+      y += 10;
+      doc.setDrawColor(180);
+      doc.line(margin, y, pageWidth - margin, y);
+      y += 15;
+
+      // ===== META INFO =====
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "normal");
+      const meta = [
+        `Score: ${quiz.score}/${quiz.totalQuestions} (${quiz.percentage}%)`,
+        `Start Time: ${formatDateTime(quiz.startTime)}`,
+        `End Time: ${formatDateTime(quiz.endTime)}`
+      ];
+      meta.forEach(line => {
+        checkPageBreak(8);
+        doc.text(doc.splitTextToSize(line, maxLineWidth), margin, y);
+        y += 7;
+      });
+      y += 10;
+
+      // ===== QUIZ AUTO-SUBMISSION NOTICE =====
+      if (quiz.autoSubmitted) {
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(200, 0, 0);
+        doc.text("⚠ Quiz was auto-submitted due to time expiry.", margin, y);
+        doc.setTextColor(0, 0, 0);
+        y += 10;
+      }
+
+      // ===== SUMMARY (calculated dynamically, case-insensitive) =====
+      let correct = 0, wrong = 0, skipped = 0, timeUp = 0, autoSubmittedQ = 0;
+      if (quiz.questionDetails) {
+        quiz.questionDetails.forEach(q => {
+          let ua = q.userAnswer ? q.userAnswer.trim() : "";
+          let ca = q.correctAnswer ? q.correctAnswer.trim() : "";
+
+          if (!ua) {
+            autoSubmittedQ++; // unanswered at auto-submission
+          } else if (ua.toLowerCase() === "skipped") {
+            skipped++;
+          } else if (ua.toLowerCase() === "time up") {
+            timeUp++;
+          } else if (ua && ca && ua.toLowerCase() === ca.toLowerCase()) {
+            correct++;
+          } else {
+            wrong++;
+          }
+        });
+      }
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
+      doc.setTextColor(0, 0, 0);
+      doc.text("Summary:", margin, y);
+      y += 10;
+
+      const summaryItems = [
+        { label: "Correct", value: correct, color: [0, 150, 0] },
+        { label: "Wrong", value: wrong, color: [200, 0, 0] },
+        { label: "Skipped", value: skipped, color: [255, 165, 0] },
+        { label: "Time Up", value: timeUp, color: [138, 43, 226] },
+        { label: "Auto-Submitted", value: autoSubmittedQ, color: [128, 128, 128] }, // gray
+        { label: "Total Questions", value: quiz.totalQuestions, color: [0, 0, 0] }
+      ];
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(12);
+      summaryItems.forEach(item => {
+        checkPageBreak(8);
+        doc.setTextColor(...item.color);
+        doc.text(`${item.label}: ${item.value}`, margin + 5, y);
+        y += 8;
+      });
+      doc.setTextColor(0, 0, 0);
+      y += 10;
+
+      // ===== QUESTION DETAILS =====
+      if (quiz.questionDetails && quiz.questionDetails.length > 0) {
+        for (let i = 0; i < quiz.questionDetails.length; i++) {
+          const q = quiz.questionDetails[i];
+          let ua = q.userAnswer ? q.userAnswer.trim() : "";
+          let ca = q.correctAnswer ? q.correctAnswer.trim() : "";
+
+          // Question text
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(13);
+          doc.setTextColor(0, 0, 200);
+          const wrappedQ = doc.splitTextToSize(`${i + 1}. ${q.question}`, maxLineWidth);
+          wrappedQ.forEach(line => {
+            checkPageBreak(8);
+            doc.text(line, margin, y);
+            y += 7;
+          });
+          doc.setTextColor(0, 0, 0);
+
+          // Question image
+          if (q.imageUrl) {
+            const dataUrl = await toDataURL(q.imageUrl);
+            await addImage(dataUrl);
+          }
+
+          // Options
+          if (q.options && q.options.length > 0) {
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(11);
+            q.options.forEach((opt, idx) => {
+              checkPageBreak(6);
+              let prefix = String.fromCharCode(65 + idx) + ". ";
+              let textColor = [0, 0, 0];
+
+              if (ua && opt.toLowerCase() === ua.toLowerCase() && ua.toLowerCase() !== ca.toLowerCase()) {
+                textColor = [200, 0, 0]; // wrong answer red
+              } else if (ca && opt.toLowerCase() === ca.toLowerCase()) {
+                textColor = [0, 150, 0]; // correct green
+              }
+
+              doc.setTextColor(...textColor);
+              const wrappedOpt = doc.splitTextToSize(prefix + opt, maxLineWidth - 10);
+              wrappedOpt.forEach(line => {
+                doc.text(line, margin + 5, y);
+                y += 6;
+              });
+              doc.setTextColor(0, 0, 0);
+            });
+          }
+
+          // ===== Your Answer (with auto-submission & time-up handling) =====
+          let uaColor = [0, 0, 0];
+          let uaText = ua || "N/A";
+
+          if (ua && ca && ua.toLowerCase() === ca.toLowerCase()) {
+            uaColor = [0, 150, 0];   // correct = green
+          } else if (!ua) {
+            uaColor = [128, 128, 128];   // auto-submitted unanswered = gray
+            uaText = "Auto-Submitted (No Answer)";
+          } else if (ua.toLowerCase() === "skipped") {
+            uaColor = [255, 165, 0]; // skipped by user
+            uaText = "Skipped";
+          } else if (ua.toLowerCase() === "time up") {
+            uaColor = [138, 43, 226]; // time up = violet
+            uaText = `Time Up (${q.partialAnswer ?? "No answer"})`;
+          } else {
+            uaColor = [200, 0, 0];   // wrong = red
+          }
+
+          doc.setFont("helvetica", "italic");
+          doc.setTextColor(...uaColor);
+          doc.text(`Your Answer: ${uaText}`, margin + 3, y);
+          y += 6;
+
+          // ===== Correct Answer (always green) =====
+          doc.setFont("helvetica", "normal");
+          doc.setTextColor(0, 150, 0);
+          doc.text(`Correct Answer: ${ca || "N/A"}`, margin + 3, y);
+          doc.setTextColor(0, 0, 0);
+          y += 8;
+
+          // Time Taken
+          doc.setFont("helvetica", "normal");
+          doc.text(`Time Taken: ${q.timeTaken ?? 0} sec`, margin + 3, y);
+          y += 10;
+
+          // Divider
+          doc.setDrawColor(200);
+          doc.line(margin, y, pageWidth - margin, y);
+          y += 10;
+        }
+      }
+
+      doc.save(`${quiz.quizName.replace(/\s+/g, "_")}_Result.pdf`);
+    } catch (err) {
+      console.error("Error generating PDF:", err);
+      alert("Failed to generate PDF. Please check console for details.");
+    }
+  })();
 }
+
+
+
+
+
+
+
+
 
 function deleteQuizResult(quizIdToDelete, timeToDelete) {
     const loggedInUser = localStorage.getItem('loggedInUser');
