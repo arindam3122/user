@@ -32,6 +32,687 @@ const quizzes = [
         ]
     },
     {
+        "id": "Web Designing & Development",
+        "name": "Web Designing & Development",
+        "description": "",
+        "enabled": true,
+        "questions": [
+            
+            {
+                "question": "Which of the following is used to change the font size in CSS?",
+                "type": "mcq",
+                "options": [
+                    "font-size",
+                    "font-style",
+                    "font-color",
+                    "font-weight"
+                ],
+                "answer": "font-size",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the default value of the position property in CSS?",
+                "type": "mcq",
+                "options": [
+                    "absolute",
+                    "relative",
+                    "static",
+                    "fixed"
+                ],
+                "answer": "static",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a valid CSS property to change the background color?",
+                "type": "mcq",
+                "options": [
+                    "color",
+                    "bgcolor",
+                    "background-color",
+                    "bg-color"
+                ],
+                "answer": "background-color",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "How do you select an element with the id \"header\" in CSS?",
+                "type": "mcq",
+                "options": [
+                    ".header",
+                    "#header",
+                    "header",
+                    "*header"
+                ],
+                "answer": "#header",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which HTML tag is used for creating a list of items?",
+                "type": "mcq",
+                "options": [
+                    "<ul>",
+                    "<ol>",
+                    "<li>",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the <a> tag represent in HTML?",
+                "type": "mcq",
+                "options": [
+                    "A paragraph",
+                    "A hyperlink",
+                    "An image",
+                    "A division"
+                ],
+                "answer": "A hyperlink",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "A hyperlink",
+                "type": "mcq",
+                "options": [
+                    "background-image: url('image.jpg');",
+                    "background: image('image.jpg');",
+                    "bg-image: 'image.jpg';",
+                    "image-background: 'image.jpg';"
+                ],
+                "answer": "background-image: url('image.jpg');",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which property is used to change the text color in CSS?",
+                "type": "mcq",
+                "options": [
+                    "color",
+                    "text-color",
+                    "font-color",
+                    "background-color"
+                ],
+                "answer": "color",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is used to write a comment in JavaScript?",
+                "type": "mcq",
+                "options": [
+                    "// comment",
+                    "<!-- comment -->",
+                    "/* comment */",
+                    "Both A and C"
+                ],
+                "answer": "Both A and C",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the purpose of the getElementById() method in JavaScript?",
+                "type": "mcq",
+                "options": [
+                    "To get an element by its class name",
+                    "To get an element by its tag name",
+                    "To get an element by its id",
+                    "To create a new element"
+                ],
+                "answer": "To get an element by its id",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "How do you write a function in JavaScript?",
+                "type": "mcq",
+                "options": [
+                    "function myFunction() {}",
+                    "function = myFunction() {}",
+                    "myFunction() => {}",
+                    "def myFunction() {}"
+                ],
+                "answer": "function myFunction() {}",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which method is used to add an item to an array in JavaScript?",
+                "type": "mcq",
+                "options": [
+                    "push()",
+                    "add()",
+                    "insert()",
+                    "append()"
+                ],
+                "answer": "push()",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the document.querySelector() method do in JavaScript?",
+                "type": "mcq",
+                "options": [
+                    "Selects a single element matching the specified selector",
+                    "Selects multiple elements matching the specified selector",
+                    "Creates a new element",
+                    "Removes an element"
+                ],
+                "answer": "Selects a single element matching the specified selector",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which JavaScript event occurs when the user clicks on an HTML element?",
+                "type": "mcq",
+                "options": [
+                    "onclick",
+                    "onmouseover",
+                    "onfocus",
+                    "onchange"
+                ],
+                "answer": "onclick",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is used to parse a string as an integer in JavaScript?",
+                "type": "mcq",
+                "options": [
+                    "parseInt()",
+                    "parseFloat()",
+                    "toString()",
+                    "stringToInt()"
+                ],
+                "answer": "parseInt()",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the innerHTML property in JavaScript used for?",
+                "type": "mcq",
+                "options": [
+                    "To get or set the HTML content of an element",
+                    "To get or set the style of an element",
+                    "To get or set the class of an element",
+                    "To get or set the attribute of an element"
+                ],
+                "answer": "To get or set the HTML content of an element",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is used to prevent an event from propagating further in JavaScript?",
+                "type": "mcq",
+                "options": [
+                    "event.stopPropagation()",
+                    "event.preventDefault()",
+                    "event.stop()",
+                    "event.cancel()"
+                ],
+                "answer": "event.stopPropagation()",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "How can you add a comment to a single line of JavaScript code?",
+                "type": "mcq",
+                "options": [
+                    "/* comment */",
+                    "<!-- comment -->",
+                    "// comment",
+                    "# comment"
+                ],
+                "answer": "// comment",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which PHP function is used to include a file in another file?",
+                "type": "mcq",
+                "options": [
+                    "require()",
+                    "include_once()",
+                    "include()",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is the correct way to connect to a MySQL database in PHP?",
+                "type": "mcq",
+                "options": [
+                    "mysql_connect()",
+                    "mysqli_connect()",
+                    "db_connect()",
+                    "connect_mysql()"
+                ],
+                "answer": "mysqli_connect()",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "How do you send data to a MySQL database using PHP?",
+                "type": "mcq",
+                "options": [
+                    "Using mysqli_query()",
+                    "Using mysql_query()",
+                    "Using mysqli_fetch_assoc()",
+                    "Using mysql_fetch_assoc()"
+                ],
+                "answer": "Using mysqli_query()",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "How do you retrieve the number of affected rows after an INSERT query in PHP?",
+                "type": "mcq",
+                "options": [
+                    "mysqli_num_rows()",
+                    "mysqli_affected_rows()",
+                    "mysql_affected_rows()",
+                    "mysqli_row_count()"
+                ],
+                "answer": "mysqli_affected_rows()",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is the correct syntax to start a PHP script?",
+                "type": "mcq",
+                "options": [
+                    "<?php ?>",
+                    "<php></php>",
+                    "<?php> </php>",
+                    "<? php ?>"
+                ],
+                "answer": "<?php ?>",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which function is used to escape special characters in a string for MySQL in PHP?",
+                "type": "mcq",
+                "options": [
+                    "mysql_escape_string()",
+                    "mysqli_escape_string()",
+                    "mysql_real_escape_string()",
+                    "mysqli_real_escape_string()"
+                ],
+                "answer": "mysqli_real_escape_string()",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a valid MySQL data type for storing large text data?",
+                "type": "mcq",
+                "options": [
+                    "TEXT",
+                    "VARCHAR",
+                    "CHAR",
+                    "BLOB"
+                ],
+                "answer": "TEXT",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the default port number for MySQL?",
+                "type": "mcq",
+                "options": [
+                    "3306",
+                    "8080",
+                    "443",
+                    "80"
+                ],
+                "answer": "3306",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "How can you retrieve all the rows from a MySQL query in PHP?",
+                "type": "mcq",
+                "options": [
+                    "mysqli_fetch_row()",
+                    "mysqli_fetch_assoc()",
+                    "mysqli_fetch_all()",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is used to end a PHP script?",
+                "type": "mcq",
+                "options": [
+                    "exit",
+                    "stop",
+                    "break",
+                    "return"
+                ],
+                "answer": "exit",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is the default content management system (CMS) for WordPress?",
+                "type": "mcq",
+                "options": [
+                    "MySQL",
+                    "PostgreSQL",
+                    "Oracle",
+                    "SQLite"
+                ],
+                "answer": "MySQL",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the main purpose of WordPress plugins?",
+                "type": "mcq",
+                "options": [
+                    "To add extra features to a website",
+                    "To style the website",
+                    "To organize posts",
+                    "To manage users"
+                ],
+                "answer": "To add extra features to a website",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which file in a WordPress theme is responsible for displaying the header section of the site?",
+                "type": "mcq",
+                "options": [
+                    "header.php",
+                    "footer.php",
+                    "index.php",
+                    "sidebar.php"
+                ],
+                "answer": "header.php",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is used to customize the appearance of a WordPress site?",
+                "type": "mcq",
+                "options": [
+                    "Themes",
+                    "Plugins",
+                    "Widgets",
+                    "Posts"
+                ],
+                "answer": "Themes",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a WordPress widget?",
+                "type": "mcq",
+                "options": [
+                    "A piece of code to add functionality",
+                    "A plugin to extend functionality",
+                    "A tool for displaying content in sidebars and footers",
+                    "A theme customization option"
+                ],
+                "answer": "A tool for displaying content in sidebars and footers",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is the default user role in WordPress?",
+                "type": "mcq",
+                "options": [
+                    "Administrator",
+                    "Editor",
+                    "Author",
+                    "Subscriber"
+                ],
+                "answer": "Subscriber",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which function is used to display the main WordPress loop?",
+                "type": "mcq",
+                "options": [
+                    "wp_query()",
+                    "the_loop()",
+                    "wp_loop()",
+                    "query_posts()"
+                ],
+                "answer": "the_loop()",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is used to install a WordPress theme?",
+                "type": "mcq",
+                "options": [
+                    "FTP",
+                    "Admin Dashboard",
+                    "Both A and B",
+                    "File Manager"
+                ],
+                "answer": "Both A and B",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following WordPress features allows content to be scheduled for future publication?",
+                "type": "mcq",
+                "options": [
+                    "Drafts",
+                    "Revisions",
+                    "Scheduling",
+                    "Auto-publish"
+                ],
+                "answer": "Scheduling",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the default directory for storing plugins in WordPress?",
+                "type": "mcq",
+                "options": [
+                    "wp-content/themes/",
+                    "wp-content/plugins/",
+                    "wp-content/uploads/",
+                    "wp-admin/"
+                ],
+                "answer": "wp-content/plugins/",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does DNS stand for in terms of domain management?",
+                "type": "mcq",
+                "options": [
+                    "Domain Name Security",
+                    "Domain Name System",
+                    "Direct Name Server",
+                    "Domain Network Service"
+                ],
+                "answer": "Domain Name System",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is required for registering a domain name?",
+                "type": "mcq",
+                "options": [
+                    "A valid email address",
+                    "A registered company name",
+                    "A website hosting plan",
+                    "A payment card"
+                ],
+                "answer": "A valid email address",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does a Web Hosting provider do?",
+                "type": "mcq",
+                "options": [
+                    "Stores websites and makes them accessible on the internet",
+                    "Manages domain registrations",
+                    "Provides website design services",
+                    "Creates content for websites"
+                ],
+                "answer": "Stores websites and makes them accessible on the internet",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the full form of SSL?",
+                "type": "mcq",
+                "options": [
+                    "Secure Socket Layer",
+                    "Secure Server Layer",
+                    "Standard Secure Layer",
+                    "Simple Secure Layer"
+                ],
+                "answer": "Secure Socket Layer",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does HTTPS stand for?",
+                "type": "mcq",
+                "options": [
+                    "HyperText Transfer Protocol Secure",
+                    "HyperText Transfer Protocol",
+                    "HyperText Transfer Protocol Standard",
+                    "HyperLink Transfer Protocol Secure"
+                ],
+                "answer": "HyperText Transfer Protocol Secure",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the function of a CPanel in web hosting?",
+                "type": "mcq",
+                "options": [
+                    "Manages databases",
+                    "Controls email accounts",
+                    "Manages files and settings",
+                    "All of the above"
+                ],
+                "answer": "All of the above",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a common web hosting plan that offers shared server resources?",
+                "type": "mcq",
+                "options": [
+                    "Shared Hosting",
+                    "Dedicated Hosting",
+                    "VPS Hosting",
+                    "Cloud Hosting"
+                ],
+                "answer": "Shared Hosting",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is an IP address used for?",
+                "type": "mcq",
+                "options": [
+                    "Identifying a device on a network",
+                    "Managing domains",
+                    "Securing websites",
+                    "Caching website content"
+                ],
+                "answer": "Identifying a device on a network",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is a subdomain?",
+                "type": "mcq",
+                "options": [
+                    "A secondary domain attached to a main domain",
+                    "A different TLD (top-level domain)",
+                    "A new IP address for a domain",
+                    "A different hosting account"
+                ],
+                "answer": "A secondary domain attached to a main domain",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the primary purpose of a content delivery network (CDN)?",
+                "type": "mcq",
+                "options": [
+                    "To speed up website load times",
+                    "To manage DNS settings",
+                    "To host websites",
+                    "To create websites"
+                ],
+                "answer": "To speed up website load times",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            }
+        ]
+    },
+    {
         "id": "Database Management System (DBMS)",
         "name": "Database Management System (DBMS)",
         "description": "",
