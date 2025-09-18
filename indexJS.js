@@ -1,5 +1,5 @@
 const users = [
-    { id: "Arindam", name: "Arindam Mitra", password: "Arindammitra166", enabled: true },
+    { id: "Arindam", name: "Super Admin", password: "arindam", enabled: true },
     { id: "Shabnur", name: "Shabnur Khatun", password: "Shabnur Khatun", enabled: false },
     { id: "roni", name: "Roni Mitra", password: "Roni", enabled: true },
     { id: "sourav", name: "Sourav Gangopadhyay (admin)", password: "Sourav Gangopadhyay", enabled: true },

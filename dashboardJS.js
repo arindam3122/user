@@ -68,7 +68,7 @@ const summaryWrong = document.getElementById('summaryWrong');
 const summarySkipped = document.getElementById('summarySkipped');
 const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
-const ADMIN_USERS = ['Arindam Mitra','Sourav Gangopadhyay (admin)', ]; // Add usernames for ADMINS
+const ADMIN_USERS = ['Super Admin','Sourav Gangopadhyay (admin)', ]; // Add usernames for ADMINS
 
 // Hamburger menu elements
 const hamburgerMenu = document.getElementById('hamburgerMenu');

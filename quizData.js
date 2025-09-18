@@ -35,7 +35,7 @@ const quizzes = [
         "id": "Web Designing & Development",
         "name": "Web Designing & Development",
         "description": "",
-        "enabled": true,
+        "enabled": false,
         "questions": [
             
             {
