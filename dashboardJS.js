@@ -68,7 +68,7 @@ const summaryWrong = document.getElementById('summaryWrong');
 const summarySkipped = document.getElementById('summarySkipped');
 const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
-const ADMIN_USERS = ['Arindam Mitra','Sourav Gangopadhyay (admin)','Shreaya Dey', ]; // Add usernames for delete button activation
+const ADMIN_USERS = ['Arindam Mitra','Sourav Gangopadhyay (admin)', ]; // Add usernames for ADMINS
 
 // Hamburger menu elements
 const hamburgerMenu = document.getElementById('hamburgerMenu');
@@ -336,6 +336,75 @@ function showQuizDetails(quiz) {
         detailsSection.style.display = 'none';
         showPreviousQuizzesSection();
     };
+}
+function loadUsers() {
+  // Load from localStorage, or fall back to the original users array
+  const storedUsers = JSON.parse(localStorage.getItem("users"));
+  return storedUsers ? storedUsers : users;
+}
+
+function saveUsers(updatedUsers) {
+  localStorage.setItem("users", JSON.stringify(updatedUsers));
+}
+
+const usersLink = document.getElementById('usersLink');
+const usersContainer = document.getElementById('usersContainer');
+const usersTableBody = document.getElementById('usersTableBody');
+
+if (usersLink) {
+  usersLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!ADMIN_USERS.includes(localStorage.getItem('loggedInUser'))) {
+      showInfoModal("Only admins can access Users.");
+      return;
+    }
+    setActiveLink(usersLink);
+    hideAllSections();
+    usersContainer.style.display = 'block';
+    renderUsersTable();
+  });
+}
+
+function renderUsersTable() {
+  const allUsers = loadUsers();
+  usersTableBody.innerHTML = '';
+
+  allUsers.forEach((u, idx) => {
+    const isAdmin = ADMIN_USERS.includes(u.name);
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${u.name}</td>
+      <td>
+        <span id="passwordDisplay-${idx}">••••••</span>
+        <button onclick="togglePassword(${idx}, '${u.password}')">Show</button>
+      </td>
+      <td>
+        <span class="${u.enabled ? 'status-active' : 'status-disabled'}">
+          ${u.enabled ? 'Active' : 'Disabled'}
+        </span>
+      </td>
+      <td>${isAdmin ? '<span style="color:blue;font-weight:bold;">Admin</span>' : 'User'}</td>
+    `;
+    usersTableBody.appendChild(row);
+  });
+}
+function togglePassword(index, password) {
+  const span = document.getElementById(`passwordDisplay-${index}`);
+  const button = span.nextElementSibling;
+
+  if (span.textContent === '••••••') {
+    span.textContent = password;
+    button.textContent = 'Hide';
+  } else {
+    span.textContent = '••••••';
+    button.textContent = 'Show';
+  }
+}
+
+function toggleUserStatus(index) {
+  users[index].enabled = !users[index].enabled;
+  renderUsersTable();
 }
 
 
@@ -968,9 +1037,13 @@ function hideAllSections() {
     quizSelectionContainer.style.display = 'none';
     performanceTrendsContainer.style.display = 'none';
     archivedQuizzesContainer.style.display = 'none';
-    document.getElementById('allQuizzesContainer').style.display = 'none'; // ✅ Added
+    document.getElementById('allQuizzesContainer').style.display = 'none';
+    if (document.getElementById('usersContainer')) {
+        document.getElementById('usersContainer').style.display = 'none';
+    }
     quizCompletedMessage.classList.remove('show');
 }
+
 
 
 performanceTrendsLink.addEventListener('click', (e) => {

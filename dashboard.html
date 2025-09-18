@@ -18,6 +18,7 @@
     <li><a href="#" id="dashboardLink" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
     <li><a href="#" id="startQuizLink"><i class="fas fa-arrow-right"></i> Start Quiz</a></li>
     <li><a href="#" id="createQuizLink"><i class="fas fa-plus-circle"></i> Create Quiz</a></li>
+    <li><a href="#" id="usersLink"><i class="fas fa-users"></i> Users</a></li>
     <li><a href="#" id="previousQuizzesLink"><i class="fas fa-history"></i> Previous Quizzes</a></li>
     <li><a href="#" id="archivedQuizzesLink"><i class="fas fa-archive"></i>Archived Quizzes</a></li>
     <li><a href="#" id="performanceTrendsLink"><i class="fas fa-chart-line"></i> Performance Trends</a></li>
@@ -39,6 +40,21 @@
   </header>
     <div id="quizCompletedMessage" class="info-message quiz-completed-message">Quiz Completed!</div>
 
+<div id="usersContainer" style="display:none;">
+  <h2 class="heading2">Manage Users</h2>
+<table class="users-table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Status</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody id="usersTableBody"></tbody>
+</table>
+
+</div>
 
   <div class="quiz-info-box" id="quizInfoBox">
     <h2 class="heading1" id="quizInfoHeading">Dashboard Overview</h2>
@@ -262,6 +278,7 @@
 
   <script src="quizData.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="indexJS.js"></script>
   <script src="dashboardJS.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJFonKIRehOXlIfgJRVCzOVw4GciFVgo8xnwP1RF8zSlbPWGnGzPOJbS9bGS7UYJnY0tHOESNkSpi9zQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
