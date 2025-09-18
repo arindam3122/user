@@ -883,6 +883,17 @@ window.addEventListener('blur', () => {
         }
     }
 });
+window.addEventListener("DOMContentLoaded", () => {
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const usersLink = document.getElementById("usersLink");
+
+  if (usersLink) {
+    if (!ADMIN_USERS.includes(loggedInUser)) {
+      usersLink.parentElement.style.display = "none"; // hide tab
+    }
+  }
+});
+
 
 window.addEventListener('focus', () => {
     if (quizActive && !document.hidden) { // Only trigger if not already handled by visibilitychange
