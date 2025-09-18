@@ -1909,3 +1909,15 @@ header {
     font-size: 14px;
     margin: 4px;
 }
+.result-item.correct {
+  border-left: 5px solid green;
+}
+.result-item.wrong {
+  border-left: 5px solid red;
+}
+.result-item.skipped {
+  border-left: 5px solid orange; /* Yellow/Orange for skipped */
+}
+.result-item.time-up {
+  border-left: 5px solid #ffcc00; /* Bright Yellow for time-up */
+}

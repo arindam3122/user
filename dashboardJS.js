@@ -274,7 +274,6 @@ function updateAdminStats() {
     document.getElementById('adminArchivedQuizzes').textContent = archivedQuizzes;
 }
 
-// --- Show Quiz Details in a Modal/Section ---
 function showQuizDetails(quiz) {
     const resultsContainer = document.getElementById('quizResultsDetailsContainer');
     const detailsSection = document.getElementById('quizResultsDetails');
@@ -283,14 +282,35 @@ function showQuizDetails(quiz) {
     resultsContainer.innerHTML = '';
     heading.textContent = `Quiz Details: ${quiz.quizName}`;
 
+    // Counters
+    let correctCount = 0;
+    let wrongCount = 0;
+    let skippedCount = 0;
+    let timeUpCount = 0;
+
     if (!quiz.questionDetails || quiz.questionDetails.length === 0) {
         resultsContainer.innerHTML = '<p style="text-align:center; color:#777;">No detailed question data available.</p>';
     } else {
         quiz.questionDetails.forEach((q, i) => {
             const div = document.createElement('div');
             div.classList.add('result-item');
-            if (q.isCorrect) div.classList.add('correct'); else div.classList.add('wrong');
 
+            // ✅ Decide status
+            if (q.status === "skipped" || q.userAnswer === "Skipped") {
+                div.classList.add('skipped');
+                skippedCount++;
+            } else if (q.status === "time_up") {
+                div.classList.add('time-up');
+                timeUpCount++;
+            } else if (q.isCorrect) {
+                div.classList.add('correct');
+                correctCount++;
+            } else {
+                div.classList.add('wrong');
+                wrongCount++;
+            }
+
+            // ✅ Render question
             div.innerHTML = `
                 <p><strong>${i + 1}. ${q.question}</strong></p>
                 <p><b>Your Answer:</b> ${q.userAnswer ?? "N/A"}</p>
@@ -302,6 +322,14 @@ function showQuizDetails(quiz) {
         });
     }
 
+    // ✅ Update summary counts
+    summaryCorrect.textContent = correctCount;
+    summaryWrong.textContent = wrongCount;
+    summarySkipped.textContent = skippedCount;
+    summaryTimeUp.textContent = timeUpCount;
+    summaryTotalQuestions.textContent = quiz.questionDetails ? quiz.questionDetails.length : 0;
+
+    // Show section
     hideAllSections();
     detailsSection.style.display = 'block';
     document.getElementById('quizResultsBackButton').onclick = () => {
@@ -309,6 +337,7 @@ function showQuizDetails(quiz) {
         showPreviousQuizzesSection();
     };
 }
+
 
 
 
