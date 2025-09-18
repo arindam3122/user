@@ -95,20 +95,6 @@ const quizzes = [
                 "explanationImageUrl": ""
             },
             {
-                "question": "Which HTML tag is used for creating a list of items?",
-                "type": "mcq",
-                "options": [
-                    "<ul>",
-                    "<ol>",
-                    "<li>",
-                    "All of the above"
-                ],
-                "answer": "All of the above",
-                "timeLimit": 60,
-                "imageUrl": "",
-                "explanationImageUrl": ""
-            },
-            {
                 "question": "What does the <a> tag represent in HTML?",
                 "type": "mcq",
                 "options": [
@@ -146,20 +132,6 @@ const quizzes = [
                     "background-color"
                 ],
                 "answer": "color",
-                "timeLimit": 60,
-                "imageUrl": "",
-                "explanationImageUrl": ""
-            },
-            {
-                "question": "Which of the following is used to write a comment in JavaScript?",
-                "type": "mcq",
-                "options": [
-                    "// comment",
-                    "<!-- comment -->",
-                    "/* comment */",
-                    "Both A and C"
-                ],
-                "answer": "Both A and C",
                 "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
@@ -277,20 +249,6 @@ const quizzes = [
                 "explanationImageUrl": ""
             },
             {
-                "question": "How can you add a comment to a single line of JavaScript code?",
-                "type": "mcq",
-                "options": [
-                    "/* comment */",
-                    "<!-- comment -->",
-                    "// comment",
-                    "# comment"
-                ],
-                "answer": "// comment",
-                "timeLimit": 60,
-                "imageUrl": "",
-                "explanationImageUrl": ""
-            },
-            {
                 "question": "Which PHP function is used to include a file in another file?",
                 "type": "mcq",
                 "options": [
@@ -342,20 +300,6 @@ const quizzes = [
                     "mysqli_row_count()"
                 ],
                 "answer": "mysqli_affected_rows()",
-                "timeLimit": 60,
-                "imageUrl": "",
-                "explanationImageUrl": ""
-            },
-            {
-                "question": "Which of the following is the correct syntax to start a PHP script?",
-                "type": "mcq",
-                "options": [
-                    "<?php ?>",
-                    "<php></php>",
-                    "<?php> </php>",
-                    "<? php ?>"
-                ],
-                "answer": "<?php ?>",
                 "timeLimit": 60,
                 "imageUrl": "",
                 "explanationImageUrl": ""
