@@ -1680,141 +1680,93 @@ header {
 .view-details-btn:hover {
     background-color: #217dbb;
 }
-/* ===== Admin Quiz Details Styling ===== */
+/* Admin Quiz Details Styling */
 .question-card {
-    background: #fafafa; /* Soft off-white */
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 18px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .question-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.question-card p {
-    margin: 8px 0;
-    font-size: 1.05em;
-    color: #444;
-    line-height: 1.5;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
 
 .question-text-result {
-    font-size: 1.15em;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-.correct-answer {
-    color: #4caf50;   /* light green text */
-    font-weight: 700; /* bolder */
-}
-
-.time-limit {
-    font-size: 0.95em;
-    color: #1565c0;
-    font-style: italic;
-    margin-top: 6px;
-    display: inline-block;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 12px;
 }
 
 .options-list {
-    list-style: disc inside;
-    margin: 8px 0 12px 20px;
-    padding: 0;
-    color: #555;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 15px 0;
 }
 .options-list li {
-    margin: 4px 0;
-    font-size: 1em;
-    line-height: 1.4;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background: #fafafa;
 }
 .options-list li.correct-option {
-    color: #4caf50;   /* light green */
-    font-weight: 600;
-}
-.quiz-filter-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
+  background: #e6ffed;
+  border-color: #16a34a;
+  color: #065f46;
+  font-weight: 600;
 }
 
-.quiz-filter-bar label {
-    font-weight: 500;
-    color: #333;
+
+.correct-answer {
+  background: transparent;  /* remove background */
+  color: #16a34a;          /* green text */
+  font-weight: 800;
+  font-size: 17px;
 }
 
-#quizStatusFilter {
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 0.95em;
+.time-limit {
+  font-size: 0.95em;
+  color: #6b7280;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-/* ===== Quiz Status Badges ===== */
-.status-badge {
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.85em;
-    font-weight: 600;
+.time-limit::before {
+  content: "⏱";
 }
 
-.status-badge.active {
-    background-color: #e8f5e9; /* soft green bg */
-    color: #2e7d32;           /* green text */
-    border: 1px solid #c8e6c9;
-}
-
-.status-badge.inactive {
-    background-color: #ffebee; /* soft red bg */
-    color: #c62828;            /* red text */
-    border: 1px solid #ffcdd2;
-}
-/* ===== View Details Button Icon Spacing ===== */
-.view-details-btn i {
-    margin-right: 6px;
-}
-/* --- Explanation Button --- */
 .explanation-btn {
-  background-color: #007bff;
-  color: white;
+  background: #3498db;
+  color: #fff;
   border: none;
   padding: 8px 14px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 0.9em;
   cursor: pointer;
   margin-top: 10px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background 0.2s ease;
 }
-
 .explanation-btn:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
+  background: #2980b9;
 }
 
-.explanation-btn i {
-  font-size: 14px;
-}
-
-/* --- Explanation Image --- */
 .explanation-image {
-  display: block;
-  max-width: 90%;
-  height: auto;
-  margin: 12px auto 0 auto;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  padding: 4px;
-  background: #f9f9f9;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
+
 .confirm-box {
   background: #fff3cd;
   color: #856404;
