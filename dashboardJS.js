@@ -69,6 +69,7 @@ const summarySkipped = document.getElementById('summarySkipped');
 const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
 const ADMIN_USERS = ['Super Admin','Sourav Gangopadhyay (admin)', ]; // Add usernames for ADMINS
+const ALLOW_USER_DELETE = false; // Change to true when you want users to delete responses
 
 // Hamburger menu elements
 const hamburgerMenu = document.getElementById('hamburgerMenu');
@@ -1789,7 +1790,6 @@ function formatDateTime(dateString) {
 
     return `${day}/${month}/${year}, ${hours}:${minutes}:${seconds} ${ampm}`;
 }
-
 function loadPreviousQuizzes() {
     const loggedInUser = localStorage.getItem('loggedInUser');
     if (!loggedInUser) return;
@@ -1797,9 +1797,10 @@ function loadPreviousQuizzes() {
     const userKey = `previousQuizzes_${loggedInUser}`;
     const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
 
-    const tableBody = document.getElementById('previousQuizzesTableBody');
-    const noDataMsg = document.getElementById('noPreviousQuizzesMessage');
-    tableBody.innerHTML = '';
+    const tableBody = document.getElementById("previousQuizzesTableBody");
+    const noDataMsg = document.getElementById("noPreviousQuizzesMessage");
+
+    tableBody.innerHTML = "";
 
     if (previousQuizzes.length === 0) {
         noDataMsg.style.display = 'block';
@@ -1818,18 +1819,28 @@ function loadPreviousQuizzes() {
 
         const actionsCell = row.insertCell(5);
 
+        // View button
         const viewBtn = document.createElement("button");
         viewBtn.innerHTML = '<i class="fas fa-eye"></i> View Details';
         viewBtn.classList.add("view-details-btn");
         viewBtn.onclick = () => showQuizDetails(quiz);
         actionsCell.appendChild(viewBtn);
 
+        // Delete button
         const deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Delete';
         deleteBtn.classList.add("delete-btn");
-        deleteBtn.onclick = () => confirmDeleteQuiz(quiz.quizId);
+
+        if (!ALLOW_USER_DELETE) {
+            deleteBtn.disabled = true;
+            deleteBtn.classList.add("disabled-button");
+        } else {
+            deleteBtn.onclick = () => confirmDeleteQuiz(quiz.quizId);
+        }
+
         actionsCell.appendChild(deleteBtn);
 
+        // Download button
         const downloadBtn = document.createElement("button");
         downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download';
         downloadBtn.classList.add("download-btn");
@@ -1837,8 +1848,6 @@ function loadPreviousQuizzes() {
         actionsCell.appendChild(downloadBtn);
     });
 }
-
-
 // --- Confirm and Delete Previous Quiz Result ---
 function confirmDeleteQuiz(quizId) {
     const loggedInUser = localStorage.getItem('loggedInUser');

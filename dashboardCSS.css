@@ -1944,4 +1944,7 @@ header {
   cursor: pointer;
   transition: background 0.2s ease;
 }
-
+.disabled-button {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
