@@ -35,7 +35,7 @@ const quizzes = [
         "id": "Fundamentals of Computers & Operating Systems",
         "name": "Fundamentals of Computers & Operating Systems",
         "description": "",
-        "enabled": true,
+        "enabled": false,
         "questions": [
             {
                 "question": "Who is considered the father of computers?",
