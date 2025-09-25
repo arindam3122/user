@@ -32,6 +32,714 @@ const quizzes = [
         ]
     },
     {
+        "id": "Fundamentals of Computers & Operating Systems",
+        "name": "Fundamentals of Computers & Operating Systems",
+        "description": "",
+        "enabled": true,
+        "questions": [
+            {
+                "question": "Who is considered the father of computers?",
+                "type": "mcq",
+                "options": [
+                    "Charles Babbage",
+                    "Alan Turing",
+                    "John von Neumann",
+                    "Blaise Pascal"
+                ],
+                "answer": "Charles Babbage",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which was the first general-purpose electronic digital computer?",
+                "type": "mcq",
+                "options": [
+                    "UNIVAC",
+                    "ENIAC",
+                    "EDVAC",
+                    "Mark I"
+                ],
+                "answer": "ENIAC",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The first generation of computers used:",
+                "type": "mcq",
+                "options": [
+                    "Transistors",
+                    "Vacuum tubes",
+                    "Integrated Circuits",
+                    "Microprocessors"
+                ],
+                "answer": "Vacuum tubes",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which generation of computers introduced microprocessors?",
+                "type": "mcq",
+                "options": [
+                    "First",
+                    "Second",
+                    "Third",
+                    "Fourth"
+                ],
+                "answer": "Fourth",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Supercomputers are mainly used for:",
+                "type": "mcq",
+                "options": [
+                    "Scientific calculations",
+                    "Personal computing",
+                    "Word processing",
+                    "Gaming"
+                ],
+                "answer": "Scientific calculations",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is NOT an example of hardware?",
+                "type": "mcq",
+                "options": [
+                    "Monitor",
+                    "Operating system",
+                    "Keyboard",
+                    "Hard disk"
+                ],
+                "answer": "Operating system",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a type of system software?",
+                "type": "mcq",
+                "options": [
+                    "Word Processor",
+                    "Antivirus",
+                    "Compiler",
+                    "Spreadsheet"
+                ],
+                "answer": "Compiler",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "ROM stands for:",
+                "type": "mcq",
+                "options": [
+                    "Read On Memory",
+                    "Read Only Memory",
+                    "Random Output Memory",
+                    "Random Only Memory"
+                ],
+                "answer": "Read Only Memory",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an example of secondary memory?",
+                "type": "mcq",
+                "options": [
+                    "RAM",
+                    "Cache",
+                    "Hard Drive",
+                    "Register"
+                ],
+                "answer": "Hard Drive",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the function of the ALU (Arithmetic Logic Unit)?",
+                "type": "mcq",
+                "options": [
+                    "Storing data",
+                    "Performing calculations and logic operations",
+                    "Controlling hardware components",
+                    "Displaying output"
+                ],
+                "answer": "Performing calculations and logic operations",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an input device?",
+                "type": "mcq",
+                "options": [
+                    "Monitor",
+                    "Printer",
+                    "Scanner",
+                    "Speaker"
+                ],
+                "answer": "Scanner",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which type of printer uses a toner cartridge?",
+                "type": "mcq",
+                "options": [
+                    "Inkjet",
+                    "Dot matrix",
+                    "Laser",
+                    "Thermal"
+                ],
+                "answer": "Laser",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "A touchpad is commonly used in:",
+                "type": "mcq",
+                "options": [
+                    "Desktop computers",
+                    "Laptops",
+                    "Servers",
+                    "Mainframes"
+                ],
+                "answer": "Laptops",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The resolution of a monitor is measured in:",
+                "type": "mcq",
+                "options": [
+                    "Inches",
+                    "Pixels",
+                    "Bytes",
+                    "Megahertz"
+                ],
+                "answer": "Pixels",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a pointing device?",
+                "type": "mcq",
+                "options": [
+                    "Keyboard",
+                    "Monitor",
+                    "Mouse",
+                    "Printer"
+                ],
+                "answer": "Mouse",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The binary number system consists of:",
+                "type": "mcq",
+                "options": [
+                    "0 and 1",
+                    "0, 1, and 2",
+                    "1 and 2",
+                    "0, 1, 2, and 3"
+                ],
+                "answer": "0 and 1",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The decimal equivalent of binary 1010 is:",
+                "type": "mcq",
+                "options": [
+                    "10",
+                    "15",
+                    "5",
+                    "8"
+                ],
+                "answer": "10",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The hexadecimal number system is based on:",
+                "type": "mcq",
+                "options": [
+                    "Base 2",
+                    "Base 8",
+                    "Base 10",
+                    "Base 16"
+                ],
+                "answer": "Base 16",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The smallest unit of data in a computer is:",
+                "type": "mcq",
+                "options": [
+                    "Byte",
+                    "Bit",
+                    "Nibble",
+                    "Word"
+                ],
+                "answer": "Bit",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "One kilobyte (KB) is equal to:",
+                "type": "mcq",
+                "options": [
+                    "1000 bytes",
+                    "1024 bytes",
+                    "100 bytes",
+                    "2048 bytes"
+                ],
+                "answer": "1024 bytes",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is NOT an operating system?",
+                "type": "mcq",
+                "options": [
+                    "Windows",
+                    "Linux",
+                    "MS Office",
+                    "macOS"
+                ],
+                "answer": "MS Office",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the primary function of an operating system?",
+                "type": "mcq",
+                "options": [
+                    "Managing hardware and software resources",
+                    "Compiling programs",
+                    "Running antivirus software",
+                    "Creating documents"
+                ],
+                "answer": "Managing hardware and software resources",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an open-source operating system?",
+                "type": "mcq",
+                "options": [
+                    "Windows",
+                    "macOS",
+                    "Linux",
+                    "MS-DOS"
+                ],
+                "answer": "Linux",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The command-line interface (CLI) is mostly used in:",
+                "type": "mcq",
+                "options": [
+                    "Windows",
+                    "Linux",
+                    "macOS",
+                    "Android"
+                ],
+                "answer": "Linux",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The GUI (Graphical User Interface) was first introduced in:",
+                "type": "mcq",
+                "options": [
+                    "Windows 95",
+                    "Linux Ubuntu",
+                    "macOS",
+                    "Xerox Alto"
+                ],
+                "answer": "Xerox Alto",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which file extension is associated with Microsoft Word documents?",
+                "type": "mcq",
+                "options": [
+                    ".txt",
+                    ".docx",
+                    ".xls",
+                    ".ppt"
+                ],
+                "answer": ".docx",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The root directory is:",
+                "type": "mcq",
+                "options": [
+                    "A file inside a folder",
+                    "The topmost directory in a file system",
+                    "A subfolder inside another folder",
+                    "A temporary folder"
+                ],
+                "answer": "The topmost directory in a file system",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What does the Recycle Bin store?",
+                "type": "mcq",
+                "options": [
+                    "Temporary files",
+                    "Deleted files",
+                    "System files",
+                    "Program files"
+                ],
+                "answer": "Deleted files",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which file system is used by Windows?",
+                "type": "mcq",
+                "options": [
+                    "NTFS",
+                    "EXT4",
+                    "HFS+",
+                    "FAT16"
+                ],
+                "answer": "NTFS",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which command is used to create a new directory in Linux?",
+                "type": "mcq",
+                "options": [
+                    "rmdir",
+                    "mkdir",
+                    "deldir",
+                    "newdir"
+                ],
+                "answer": "mkdir",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which memory is non-volatile?",
+                "type": "mcq",
+                "options": [
+                    "RAM",
+                    "Cache Memory",
+                    "ROM",
+                    "Register"
+                ],
+                "answer": "ROM",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the function of the Control Unit (CU) in a computer?",
+                "type": "mcq",
+                "options": [
+                    "Stores data permanently",
+                    "Performs arithmetic operations",
+                    "Directs the operation of the processor",
+                    "Generates output"
+                ],
+                "answer": "Directs the operation of the processor",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The speed of a processor is measured in:",
+                "type": "mcq",
+                "options": [
+                    "Hertz (Hz)",
+                    "Bits",
+                    "Bytes",
+                    "Joules"
+                ],
+                "answer": "Hertz (Hz)",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is an example of application software?",
+                "type": "mcq",
+                "options": [
+                    "Windows OS",
+                    "Linux Kernel",
+                    "Microsoft Excel",
+                    "Device Driver"
+                ],
+                "answer": "Microsoft Excel",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Cache memory is used to:",
+                "type": "mcq",
+                "options": [
+                    "Store frequently used instructions",
+                    "Store the operating system permanently",
+                    "Backup data",
+                    "Connect external devices"
+                ],
+                "answer": "Store frequently used instructions",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "A light pen is used for:",
+                "type": "mcq",
+                "options": [
+                    "Printing",
+                    "Scanning",
+                    "Drawing on a screen",
+                    "Typing"
+                ],
+                "answer": "Drawing on a screen",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which device converts digital signals into analog signals for transmission over a\nphone line?",
+                "type": "mcq",
+                "options": [
+                    "Router",
+                    "Modem",
+                    "Switch",
+                    "Hub"
+                ],
+                "answer": "Modem",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following devices is an example of an output device?",
+                "type": "mcq",
+                "options": [
+                    "Microphone",
+                    "Touchscreen",
+                    "Plotter",
+                    "Joystick"
+                ],
+                "answer": "Plotter",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which key is used to refresh a webpage in most browsers?",
+                "type": "mcq",
+                "options": [
+                    "F1",
+                    "F5",
+                    "Ctrl + S",
+                    "Alt + Tab"
+                ],
+                "answer": "F5",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the full form of DPI in printers?",
+                "type": "mcq",
+                "options": [
+                    "Dots Per Inch",
+                    "Data Processing Interface",
+                    "Digital Processing Index",
+                    "Dual Process Integration"
+                ],
+                "answer": "Dots Per Inch",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which number system is used by computers?",
+                "type": "mcq",
+                "options": [
+                    "Decimal",
+                    "Octal",
+                    "Binary",
+                    "Hexadecimal"
+                ],
+                "answer": "Binary",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the decimal equivalent of the binary number 1101?",
+                "type": "mcq",
+                "options": [
+                    "11",
+                    "12",
+                    "13",
+                    "14"
+                ],
+                "answer": "13",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "One nibble consists of:",
+                "type": "mcq",
+                "options": [
+                    "2 bits",
+                    "4 bits",
+                    "8 bits",
+                    "16 bits"
+                ],
+                "answer": "4 bits",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The ASCII system is used for:",
+                "type": "mcq",
+                "options": [
+                    "Number conversion",
+                    "Text representation",
+                    "Image processing",
+                    "Video encoding"
+                ],
+                "answer": "Text representation",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is 2’s complement used for?",
+                "type": "mcq",
+                "options": [
+                    "Storing floating-point numbers",
+                    "Representing negative numbers",
+                    "Converting binary to decimal",
+                    "Sorting data"
+                ],
+                "answer": "Representing negative numbers",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which OS is widely used for mobile devices?",
+                "type": "mcq",
+                "options": [
+                    "Windows",
+                    "Linux",
+                    "Android",
+                    "macOS"
+                ],
+                "answer": "Android",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which Windows version introduced the Start Menu?",
+                "type": "mcq",
+                "options": [
+                    "Windows XP",
+                    "Windows 95",
+                    "Windows 7",
+                    "Windows 10"
+                ],
+                "answer": "Windows 95",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The command used to list files in a Linux directory is:",
+                "type": "mcq",
+                "options": [
+                    "ls",
+                    "dir",
+                    "list",
+                    "show"
+                ],
+                "answer": "ls",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Which of the following is a multi-user operating system?",
+                "type": "mcq",
+                "options": [
+                    "MS-DOS",
+                    "Windows 10",
+                    "Linux",
+                    "macOS"
+                ],
+                "answer": "Linux",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "The Linux command to remove a file is:",
+                "type": "mcq",
+                "options": [
+                    "delete",
+                    "erase",
+                    "remove",
+                    "rm"
+                ],
+                "answer": "rm",
+                "timeLimit": 60,
+                "imageUrl": "",
+                "explanationImageUrl": ""
+            }
+        ]
+    },
+    {
         "id": "Web Designing & Development",
         "name": "Web Designing & Development",
         "description": "",
