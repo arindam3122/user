@@ -1215,6 +1215,12 @@ function renderQuizList() {
     });
 }
 
+// ✅ Reset feedback UI when starting a new quiz
+const feedbackBox = document.getElementById("instantFeedback");
+const moveOnBtn = document.getElementById("moveOnButton");
+if (feedbackBox) feedbackBox.style.display = "none";
+if (moveOnBtn) moveOnBtn.style.display = "none";
+submitButton.disabled = false;
 
 // --- Quiz Logic ---
 function startQuiz(quizId) {
@@ -1286,6 +1292,41 @@ function selectOption(selectedOptionDiv, optionText) {
     questionStatuses[currentQuestionIndex] = 'answered'; // NEW: Mark as answered
     // Time taken will be recorded when navigating away from the question
 }
+// ✅ Show instant feedback for MCQs
+function showInstantFeedback(isCorrect) {
+    const feedbackBox = document.getElementById("instantFeedback");
+    const moveOnBtn = document.getElementById("moveOnButton");
+
+    if (isCorrect) {
+        feedbackBox.textContent = "✅ Correct!";
+        feedbackBox.style.background = "#d4edda";
+        feedbackBox.style.color = "#155724";
+    } else {
+        feedbackBox.textContent = "❌ Wrong Answer!";
+        feedbackBox.style.background = "#f8d7da";
+        feedbackBox.style.color = "#721c24";
+    }
+
+    feedbackBox.style.display = "block";
+    moveOnBtn.style.display = "inline-flex";
+
+    // Disable submit temporarily
+    submitButton.disabled = true;
+
+    moveOnBtn.onclick = () => {
+        feedbackBox.style.display = "none";
+        moveOnBtn.style.display = "none";
+        submitButton.disabled = false;
+
+        if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+            currentQuestionIndex++;
+            loadQuestion();
+        } else {
+            handleSubmitButtonClick(); // End quiz if last question
+        }
+    };
+}
+
 
 // Helper function to update time taken for the current question before moving
 function updateTimeTakenBeforeMoving() {
@@ -1321,6 +1362,18 @@ function handleSkipButtonClick() {
 function handleNextButtonClick() {
     const currentQuestion = currentQuiz.questions[currentQuestionIndex];
     const answer = userAnswers[currentQuestionIndex];
+
+    // ✅ Instant check for MCQs
+    if (currentQuestion.type === 'mcq') {
+        if (answer === null) {
+            showInfoModal("Please select an option.");
+            return;
+        }
+        const isCorrect = (answer === currentQuestion.answer);
+        showInstantFeedback(isCorrect);
+        return; // Stop auto-moving, wait for "Move On"
+    }
+
 
     if (currentQuestion.type === 'input') {
         // For input type, if user input is empty, require an answer or skip
@@ -2405,7 +2458,6 @@ async function downloadQuizResponse(quiz) {
 
     showInfoModal(`✅ Download completed. Please check your browser's default downloads folder for "${fileName}".`);
 }
-
 
 
 

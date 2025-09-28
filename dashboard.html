@@ -101,24 +101,46 @@
       </div>
   </div>
 
-  <div class="quiz-container" id="quizContainer">
-    <h2 class="heading3" id="quizTitle">Quiz Title</h2>
-    <div class="progress-bar-container">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-    <div class="timer-display" id="timerDisplay">Time Left: 0:00</div>
-    <div class="question-area">
-      <img id="questionImage" src="" alt="Question Image" style="display:none;">
-        <p id="questionText"></p>
-    </div>
-    <div id="optionsContainer" class="options-grid">
-      </div>
-    <div class="quiz-navigation">
-      <button id="skipButton" class="nav-button skip-button"><i class="fas fa-forward"></i> Skip</button>
-      <button id="nextButton" class="nav-button next-button">Next <i class="fas fa-arrow-right"></i></button>
-      <button id="submitButton" class="nav-button submit-button">Submit <i class="fas fa-check-circle"></i></button>
-    </div>
+<div class="quiz-container" id="quizContainer">
+  <h2 class="heading3" id="quizTitle">Quiz Title</h2>
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progressBar"></div>
   </div>
+  <div class="timer-display" id="timerDisplay">Time Left: 0:00</div>
+  <div class="question-area">
+    <img id="questionImage" src="" alt="Question Image" style="display:none;">
+    <p id="questionText"></p>
+  </div>
+
+  <div id="optionsContainer" class="options-grid"></div>
+
+  <!-- ✅ Instant feedback for MCQs -->
+  <div id="instantFeedback" class="instant-feedback" 
+       style="display:none; margin-top:15px; padding:12px; border-radius:8px; font-weight:bold; text-align:center;">
+  </div>
+
+  <!-- ✅ Navigation row with Move On between Skip and Next -->
+  <div class="quiz-navigation">
+    <button id="skipButton" class="nav-button skip-button">
+      <i class="fas fa-forward"></i> Skip
+    </button>
+
+    <button id="moveOnButton" class="nav-button" 
+            style="display:none; background:#007bff; color:#fff; border:none; padding:8px 16px; border-radius:6px; cursor:pointer;">
+      Move On <i class="fas fa-arrow-right"></i>
+    </button>
+
+    <button id="nextButton" class="nav-button next-button">
+      Next <i class="fas fa-arrow-right"></i>
+    </button>
+
+    <button id="submitButton" class="nav-button submit-button">
+      Submit <i class="fas fa-check-circle"></i>
+    </button>
+  </div>
+</div>
+
+
 
     <div class="final-score-container" id="finalScoreContainer">
         <h2 class="heading4">Quiz Completed!</h2>
