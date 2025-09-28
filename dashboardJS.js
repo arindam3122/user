@@ -1314,6 +1314,9 @@ function showInstantFeedback(isCorrect) {
     submitButton.disabled = true;
 
     moveOnBtn.onclick = () => {
+        // ✅ record time before moving
+        updateTimeTakenBeforeMoving();
+
         feedbackBox.style.display = "none";
         moveOnBtn.style.display = "none";
         submitButton.disabled = false;
@@ -1326,6 +1329,7 @@ function showInstantFeedback(isCorrect) {
         }
     };
 }
+
 
 
 // Helper function to update time taken for the current question before moving
@@ -1506,6 +1510,49 @@ if (downloadQuizBtn) {
   });
 }
 
+function startTimer() {
+    clearInterval(timerInterval); 
+    const questionTimeLimit = currentQuiz.questions[currentQuestionIndex].timeLimit;
+    timeLeft = questionTimeLimit;
+    initialTimeLimit = questionTimeLimit;
+    updateTimerDisplay();
+
+    if (quizActive) {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            updateTimerDisplay();
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                clearTimeUpMessage();
+
+                // ✅ record time before moving
+                updateTimeTakenBeforeMoving();
+
+                // Mark status as time_up
+                if (questionStatuses[currentQuestionIndex] === 'unanswered') {
+                    questionStatuses[currentQuestionIndex] = 'time_up';
+                    const currentQuestionData = currentQuiz.questions[currentQuestionIndex];
+
+                    if (currentQuestionData.type === 'input') {
+                        const inputField = optionsContainer.querySelector('.input-answer-field');
+                        userAnswers[currentQuestionIndex] = inputField ? inputField.value : '';
+                    }
+                    questionTimesTaken[currentQuestionIndex] = questionTimeLimit;
+                    showTimeUpMessage();
+                }
+
+                if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                } else {
+                    handleSubmitButtonClick();
+                }
+            }
+        }, 1000);
+    }
+}
+
 
 
 
@@ -1521,51 +1568,12 @@ function updateNavigationButtons() {
     submitButton.style.display = currentQuestionIndex === currentQuiz.questions.length - 1 ? 'inline-flex' : 'none';
     skipButton.style.display = 'inline-flex'; // Always show skip button
 }
-
-
-// --- Timer Logic ---
-function startTimer() {
-    clearInterval(timerInterval); // Clear any existing timer
-    const questionTimeLimit = currentQuiz.questions[currentQuestionIndex].timeLimit;
-    timeLeft = questionTimeLimit;
-    initialTimeLimit = questionTimeLimit; // Store initial time limit
-    updateTimerDisplay(); // Initial display
-    if (quizActive) { // Only start timer if quiz is active
-        timerInterval = setInterval(() => {
-            timeLeft--;
-            updateTimerDisplay(); // Update display every second
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                clearTimeUpMessage(); // Ensure previous message is cleared
-
-                // NEW LOGIC FOR TIME UP: Capture partial input and mark status
-                if (questionStatuses[currentQuestionIndex] === 'unanswered') { // Only process if not already answered/skipped
-                    questionStatuses[currentQuestionIndex] = 'time_up'; // Mark as time up
-
-                    const currentQuestionData = currentQuiz.questions[currentQuestionIndex];
-                    if (currentQuestionData.type === 'input') {
-                        // Capture the current value from the textarea if it exists
-                        const inputField = optionsContainer.querySelector('.input-answer-field');
-                        if (inputField) {
-                            userAnswers[currentQuestionIndex] = inputField.value; // Store the actual input
-                        } else {
-                            userAnswers[currentQuestionIndex] = ''; // If input field not found for some reason, default to empty
-                        }
-                    } else {
-                        // For multiple choice, if no option was selected, userAnswers[currentQuestionIndex] is already null
-                    }
-                    questionTimesTaken[currentQuestionIndex] = questionTimeLimit; // Time taken is the full limit
-                    showTimeUpMessage(); // Display temporary time-up message
-                }
-
-                if (currentQuestionIndex < currentQuiz.questions.length - 1) {
-                    currentQuestionIndex++;
-                    loadQuestion();
-                } else {
-                    handleSubmitButtonClick(); // Submit if last question
-                }
-            }
-        }, 1000);
+function updateTimeTakenBeforeMoving() {
+    if (currentQuestionIndex >= 0 && currentQuestionIndex < currentQuiz.questions.length) {
+        if (questionStartTime) {
+            const timeElapsed = Math.round((new Date().getTime() - questionStartTime) / 1000);
+            questionTimesTaken[currentQuestionIndex] = timeElapsed;
+        }
     }
 }
 
@@ -2463,67 +2471,46 @@ async function downloadQuizResponse(quiz) {
 
 
 function loadQuestion() {
-    if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
-        return;
-    }
-
-    const questionData = currentQuiz.questions[currentQuestionIndex];
-    quizTitle.textContent = currentQuiz.name;
-
-    // Clear previous image and text content to prevent flicker or old content
-    questionImage.src = '';
-    questionImage.style.display = 'none';
-    questionText.innerHTML = '';
-    optionsContainer.innerHTML = '';
-
-    // First, display the image if it exists
-    if (questionData.imageUrl) {
-        questionImage.src = questionData.imageUrl;
+    questionStartTime = Date.now(); // ✅ reset timer for this question
+    const currentQuestion = currentQuiz.questions[currentQuestionIndex];
+    questionText.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
+    
+    // Show question image if available
+    if (currentQuestion.imageUrl) {
+        questionImage.src = currentQuestion.imageUrl;
         questionImage.style.display = 'block';
     } else {
         questionImage.style.display = 'none';
-        questionImage.src = ''; // Ensure src is cleared if no image
     }
 
-    // Then, display the question text below the image
-    questionText.innerHTML = `${currentQuestionIndex + 1}. ${questionData.question}`;
+    optionsContainer.innerHTML = '';
 
-
-    if (questionData.type === 'input') {
-        const inputField = document.createElement('textarea');
-        inputField.classList.add('input-answer-field');
-        inputField.placeholder = 'Type your answer here...';
-        inputField.value = userAnswers[currentQuestionIndex] || '';
-        inputField.rows = 1;
-        inputField.spellcheck = true;
-
-        inputField.addEventListener('input', () => {
-            userAnswers[currentQuestionIndex] = inputField.value;
-            inputField.style.height = 'auto';
-            inputField.style.height = (inputField.scrollHeight) + 'px';
-        });
-
-        optionsContainer.appendChild(inputField);
-    } else {
-        questionData.options.forEach((option, index) => {
+    if (currentQuestion.type === 'mcq') {
+        currentQuestion.options.forEach(option => {
             const optionDiv = document.createElement('div');
             optionDiv.classList.add('option');
-            optionDiv.innerHTML = `<span class="option-label">${String.fromCharCode(65 + index)}.</span> <span class="option-text">${option}</span>`;
-            optionDiv.dataset.option = option;
-            optionDiv.addEventListener('click', () => selectOption(optionDiv, option));
+            optionDiv.textContent = option;
+            optionDiv.onclick = () => selectOption(optionDiv, option);
             optionsContainer.appendChild(optionDiv);
-
-            if (userAnswers[currentQuestionIndex] === option) {
-                optionDiv.classList.add('selected');
-            }
         });
+    } else if (currentQuestion.type === 'input') {
+        const inputField = document.createElement('textarea');
+        inputField.classList.add('input-answer-field');
+        inputField.placeholder = "Type your answer here...";
+        inputField.oninput = (e) => {
+            userAnswers[currentQuestionIndex] = e.target.value;
+            questionStatuses[currentQuestionIndex] = 'answered';
+        };
+        optionsContainer.appendChild(inputField);
     }
 
     updateProgressBar();
     updateNavigationButtons();
-    questionStartTime = new Date().getTime();
-    resetTimer(questionData.timeLimit);
+
+    // Reset and start timer
+    resetTimer(currentQuestion.timeLimit);
 }
+
 
 function showQuizResultsDetails(result) {
     showQuizResultsDetailsSection();
