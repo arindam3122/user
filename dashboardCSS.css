@@ -1948,3 +1948,17 @@ header {
   opacity: 0.5;
   cursor: not-allowed;
 }
+#instantFeedback {
+  margin-top: 15px;   /* space above feedback */
+  margin-bottom: 20px; /* space below feedback */
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#moveOnButton,
+#skipButton,
+#nextButton {
+  margin-top: 10px; /* ensures buttons don’t touch the feedback box */
+}
