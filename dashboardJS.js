@@ -1246,6 +1246,11 @@ function startQuiz(quizId) {
         return;
     }
 
+    // ✅ Set quiz title here
+    if (quizTitle) {
+        quizTitle.textContent = currentQuiz.name;
+    }
+
     // Shuffle the questions array when the quiz starts - REMOVED TO STOP SHUFFLING
     // currentQuiz.questions = shuffleArray(currentQuiz.questions); 
 
@@ -1279,6 +1284,7 @@ function startQuiz(quizId) {
     nextButton.addEventListener('click', handleNextButtonClick);
     submitButton.addEventListener('click', handleSubmitButtonClick);
 }
+
 
 
 function selectOption(selectedOptionDiv, optionText) {
@@ -1584,10 +1590,6 @@ function startTimer() {
         }, 1000);
     }
 }
-
-
-
-
 
 function updateProgressBar() {
     const progress = ((currentQuestionIndex + 1) / currentQuiz.questions.length) * 100;
