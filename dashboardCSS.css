@@ -1962,3 +1962,8 @@ header {
 #nextButton {
   margin-top: 10px; /* ensures buttons don’t touch the feedback box */
 }
+.disabled-button {
+    opacity: 0.5;
+    pointer-events: none;
+    background-color: #c0bfbf;
+}

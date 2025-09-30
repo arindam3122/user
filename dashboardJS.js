@@ -1318,35 +1318,39 @@ function showInstantFeedback(isCorrect) {
     feedbackBox.style.display = "block";
     moveOnBtn.style.display = "inline-flex";
 
-    // ---- IMPORTANT FIX: record time taken now and stop the timer so it doesn't keep running
+    // Disable Next button while feedback is active
+    nextButton.disabled = true;  
+    nextButton.classList.add("disabled-button"); // optional CSS for style
+
+    // Record time taken (already in your code)
     if (questionStartTime && (questionTimesTaken[currentQuestionIndex] === undefined || questionTimesTaken[currentQuestionIndex] === 0)) {
         const timeElapsed = Math.round((Date.now() - questionStartTime) / 1000);
         questionTimesTaken[currentQuestionIndex] = timeElapsed;
     }
 
-    // stop per-question timer immediately
     clearInterval(timerInterval);
-
-    // Prevent further accidental overwrites
     questionStartTime = null;
-
-    // Disable submit while feedback visible
     submitButton.disabled = true;
 
-    // Move On handler (do NOT record time again here)
+    // Move On handler
     moveOnBtn.onclick = () => {
         feedbackBox.style.display = "none";
         moveOnBtn.style.display = "none";
         submitButton.disabled = false;
 
+        // Re-enable Next button for the next question
+        nextButton.disabled = false;
+        nextButton.classList.remove("disabled-button");
+
         if (currentQuestionIndex < currentQuiz.questions.length - 1) {
             currentQuestionIndex++;
-            loadQuestion(); // loadQuestion() should set questionStartTime and start the timer for next question
+            loadQuestion();
         } else {
             handleSubmitButtonClick();
         }
     };
 }
+
 
 
 
