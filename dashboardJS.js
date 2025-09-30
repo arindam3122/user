@@ -1304,14 +1304,15 @@ function showInstantFeedback(isCorrect) {
     const feedbackBox = document.getElementById("instantFeedback");
     const moveOnBtn = document.getElementById("moveOnButton");
 
+    // Set message + toggle classes
     if (isCorrect) {
         feedbackBox.textContent = "✅ Correct!";
-        feedbackBox.style.background = "#d4edda";
-        feedbackBox.style.color = "#155724";
+        feedbackBox.classList.add("correct");
+        feedbackBox.classList.remove("wrong");
     } else {
         feedbackBox.textContent = "❌ Wrong Answer!";
-        feedbackBox.style.background = "#f8d7da";
-        feedbackBox.style.color = "#721c24";
+        feedbackBox.classList.add("wrong");
+        feedbackBox.classList.remove("correct");
     }
 
     // Show feedback UI
@@ -1319,20 +1320,23 @@ function showInstantFeedback(isCorrect) {
     moveOnBtn.style.display = "inline-flex";
 
     // Disable Next button while feedback is active
-    nextButton.disabled = true;  
-    nextButton.classList.add("disabled-button"); // optional CSS for style
+    nextButton.disabled = true;
+    nextButton.classList.add("disabled-button");
 
-    // Record time taken (already in your code)
+    // Record time taken (only once)
     if (questionStartTime && (questionTimesTaken[currentQuestionIndex] === undefined || questionTimesTaken[currentQuestionIndex] === 0)) {
         const timeElapsed = Math.round((Date.now() - questionStartTime) / 1000);
         questionTimesTaken[currentQuestionIndex] = timeElapsed;
     }
 
+    // Stop per-question timer
     clearInterval(timerInterval);
     questionStartTime = null;
+
+    // Disable submit button while feedback visible
     submitButton.disabled = true;
 
-    // Move On handler
+    // Handle "Move On"
     moveOnBtn.onclick = () => {
         feedbackBox.style.display = "none";
         moveOnBtn.style.display = "none";
@@ -1344,17 +1348,12 @@ function showInstantFeedback(isCorrect) {
 
         if (currentQuestionIndex < currentQuiz.questions.length - 1) {
             currentQuestionIndex++;
-            loadQuestion();
+            loadQuestion(); // Load next question
         } else {
-            handleSubmitButtonClick();
+            handleSubmitButtonClick(); // End quiz if last question
         }
     };
 }
-
-
-
-
-
 
 // Helper function to update time taken for the current question before moving
 function updateTimeTakenBeforeMoving() {
