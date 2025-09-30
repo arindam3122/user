@@ -1292,7 +1292,8 @@ function selectOption(selectedOptionDiv, optionText) {
     questionStatuses[currentQuestionIndex] = 'answered'; // NEW: Mark as answered
     // Time taken will be recorded when navigating away from the question
 }
-// ✅ Show instant feedback for MCQs
+// ✅ Show instant feedback for MCQs (updated: stop timer and record time immediately)
+// ✅ Show instant feedback for MCQs (updated: stop timer, record time once, and prevent overwrites)
 function showInstantFeedback(isCorrect) {
     const feedbackBox = document.getElementById("instantFeedback");
     const moveOnBtn = document.getElementById("moveOnButton");
@@ -1307,40 +1308,59 @@ function showInstantFeedback(isCorrect) {
         feedbackBox.style.color = "#721c24";
     }
 
+    // Show feedback UI
     feedbackBox.style.display = "block";
     moveOnBtn.style.display = "inline-flex";
 
-    // Disable submit temporarily
+    // ---- IMPORTANT FIX: record time taken now and stop the timer so it doesn't keep running
+    if (questionStartTime && (questionTimesTaken[currentQuestionIndex] === undefined || questionTimesTaken[currentQuestionIndex] === 0)) {
+        const timeElapsed = Math.round((Date.now() - questionStartTime) / 1000);
+        questionTimesTaken[currentQuestionIndex] = timeElapsed;
+    }
+
+    // stop per-question timer immediately
+    clearInterval(timerInterval);
+
+    // Prevent further accidental overwrites
+    questionStartTime = null;
+
+    // Disable submit while feedback visible
     submitButton.disabled = true;
 
+    // Move On handler (do NOT record time again here)
     moveOnBtn.onclick = () => {
-        // ✅ record time before moving
-        updateTimeTakenBeforeMoving();
-
         feedbackBox.style.display = "none";
         moveOnBtn.style.display = "none";
         submitButton.disabled = false;
 
         if (currentQuestionIndex < currentQuiz.questions.length - 1) {
             currentQuestionIndex++;
-            loadQuestion();
+            loadQuestion(); // loadQuestion() should set questionStartTime and start the timer for next question
         } else {
-            handleSubmitButtonClick(); // End quiz if last question
+            handleSubmitButtonClick();
         }
     };
 }
 
 
 
+
+
 // Helper function to update time taken for the current question before moving
 function updateTimeTakenBeforeMoving() {
     if (currentQuestionIndex >= 0 && currentQuestionIndex < currentQuiz.questions.length) {
-        if (questionStartTime) { // Ensure questionStartTime was set
-            const timeElapsed = Math.round((new Date().getTime() - questionStartTime) / 1000); // Time in seconds
-            questionTimesTaken[currentQuestionIndex] = timeElapsed; // Store time taken
+        // Only record if we have a valid questionStartTime AND time wasn't already recorded
+        if (questionStartTime) {
+            if (questionTimesTaken[currentQuestionIndex] === undefined || questionTimesTaken[currentQuestionIndex] === 0) {
+                const timeElapsed = Math.round((Date.now() - questionStartTime) / 1000);
+                questionTimesTaken[currentQuestionIndex] = timeElapsed;
+            }
         }
     }
+    // Clear start time so subsequent calls won't re-calc this question's time.
+    questionStartTime = null;
 }
+
 
 function handleSkipButtonClick() {
     // If the user has selected an answer, they cannot skip.
@@ -1354,12 +1374,12 @@ function handleSkipButtonClick() {
     }
 
     if (currentQuestionIndex < currentQuiz.questions.length - 1) {
-        currentQuestionIndex++;
-        loadQuestion();
+    clearInterval(timerInterval); // stop old timer
+    currentQuestionIndex++;
+    loadQuestion();
     } else {
-        // If it's the last question and skipped, go to results
-        handleSubmitButtonClick();
-    }
+    handleSubmitButtonClick();
+}
 }
 
 
@@ -1398,12 +1418,14 @@ function handleNextButtonClick() {
     updateTimeTakenBeforeMoving(); // Record time for the question just left
 
     if (currentQuestionIndex < currentQuiz.questions.length - 1) {
-        currentQuestionIndex++;
-        loadQuestion();
-    } else {
-        handleSubmitButtonClick();
-    }
-}
+    clearInterval(timerInterval); // stop old timer
+    currentQuestionIndex++;
+    loadQuestion();
+   }  else {
+    handleSubmitButtonClick();
+ }
+ }
+
 
 function handleSubmitButtonClick() {
     // If auto-submit was triggered due to anti-cheat, update unanswered questions
@@ -1526,10 +1548,14 @@ function startTimer() {
                 clearInterval(timerInterval);
                 clearTimeUpMessage();
 
-                // ✅ record time before moving
-                updateTimeTakenBeforeMoving();
+                // ✅ record time only if not already recorded
+                if (questionStartTime && 
+                    (questionTimesTaken[currentQuestionIndex] === undefined || questionTimesTaken[currentQuestionIndex] === 0)) {
+                    const timeElapsed = Math.round((Date.now() - questionStartTime) / 1000);
+                    questionTimesTaken[currentQuestionIndex] = timeElapsed;
+                }
 
-                // Mark status as time_up
+                // Mark status as time_up if unanswered
                 if (questionStatuses[currentQuestionIndex] === 'unanswered') {
                     questionStatuses[currentQuestionIndex] = 'time_up';
                     const currentQuestionData = currentQuiz.questions[currentQuestionIndex];
@@ -1538,10 +1564,16 @@ function startTimer() {
                         const inputField = optionsContainer.querySelector('.input-answer-field');
                         userAnswers[currentQuestionIndex] = inputField ? inputField.value : '';
                     }
-                    questionTimesTaken[currentQuestionIndex] = questionTimeLimit;
+
+                    // If no time recorded yet, fallback to full time limit
+                    if (questionTimesTaken[currentQuestionIndex] === undefined || questionTimesTaken[currentQuestionIndex] === 0) {
+                        questionTimesTaken[currentQuestionIndex] = questionTimeLimit;
+                    }
+
                     showTimeUpMessage();
                 }
 
+                // Move to next or finish
                 if (currentQuestionIndex < currentQuiz.questions.length - 1) {
                     currentQuestionIndex++;
                     loadQuestion();
@@ -1552,6 +1584,7 @@ function startTimer() {
         }, 1000);
     }
 }
+
 
 
 
