@@ -1169,7 +1169,6 @@ function updateDashboardInfo() {
 function renderQuizList() {
     quizList.innerHTML = ''; // Clear existing quiz cards
 
-    // get user and previous quiz data once
     const loggedInUser = localStorage.getItem('loggedInUser');
     const userKey = `previousQuizzes_${loggedInUser}`;
     const previousQuizzes = JSON.parse(localStorage.getItem(userKey)) || [];
@@ -1178,31 +1177,40 @@ function renderQuizList() {
     const enabledQuizzes = quizzes.filter(quiz => quiz.enabled);
     const disabledQuizzes = quizzes.filter(quiz => !quiz.enabled);
 
+    // Merge them so active ones appear first
     const sortedQuizzes = [...enabledQuizzes, ...disabledQuizzes];
 
     sortedQuizzes.forEach(quiz => {
         const quizCard = document.createElement('div');
         quizCard.classList.add('quiz-card');
 
+        // ✅ Calculate total questions and total time
+        const totalQuestions = quiz.questions.length;
+        const totalTime = quiz.questions.reduce((sum, q) => sum + (q.timeLimit || 0), 0);
+        const formattedTime = totalTime >= 60 
+            ? `${Math.floor(totalTime / 60)} min ${totalTime % 60} sec`
+            : `${totalTime} sec`;
+
         quizCard.innerHTML = `
             <h3>${quiz.name}</h3>
             <p>${quiz.description}</p>
+            <p class="quiz-meta">🧮 ${totalQuestions} Questions | ⏱ ${formattedTime}</p>
             <button class="start-quiz-card-btn" data-quiz-id="${quiz.id}"></button>
         `;
 
         const startButton = quizCard.querySelector('.start-quiz-card-btn');
 
-        // check if user has already attempted this quiz
+        // Check if user already attempted this quiz
         const alreadyAttempted = previousQuizzes.find(q => q.quizId === quiz.id);
 
         if (!quiz.enabled) {
-    startButton.disabled = true;
-    startButton.classList.add('disabled-button');
-    startButton.innerHTML = '<i class="fas fa-lock"></i> Quiz Locked';
+            startButton.disabled = true;
+            startButton.classList.add('disabled-button');
+            startButton.innerHTML = '<i class="fas fa-lock"></i> Quiz Locked';
         } else if (alreadyAttempted) {
             startButton.disabled = true;
             startButton.classList.add('disabled-button');
-            startButton.innerHTML = ' <i class="fas fa-check"></i>Already Attempted!';
+            startButton.innerHTML = '<i class="fas fa-check"></i> Already Attempted!';
         } else {
             startButton.innerHTML = 'Start Quiz <i class="fas fa-arrow-right"></i>';
             startButton.addEventListener('click', (e) => {
@@ -1214,6 +1222,7 @@ function renderQuizList() {
         quizList.appendChild(quizCard);
     });
 }
+
 
 // ✅ Reset feedback UI when starting a new quiz
 const feedbackBox = document.getElementById("instantFeedback");
