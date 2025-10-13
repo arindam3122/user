@@ -68,8 +68,8 @@ const summaryWrong = document.getElementById('summaryWrong');
 const summarySkipped = document.getElementById('summarySkipped');
 const summaryTimeUp = document.getElementById('summaryTimeUp'); // New element
 const summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
-const ADMIN_USERS = ['Super Admin','Sourav Gangopadhyay (admin)', ]; // Add usernames for ADMINS
-const ALLOW_USER_DELETE = true; // Change to true when you want users to delete responses
+const ADMIN_USERS = ['Super Admin','Prerana Ghosh', ]; // Add usernames for ADMINS
+const ALLOW_USER_DELETE = false; // Change to true when you want users to delete responses
 
 // Hamburger menu elements
 const hamburgerMenu = document.getElementById('hamburgerMenu');
