@@ -743,7 +743,7 @@ const quizzes = [
         "id": "Web Designing & Development",
         "name": "Web Designing & Development",
         "description": "",
-        "enabled": false,
+        "enabled": true,
         "questions": [
             
             {
@@ -1368,7 +1368,7 @@ const quizzes = [
         "id": "Database Management System (DBMS)",
         "name": "Database Management System (DBMS)",
         "description": "",
-        "enabled": false,
+        "enabled": true,
         "questions": [
             {
                 "question": "What is DBMS?",
@@ -2076,7 +2076,7 @@ const quizzes = [
         "id": "Computer Networks & Security",
         "name": "Computer Networks & Security",
         "description": "",
-        "enabled": false,
+        "enabled": true,
         "questions": [
             {
                 "question": "Which layer of the OSI model is responsible for end-to-end communication and error handling?",
@@ -2810,7 +2810,7 @@ const quizzes = [
         "id": "Internet & Web Technology",
         "name": "Internet & Web Technology (MCQ)",
         "description": "",
-        "enabled": false,
+        "enabled": true,
         "questions": [
             {
                 "question": "What is the main function of a web browser?",
@@ -3433,7 +3433,7 @@ const quizzes = [
         "id": "11",
         "name": "Microsoft Office & Productivity Tools MS Word",
         "description": "",
-        "enabled": false,
+        "enabled": true,
         "questions": [
             {
                 "question": "What is the default font in Microsoft Word?",
