@@ -430,7 +430,42 @@ function showQuizDetailsForAdmin(quiz) {
 
     const resultsContainer = document.getElementById('quizResultsDetailsContainer');
     resultsContainer.innerHTML = '';
+        // ✅ Show search bar and enable live search
+    const searchContainer = document.getElementById('questionSearchContainer');
+    const searchInput = document.getElementById('questionSearchInput');
+    if (searchContainer) searchContainer.style.display = 'block';
 
+    // Clear previous listener to avoid stacking
+    searchInput.oninput = () => {
+        const term = searchInput.value.toLowerCase().trim();
+        const questions = resultsContainer.querySelectorAll('.question-card');
+
+        questions.forEach((q) => {
+            const text = q.innerText.toLowerCase();
+
+            // Remove old highlights
+            const questionText = q.querySelector('.question-text-result');
+            if (questionText) {
+                questionText.innerHTML = questionText.textContent;
+            }
+
+            if (term === "") {
+                q.style.display = "";
+                return;
+            }
+
+            if (text.includes(term)) {
+                q.style.display = "";
+                // Highlight matched text
+                if (questionText) {
+                    const regex = new RegExp(`(${term})`, "gi");
+                    questionText.innerHTML = questionText.textContent.replace(regex, `<mark class="highlight">$1</mark>`);
+                }
+            } else {
+                q.style.display = "none";
+            }
+        });
+    };
     quiz.questions.forEach((q, i) => {
         const div = document.createElement('div');
         div.classList.add('question-card');
@@ -469,15 +504,20 @@ function showQuizDetailsForAdmin(quiz) {
         resultsContainer.appendChild(div);
     });
 
-    // Back button returns to the All Quizzes list
-    document.getElementById('quizResultsBackButton').onclick = () => {
-        quizResultsDetails.style.display = 'none';
-        showAllQuizzesSection();
+document.getElementById('quizResultsBackButton').onclick = () => {
+    quizResultsDetails.style.display = 'none';
+    showAllQuizzesSection();
 
-        // Restore original heading when going back
-        heading.textContent = 'Detailed Quiz Results';
-        document.querySelector('.results-summary-box').style.display = 'block';
-    };
+    // Hide search bar + clear search input
+    const searchContainer = document.getElementById('questionSearchContainer');
+    const searchInput = document.getElementById('questionSearchInput');
+    if (searchContainer) searchContainer.style.display = 'none';
+    if (searchInput) searchInput.value = '';
+
+    // Restore heading and summary box
+    heading.textContent = 'Detailed Quiz Results';
+    document.querySelector('.results-summary-box').style.display = 'block';
+};
 }
 function toggleExplanationImage(button) {
     const img = button.nextElementSibling;

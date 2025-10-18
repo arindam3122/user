@@ -2043,3 +2043,55 @@ header {
   margin: 6px 0 10px;
   font-weight: 500;
 }
+/* 🌟 Stylish Search Bar */
+.search-bar-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  font-size: 16px;
+  transition: color 0.2s ease;
+}
+
+.question-search-input {
+  width: 100%;
+  padding: 12px 45px 12px 40px;
+  border-radius: 30px;
+  border: 1.5px solid #d1d5db;
+  font-size: 16px;
+  background: #f9fafb;
+  outline: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.question-search-input:hover {
+  border-color: #60a5fa;
+}
+
+.question-search-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 6px rgba(37,99,235,0.4);
+  background: #ffffff;
+}
+
+.question-search-input::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Highlight style for matched text */
+mark.highlight {
+  background-color: #fff176;
+  padding: 0 3px;
+  border-radius: 3px;
+}
+
