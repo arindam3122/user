@@ -2043,12 +2043,14 @@ header {
   margin: 6px 0 10px;
   font-weight: 500;
 }
-/* 🌟 Stylish Search Bar */
+/* 🌟 Stylish & Responsive Search Bar */
 .search-bar-wrapper {
   position: relative;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 .search-icon {
@@ -2088,18 +2090,41 @@ header {
   font-style: italic;
 }
 
-/* Highlight style for matched text */
+/* Highlight for matched terms */
 mark.highlight {
   background-color: #fff176;
   padding: 0 3px;
   border-radius: 3px;
 }
-#noMatchMessage {
-  animation: fadeIn 0.3s ease-in-out;
+
+/* 📱 Responsive styling for small screens */
+@media (max-width: 768px) {
+  .search-bar-wrapper {
+    max-width: 95%;
+  }
+
+  .question-search-input {
+    font-size: 15px;
+    padding: 10px 40px 10px 38px;
+  }
+
+  .search-icon {
+    left: 12px;
+    font-size: 14px;
+  }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-3px); }
-  to { opacity: 1; transform: translateY(0); }
+@media (max-width: 480px) {
+  .question-search-input {
+    font-size: 14px;
+    padding: 9px 38px 9px 35px;
+    border-radius: 25px;
+  }
+
+  .search-icon {
+    left: 10px;
+    font-size: 13px;
+  }
 }
+
 
