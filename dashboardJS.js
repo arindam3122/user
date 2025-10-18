@@ -436,36 +436,48 @@ function showQuizDetailsForAdmin(quiz) {
     if (searchContainer) searchContainer.style.display = 'block';
 
     // Clear previous listener to avoid stacking
-    searchInput.oninput = () => {
-        const term = searchInput.value.toLowerCase().trim();
-        const questions = resultsContainer.querySelectorAll('.question-card');
+searchInput.oninput = () => {
+    const term = searchInput.value.toLowerCase().trim();
+    const questions = resultsContainer.querySelectorAll('.question-card');
+    const noMatchMsg = document.getElementById('noMatchMessage');
+    let visibleCount = 0;
 
-        questions.forEach((q) => {
-            const text = q.innerText.toLowerCase();
+    questions.forEach((q) => {
+        const text = q.innerText.toLowerCase();
 
-            // Remove old highlights
-            const questionText = q.querySelector('.question-text-result');
+        // Remove previous highlights
+        const questionText = q.querySelector('.question-text-result');
+        if (questionText) {
+            questionText.innerHTML = questionText.textContent;
+        }
+
+        if (term === "") {
+            q.style.display = "";
+            return;
+        }
+
+        if (text.includes(term)) {
+            q.style.display = "";
+            visibleCount++;
+
+            // Highlight matches
             if (questionText) {
-                questionText.innerHTML = questionText.textContent;
+                const regex = new RegExp(`(${term})`, "gi");
+                questionText.innerHTML = questionText.textContent.replace(regex, `<mark class="highlight">$1</mark>`);
             }
+        } else {
+            q.style.display = "none";
+        }
+    });
 
-            if (term === "") {
-                q.style.display = "";
-                return;
-            }
+    // Show or hide "no match" message
+    if (term !== "" && visibleCount === 0) {
+        noMatchMsg.style.display = "block";
+    } else {
+        noMatchMsg.style.display = "none";
+    }
+};
 
-            if (text.includes(term)) {
-                q.style.display = "";
-                // Highlight matched text
-                if (questionText) {
-                    const regex = new RegExp(`(${term})`, "gi");
-                    questionText.innerHTML = questionText.textContent.replace(regex, `<mark class="highlight">$1</mark>`);
-                }
-            } else {
-                q.style.display = "none";
-            }
-        });
-    };
     quiz.questions.forEach((q, i) => {
         const div = document.createElement('div');
         div.classList.add('question-card');
