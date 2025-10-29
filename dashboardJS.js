@@ -1364,27 +1364,59 @@ function selectOption(selectedOptionDiv, optionText) {
 function showInstantFeedback(isCorrect) {
     const feedbackBox = document.getElementById("instantFeedback");
     const moveOnBtn = document.getElementById("moveOnButton");
+    const currentQuestion = currentQuiz.questions[currentQuestionIndex];
+    const selectedAnswer = userAnswers[currentQuestionIndex];
 
-    // Set message + toggle classes
+    // 🔹 Clear previous highlights
+    document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('correct-option', 'wrong-option', 'selected');
+        opt.style.pointerEvents = "auto";
+        opt.style.opacity = "1";
+        opt.style.cursor = "pointer";
+    });
+
+    // 🔹 Highlight correct and wrong answers
+    const optionDivs = document.querySelectorAll('.option');
+    optionDivs.forEach(opt => {
+        const text = opt.textContent.trim();
+
+        if (text === currentQuestion.answer) {
+            opt.classList.add('correct-option'); // ✅ correct
+        }
+
+        if (text === selectedAnswer && text !== currentQuestion.answer) {
+            opt.classList.add('wrong-option'); // ❌ user’s wrong
+        }
+    });
+
+    // 🔹 Disable all options after submission
+    optionDivs.forEach(opt => {
+        opt.style.pointerEvents = "none";
+        opt.style.opacity = "1";
+        opt.style.cursor = "not-allowed";
+    });
+
+    // === 🧠 Simplified feedback ===
     if (isCorrect) {
-        feedbackBox.textContent = "✅ Correct!";
+        feedbackBox.innerHTML = `✅ Correct!`;
         feedbackBox.classList.add("correct");
         feedbackBox.classList.remove("wrong");
     } else {
-        feedbackBox.textContent = "❌ Wrong Answer!";
+        feedbackBox.innerHTML = `❌ Wrong Answer!`; // removed correct answer text
         feedbackBox.classList.add("wrong");
         feedbackBox.classList.remove("correct");
     }
 
-    // Show feedback UI
+    // Show feedback box + Move On
     feedbackBox.style.display = "block";
     moveOnBtn.style.display = "inline-flex";
 
-    // Disable Next button while feedback is active
+    // Disable navigation while feedback visible
     nextButton.disabled = true;
     nextButton.classList.add("disabled-button");
+    submitButton.disabled = true;
 
-    // Record time taken (only once)
+    // Record time taken
     if (questionStartTime && (questionTimesTaken[currentQuestionIndex] === undefined || questionTimesTaken[currentQuestionIndex] === 0)) {
         const timeElapsed = Math.round((Date.now() - questionStartTime) / 1000);
         questionTimesTaken[currentQuestionIndex] = timeElapsed;
@@ -1394,28 +1426,30 @@ function showInstantFeedback(isCorrect) {
     clearInterval(timerInterval);
     questionStartTime = null;
 
-    // Disable submit button while feedback visible
-    submitButton.disabled = true;
-
-    // Handle "Move On"
+    // "Move On" button logic
     moveOnBtn.onclick = () => {
         feedbackBox.style.display = "none";
         moveOnBtn.style.display = "none";
         submitButton.disabled = false;
-
-        // Re-enable Next button for the next question
         nextButton.disabled = false;
         nextButton.classList.remove("disabled-button");
 
+        // Re-enable options for next question
+        document.querySelectorAll('.option').forEach(opt => {
+            opt.classList.remove('correct-option', 'wrong-option');
+            opt.style.pointerEvents = "auto";
+            opt.style.opacity = "1";
+            opt.style.cursor = "pointer";
+        });
+
         if (currentQuestionIndex < currentQuiz.questions.length - 1) {
             currentQuestionIndex++;
-            loadQuestion(); // Load next question
+            loadQuestion();
         } else {
-            handleSubmitButtonClick(); // End quiz if last question
+            handleSubmitButtonClick();
         }
     };
 }
-
 // Helper function to update time taken for the current question before moving
 function updateTimeTakenBeforeMoving() {
     if (currentQuestionIndex >= 0 && currentQuestionIndex < currentQuiz.questions.length) {

@@ -2126,5 +2126,42 @@ mark.highlight {
     font-size: 13px;
   }
 }
+/* Smooth transition for all options */
+.option {
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* ✅ Correct option styling */
+.option.correct-option {
+  background-color: #b9f6ca !important;   /* bright green */
+  border: 3px solid #2e7d32 !important;
+  color: #1b5e20 !important;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(46, 125, 50, 0.4);
+}
+
+/* ❌ Wrong option styling */
+.option.wrong-option {
+  background-color: #ffcdd2 !important;   /* soft red */
+  border: 3px solid #c62828 !important;
+  color: #7f0000 !important;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(198, 40, 40, 0.4);
+}
+
+/* 🚫 When disabled (locked after answer) */
+.option[style*="not-allowed"] {
+  cursor: not-allowed !important;
+}
+
+/* Prevent hover effects when options are locked */
+.option[style*="not-allowed"]:hover {
+  background-color: inherit !important;
+  transform: none !important;
+}
+
+
 
 
