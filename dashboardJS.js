@@ -313,12 +313,13 @@ function showQuizDetails(quiz) {
 
             // ✅ Render question
             div.innerHTML = `
-                <p><strong>${i + 1}. ${q.question}</strong></p>
-                <p><b>Your Answer:</b> ${q.userAnswer ?? "N/A"}</p>
-                <p><b>Correct Answer:</b> <span class="correct-answer">${q.correctAnswer}</span></p>
-                <p><b>Time Taken:</b> ${q.timeTaken ?? 0} sec</p>
-                <hr>
-            `;
+            <p><strong>${i + 1}. ${q.question}</strong></p>
+            <p><b>Your Answer:</b> ${q.userAnswer ?? "N/A"}</p>
+            <p><b>Correct Answer:</b> <span class="correct-answer">${q.correctAnswer}</span></p>
+            <p><b>Time Taken:</b> ${formatTime(q.timeTaken ?? 0)}</p>
+            <hr>
+     `;
+
             resultsContainer.appendChild(div);
         });
     }
