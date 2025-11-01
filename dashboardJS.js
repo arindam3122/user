@@ -311,14 +311,31 @@ function showQuizDetails(quiz) {
                 wrongCount++;
             }
 
-            // ✅ Render question
+            // ✅ Add image if available
+            const questionImageHtml = q.imageUrl
+                ? `<img src="${q.imageUrl}" alt="Question Image" class="question-result-image">`
+                : '';
+
+            // ✅ Add explanation image if available
+            const explanationImageHtml = q.explanationImageUrl
+                ? `
+                    <button class="explanation-btn" onclick="toggleExplanationImage(this)">
+                        <i class="fas fa-image"></i> View Explanation Image
+                    </button>
+                    <img src="${q.explanationImageUrl}" class="explanation-image" style="display:none; margin-top:8px;">
+                  `
+                : '';
+
+            // ✅ Render question block
             div.innerHTML = `
-            <p><strong>${i + 1}. ${q.question}</strong></p>
-            <p><b>Your Answer:</b> ${q.userAnswer ?? "N/A"}</p>
-            <p><b>Correct Answer:</b> <span class="correct-answer">${q.correctAnswer}</span></p>
-            <p><b>Time Taken:</b> ${formatTime(q.timeTaken ?? 0)}</p>
-            <hr>
-     `;
+                <p><strong>${i + 1}. ${q.question}</strong></p>
+                ${questionImageHtml}
+                <p><b>Your Answer:</b> ${q.userAnswer ?? "N/A"}</p>
+                <p><b>Correct Answer:</b> <span class="correct-answer">${q.correctAnswer}</span></p>
+                <p><b>Time Taken:</b> ${formatTime(q.timeTaken ?? 0)}</p>
+                ${explanationImageHtml}
+                <hr>
+            `;
 
             resultsContainer.appendChild(div);
         });
@@ -339,6 +356,7 @@ function showQuizDetails(quiz) {
         showPreviousQuizzesSection();
     };
 }
+
 function loadUsers() {
   // Load from localStorage, or fall back to the original users array
   const storedUsers = JSON.parse(localStorage.getItem("users"));

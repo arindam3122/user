@@ -2209,4 +2209,33 @@ mark.highlight {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
+/* 🔹 Fix image size for quiz result images */
+.question-result-image,
+.explanation-image {
+  width: 350px;              /* fixed width */
+  height: 200px;             /* fixed height */
+  object-fit: cover;         /* keeps good framing */
+  display: block;
+  margin: 15px auto;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background-color: #f8f8f8;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
+/* Optional hover zoom effect */
+.question-result-image:hover,
+.explanation-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive layout for small screens */
+@media (max-width: 600px) {
+  .question-result-image,
+  .explanation-image {
+    width: 90%;
+    height: auto;
+  }
+}
