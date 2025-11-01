@@ -1378,9 +1378,12 @@ function selectOption(selectedOptionDiv, optionText) {
     questionStatuses[currentQuestionIndex] = 'answered'; // NEW: Mark as answered
     // Time taken will be recorded when navigating away from the question
 }
-// ✅ Show instant feedback for MCQs (updated: stop timer and record time immediately)
 // ✅ Show instant feedback for MCQs (updated: stop timer, record time once, and prevent overwrites)
+// ✅ Show instant feedback for MCQs (updated with anti-cheat control)
 function showInstantFeedback(isCorrect) {
+    // 🔒 Turn OFF anti-cheat during feedback so tab switches won't trigger auto-submit
+    quizActive = false;
+
     const feedbackBox = document.getElementById("instantFeedback");
     const moveOnBtn = document.getElementById("moveOnButton");
     const currentQuestion = currentQuiz.questions[currentQuestionIndex];
@@ -1400,18 +1403,17 @@ function showInstantFeedback(isCorrect) {
         const text = opt.textContent.trim();
 
         if (text === currentQuestion.answer) {
-            opt.classList.add('correct-option'); // ✅ correct
+            opt.classList.add('correct-option');
         }
 
         if (text === selectedAnswer && text !== currentQuestion.answer) {
-            opt.classList.add('wrong-option'); // ❌ user’s wrong
+            opt.classList.add('wrong-option');
         }
     });
 
     // 🔹 Disable all options after submission
     optionDivs.forEach(opt => {
         opt.style.pointerEvents = "none";
-        opt.style.opacity = "1";
         opt.style.cursor = "not-allowed";
     });
 
@@ -1421,7 +1423,7 @@ function showInstantFeedback(isCorrect) {
         feedbackBox.classList.add("correct");
         feedbackBox.classList.remove("wrong");
     } else {
-        feedbackBox.innerHTML = `❌ Wrong Answer!`; // removed correct answer text
+        feedbackBox.innerHTML = `❌ Wrong Answer!`;
         feedbackBox.classList.add("wrong");
         feedbackBox.classList.remove("correct");
     }
@@ -1445,8 +1447,11 @@ function showInstantFeedback(isCorrect) {
     clearInterval(timerInterval);
     questionStartTime = null;
 
-    // "Move On" button logic
+    // === 🟢 Move On button logic ===
     moveOnBtn.onclick = () => {
+        // ✅ Re-enable anti-cheat when moving to the next question
+        quizActive = true;
+
         feedbackBox.style.display = "none";
         moveOnBtn.style.display = "none";
         submitButton.disabled = false;
@@ -1469,6 +1474,7 @@ function showInstantFeedback(isCorrect) {
         }
     };
 }
+
 // Helper function to update time taken for the current question before moving
 function updateTimeTakenBeforeMoving() {
     if (currentQuestionIndex >= 0 && currentQuestionIndex < currentQuiz.questions.length) {
@@ -2658,9 +2664,11 @@ function loadQuestion() {
 
     updateProgressBar();
     updateNavigationButtons();
-
+    quizActive = true; // ✅ Enable anti-cheat when a new question is loaded
     // Reset and start timer
     resetTimer(currentQuestion.timeLimit);
+    
+
 }
 
 
