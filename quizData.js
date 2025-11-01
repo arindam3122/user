@@ -32,6 +32,65 @@ const quizzes = [
         ]
     },
     {
+        "id": "Experiment Quiz",
+        "name": "Experiment Quiz",
+        "description": "It is a experiment quiz for backend work",
+        "enabled": true,
+        "questions": [
+            {
+                "question": "What is the name of this fruit",
+                "type": "mcq",
+                "options": [
+                    "Apple",
+                    "Guava",
+                    "Banana",
+                    "None of these"
+                ],
+                "answer": "Banana",
+                "timeLimit": 70,
+                "imageUrl": "banana.jpg",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the name of this fruit",
+                "type": "mcq",
+                "options": [
+                    "Apple",
+                    "Guava",
+                    "Banana",
+                    "None of this"
+                ],
+                "answer": "Guava",
+                "timeLimit": 70,
+                "imageUrl": "guava.jpeg",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "What is the name of this Fruit",
+                "type": "mcq",
+                "options": [
+                    "Apple",
+                    "Guava",
+                    "Banana",
+                    "None of this"
+                ],
+                "answer": "Apple",
+                "timeLimit": 70,
+                "imageUrl": "apple.jpg",
+                "explanationImageUrl": ""
+            },
+            {
+                "question": "Name the Sequence of this Fruits.(NO CAPITAL LETTERS AND SEPARATE THE NAMES WITH COMAS)",
+                "type": "input",
+                "options": [],
+                "answer": "apple,mango,banana",
+                "timeLimit": 70,
+                "imageUrl": "mix fruit.jpg",
+                "explanationImageUrl": ""
+            }
+        ]
+    },
+    {
         "id": "Fundamentals of Computers & Operating Systems",
         "name": "Fundamentals of Computers & Operating Systems",
         "description": "",
