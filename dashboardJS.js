@@ -328,14 +328,15 @@ function showQuizDetails(quiz) {
 
             // ✅ Render question block
             div.innerHTML = `
-                <p><strong>${i + 1}. ${q.question}</strong></p>
-                ${questionImageHtml}
-                <p><b>Your Answer:</b> ${q.userAnswer ?? "N/A"}</p>
-                <p><b>Correct Answer:</b> <span class="correct-answer">${q.correctAnswer}</span></p>
-                <p><b>Time Taken:</b> ${formatTime(q.timeTaken ?? 0)}</p>
-                ${explanationImageHtml}
-                <hr>
-            `;
+              <p><strong>${i + 1}. ${q.question}</strong></p>
+              ${questionImageHtml}
+              <p>Your Answer: ${q.userAnswer ?? "N/A"}</p>
+              <p>Correct Answer: <span class="correct-answer">${q.correctAnswer}</span></p>
+              <p>Time Taken: <b>${formatTime(q.timeTaken ?? 0)}</b></p>
+              ${explanationImageHtml}
+              <hr>
+              `;
+
 
             resultsContainer.appendChild(div);
         });
