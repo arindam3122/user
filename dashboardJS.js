@@ -550,25 +550,7 @@ document.getElementById('quizResultsBackButton').onclick = () => {
     document.querySelector('.results-summary-box').style.display = 'block';
 };
 }
-function toggleExplanationImage(button) {
-    const img = button.nextElementSibling;
-    if (img.style.display === 'none') {
-        img.style.display = 'block';
-        button.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Explanation Image';
-    } else {
-        img.style.display = 'none';
-        button.innerHTML = '<i class="fas fa-image"></i> View Explanation Image';
-    }
-}
-
-
-
-
-
-
-/**
- * Hides the custom information/alert modal.
- */
+  //Hides the custom information/alert modal.
 function hideInfoModal() {
     const modal = document.getElementById('infoModal');
     modal.classList.remove('active');
@@ -601,41 +583,6 @@ function showTimeUpMessage() {
         timeUpMessageElement.classList.remove('show');
     }, 3000); // Message visible for 3 seconds
 }
-document.addEventListener('DOMContentLoaded', () => {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (ADMIN_USERS.includes(loggedInUser)) {
-    if (adminGreeting) {
-        adminGreeting.style.display = "block";
-        updateAdminStats(); // populate stats
-    }
-
-    startQuizLink.innerHTML = '<i class="fas fa-list"></i> All Quizzes';
-    startQuizLink.onclick = (e) => {
-        e.preventDefault();
-        setActiveLink(startQuizLink);
-        showAllQuizzesSection();
-        closeSidebar();
-    };
-} else {
-    if (adminGreeting) adminGreeting.style.display = "none";
-    startQuizLink.onclick = (e) => {
-        e.preventDefault();
-        setActiveLink(startQuizLink);
-        showQuizSelection();
-        closeSidebar();
-    };
-}
-
-
-    // ✅ Add filter listener here
-    const filter = document.getElementById('quizStatusFilter');
-    if (filter) {
-        filter.addEventListener('change', () => {
-            renderAllQuizzes();
-        });
-    }
-});
-
 archivedQuizzesLink.addEventListener('click', (e) => {
     e.preventDefault();
     setActiveLink(archivedQuizzesLink);

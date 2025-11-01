@@ -95,28 +95,6 @@ body {
     background-color: #101212; /* Accent color */
     border-radius: 2px;
 }
-.heading4::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: #000000; /* Accent color */
-    border-radius: 2px;
-}
-.heading5::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: #000000; /* Accent color */
-    border-radius: 2px;
-}
 .auto-submitted-answer {
     color: rgb(158, 1, 158);
 }
