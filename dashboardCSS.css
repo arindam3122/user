@@ -2218,5 +2218,59 @@ mark.highlight {
     height: auto;
   }
 }
+/* 🌟 Enhanced Summary Box Styling */
+/* 🌤️ One-Line Summary Box — lighter, balanced background */
+.results-summary-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #f2f5fa, #e6ebf3);
+  border: 1px solid #d1d9e0; /* ✅ thin outline around the box */
+  border-radius: 12px;
+  padding: 22px 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  margin: 25px auto;
+  max-width: 1000px;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.results-summary-box p {
+  flex: 1;
+  margin: 0;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 14px 18px;
+  text-align: center;
+  font-size: 1.05em;
+  font-weight: 600;
+  color: #222;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.results-summary-box p:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎨 Colors for each stat */
+#summaryCorrect {
+  color: #16a34a; /* soft green */
+}
+#summaryWrong {
+  color: #dc2626; /* red */
+}
+#summarySkipped {
+  color: #eab308; /* gold */
+}
+#summaryTimeUp {
+  color: #f97316; /* orange */
+}
+#summaryTotalQuestions {
+  color: #2563eb; /* blue */
+}
+
 
 
